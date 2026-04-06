@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyxen - AI Storyteller</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --gradient-start: #b8966a;
+            --gradient-end: #662a69;
+            --header-bg: #d8b588;
+            --app-font: #F7F2FF;
+            --primary-font: #000000;
+            --card-bg: #C8B2EE;
+            --border-accent: #321860;
+            --button-bg: #0A1551;
+            --button-text: #FFFFFF;
+            --logo-bg: #412A69;
+            --icon-bg: #695A2A;
+            --icon-color: #F7F2FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            min-height: 100vh;
+            color: var(--app-font);
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 260px;
+            background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-right: 2px solid var(--border-accent);
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            background: var(--logo-bg);
+        }
+
+        .sidebar-header img {
+            height: 64px;
+            width: auto;
+        }
+
+        .sidebar-header p {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--app-font);
+            margin-top: 8px;
+        }
+
+        .nav-menu {
+            padding: 16px 12px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--app-font);
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(200, 178, 238, 0.3);
+        }
+
+        .nav-item.active {
+            background: var(--card-bg);
+            color: var(--primary-font);
+            border-color: var(--border-accent);
+        }
+
+        .nav-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--icon-bg);
+            color: var(--icon-color);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            border-top: 1px solid rgba(50, 24, 96, 0.4);
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .sidebar-footer span {
+            color: var(--card-bg);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 150;
+            padding: 10px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--primary-font);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Chat Page */
+        .chat-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .conversations-sidebar {
+            width: 280px;
+            background: rgba(200, 178, 238, 0.25);
+            border-right: 2px solid var(--border-accent);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .conversations-header {
+            padding: 16px;
+            border-bottom: 2px solid var(--border-accent);
+        }
+
+        .new-story-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+
+        .new-story-btn:hover {
+            opacity: 0.9;
+        }
+
+        .conversations-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .conversation-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .conversation-item:hover {
+            background: rgba(200, 178, 238, 0.5);
+        }
+
+        .conversation-item.active {
+            background: var(--card-bg);
+            color: var(--primary-font);
+            border-color: var(--border-accent);
+        }
+
+        .conversation-item h4 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .conversation-item p {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            height: 64px;
+            background: var(--header-bg);
+            border-bottom: 2px solid var(--border-accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .chat-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--primary-font);
+        }
+
+        .chat-header p {
+            font-size: 12px;
+            color: var(--primary-font);
+            opacity: 0.7;
+        }
+
+        .chat-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .genre-select, .mode-toggle {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: var(--primary-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .mode-toggle {
+            display: flex;
+            padding: 4px;
+        }
+
+        .mode-btn {
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: var(--primary-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background: var(--button-bg);
+            color: var(--button-text);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .welcome-screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .welcome-logo {
+            width: 96px;
+            height: 96px;
+            background: var(--logo-bg);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .welcome-logo img {
+            height: 80px;
+            width: auto;
+        }
+
+        .welcome-screen h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .welcome-screen p {
+            opacity: 0.8;
+            max-width: 400px;
+            margin-bottom: 32px;
+        }
+
+        .suggestions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .suggestion-btn {
+            padding: 12px 16px;
+            background: var(--card-bg);
+            color: var(--primary-font);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .suggestion-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .message {
+            max-width: 800px;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            margin-left: auto;
+        }
+
+        .message-content {
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 2px solid var(--border-accent);
+        }
+
+        .message.user .message-content {
+            background: var(--header-bg);
+            color: var(--primary-font);
+        }
+
+        .message.assistant .message-content {
+            background: var(--card-bg);
+            color: var(--primary-font);
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(50, 24, 96, 0.3);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--border-accent);
+        }
+
+        .message-text {
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .loading-message {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            color: var(--primary-font);
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-accent);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .chat-input-area {
+            padding: 16px;
+            background: var(--header-bg);
+            border-top: 2px solid var(--border-accent);
+        }
+
+        .chat-input-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px;
+            color: var(--primary-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            resize: none;
+            min-height: 60px;
+            max-height: 200px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+        }
+
+        .chat-input::placeholder {
+            color: var(--primary-font);
+            opacity: 0.5;
+        }
+
+        .send-btn {
+            padding: 12px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            align-self: flex-end;
+            transition: opacity 0.2s;
+        }
+
+        .send-btn:hover {
+            opacity: 0.9;
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Story Generator Page */
+        .page-container {
+            padding: 48px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            opacity: 0.8;
+        }
+
+        .genre-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .genre-card {
+            position: relative;
+            height: 128px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid var(--card-bg);
+            transition: all 0.2s;
+        }
+
+        .genre-card.selected {
+            border-color: var(--border-accent);
+            box-shadow: 0 0 20px rgba(50, 24, 96, 0.4);
+        }
+
+        .genre-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .genre-card:hover img {
+            opacity: 0.8;
+        }
+
+        .genre-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .genre-card span {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            text-transform: capitalize;
+        }
+
+        .story-form {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-row label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary-font);
+        }
+
+        .story-textarea {
+            width: 100%;
+            height: 128px;
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 16px;
+            color: var(--primary-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            resize: none;
+        }
+
+        .story-textarea:focus {
+            outline: none;
+        }
+
+        .generate-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: opacity 0.2s;
+        }
+
+        .generate-btn:hover {
+            opacity: 0.9;
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .story-output {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 32px;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .story-output h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary-font);
+            margin-bottom: 24px;
+        }
+
+        .story-text {
+            color: var(--primary-font);
+            line-height: 1.9;
+            white-space: pre-wrap;
+        }
+
+        /* Story Bible Page */
+        .bible-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .bible-section {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary-font);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--icon-bg);
+            color: var(--icon-color);
+            border-radius: 8px;
+        }
+
+        .add-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .character-card {
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.2s;
+        }
+
+        .character-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .character-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--primary-font);
+            margin-bottom: 8px;
+        }
+
+        .character-card p {
+            font-size: 14px;
+            color: var(--primary-font);
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .character-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .trait-tag {
+            padding: 4px 8px;
+            background: var(--border-accent);
+            color: var(--app-font);
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .character-meta {
+            padding-top: 12px;
+            border-top: 1px solid rgba(50, 24, 96, 0.3);
+            font-size: 12px;
+            color: var(--primary-font);
+            opacity: 0.7;
+        }
+
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .setting-item {
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .setting-type {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--border-accent);
+            font-weight: 600;
+        }
+
+        .setting-name {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-font);
+        }
+
+        .setting-desc {
+            font-size: 12px;
+            color: var(--primary-font);
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px;
+            color: var(--primary-font);
+            opacity: 0.6;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: var(--border-accent);
+            opacity: 0.5;
+        }
+
+        .bible-banner {
+            grid-column: 1 / -1;
+            position: relative;
+            height: 192px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--border-accent);
+        }
+
+        .bible-banner img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .bible-banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(184, 150, 106, 0.8), transparent, rgba(102, 42, 105, 0.8));
+        }
+
+        .bible-banner-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bible-banner h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+        }
+
+        /* Gallery Page */
+        .gallery-controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .gallery-control {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .gallery-control h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--primary-font);
+            margin-bottom: 16px;
+        }
+
+        .gallery-textarea {
+            width: 100%;
+            height: 96px;
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--primary-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            resize: none;
+            margin-bottom: 16px;
+        }
+
+        .gallery-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .media-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .media-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--border-accent);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .media-item:hover {
+            transform: scale(1.02);
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            padding: 16px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 2px solid var(--border-accent);
+        }
+
+        .modal-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary-font);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary-font);
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--primary-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .traits-input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .traits-input-row input {
+            flex: 1;
+        }
+
+        .traits-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .trait-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            background: var(--border-accent);
+            color: var(--app-font);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .trait-item button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+            font-size: 12px;
+        }
+
+        .modal-footer {
+            padding: 24px;
+            border-top: 2px solid var(--border-accent);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn-secondary {
+            padding: 12px 16px;
+            background: var(--header-bg);
+            color: var(--primary-font);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            padding: 12px 16px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.visible {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .conversations-sidebar {
+                display: none;
+            }
+
+            .genre-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bible-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .characters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .media-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .page-container {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="https://cdn1.site-media.eu/images/0/24605435/NyxenLogo-HC7dR0B8dpqO3kUw00D6eg.png" alt="Nyxen">
+            <p>AI Storyteller</p>
+        </div>
+        <nav class="nav-menu">
+            <a class="nav-item active" onclick="showPage('chat')" data-page="chat">
+                <span class="nav-icon"><i class="fas fa-comment"></i></span>
+                <span>Chat</span>
+            </a>
+            <a class="nav-item" onclick="showPage('story')" data-page="story">
+                <span class="nav-icon"><i class="fas fa-book"></i></span>
+                <span>Story Generator</span>
+            </a>
+            <a class="nav-item" onclick="showPage('bible')" data-page="bible">
+                <span class="nav-icon"><i class="fas fa-users"></i></span>
+                <span>Story Bible</span>
+            </a>
+            <a class="nav-item" onclick="showPage('gallery')" data-page="gallery">
+                <span class="nav-icon"><i class="fas fa-image"></i></span>
+                <span>Gallery</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            Developed by <span>S.M. Cantrell</span>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Chat Page -->
+        <div class="page active" id="page-chat">
+            <div class="chat-container">
+                <aside class="conversations-sidebar">
+                    <div class="conversations-header">
+                        <button class="new-story-btn" onclick="newConversation()">
+                            <i class="fas fa-plus"></i>
+                            New Story
+                        </button>
+                    </div>
+                    <div class="conversations-list" id="conversations-list"></div>
+                </aside>
+                <div class="chat-main">
+                    <header class="chat-header">
+                        <div>
+                            <h2 id="chat-title">New Story Session</h2>
+                            <p>Your creative companion awaits</p>
+                        </div>
+                        <div class="chat-controls">
+                            <select class="genre-select" id="genre-select">
+                                <option value="fantasy">Fantasy</option>
+                                <option value="romance">Romance</option>
+                                <option value="thriller">Thriller</option>
+                                <option value="scifi">Sci-Fi</option>
+                            </select>
+                            <div class="mode-toggle">
+                                <button class="mode-btn" onclick="setMode('fast')"><i class="fas fa-bolt"></i> Fast</button>
+                                <button class="mode-btn active" onclick="setMode('deep')"><i class="fas fa-clock"></i> Deep</button>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="welcome-screen" id="welcome-screen">
+                            <div class="welcome-logo">
+                                <img src="https://cdn1.site-media.eu/images/0/24605435/NyxenLogo-HC7dR0B8dpqO3kUw00D6eg.png" alt="Nyxen">
+                            </div>
+                            <h3 class="font-serif">Welcome, storyteller</h3>
+                            <p>Share a prompt, a scene, or an idea. Let's weave something extraordinary together.</p>
+                            <div class="suggestions">
+                                <button class="suggestion-btn" onclick="useSuggestion('Tell me a fantasy adventure')">Tell me a fantasy adventure</button>
+                                <button class="suggestion-btn" onclick="useSuggestion('Write a romantic meet-cute')">Write a romantic meet-cute</button>
+                                <button class="suggestion-btn" onclick="useSuggestion('Create a thriller opening')">Create a thriller opening</button>
+                                <button class="suggestion-btn" onclick="useSuggestion('Describe a sci-fi world')">Describe a sci-fi world</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="chat-input-container">
+                            <textarea class="chat-input" id="chat-input" placeholder="Share your story idea, describe a scene, or ask for writing help..." rows="2"></textarea>
+                            <button class="send-btn" id="send-btn" onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Generator Page -->
+        <div class="page" id="page-story">
+            <div class="page-container">
+                <header class="page-header">
+                    <h1 class="font-serif">Story Generator</h1>
+                    <p>Craft original stories across any genre with Nyxen's assistance.</p>
+                </header>
+                <div class="genre-cards" id="genre-cards">
+                    <div class="genre-card selected" data-genre="fantasy" onclick="selectGenre('fantasy')">
+                        <img src="https://images.pexels.com/photos/207130/pexels-photo-207130.jpeg" alt="Fantasy">
+                        <div class="genre-card-overlay"></div>
+                        <span>Fantasy</span>
+                    </div>
+                    <div class="genre-card" data-genre="romance" onclick="selectGenre('romance')">
+                        <img src="https://images.pexels.com/photos/11741360/pexels-photo-11741360.jpeg" alt="Romance">
+                        <div class="genre-card-overlay"></div>
+                        <span>Romance</span>
+                    </div>
+                    <div class="genre-card" data-genre="thriller" onclick="selectGenre('thriller')">
+                        <img src="https://images.pexels.com/photos/3772353/pexels-photo-3772353.jpeg" alt="Thriller">
+                        <div class="genre-card-overlay"></div>
+                        <span>Thriller</span>
+                    </div>
+                    <div class="genre-card" data-genre="scifi" onclick="selectGenre('scifi')">
+                        <img src="https://images.unsplash.com/photo-1687985826611-80b714011d0b" alt="Sci-Fi">
+                        <div class="genre-card-overlay"></div>
+                        <span>Sci-Fi</span>
+                    </div>
+                </div>
+                <div class="story-form">
+                    <div class="form-row">
+                        <label>Mode:</label>
+                        <div class="mode-toggle">
+                            <button class="mode-btn" onclick="setStoryMode('fast')"><i class="fas fa-bolt"></i> Fast (~400 words)</button>
+                            <button class="mode-btn active" onclick="setStoryMode('deep')"><i class="fas fa-clock"></i> Deep (800-1200 words)</button>
+                        </div>
+                    </div>
+                    <textarea class="story-textarea" id="story-prompt" placeholder="Describe your story idea... A dragon who befriends a lonely baker, a detective uncovering ancient secrets, star-crossed lovers in a cyberpunk city..."></textarea>
+                    <button class="generate-btn" id="generate-story-btn" onclick="generateStory()">
+                        <i class="fas fa-sparkles"></i>
+                        Generate Story
+                    </button>
+                </div>
+                <div class="story-output" id="story-output" style="display: none;">
+                    <h2 class="font-serif">Your Story</h2>
+                    <div class="story-text" id="story-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Bible Page -->
+        <div class="page" id="page-bible">
+            <div class="page-container">
+                <header class="page-header">
+                    <h1 class="font-serif">Story Bible</h1>
+                    <p>Manage your characters, worlds, and story elements for consistent storytelling.</p>
+                </header>
+                <div class="bible-grid">
+                    <section class="bible-section">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <span class="section-icon"><i class="fas fa-users"></i></span>
+                                Characters
+                            </h2>
+                            <button class="add-btn" onclick="openCharacterModal()">
+                                <i class="fas fa-plus"></i>
+                                Add Character
+                            </button>
+                        </div>
+                        <div class="characters-grid" id="characters-grid">
+                            <div class="empty-state">
+                                <i class="fas fa-users"></i>
+                                <p>No characters yet. Create your first character to get started.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="bible-section">
+                        <div class="section-header">
+                            <h2 class="section-title" style="font-size: 20px;">
+                                <span class="section-icon" style="width: 32px; height: 32px;"><i class="fas fa-palette"></i></span>
+                                World Building
+                            </h2>
+                            <button class="add-btn" onclick="openSettingModal()" style="padding: 8px;">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="settings-list" id="settings-list">
+                            <div class="empty-state" style="padding: 32px;">
+                                <i class="fas fa-palette" style="font-size: 36px;"></i>
+                                <p>Add locations, timelines, and more.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="bible-banner">
+                        <img src="https://images.unsplash.com/photo-1692742593455-79d81616196a" alt="Story Bible">
+                        <div class="bible-banner-overlay"></div>
+                        <div class="bible-banner-content">
+                            <h3 class="font-serif">Your Story Universe</h3>
+                            <p>Characters: <span id="char-count">0</span> | Settings: <span id="setting-count">0</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Page -->
+        <div class="page" id="page-gallery">
+            <div class="page-container">
+                <header class="page-header">
+                    <h1 class="font-serif">Media Gallery</h1>
+                    <p>Generate and browse images and videos inspired by your stories.</p>
+                </header>
+                <div class="gallery-controls">
+                    <div class="gallery-control">
+                        <h3>
+                            <span class="section-icon" style="width: 32px; height: 32px;"><i class="fas fa-image"></i></span>
+                            Generate Image
+                        </h3>
+                        <textarea class="gallery-textarea" id="image-prompt" placeholder="Describe the scene you want to visualize..."></textarea>
+                        <button class="gallery-btn" id="generate-image-btn" onclick="generateImage()">
+                            <i class="fas fa-sparkles"></i>
+                            Generate Image
+                        </button>
+                    </div>
+                    <div class="gallery-control">
+                        <h3>
+                            <span class="section-icon" style="width: 32px; height: 32px;"><i class="fas fa-video"></i></span>
+                            Generate Video
+                        </h3>
+                        <textarea class="gallery-textarea" id="video-prompt" placeholder="Describe the scene with motion..."></textarea>
+                        <button class="gallery-btn" id="generate-video-btn" onclick="generateVideo()">
+                            <i class="fas fa-sparkles"></i>
+                            Generate Video
+                        </button>
+                    </div>
+                </div>
+                <section class="media-section" id="images-section" style="display: none; margin-bottom: 48px;">
+                    <h3>
+                        <span class="section-icon"><i class="fas fa-image"></i></span>
+                        Images (<span id="images-count">0</span>)
+                    </h3>
+                    <div class="media-grid" id="images-grid"></div>
+                </section>
+                <section class="media-section" id="videos-section" style="display: none;">
+                    <h3>
+                        <span class="section-icon"><i class="fas fa-video"></i></span>
+                        Videos (<span id="videos-count">0</span>)
+                    </h3>
+                    <div class="media-grid" id="videos-grid"></div>
+                </section>
+                <div class="empty-state" id="gallery-empty">
+                    <i class="fas fa-image" style="font-size: 64px;"></i>
+                    <p>No media generated yet. Create your first image or video above.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Character Modal -->
+    <div class="modal-overlay" id="character-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="font-serif">Create Character</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" class="form-input" id="char-name" placeholder="Character name">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-textarea" id="char-description" placeholder="Brief description of the character"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Traits</label>
+                    <div class="traits-input-row">
+                        <input type="text" class="form-input" id="trait-input" placeholder="Add a trait and press Enter">
+                        <button class="btn-primary" onclick="addTrait()">Add</button>
+                    </div>
+                    <div class="traits-list" id="traits-list"></div>
+                </div>
+                <div class="form-group">
+                    <label>Backstory</label>
+                    <textarea class="form-textarea" id="char-backstory" placeholder="Character's history and background"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Speech Patterns</label>
+                    <input type="text" class="form-input" id="char-speech" placeholder="e.g., Formal speech, uses contractions">
+                </div>
+                <div class="form-group">
+                    <label>Emotional State</label>
+                    <select class="form-select" id="char-emotional">
+                        <option value="neutral">Neutral</option>
+                        <option value="happy">Happy</option>
+                        <option value="sad">Sad</option>
+                        <option value="angry">Angry</option>
+                        <option value="fearful">Fearful</option>
+                        <option value="conflicted">Conflicted</option>
+                        <option value="determined">Determined</option>
+                        <option value="hopeful">Hopeful</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeCharacterModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveCharacter()">Create Character</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Setting Modal -->
+    <div class="modal-overlay" id="setting-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="font-serif">Add World Element</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Type</label>
+                    <select class="form-select" id="setting-type">
+                        <option value="location">Location</option>
+                        <option value="timeline">Timeline</option>
+                        <option value="organization">Organization</option>
+                        <option value="magic_system">Magic System</option>
+                        <option value="technology">Technology</option>
+                        <option value="culture">Culture</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" class="form-input" id="setting-name" placeholder="Element name">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-textarea" id="setting-description" placeholder="Describe this world element"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeSettingModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveSetting()">Add Element</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration - UPDATE THIS URL FOR YOUR DEPLOYMENT
+        const API_URL = 'https://completion-engine-1.preview.emergentagent.com/api';
+
+        // State
+        let currentConversationId = null;
+        let conversations = [];
+        let messages = [];
+        let characters = [];
+        let settings = [];
+        let media = [];
+        let currentMode = 'deep';
+        let currentGenre = 'fantasy';
+        let storyMode = 'deep';
+        let selectedGenre = 'fantasy';
+        let currentTraits = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadConversations();
+            loadCharacters();
+            loadSettings();
+            loadMedia();
+
+            // Enter key for chat
+            document.getElementById('chat-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Enter key for traits
+            document.getElementById('trait-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addTrait();
+                }
+            });
+        });
+
+        // Navigation
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            document.querySelector(`[data-page="${page}"]`).classList.add('active');
+            
+            // Close mobile sidebar
+            document.getElementById('sidebar').classList.remove('visible');
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('visible');
+        }
+
+        // Chat Functions
+        async function loadConversations() {
+            try {
+                const res = await fetch(`${API_URL}/conversations`);
+                conversations = await res.json();
+                renderConversations();
+            } catch (e) {
+                console.error('Failed to load conversations', e);
+            }
+        }
+
+        function renderConversations() {
+            const list = document.getElementById('conversations-list');
+            if (conversations.length === 0) {
+                list.innerHTML = '<div class="empty-state" style="padding: 24px;"><p>No conversations yet</p></div>';
+                return;
+            }
+            list.innerHTML = conversations.map(conv => `
+                <div class="conversation-item ${conv.id === currentConversationId ? 'active' : ''}" onclick="selectConversation('${conv.id}')">
+                    <h4>${conv.title}</h4>
+                    <p>${conv.genre || 'Story'}</p>
+                </div>
+            `).join('');
+        }
+
+        async function selectConversation(id) {
+            currentConversationId = id;
+            const conv = conversations.find(c => c.id === id);
+            document.getElementById('chat-title').textContent = conv.title;
+            document.getElementById('welcome-screen').style.display = 'none';
+            renderConversations();
+            await loadMessages(id);
+        }
+
+        async function loadMessages(conversationId) {
+            try {
+                const res = await fetch(`${API_URL}/conversations/${conversationId}/messages`);
+                messages = await res.json();
+                renderMessages();
+            } catch (e) {
+                console.error('Failed to load messages', e);
+            }
+        }
+
+        function renderMessages() {
+            const container = document.getElementById('chat-messages');
+            if (messages.length === 0) {
+                container.innerHTML = document.getElementById('welcome-screen').outerHTML;
+                return;
+            }
+            container.innerHTML = messages.map(msg => `
+                <div class="message ${msg.role}">
+                    <div class="message-content">
+                        ${msg.role === 'assistant' ? '<div class="message-header"><i class="fas fa-sparkles"></i> Nyxen</div>' : ''}
+                        <div class="message-text">${msg.content}</div>
+                    </div>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function newConversation() {
+            currentConversationId = null;
+            messages = [];
+            document.getElementById('chat-title').textContent = 'New Story Session';
+            document.getElementById('chat-messages').innerHTML = document.getElementById('welcome-screen').outerHTML;
+            renderConversations();
+        }
+
+        function useSuggestion(text) {
+            document.getElementById('chat-input').value = text;
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.chat-header .mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const genre = document.getElementById('genre-select').value;
+            input.value = '';
+
+            // Hide welcome screen
+            document.getElementById('welcome-screen').style.display = 'none';
+
+            // Add user message
+            const container = document.getElementById('chat-messages');
+            container.innerHTML += `
+                <div class="message user">
+                    <div class="message-content">
+                        <div class="message-text">${message}</div>
+                    </div>
+                </div>
+                <div class="loading-message" id="loading">
+                    <div class="loading-spinner"></div>
+                    <span>Nyxen is crafting your story...</span>
+                </div>
+            `;
+            container.scrollTop = container.scrollHeight;
+
+            try {
+                const res = await fetch(`${API_URL}/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        conversation_id: currentConversationId,
+                        message,
+                        genre,
+                        mode: currentMode
+                    })
+                });
+                const data = await res.json();
+
+                document.getElementById('loading').remove();
+
+                // Add AI response
+                container.innerHTML += `
+                    <div class="message assistant">
+                        <div class="message-content">
+                            <div class="message-header"><i class="fas fa-sparkles"></i> Nyxen</div>
+                            <div class="message-text">${data.message.content}</div>
+                        </div>
+                    </div>
+                `;
+                container.scrollTop = container.scrollHeight;
+
+                if (!currentConversationId) {
+                    currentConversationId = data.conversation_id;
+                    loadConversations();
+                }
+            } catch (e) {
+                document.getElementById('loading').remove();
+                alert('Failed to send message. Please try again.');
+            }
+        }
+
+        // Story Generator Functions
+        function selectGenre(genre) {
+            selectedGenre = genre;
+            document.querySelectorAll('.genre-card').forEach(card => {
+                card.classList.toggle('selected', card.dataset.genre === genre);
+            });
+        }
+
+        function setStoryMode(mode) {
+            storyMode = mode;
+            document.querySelectorAll('.story-form .mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        async function generateStory() {
+            const prompt = document.getElementById('story-prompt').value.trim();
+            if (!prompt) return;
+
+            const btn = document.getElementById('generate-story-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+            try {
+                const res = await fetch(`${API_URL}/story/generate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        prompt,
+                        genre: selectedGenre,
+                        mode: storyMode
+                    })
+                });
+                const data = await res.json();
+
+                document.getElementById('story-text').textContent = data.story;
+                document.getElementById('story-output').style.display = 'block';
+            } catch (e) {
+                alert('Failed to generate story. Please try again.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sparkles"></i> Generate Story';
+            }
+        }
+
+        // Story Bible Functions
+        async function loadCharacters() {
+            try {
+                const res = await fetch(`${API_URL}/characters`);
+                characters = await res.json();
+                renderCharacters();
+            } catch (e) {
+                console.error('Failed to load characters', e);
+            }
+        }
+
+        function renderCharacters() {
+            const grid = document.getElementById('characters-grid');
+            document.getElementById('char-count').textContent = characters.length;
+
+            if (characters.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><i class="fas fa-users"></i><p>No characters yet. Create your first character to get started.</p></div>';
+                return;
+            }
+
+            grid.innerHTML = characters.map(char => `
+                <div class="character-card">
+                    <h3>${char.name}</h3>
+                    <p>${char.description || 'No description'}</p>
+                    <div class="character-traits">
+                        ${(char.traits || []).slice(0, 3).map(t => `<span class="trait-tag">${t}</span>`).join('')}
+                        ${char.traits && char.traits.length > 3 ? `<span style="font-size: 12px; opacity: 0.6;">+${char.traits.length - 3} more</span>` : ''}
+                    </div>
+                    <div class="character-meta">Emotional state: ${char.emotional_state}</div>
+                </div>
+            `).join('');
+        }
+
+        async function loadSettings() {
+            try {
+                const res = await fetch(`${API_URL}/story-settings`);
+                settings = await res.json();
+                renderSettings();
+            } catch (e) {
+                console.error('Failed to load settings', e);
+            }
+        }
+
+        function renderSettings() {
+            const list = document.getElementById('settings-list');
+            document.getElementById('setting-count').textContent = settings.length;
+
+            if (settings.length === 0) {
+                list.innerHTML = '<div class="empty-state" style="padding: 32px;"><i class="fas fa-palette" style="font-size: 36px;"></i><p>Add locations, timelines, and more.</p></div>';
+                return;
+            }
+
+            list.innerHTML = settings.map(s => `
+                <div class="setting-item">
+                    <div class="setting-type">${s.type}</div>
+                    <div class="setting-name">${s.name}</div>
+                    ${s.description ? `<div class="setting-desc">${s.description}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function openCharacterModal() {
+            currentTraits = [];
+            document.getElementById('char-name').value = '';
+            document.getElementById('char-description').value = '';
+            document.getElementById('char-backstory').value = '';
+            document.getElementById('char-speech').value = '';
+            document.getElementById('char-emotional').value = 'neutral';
+            document.getElementById('traits-list').innerHTML = '';
+            document.getElementById('character-modal').classList.add('active');
+        }
+
+        function closeCharacterModal() {
+            document.getElementById('character-modal').classList.remove('active');
+        }
+
+        function addTrait() {
+            const input = document.getElementById('trait-input');
+            const trait = input.value.trim();
+            if (trait && !currentTraits.includes(trait)) {
+                currentTraits.push(trait);
+                renderTraits();
+                input.value = '';
+            }
+        }
+
+        function removeTrait(index) {
+            currentTraits.splice(index, 1);
+            renderTraits();
+        }
+
+        function renderTraits() {
+            document.getElementById('traits-list').innerHTML = currentTraits.map((t, i) => `
+                <span class="trait-item">${t} <button onclick="removeTrait(${i})"><i class="fas fa-times"></i></button></span>
+            `).join('');
+        }
+
+        async function saveCharacter() {
+            const name = document.getElementById('char-name').value.trim();
+            if (!name) {
+                alert('Character name is required');
+                return;
+            }
+
+            try {
+                await fetch(`${API_URL}/characters`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        description: document.getElementById('char-description').value,
+                        traits: currentTraits,
+                        backstory: document.getElementById('char-backstory').value,
+                        speech_patterns: document.getElementById('char-speech').value,
+                        emotional_state: document.getElementById('char-emotional').value
+                    })
+                });
+                closeCharacterModal();
+                loadCharacters();
+            } catch (e) {
+                alert('Failed to save character');
+            }
+        }
+
+        function openSettingModal() {
+            document.getElementById('setting-type').value = 'location';
+            document.getElementById('setting-name').value = '';
+            document.getElementById('setting-description').value = '';
+            document.getElementById('setting-modal').classList.add('active');
+        }
+
+        function closeSettingModal() {
+            document.getElementById('setting-modal').classList.remove('active');
+        }
+
+        async function saveSetting() {
+            const name = document.getElementById('setting-name').value.trim();
+            if (!name) {
+                alert('Setting name is required');
+                return;
+            }
+
+            try {
+                await fetch(`${API_URL}/story-settings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        type: document.getElementById('setting-type').value,
+                        description: document.getElementById('setting-description').value
+                    })
+                });
+                closeSettingModal();
+                loadSettings();
+            } catch (e) {
+                alert('Failed to save setting');
+            }
+        }
+
+        // Gallery Functions
+        async function loadMedia() {
+            try {
+                const res = await fetch(`${API_URL}/media`);
+                media = await res.json();
+                renderMedia();
+            } catch (e) {
+                console.error('Failed to load media', e);
+            }
+        }
+
+        function renderMedia() {
+            const images = media.filter(m => m.type === 'image');
+            const videos = media.filter(m => m.type === 'video');
+
+            document.getElementById('images-count').textContent = images.length;
+            document.getElementById('videos-count').textContent = videos.length;
+
+            if (images.length === 0 && videos.length === 0) {
+                document.getElementById('gallery-empty').style.display = 'block';
+                document.getElementById('images-section').style.display = 'none';
+                document.getElementById('videos-section').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('gallery-empty').style.display = 'none';
+
+            if (images.length > 0) {
+                document.getElementById('images-section').style.display = 'block';
+                document.getElementById('images-grid').innerHTML = images.map(img => `
+                    <div class="media-item">
+                        <img src="${img.url}" alt="${img.prompt}">
+                    </div>
+                `).join('');
+            }
+
+            if (videos.length > 0) {
+                document.getElementById('videos-section').style.display = 'block';
+                document.getElementById('videos-grid').innerHTML = videos.map(vid => `
+                    <div class="media-item">
+                        <video src="${vid.url}" controls></video>
+                    </div>
+                `).join('');
+            }
+        }
+
+        async function generateImage() {
+            const prompt = document.getElementById('image-prompt').value.trim();
+            if (!prompt) return;
+
+            const btn = document.getElementById('generate-image-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+            try {
+                await fetch(`${API_URL}/image/generate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                document.getElementById('image-prompt').value = '';
+                loadMedia();
+                alert('Image generated successfully!');
+            } catch (e) {
+                alert('Failed to generate image');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sparkles"></i> Generate Image';
+            }
+        }
+
+        async function generateVideo() {
+            const prompt = document.getElementById('video-prompt').value.trim();
+            if (!prompt) return;
+
+            const btn = document.getElementById('generate-video-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+            alert('Video generation started. This may take a few minutes...');
+
+            try {
+                await fetch(`${API_URL}/video/generate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                document.getElementById('video-prompt').value = '';
+                loadMedia();
+                alert('Video generated successfully!');
+            } catch (e) {
+                alert('Failed to generate video');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sparkles"></i> Generate Video';
+            }
+        }
+    </script>
+</body>
+</html>
