@@ -252,7 +252,7 @@ async def call_groq_api(messages: List[dict], mode: str = "deep") -> str:
                 "Content-Type": "application/json"
             },
             json={
-                "model": "openai/gpt-oss-20b",
+                "model": "llama-3.3-70b-versatile",
                 "messages": messages,
                 "max_tokens": max_tokens,
                 "temperature": 0.85,
