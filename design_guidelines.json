@@ -1,0 +1,90 @@
+{
+  "project_name": "Nyxen",
+  "creator": "S.M. Cantrell",
+  "theme": {
+    "mode": "dark",
+    "archetype": "5_Jewel_and_Luxury",
+    "emotion": "Immersive, sophisticated, cinematic, mysterious"
+  },
+  "colors": {
+    "background": "#050507",
+    "surface": "#0C0C11",
+    "surface_elevated": "#14141A",
+    "primary": "#D4AF37",
+    "primary_hover": "#F0C84B",
+    "accent": "#4D5C75",
+    "text_primary": "#F4F4F5",
+    "text_secondary": "#A1A1AA",
+    "text_tertiary": "#71717A",
+    "border": "rgba(255, 255, 255, 0.08)",
+    "glass_bg": "rgba(10, 10, 14, 0.65)"
+  },
+  "typography": {
+    "font_heading": "Playfair Display",
+    "font_body": "Outfit",
+    "font_mono": "JetBrains Mono",
+    "rules": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight text-zinc-50",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-serif tracking-tight text-zinc-100",
+      "h3": "text-xl sm:text-2xl font-serif text-zinc-200",
+      "body": "text-base font-sans leading-relaxed text-zinc-400",
+      "overline": "text-xs font-sans uppercase tracking-[0.2em] text-zinc-500",
+      "anti_pattern_avoided": "No Inter or default sans used for headings to preserve the literary aesthetic."
+    }
+  },
+  "spacing_and_layout": {
+    "philosophy": "Generous Spacing, cinematic margins, bento grids for data.",
+    "container_padding": "p-6 md:p-8 lg:p-12",
+    "grid_modes": {
+      "story_bible": "Bento layout (grid-cols-1 md:grid-cols-12 gap-6), mixing span-8 hero areas with span-4 supporting cards.",
+      "chat_interface": "Centrally focused max-w-4xl container with 'Crystal Glass' floating input at bottom."
+    },
+    "surface_styles": {
+      "header": "Crystal Glass: backdrop-blur-xl bg-[#050507]/60 border-b border-white/5",
+      "cards": "Neumorphic/Tactile blend: flat #0C0C11 background, 1px subtle white/5 border, shadow-2xl for depth, NO standard gray gradients.",
+      "inputs": "Glassmorphism with 1px border-white/10 focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/50"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#D4AF37] text-black font-semibold hover:bg-[#F0C84B] transition-colors rounded-sm",
+      "secondary": "bg-transparent border border-white/10 text-zinc-300 hover:text-white hover:border-white/30 rounded-sm"
+    },
+    "shadcn_overrides": {
+      "card": "Remove default rounded-xl if needed, use sharp or max rounded-md for literary edge. Add border-white/5.",
+      "dialog": "Dark glass overlay, #14141A background, subtle noise texture.",
+      "tabs": "Override h-9, use border-b styling rather than pill shapes to feel more like a manuscript."
+    }
+  },
+  "motion": {
+    "interactions": "Subtle, smooth. Hover states lift slightly (-translate-y-[2px]) and borders glow.",
+    "page_transitions": "Fade and gentle slide up using Framer Motion.",
+    "chat_appearance": "Staggered fade-in for messages."
+  },
+  "media_and_assets": {
+    "logo": "https://cdn1.site-media.eu/images/0/24605435/NyxenLogo-HC7dR0B8dpqO3kUw00D6eg.png",
+    "placeholders": {
+      "genre_romance": "https://images.pexels.com/photos/11741360/pexels-photo-11741360.jpeg",
+      "genre_fantasy": "https://images.pexels.com/photos/207130/pexels-photo-207130.jpeg",
+      "genre_thriller": "https://images.pexels.com/photos/3772353/pexels-photo-3772353.jpeg",
+      "genre_scifi": "https://images.unsplash.com/photo-1687985826611-80b714011d0b",
+      "story_bible_bg": "https://images.unsplash.com/photo-1692742593455-79d81616196a"
+    },
+    "icons": "lucide-react (standardized to stroke-width 1.5 for elegance)"
+  },
+  "accessibility": {
+    "contrast": "Strict APCA/WCAG AA compliance. Muted text must remain readable. #A1A1AA on #0C0C11 is safe.",
+    "focus": "All interactive elements must have a visible focus ring.",
+    "testing_attributes": "All interactive elements MUST include data-testid (e.g., 'generate-story-button', 'chat-input')."
+  },
+  "instructions_to_main_agent": [
+    "Strictly adhere to the dark theme and 'Jewel & Luxury' archetype.",
+    "Ensure the fonts 'Playfair Display' and 'Outfit' are loaded (via Google Fonts or similar).",
+    "Build the Chat Interface with a floating bottom input using the defined 'glass_bg' style.",
+    "For the Story Bible, implement a Bento Grid layout for visual interest.",
+    "DO NOT use generic Shadcn pill-shaped buttons; apply the specific button styles with sharper edges.",
+    "Use Framer Motion to animate message bubbles and bento grid item entrances.",
+    "Implement data-testid attributes universally for testing.",
+    "Ensure S.M. Cantrell is credited in the UI (e.g., footer or about section)."
+  ]
+}
