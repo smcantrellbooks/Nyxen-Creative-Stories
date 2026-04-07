@@ -3,10 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nyxen Creative Stories</title>
+    <meta name="description" content="Nyxen Creative Stories - AI-powered creative writing assistant for authors and storytellers">
+    <title>Nyxen Creative Stories - AI Writing Assistant</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* Skip to main content link for screen readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--button-bg);
+            color: var(--button-text);
+            padding: 8px 16px;
+            z-index: 1000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus indicators for accessibility */
+        *:focus {
+            outline: 3px solid var(--border-accent);
+            outline-offset: 2px;
+        }
+
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        *:focus-visible {
+            outline: 3px solid var(--border-accent);
+            outline-offset: 2px;
+        }
+
+        /* High contrast focus for buttons */
+        .btn:focus-visible, .tab-btn:focus-visible, .mode-card:focus-visible {
+            outline: 3px solid #FFFFFF;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 6px var(--border-accent);
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Screen reader only class */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Ensure sufficient color contrast for text */
+        .high-contrast-text {
+            color: #1a1a1a;
+        }
         :root {
             --gradient-start: #b8966a;
             --gradient-end: #662a69;
@@ -557,130 +622,141 @@
     </style>
 </head>
 <body>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Live region for announcements -->
+    <div id="announcements" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <!-- Top Bar -->
-    <header class="top-bar">
+    <header class="top-bar" role="banner">
         <div class="top-bar-left">
-            <img src="https://cdn1.site-media.eu/images/0/24605435/NyxenLogo-HC7dR0B8dpqO3kUw00D6eg.png" alt="Nyxen" class="top-bar-logo">
-            <div class="tier-display">
+            <img src="https://cdn1.site-media.eu/images/0/24605435/NyxenLogo-HC7dR0B8dpqO3kUw00D6eg.png" alt="Nyxen Creative Stories Logo" class="top-bar-logo">
+            <div class="tier-display" role="status" aria-label="Current membership tier and points">
                 <span class="tier-badge">Free Tier</span>
-                <span class="points-display">100 Points</span>
+                <span class="points-display" aria-label="100 points available">100 Points</span>
             </div>
         </div>
-        <div class="top-bar-actions">
-            <button class="btn btn-secondary" onclick="showPage('membership')">
-                <i class="fas fa-arrow-up"></i> Upgrade
+        <div class="top-bar-actions" role="group" aria-label="Account actions">
+            <button class="btn btn-secondary" onclick="showPage('membership')" aria-label="Upgrade your membership">
+                <i class="fas fa-arrow-up" aria-hidden="true"></i> Upgrade
             </button>
-            <button class="btn btn-secondary" onclick="showPage('membership')">
-                <i class="fas fa-coins"></i> Buy Points
+            <button class="btn btn-secondary" onclick="showPage('membership')" aria-label="Purchase additional points">
+                <i class="fas fa-coins" aria-hidden="true"></i> Buy Points
             </button>
-            <a href="https://smcantrellbooks.com/join" target="_blank" class="btn btn-primary">
-                <i class="fas fa-rocket"></i> Upgrade to Cantrell Creatives
+            <a href="https://smcantrellbooks.com/join" target="_blank" class="btn btn-primary" aria-label="Upgrade to Cantrell Creatives (opens in new tab)">
+                <i class="fas fa-rocket" aria-hidden="true"></i> Upgrade to Cantrell Creatives
             </a>
         </div>
     </header>
 
     <!-- Tab Navigation -->
-    <nav class="tab-nav">
-        <button class="tab-btn active" data-page="assistant" onclick="showPage('assistant')">
-            <i class="fas fa-comments"></i> Creatives Assistant
+    <nav class="tab-nav" role="tablist" aria-label="Main navigation">
+        <button class="tab-btn active" data-page="assistant" onclick="showPage('assistant')" role="tab" aria-selected="true" aria-controls="page-assistant" id="tab-assistant">
+            <i class="fas fa-comments" aria-hidden="true"></i> <span>Creatives Assistant</span>
         </button>
-        <button class="tab-btn" data-page="story-workspace" onclick="showPage('story-workspace')">
-            <i class="fas fa-pen-fancy"></i> Story Workspace
+        <button class="tab-btn" data-page="story-workspace" onclick="showPage('story-workspace')" role="tab" aria-selected="false" aria-controls="page-story-workspace" id="tab-story-workspace">
+            <i class="fas fa-pen-fancy" aria-hidden="true"></i> <span>Story Workspace</span>
         </button>
-        <button class="tab-btn" data-page="drafting" onclick="showPage('drafting')">
-            <i class="fas fa-file-alt"></i> Drafting
+        <button class="tab-btn" data-page="drafting" onclick="showPage('drafting')" role="tab" aria-selected="false" aria-controls="page-drafting" id="tab-drafting">
+            <i class="fas fa-file-alt" aria-hidden="true"></i> <span>Drafting</span>
         </button>
-        <button class="tab-btn" data-page="editing" onclick="showPage('editing')">
-            <i class="fas fa-edit"></i> Edit Mode
+        <button class="tab-btn" data-page="editing" onclick="showPage('editing')" role="tab" aria-selected="false" aria-controls="page-editing" id="tab-editing">
+            <i class="fas fa-edit" aria-hidden="true"></i> <span>Edit Mode</span>
         </button>
-        <button class="tab-btn" data-page="publishing" onclick="showPage('publishing')">
-            <i class="fas fa-book-open"></i> Publishing
+        <button class="tab-btn" data-page="publishing" onclick="showPage('publishing')" role="tab" aria-selected="false" aria-controls="page-publishing" id="tab-publishing">
+            <i class="fas fa-book-open" aria-hidden="true"></i> <span>Publishing</span>
         </button>
-        <button class="tab-btn" data-page="image-studio" onclick="showPage('image-studio')">
-            <i class="fas fa-image"></i> Image Studio
+        <button class="tab-btn" data-page="image-studio" onclick="showPage('image-studio')" role="tab" aria-selected="false" aria-controls="page-image-studio" id="tab-image-studio">
+            <i class="fas fa-image" aria-hidden="true"></i> <span>Image Studio</span>
         </button>
-        <button class="tab-btn" data-page="membership" onclick="showPage('membership')">
-            <i class="fas fa-crown"></i> Membership
+        <button class="tab-btn" data-page="membership" onclick="showPage('membership')" role="tab" aria-selected="false" aria-controls="page-membership" id="tab-membership">
+            <i class="fas fa-crown" aria-hidden="true"></i> <span>Membership</span>
         </button>
-        <button class="tab-btn" data-page="disclosures" onclick="showPage('disclosures')">
-            <i class="fas fa-shield-alt"></i> Disclosures
+        <button class="tab-btn" data-page="disclosures" onclick="showPage('disclosures')" role="tab" aria-selected="false" aria-controls="page-disclosures" id="tab-disclosures">
+            <i class="fas fa-shield-alt" aria-hidden="true"></i> <span>Disclosures</span>
         </button>
     </nav>
 
     <!-- Main Container -->
     <div class="main-container">
         <!-- Main Content Area -->
-        <div class="main-content">
+        <main class="main-content" id="main-content" role="main">
             <!-- Page 1: Creatives Assistant Chat -->
-            <div class="page active" id="page-assistant">
-                <div class="page-header">
+            <section class="page active" id="page-assistant" role="tabpanel" aria-labelledby="tab-assistant">
+                <header class="page-header">
                     <h1 class="font-serif">Creatives Assistant</h1>
                     <p>Your AI-powered creative companion for storytelling</p>
-                </div>
+                </header>
 
                 <!-- Generation Mode Selector -->
-                <div class="mode-selector">
-                    <div class="mode-card active" onclick="selectMode(this, 'story')">
-                        <i class="fas fa-book"></i>
+                <fieldset class="mode-selector" role="radiogroup" aria-label="Select generation mode">
+                    <legend class="sr-only">Generation Mode</legend>
+                    <div class="mode-card active" onclick="selectMode(this, 'story')" role="radio" aria-checked="true" tabindex="0" onkeypress="handleModeKeypress(event, this, 'story')">
+                        <i class="fas fa-book" aria-hidden="true"></i>
                         <span>Story Generation</span>
                     </div>
-                    <div class="mode-card" onclick="selectMode(this, 'image')">
-                        <i class="fas fa-image"></i>
+                    <div class="mode-card" onclick="selectMode(this, 'image')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'image')">
+                        <i class="fas fa-image" aria-hidden="true"></i>
                         <span>Image Generation</span>
                     </div>
-                    <div class="mode-card" onclick="selectMode(this, 'text-video')">
-                        <i class="fas fa-video"></i>
+                    <div class="mode-card" onclick="selectMode(this, 'text-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'text-video')">
+                        <i class="fas fa-video" aria-hidden="true"></i>
                         <span>Text to Video</span>
                     </div>
-                    <div class="mode-card" onclick="selectMode(this, 'image-video')">
-                        <i class="fas fa-film"></i>
+                    <div class="mode-card" onclick="selectMode(this, 'image-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'image-video')">
+                        <i class="fas fa-film" aria-hidden="true"></i>
                         <span>Image to Video</span>
                     </div>
-                </div>
+                </fieldset>
 
                 <div class="grid-2">
                     <!-- Project Snapshot -->
-                    <div class="card">
+                    <article class="card" aria-labelledby="snapshot-title">
                         <div class="card-header">
-                            <h3 class="card-title">Project Snapshot</h3>
-                            <button class="btn btn-secondary">Save Snapshot</button>
+                            <h2 class="card-title" id="snapshot-title">Project Snapshot</h2>
+                            <button class="btn btn-secondary" aria-label="Save project snapshot">Save Snapshot</button>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-textarea" placeholder="Genre, audience, premise, protagonist, worldbuilding, structure, current chapter draft status..."></textarea>
+                            <label for="project-snapshot" class="sr-only">Project details</label>
+                            <textarea id="project-snapshot" class="form-textarea" placeholder="Genre, audience, premise, protagonist, worldbuilding, structure, current chapter draft status..." aria-describedby="snapshot-note"></textarea>
                         </div>
-                        <div class="note-box">
+                        <div class="note-box" id="snapshot-note" role="note">
                             Keep brief notes about your project so Nyxen stays consistent across the conversation.
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Documents & Pasted Text -->
-                    <div class="card">
+                    <article class="card" aria-labelledby="documents-title">
                         <div class="card-header">
-                            <h3 class="card-title">Documents & Pasted Text</h3>
+                            <h2 class="card-title" id="documents-title">Documents & Pasted Text</h2>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-secondary" style="width: 100%;">
-                                <i class="fas fa-upload"></i> Choose File
+                            <label for="file-upload" class="sr-only">Upload document</label>
+                            <button class="btn btn-secondary" style="width: 100%;" onclick="document.getElementById('file-upload').click()" aria-label="Choose file to upload">
+                                <i class="fas fa-upload" aria-hidden="true"></i> Choose File
                             </button>
+                            <input type="file" id="file-upload" class="sr-only" accept=".txt,.doc,.docx,.pdf" aria-describedby="upload-note">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-textarea" placeholder="Paste text here..."></textarea>
+                            <label for="paste-text" class="sr-only">Paste text</label>
+                            <textarea id="paste-text" class="form-textarea" placeholder="Paste text here..."></textarea>
                         </div>
-                        <button class="btn btn-primary">Import Pasted Text</button>
-                        <div class="note-box">
+                        <button class="btn btn-primary" aria-label="Import pasted text into session">Import Pasted Text</button>
+                        <div class="note-box" id="upload-note" role="note">
                             I can summarise and reference them during the session, but I do not store files after the session ends.
                         </div>
-                    </div>
+                    </article>
                 </div>
 
                 <!-- JotForm Chat Embed -->
-                <div class="card">
+                <article class="card" aria-labelledby="conversation-title">
                     <div class="card-header">
-                        <h3 class="card-title">Conversation with Nyxen</h3>
+                        <h2 class="card-title" id="conversation-title">Conversation with Nyxen</h2>
                     </div>
                     <div class="jotform-container">
                         <iframe id="JotFormIFrame-019d3d3c3a537add8379214c3060726a324e" 
-                            title="Nyxen: Creative Mentor"
+                            title="Nyxen Creative Mentor Chat Interface"
                             allowtransparency="true" 
                             allow="geolocation; microphone; camera; fullscreen"
                             src="https://agent.jotform.com/019d3d3c3a537add8379214c3060726a324e?embedMode=iframe&autofocus=0&background=1&shadow=1"
@@ -689,108 +765,111 @@
                             scrolling="no">
                         </iframe>
                     </div>
-                </div>
+                </article>
 
                 <!-- Ask Anything -->
-                <div class="card">
+                <article class="card" aria-labelledby="ask-title">
                     <div class="card-header">
-                        <h3 class="card-title">Ask Anything</h3>
+                        <h2 class="card-title" id="ask-title">Ask Anything</h2>
                     </div>
-                    <div style="display: flex; gap: 12px;">
-                        <input type="text" class="form-input" placeholder="Ask about structure, pacing, formats, or next steps..." style="flex: 1;">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Send
+                    <form onsubmit="event.preventDefault(); submitQuestion();" style="display: flex; gap: 12px;">
+                        <label for="ask-input" class="sr-only">Your question about writing</label>
+                        <input type="text" id="ask-input" class="form-input" placeholder="Ask about structure, pacing, formats, or next steps..." style="flex: 1;" aria-describedby="ask-help">
+                        <button type="submit" class="btn btn-primary" aria-label="Send your question">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Send
                         </button>
-                    </div>
-                </div>
-            </div>
+                    </form>
+                    <span id="ask-help" class="sr-only">Type your question and press Enter or click Send</span>
+                </article>
+            </section>
 
             <!-- Page 2: Story Generation Workspace -->
-            <div class="page" id="page-story-workspace">
-                <div class="page-header">
+            <section class="page" id="page-story-workspace" role="tabpanel" aria-labelledby="tab-story-workspace">
+                <header class="page-header">
                     <h1 class="font-serif">Story Generation Workspace</h1>
                     <p>Craft your narrative with AI assistance</p>
-                </div>
+                </header>
 
                 <div class="grid-2">
                     <!-- Story Chat Panel -->
-                    <div class="card">
+                    <article class="card" aria-labelledby="story-chat-title">
                         <div class="card-header">
-                            <h3 class="card-title">Story Chat Panel</h3>
+                            <h2 class="card-title" id="story-chat-title">Story Chat Panel</h2>
                         </div>
-                        <div style="min-height: 300px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+                        <div style="min-height: 300px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 16px;" role="region" aria-label="Story chat messages">
                             <p style="color: var(--primary-font); opacity: 0.6; text-align: center; padding-top: 120px;">Nyxen story chat panel</p>
                         </div>
-                        <div style="display: flex; gap: 12px;">
-                            <input type="text" class="form-input" placeholder="Describe the scene or ask Nyxen for direction..." style="flex: 1;">
-                            <button class="btn btn-primary">Send</button>
-                        </div>
-                    </div>
+                        <form onsubmit="event.preventDefault();" style="display: flex; gap: 12px;">
+                            <label for="story-prompt" class="sr-only">Describe your scene or question</label>
+                            <input type="text" id="story-prompt" class="form-input" placeholder="Describe the scene or ask Nyxen for direction..." style="flex: 1;">
+                            <button type="submit" class="btn btn-primary" aria-label="Send story prompt">Send</button>
+                        </form>
+                    </article>
 
                     <!-- Chapters and Scenes -->
-                    <div class="card">
+                    <article class="card" aria-labelledby="chapters-title">
                         <div class="card-header">
-                            <h3 class="card-title">Chapters and Scenes</h3>
+                            <h2 class="card-title" id="chapters-title">Chapters and Scenes</h2>
                         </div>
-                        <div class="act-tabs">
-                            <button class="act-tab active">Act I</button>
-                            <button class="act-tab">Act II</button>
-                            <button class="act-tab">Act III</button>
+                        <div class="act-tabs" role="tablist" aria-label="Story acts">
+                            <button class="act-tab active" role="tab" aria-selected="true" aria-controls="act1-content" id="act1-tab">Act I</button>
+                            <button class="act-tab" role="tab" aria-selected="false" aria-controls="act2-content" id="act2-tab">Act II</button>
+                            <button class="act-tab" role="tab" aria-selected="false" aria-controls="act3-content" id="act3-tab">Act III</button>
                         </div>
-                        <div style="min-height: 200px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
+                        <div id="act1-content" role="tabpanel" aria-labelledby="act1-tab" style="min-height: 200px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
                             <p style="color: var(--primary-font); opacity: 0.6;">Manage structure, outlines, and scene notes here.</p>
                         </div>
-                    </div>
+                    </article>
                 </div>
 
                 <!-- Collected Snippets -->
-                <div class="card">
+                <article class="card" aria-labelledby="snippets-title">
                     <div class="card-header">
-                        <h3 class="card-title">Collected Snippets</h3>
+                        <h2 class="card-title" id="snippets-title">Collected Snippets</h2>
                     </div>
-                    <div style="min-height: 150px; background: var(--header-bg); border-radius: 6px; padding: 16px; border: 2px dashed var(--border-accent);">
+                    <div style="min-height: 150px; background: var(--header-bg); border-radius: 6px; padding: 16px; border: 2px dashed var(--border-accent);" role="region" aria-label="Snippet drop zone" tabindex="0">
                         <p style="color: var(--primary-font); opacity: 0.6; text-align: center;">Drop generated text snippets here</p>
                     </div>
-                </div>
+                </article>
 
                 <!-- Nyxen Account Links -->
-                <div class="card">
+                <article class="card" aria-labelledby="account-title">
                     <div class="card-header">
-                        <h3 class="card-title">Nyxen Account</h3>
+                        <h2 class="card-title" id="account-title">Nyxen Account</h2>
                     </div>
-                    <div class="note-box">
+                    <div class="note-box" role="note">
                         These actions open the Nyxen membership site in your browser. Account creation, login, and billing are all handled on nyxen.smcantrellbooks.com, not inside this app.
                     </div>
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
-                        <a href="https://nyxen.smcantrellbooks.com/join" target="_blank" class="btn btn-primary">Join Nyxen</a>
-                        <a href="https://nyxen.smcantrellbooks.com/login" target="_blank" class="btn btn-secondary">Login to Nyxen</a>
-                        <a href="https://nyxen.smcantrellbooks.com/my-account" target="_blank" class="btn btn-secondary">Manage / My Account</a>
-                        <button class="btn btn-secondary">Logout from Nyxen</button>
-                    </div>
-                </div>
-            </div>
+                    <nav style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;" aria-label="Account management links">
+                        <a href="https://nyxen.smcantrellbooks.com/join" target="_blank" class="btn btn-primary" aria-label="Join Nyxen membership (opens in new tab)">Join Nyxen</a>
+                        <a href="https://nyxen.smcantrellbooks.com/login" target="_blank" class="btn btn-secondary" aria-label="Login to Nyxen account (opens in new tab)">Login to Nyxen</a>
+                        <a href="https://nyxen.smcantrellbooks.com/my-account" target="_blank" class="btn btn-secondary" aria-label="Manage your Nyxen account (opens in new tab)">Manage / My Account</a>
+                        <button class="btn btn-secondary" aria-label="Logout from Nyxen">Logout from Nyxen</button>
+                    </nav>
+                </article>
+            </section>
 
             <!-- Page 3: Drafting & Chapter Creation -->
-            <div class="page" id="page-drafting">
-                <div class="page-header">
+            <section class="page" id="page-drafting" role="tabpanel" aria-labelledby="tab-drafting">
+                <header class="page-header">
                     <h1 class="font-serif">Drafting & Chapter Creation</h1>
                     <p>Turn your story plan into concrete chapters and scenes</p>
-                </div>
+                </header>
 
                 <div class="grid-2">
                     <!-- Drafting Mentor -->
-                    <div class="card">
+                    <article class="card" aria-labelledby="drafting-mentor-title">
                         <div class="card-header">
-                            <h3 class="card-title">Nyxen — Drafting Mentor</h3>
+                            <h2 class="card-title" id="drafting-mentor-title">Nyxen — Drafting Mentor</h2>
                         </div>
                         <p style="color: var(--primary-font); margin-bottom: 16px;">I'll help you turn your story plan into concrete chapters, scenes, and summaries that stay true to your genre, audience, worldbuilding, and structure in StoryForge Studio.</p>
-                        <div class="note-box">
+                        <div class="note-box" role="note">
                             Available on creatives.smcantrellbooks.com and nyxen.smcantrellbooks.com for the same project workspace.
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Select Project</label>
-                            <select class="form-select">
+                            <label for="draft-project" class="form-label">Select Project</label>
+                            <select id="draft-project" class="form-select">
                                 <option>Starbound Heirs</option>
                                 <option>Glass Kingdoms</option>
                                 <option>Neon Fables</option>
@@ -799,8 +878,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Which chapter or scene are you drafting?</label>
-                            <select class="form-select">
+                            <label for="draft-chapter" class="form-label">Which chapter or scene are you drafting?</label>
+                            <select id="draft-chapter" class="form-select">
                                 <option>Chapter 1 - Opening</option>
                                 <option>Chapter 2 - Rising Action</option>
                                 <option>Chapter 3 - Confrontation</option>
@@ -808,8 +887,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Preferred Format</label>
-                            <select class="form-select">
+                            <label for="draft-format" class="form-label">Preferred Format</label>
+                            <select id="draft-format" class="form-select">
                                 <option>Narrative prose</option>
                                 <option>Scene outline</option>
                                 <option>Dialogue-heavy</option>
@@ -818,20 +897,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">What should we focus on?</label>
-                            <input type="text" class="form-input" placeholder="Example: opening hook, tension escalation, or character voice consistency">
+                            <label for="draft-focus" class="form-label">What should we focus on?</label>
+                            <input type="text" id="draft-focus" class="form-input" placeholder="Example: opening hook, tension escalation, or character voice consistency">
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Existing text (optional)</label>
-                            <textarea class="form-textarea" placeholder="Paste a draft excerpt and I'll suggest refinements and restructuring"></textarea>
+                            <label for="draft-existing" class="form-label">Existing text (optional)</label>
+                            <textarea id="draft-existing" class="form-textarea" placeholder="Paste a draft excerpt and I'll suggest refinements and restructuring"></textarea>
                         </div>
 
-                        <div style="display: flex; gap: 12px;">
-                            <button class="btn btn-primary">Draft Guidance</button>
-                            <button class="btn btn-secondary">Suggest Next Chapter/Scene</button>
+                        <div style="display: flex; gap: 12px;" role="group" aria-label="Drafting actions">
+                            <button class="btn btn-primary" aria-label="Get draft guidance from Nyxen">Draft Guidance</button>
+                            <button class="btn btn-secondary" aria-label="Get suggestion for next chapter or scene">Suggest Next Chapter/Scene</button>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Right Column -->
                     <div>
@@ -1197,79 +1276,79 @@
             </div>
 
             <!-- Page 7: Membership -->
-            <div class="page" id="page-membership">
-                <div class="page-header">
+            <section class="page" id="page-membership" role="tabpanel" aria-labelledby="tab-membership">
+                <header class="page-header">
                     <h1 class="font-serif">Storefront & Membership</h1>
                     <p>Choose the plan that fits your creative journey</p>
-                </div>
+                </header>
 
                 <!-- Membership Tiers -->
-                <div class="grid-3">
-                    <div class="membership-card">
-                        <h3 class="font-serif" style="color: var(--primary-font);">Nyxen Free</h3>
-                        <div class="membership-price">$0<span>/month</span></div>
-                        <ul class="membership-features">
-                            <li><i class="fas fa-check"></i> 100 points/month</li>
-                            <li><i class="fas fa-check"></i> Story generation</li>
-                            <li><i class="fas fa-check"></i> Image generation</li>
-                            <li><i class="fas fa-check"></i> Video generation</li>
-                            <li><i class="fas fa-times" style="opacity: 0.5;"></i> No video storage</li>
+                <div class="grid-3" role="list" aria-label="Membership tier options">
+                    <article class="membership-card" role="listitem" aria-labelledby="free-tier-title">
+                        <h2 class="font-serif" id="free-tier-title" style="color: var(--primary-font);">Nyxen Free</h2>
+                        <div class="membership-price" aria-label="Free, zero dollars per month">$0<span>/month</span></div>
+                        <ul class="membership-features" aria-label="Free tier features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>100 points/month</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>Story generation</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>Image generation</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>Video generation</span></li>
+                            <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-secondary" style="width: 100%;">Join Free</button>
-                    </div>
+                        <button class="btn btn-secondary" style="width: 100%;" aria-label="Join Nyxen Free tier">Join Free</button>
+                    </article>
 
-                    <div class="membership-card featured">
-                        <h3 class="font-serif" style="color: var(--primary-font);">Nyxen Pro</h3>
-                        <div class="membership-price">$5<span>/month</span></div>
-                        <ul class="membership-features">
-                            <li><i class="fas fa-check"></i> 300 points/month</li>
-                            <li><i class="fas fa-check"></i> Story generation</li>
-                            <li><i class="fas fa-check"></i> <strong>Unlimited images</strong></li>
-                            <li><i class="fas fa-check"></i> Video generation</li>
-                            <li><i class="fas fa-times" style="opacity: 0.5;"></i> No video storage</li>
+                    <article class="membership-card featured" role="listitem" aria-labelledby="pro-tier-title">
+                        <h2 class="font-serif" id="pro-tier-title" style="color: var(--primary-font);">Nyxen Pro</h2>
+                        <div class="membership-price" aria-label="Five dollars per month">$5<span>/month</span></div>
+                        <ul class="membership-features" aria-label="Pro tier features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>300 points/month</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>Story generation</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <strong>Unlimited images</strong></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>Video generation</span></li>
+                            <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Join Pro</button>
-                    </div>
+                        <button class="btn btn-primary" style="width: 100%;" aria-label="Join Nyxen Pro tier for 5 dollars per month">Join Pro</button>
+                    </article>
 
-                    <div class="membership-card">
-                        <h3 class="font-serif" style="color: var(--primary-font);">Nyxen Premium</h3>
-                        <div class="membership-price">$10<span>/month</span></div>
-                        <ul class="membership-features">
-                            <li><i class="fas fa-check"></i> 600 points/month</li>
-                            <li><i class="fas fa-check"></i> Story generation</li>
-                            <li><i class="fas fa-check"></i> <strong>Unlimited images</strong></li>
-                            <li><i class="fas fa-check"></i> <strong>Unlimited video</strong></li>
-                            <li><i class="fas fa-times" style="opacity: 0.5;"></i> No video storage</li>
+                    <article class="membership-card" role="listitem" aria-labelledby="premium-tier-title">
+                        <h2 class="font-serif" id="premium-tier-title" style="color: var(--primary-font);">Nyxen Premium</h2>
+                        <div class="membership-price" aria-label="Ten dollars per month">$10<span>/month</span></div>
+                        <ul class="membership-features" aria-label="Premium tier features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>600 points/month</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <span>Story generation</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <strong>Unlimited images</strong></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <strong>Unlimited video</strong></li>
+                            <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Join Premium</button>
-                    </div>
+                        <button class="btn btn-primary" style="width: 100%;" aria-label="Join Nyxen Premium tier for 10 dollars per month">Join Premium</button>
+                    </article>
                 </div>
 
                 <!-- A La Carte Points -->
-                <div class="card" style="margin-top: 24px;">
+                <article class="card" style="margin-top: 24px;" aria-labelledby="alacarte-title">
                     <div class="card-header">
-                        <h3 class="card-title">A La Carte Points</h3>
+                        <h2 class="card-title" id="alacarte-title">A La Carte Points</h2>
                     </div>
-                    <div class="grid-2">
-                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;">
+                    <div class="grid-2" role="list" aria-label="Point purchase options">
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;" role="listitem">
                             <div>
-                                <h4 style="color: var(--primary-font);">50 Points</h4>
+                                <h3 style="color: var(--primary-font);">50 Points</h3>
                                 <p style="color: var(--primary-font); opacity: 0.7;">One-time purchase</p>
                             </div>
-                            <button class="btn btn-primary">$2.50</button>
+                            <button class="btn btn-primary" aria-label="Purchase 50 points for 2 dollars and 50 cents">$2.50</button>
                         </div>
-                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;" role="listitem">
                             <div>
-                                <h4 style="color: var(--primary-font);">100 Points</h4>
+                                <h3 style="color: var(--primary-font);">100 Points</h3>
                                 <p style="color: var(--primary-font); opacity: 0.7;">One-time purchase</p>
                             </div>
-                            <button class="btn btn-primary">$5.00</button>
+                            <button class="btn btn-primary" aria-label="Purchase 100 points for 5 dollars">$5.00</button>
                         </div>
                     </div>
-                    <div class="note-box">
+                    <div class="note-box" role="note">
                         No video storage included with point purchases.
                     </div>
-                </div>
+                </article>
 
                 <!-- Projects -->
                 <div class="card" style="margin-top: 24px;">
@@ -1300,101 +1379,106 @@
             </div>
 
             <!-- Page 8: Disclosures -->
-            <div class="page" id="page-disclosures">
-                <div class="page-header">
+            <section class="page" id="page-disclosures" role="tabpanel" aria-labelledby="tab-disclosures">
+                <header class="page-header">
                     <h1 class="font-serif">Disclosures & Policies</h1>
                     <p>Important information about using Nyxen Creative Stories</p>
-                </div>
+                </header>
 
-                <div class="disclosure-card">
-                    <h3><i class="fas fa-robot"></i> AI Usage Disclosure</h3>
+                <article class="disclosure-card" aria-labelledby="ai-disclosure-title">
+                    <h2 id="ai-disclosure-title"><i class="fas fa-robot" aria-hidden="true"></i> AI Usage Disclosure</h2>
                     <p>Nyxen, our AI mentor, is an artificial intelligence assistant. All suggestions, creative prompts, and draft content provided by Nyxen are AI-generated. As a creator, you are solely responsible for reviewing, editing, and ensuring the legal and compliance suitability of all generated content before any use or publication.</p>
-                </div>
+                </article>
 
-                <div class="disclosure-card">
-                    <h3><i class="fas fa-palette"></i> Visual Creations Disclosure</h3>
+                <article class="disclosure-card" aria-labelledby="visual-disclosure-title">
+                    <h2 id="visual-disclosure-title"><i class="fas fa-palette" aria-hidden="true"></i> Visual Creations Disclosure</h2>
                     <p>Images and visual assets generated within Nyxen Creative Stories may also be AI-generated. These creations can sometimes inadvertently resemble existing styles or copyrighted works. It is your responsibility to review all visual assets for appropriate rights, licences, and usage permissions before public release.</p>
-                </div>
+                </article>
 
-                <div class="disclosure-card">
-                    <h3><i class="fas fa-book"></i> Publication Disclaimer</h3>
+                <article class="disclosure-card" aria-labelledby="publication-disclaimer-title">
+                    <h2 id="publication-disclaimer-title"><i class="fas fa-book" aria-hidden="true"></i> Publication Disclaimer</h2>
                     <p>All decisions regarding the publication of your works, including but not limited to ebooks, audiobooks, print, and digital formats, are exclusively your responsibility as the creator. This includes securing all necessary rights, permissions, and ensuring full legal compliance within your specific jurisdiction.</p>
-                </div>
+                </article>
 
-                <div class="disclosure-card">
-                    <h3><i class="fas fa-file-contract"></i> Terms & Conditions</h3>
+                <article class="disclosure-card" aria-labelledby="terms-title">
+                    <h2 id="terms-title"><i class="fas fa-file-contract" aria-hidden="true"></i> Terms & Conditions</h2>
                     <p>By using the Nyxen Creative Stories platform, you signify your agreement to our comprehensive terms and conditions. Please ensure you have read and understood them.</p>
-                    <button class="btn btn-secondary">View Full Terms & Conditions</button>
-                </div>
+                    <button class="btn btn-secondary" aria-label="View full terms and conditions document">View Full Terms & Conditions</button>
+                </article>
 
-                <div class="disclosure-card">
-                    <h3><i class="fas fa-shield-alt"></i> Privacy Notice</h3>
+                <article class="disclosure-card" aria-labelledby="privacy-title">
+                    <h2 id="privacy-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> Privacy Notice</h2>
                     <p>Your user accounts, creative projects, and uploaded content are handled with care and in accordance with our established privacy practices. We are committed to protecting your data.</p>
-                    <button class="btn btn-secondary">View Full Privacy Policy</button>
-                </div>
+                    <button class="btn btn-secondary" aria-label="View full privacy policy document">View Full Privacy Policy</button>
+                </article>
 
-                <div class="note-box" style="margin-top: 24px;">
+                <aside class="note-box" style="margin-top: 24px;" role="note" aria-label="Backup recommendation">
                     <strong>Backup Recommendation:</strong> We recommend downloading and backing up your creations regularly in case of technical issues or data loss.
-                </div>
-            </div>
-        </div>
+                </aside>
+            </section>
+        </main>
 
         <!-- Side Panel -->
-        <aside class="side-panel">
+        <aside class="side-panel" role="complementary" aria-label="Nyxen side panel">
             <div class="side-panel-header">
-                <h3 class="side-panel-title">Nyxen Panel</h3>
-                <button class="btn btn-secondary" style="padding: 6px 10px;" onclick="toggleSidePanel()">
-                    <i class="fas fa-chevron-right"></i>
+                <h2 class="side-panel-title">Nyxen Panel</h2>
+                <button class="btn btn-secondary" style="padding: 6px 10px;" onclick="toggleSidePanel()" aria-label="Collapse side panel" aria-expanded="true">
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
                 </button>
             </div>
-            <div class="side-panel-tabs">
-                <button class="side-tab active" onclick="switchSideTab('conversations')">Conversations</button>
-                <button class="side-tab" onclick="switchSideTab('projects')">Projects</button>
+            <div class="side-panel-tabs" role="tablist" aria-label="Side panel navigation">
+                <button class="side-tab active" onclick="switchSideTab('conversations')" role="tab" aria-selected="true" aria-controls="side-conversations" id="side-tab-conversations">Conversations</button>
+                <button class="side-tab" onclick="switchSideTab('projects')" role="tab" aria-selected="false" aria-controls="side-projects" id="side-tab-projects">Projects</button>
             </div>
             <div class="side-panel-content">
                 <!-- Conversations Tab -->
-                <div id="side-conversations">
+                <div id="side-conversations" role="tabpanel" aria-labelledby="side-tab-conversations">
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="New conversation title...">
+                        <label for="new-conversation-title" class="sr-only">New conversation title</label>
+                        <input type="text" id="new-conversation-title" class="form-input" placeholder="New conversation title...">
                     </div>
-                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 16px;">
-                        <i class="fas fa-plus"></i> Create
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 16px;" aria-label="Create new conversation">
+                        <i class="fas fa-plus" aria-hidden="true"></i> Create
                     </button>
-                    <div class="conversation-item">
-                        <h4>Story structure discussion</h4>
-                        <p>Last updated: 2 hours ago</p>
-                    </div>
-                    <div class="conversation-item">
-                        <h4>Character development</h4>
-                        <p>Last updated: Yesterday</p>
-                    </div>
-                    <div class="conversation-item">
-                        <h4>World-building ideas</h4>
-                        <p>Last updated: 3 days ago</p>
-                    </div>
+                    <nav aria-label="Recent conversations">
+                        <div class="conversation-item" role="button" tabindex="0" aria-label="Story structure discussion, last updated 2 hours ago">
+                            <h3 style="font-size: 14px; color: var(--primary-font);">Story structure discussion</h3>
+                            <p>Last updated: 2 hours ago</p>
+                        </div>
+                        <div class="conversation-item" role="button" tabindex="0" aria-label="Character development, last updated yesterday">
+                            <h3 style="font-size: 14px; color: var(--primary-font);">Character development</h3>
+                            <p>Last updated: Yesterday</p>
+                        </div>
+                        <div class="conversation-item" role="button" tabindex="0" aria-label="World-building ideas, last updated 3 days ago">
+                            <h3 style="font-size: 14px; color: var(--primary-font);">World-building ideas</h3>
+                            <p>Last updated: 3 days ago</p>
+                        </div>
+                    </nav>
                 </div>
                 <!-- Projects Tab -->
-                <div id="side-projects" style="display: none;">
-                    <div class="project-card">
-                        <h4>Starbound Heirs</h4>
-                        <p>Science Fantasy • Ebook trilogy</p>
-                        <button class="btn btn-secondary" style="width: 100%;">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Glass Kingdoms</h4>
-                        <p>Epic Fantasy • Deluxe ebook</p>
-                        <button class="btn btn-secondary" style="width: 100%;">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Neon Fables</h4>
-                        <p>Cyberpunk • Ebook collection</p>
-                        <button class="btn btn-secondary" style="width: 100%;">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Ink & Ember</h4>
-                        <p>Dark Fantasy Mystery</p>
-                        <button class="btn btn-secondary" style="width: 100%;">Set Active</button>
-                    </div>
+                <div id="side-projects" style="display: none;" role="tabpanel" aria-labelledby="side-tab-projects" aria-hidden="true">
+                    <nav aria-label="Your projects">
+                        <article class="project-card">
+                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Starbound Heirs</h3>
+                            <p>Science Fantasy • Ebook trilogy</p>
+                            <button class="btn btn-secondary" style="width: 100%;" aria-label="Set Starbound Heirs as active project">Set Active</button>
+                        </article>
+                        <article class="project-card">
+                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Glass Kingdoms</h3>
+                            <p>Epic Fantasy • Deluxe ebook</p>
+                            <button class="btn btn-secondary" style="width: 100%;" aria-label="Set Glass Kingdoms as active project">Set Active</button>
+                        </article>
+                        <article class="project-card">
+                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Neon Fables</h3>
+                            <p>Cyberpunk • Ebook collection</p>
+                            <button class="btn btn-secondary" style="width: 100%;" aria-label="Set Neon Fables as active project">Set Active</button>
+                        </article>
+                        <article class="project-card">
+                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Ink & Ember</h3>
+                            <p>Dark Fantasy Mystery</p>
+                            <button class="btn btn-secondary" style="width: 100%;" aria-label="Set Ink and Ember as active project">Set Active</button>
+                        </article>
+                    </nav>
                 </div>
             </div>
         </aside>
@@ -1411,44 +1495,173 @@
             );
         }
 
-        // Page Navigation
+        // Announce to screen readers
+        function announce(message) {
+            const announcer = document.getElementById('announcements');
+            announcer.textContent = message;
+            setTimeout(() => { announcer.textContent = ''; }, 1000);
+        }
+
+        // Page Navigation with accessibility
         function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            // Hide all pages and update ARIA
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+                page.setAttribute('aria-hidden', 'true');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
             
             // Show selected page
-            document.getElementById('page-' + pageId).classList.add('active');
-            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
-        }
-
-        // Mode Selector
-        function selectMode(element, mode) {
-            document.querySelectorAll('.mode-card').forEach(card => card.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        // Side Panel Tabs
-        function switchSideTab(tab) {
-            document.querySelectorAll('.side-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+            const page = document.getElementById('page-' + pageId);
+            const tab = document.querySelector(`[data-page="${pageId}"]`);
             
-            document.getElementById('side-conversations').style.display = tab === 'conversations' ? 'block' : 'none';
-            document.getElementById('side-projects').style.display = tab === 'projects' ? 'block' : 'none';
+            page.classList.add('active');
+            page.setAttribute('aria-hidden', 'false');
+            page.removeAttribute('aria-hidden');
+            
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            
+            // Focus on page heading for screen readers
+            const heading = page.querySelector('h1');
+            if (heading) {
+                heading.setAttribute('tabindex', '-1');
+                heading.focus();
+            }
+            
+            // Announce page change
+            announce('Navigated to ' + tab.textContent.trim() + ' page');
+        }
+
+        // Mode Selector with accessibility
+        function selectMode(element, mode) {
+            document.querySelectorAll('.mode-card').forEach(card => {
+                card.classList.remove('active');
+                card.setAttribute('aria-checked', 'false');
+            });
+            element.classList.add('active');
+            element.setAttribute('aria-checked', 'true');
+            
+            const modeName = element.querySelector('span').textContent;
+            announce('Selected ' + modeName + ' mode');
+        }
+
+        // Handle keyboard for mode selection
+        function handleModeKeypress(event, element, mode) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                selectMode(element, mode);
+            }
+        }
+
+        // Side Panel Tabs with accessibility
+        function switchSideTab(tab) {
+            document.querySelectorAll('.side-tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            event.target.classList.add('active');
+            event.target.setAttribute('aria-selected', 'true');
+            
+            const conversationsTab = document.getElementById('side-conversations');
+            const projectsTab = document.getElementById('side-projects');
+            
+            conversationsTab.style.display = tab === 'conversations' ? 'block' : 'none';
+            conversationsTab.setAttribute('aria-hidden', tab === 'conversations' ? 'false' : 'true');
+            
+            projectsTab.style.display = tab === 'projects' ? 'block' : 'none';
+            projectsTab.setAttribute('aria-hidden', tab === 'projects' ? 'false' : 'true');
+            
+            announce('Switched to ' + tab + ' panel');
         }
 
         // Toggle Side Panel
         function toggleSidePanel() {
             const panel = document.querySelector('.side-panel');
-            panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+            const isVisible = panel.style.display !== 'none';
+            panel.style.display = isVisible ? 'none' : 'flex';
+            panel.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
+            announce(isVisible ? 'Side panel hidden' : 'Side panel shown');
         }
 
-        // Act Tabs
-        document.querySelectorAll('.act-tab').forEach(tab => {
+        // Submit question function
+        function submitQuestion() {
+            const input = document.getElementById('ask-input');
+            if (input.value.trim()) {
+                announce('Question submitted');
+                // Add submission logic here
+            }
+        }
+
+        // Act Tabs with accessibility
+        document.querySelectorAll('.act-tab').forEach((tab, index) => {
             tab.addEventListener('click', function() {
-                document.querySelectorAll('.act-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.act-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
                 this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+                announce('Switched to ' + this.textContent);
             });
+            
+            // Keyboard navigation for act tabs
+            tab.addEventListener('keydown', function(e) {
+                const tabs = Array.from(document.querySelectorAll('.act-tab'));
+                const currentIndex = tabs.indexOf(this);
+                
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    const nextTab = tabs[(currentIndex + 1) % tabs.length];
+                    nextTab.focus();
+                    nextTab.click();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const prevTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
+                    prevTab.focus();
+                    prevTab.click();
+                }
+            });
+        });
+
+        // Main tab keyboard navigation
+        document.querySelectorAll('.tab-btn').forEach((tab, index) => {
+            tab.addEventListener('keydown', function(e) {
+                const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+                const currentIndex = tabs.indexOf(this);
+                
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    const nextTab = tabs[(currentIndex + 1) % tabs.length];
+                    nextTab.focus();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const prevTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
+                    prevTab.focus();
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    tabs[0].focus();
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    tabs[tabs.length - 1].focus();
+                }
+            });
+        });
+
+        // Initialize ARIA states on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial ARIA states for pages
+            document.querySelectorAll('.page').forEach(page => {
+                if (!page.classList.contains('active')) {
+                    page.setAttribute('aria-hidden', 'true');
+                }
+            });
+            
+            // Set initial ARIA states for side panel tabs
+            document.getElementById('side-projects').setAttribute('aria-hidden', 'true');
         });
     </script>
 </body>
