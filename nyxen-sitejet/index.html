@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyxen Creative Stories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --gradient-start: #b8966a;
+            --gradient-end: #662a69;
+            --header-bg: #d8b588;
+            --app-font: #F7F2FF;
+            --primary-font: #000000;
+            --card-bg: #C8B2EE;
+            --border-accent: #321860;
+            --button-bg: #0A1551;
+            --button-text: #FFFFFF;
+            --logo-bg: #412A69;
+            --icon-bg: #695A2A;
+            --icon-color: #F7F2FF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            min-height: 100vh;
+            color: var(--app-font);
+        }
+
+        .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--header-bg);
+            border-bottom: 2px solid var(--border-accent);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .top-bar-logo {
+            height: 48px;
+            width: auto;
+        }
+
+        .tier-display {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+        }
+
+        .tier-badge {
+            font-weight: 600;
+            color: var(--primary-font);
+        }
+
+        .points-display {
+            color: var(--border-accent);
+            font-weight: 500;
+        }
+
+        .top-bar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--button-bg);
+            color: var(--button-text);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--primary-font);
+            border: 2px solid var(--border-accent);
+        }
+
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* Tab Navigation */
+        .tab-nav {
+            background: rgba(200, 178, 238, 0.3);
+            border-bottom: 2px solid var(--border-accent);
+            padding: 0 24px;
+            display: flex;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 16px 24px;
+            background: transparent;
+            border: none;
+            color: var(--app-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover { background: rgba(200, 178, 238, 0.3); }
+
+        .tab-btn.active {
+            background: var(--card-bg);
+            color: var(--primary-font);
+            border-bottom-color: var(--border-accent);
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 130px);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        /* Side Panel */
+        .side-panel {
+            width: 320px;
+            background: var(--card-bg);
+            border-left: 2px solid var(--border-accent);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-panel-header {
+            padding: 16px;
+            border-bottom: 2px solid var(--border-accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .side-panel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--primary-font);
+        }
+
+        .side-panel-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-accent);
+        }
+
+        .side-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            color: var(--primary-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .side-tab.active {
+            background: var(--header-bg);
+            font-weight: 600;
+        }
+
+        .side-panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        /* Pages */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p { opacity: 0.8; }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--primary-font);
+        }
+
+        /* Form Elements */
+        .form-group { margin-bottom: 16px; }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary-font);
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 6px;
+            color: var(--primary-font);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--button-bg);
+        }
+
+        /* Mode Selector */
+        .mode-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mode-card {
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-card:hover { transform: translateY(-2px); }
+
+        .mode-card.active {
+            background: var(--button-bg);
+            color: var(--button-text);
+        }
+
+        .mode-card i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .mode-card span {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* JotForm Container */
+        .jotform-container {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+        /* Membership Cards */
+        .membership-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .membership-card.featured {
+            border-color: var(--button-bg);
+            box-shadow: 0 0 20px rgba(10, 21, 81, 0.3);
+        }
+
+        .membership-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--primary-font);
+            margin: 16px 0;
+        }
+
+        .membership-price span {
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+        .membership-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .membership-features li {
+            padding: 8px 0;
+            color: var(--primary-font);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .membership-features li i {
+            color: var(--border-accent);
+        }
+
+        /* Chapter Tabs */
+        .act-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .act-tab {
+            padding: 8px 16px;
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 6px;
+            color: var(--primary-font);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .act-tab.active {
+            background: var(--button-bg);
+            color: var(--button-text);
+        }
+
+        /* Checklist */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--header-bg);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            color: var(--primary-font);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--border-accent);
+        }
+
+        /* Author Card */
+        .author-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--header-bg);
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--icon-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--icon-color);
+        }
+
+        .author-info h4 {
+            color: var(--primary-font);
+            font-size: 14px;
+        }
+
+        .author-info p {
+            color: var(--primary-font);
+            opacity: 0.7;
+            font-size: 12px;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .project-card h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-font);
+            margin-bottom: 8px;
+        }
+
+        .project-card p {
+            font-size: 13px;
+            color: var(--primary-font);
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        /* Conversation Item */
+        .conversation-item {
+            padding: 12px;
+            background: var(--header-bg);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .conversation-item:hover {
+            background: rgba(216, 181, 136, 0.8);
+        }
+
+        .conversation-item h4 {
+            color: var(--primary-font);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .conversation-item p {
+            color: var(--primary-font);
+            opacity: 0.7;
+            font-size: 12px;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Disclosure Card */
+        .disclosure-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .disclosure-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-font);
+            margin-bottom: 12px;
+        }
+
+        .disclosure-card p {
+            color: var(--primary-font);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        /* Note Box */
+        .note-box {
+            background: rgba(50, 24, 96, 0.2);
+            border-left: 4px solid var(--border-accent);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            color: var(--app-font);
+            margin: 12px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .side-panel { display: none; }
+            .mode-selector { grid-template-columns: repeat(2, 1fr); }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { flex-wrap: wrap; gap: 12px; }
+            .tab-nav { padding: 0 12px; }
+            .tab-btn { padding: 12px 16px; font-size: 13px; }
+            .main-content { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <img src="https://cdn1.site-media.eu/images/0/24605435/NyxenLogo-HC7dR0B8dpqO3kUw00D6eg.png" alt="Nyxen" class="top-bar-logo">
+            <div class="tier-display">
+                <span class="tier-badge">Free Tier</span>
+                <span class="points-display">100 Points</span>
+            </div>
+        </div>
+        <div class="top-bar-actions">
+            <button class="btn btn-secondary" onclick="showPage('membership')">
+                <i class="fas fa-arrow-up"></i> Upgrade
+            </button>
+            <button class="btn btn-secondary" onclick="showPage('membership')">
+                <i class="fas fa-coins"></i> Buy Points
+            </button>
+            <a href="https://smcantrellbooks.com/join" target="_blank" class="btn btn-primary">
+                <i class="fas fa-rocket"></i> Upgrade to Cantrell Creatives
+            </a>
+        </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-page="assistant" onclick="showPage('assistant')">
+            <i class="fas fa-comments"></i> Creatives Assistant
+        </button>
+        <button class="tab-btn" data-page="story-workspace" onclick="showPage('story-workspace')">
+            <i class="fas fa-pen-fancy"></i> Story Workspace
+        </button>
+        <button class="tab-btn" data-page="drafting" onclick="showPage('drafting')">
+            <i class="fas fa-file-alt"></i> Drafting
+        </button>
+        <button class="tab-btn" data-page="editing" onclick="showPage('editing')">
+            <i class="fas fa-edit"></i> Edit Mode
+        </button>
+        <button class="tab-btn" data-page="publishing" onclick="showPage('publishing')">
+            <i class="fas fa-book-open"></i> Publishing
+        </button>
+        <button class="tab-btn" data-page="image-studio" onclick="showPage('image-studio')">
+            <i class="fas fa-image"></i> Image Studio
+        </button>
+        <button class="tab-btn" data-page="membership" onclick="showPage('membership')">
+            <i class="fas fa-crown"></i> Membership
+        </button>
+        <button class="tab-btn" data-page="disclosures" onclick="showPage('disclosures')">
+            <i class="fas fa-shield-alt"></i> Disclosures
+        </button>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Page 1: Creatives Assistant Chat -->
+            <div class="page active" id="page-assistant">
+                <div class="page-header">
+                    <h1 class="font-serif">Creatives Assistant</h1>
+                    <p>Your AI-powered creative companion for storytelling</p>
+                </div>
+
+                <!-- Generation Mode Selector -->
+                <div class="mode-selector">
+                    <div class="mode-card active" onclick="selectMode(this, 'story')">
+                        <i class="fas fa-book"></i>
+                        <span>Story Generation</span>
+                    </div>
+                    <div class="mode-card" onclick="selectMode(this, 'image')">
+                        <i class="fas fa-image"></i>
+                        <span>Image Generation</span>
+                    </div>
+                    <div class="mode-card" onclick="selectMode(this, 'text-video')">
+                        <i class="fas fa-video"></i>
+                        <span>Text to Video</span>
+                    </div>
+                    <div class="mode-card" onclick="selectMode(this, 'image-video')">
+                        <i class="fas fa-film"></i>
+                        <span>Image to Video</span>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Project Snapshot -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Project Snapshot</h3>
+                            <button class="btn btn-secondary">Save Snapshot</button>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-textarea" placeholder="Genre, audience, premise, protagonist, worldbuilding, structure, current chapter draft status..."></textarea>
+                        </div>
+                        <div class="note-box">
+                            Keep brief notes about your project so Nyxen stays consistent across the conversation.
+                        </div>
+                    </div>
+
+                    <!-- Documents & Pasted Text -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Documents & Pasted Text</h3>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-secondary" style="width: 100%;">
+                                <i class="fas fa-upload"></i> Choose File
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-textarea" placeholder="Paste text here..."></textarea>
+                        </div>
+                        <button class="btn btn-primary">Import Pasted Text</button>
+                        <div class="note-box">
+                            I can summarise and reference them during the session, but I do not store files after the session ends.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JotForm Chat Embed -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Conversation with Nyxen</h3>
+                    </div>
+                    <div class="jotform-container">
+                        <iframe id="JotFormIFrame-019d3d3c3a537add8379214c3060726a324e" 
+                            title="Nyxen: Creative Mentor"
+                            allowtransparency="true" 
+                            allow="geolocation; microphone; camera; fullscreen"
+                            src="https://agent.jotform.com/019d3d3c3a537add8379214c3060726a324e?embedMode=iframe&autofocus=0&background=1&shadow=1"
+                            frameborder="0" 
+                            style="width:100%; height:688px; border:none;" 
+                            scrolling="no">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Ask Anything -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Ask Anything</h3>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <input type="text" class="form-input" placeholder="Ask about structure, pacing, formats, or next steps..." style="flex: 1;">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 2: Story Generation Workspace -->
+            <div class="page" id="page-story-workspace">
+                <div class="page-header">
+                    <h1 class="font-serif">Story Generation Workspace</h1>
+                    <p>Craft your narrative with AI assistance</p>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Story Chat Panel -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Story Chat Panel</h3>
+                        </div>
+                        <div style="min-height: 300px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+                            <p style="color: var(--primary-font); opacity: 0.6; text-align: center; padding-top: 120px;">Nyxen story chat panel</p>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <input type="text" class="form-input" placeholder="Describe the scene or ask Nyxen for direction..." style="flex: 1;">
+                            <button class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+
+                    <!-- Chapters and Scenes -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Chapters and Scenes</h3>
+                        </div>
+                        <div class="act-tabs">
+                            <button class="act-tab active">Act I</button>
+                            <button class="act-tab">Act II</button>
+                            <button class="act-tab">Act III</button>
+                        </div>
+                        <div style="min-height: 200px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
+                            <p style="color: var(--primary-font); opacity: 0.6;">Manage structure, outlines, and scene notes here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collected Snippets -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Collected Snippets</h3>
+                    </div>
+                    <div style="min-height: 150px; background: var(--header-bg); border-radius: 6px; padding: 16px; border: 2px dashed var(--border-accent);">
+                        <p style="color: var(--primary-font); opacity: 0.6; text-align: center;">Drop generated text snippets here</p>
+                    </div>
+                </div>
+
+                <!-- Nyxen Account Links -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Nyxen Account</h3>
+                    </div>
+                    <div class="note-box">
+                        These actions open the Nyxen membership site in your browser. Account creation, login, and billing are all handled on nyxen.smcantrellbooks.com, not inside this app.
+                    </div>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
+                        <a href="https://nyxen.smcantrellbooks.com/join" target="_blank" class="btn btn-primary">Join Nyxen</a>
+                        <a href="https://nyxen.smcantrellbooks.com/login" target="_blank" class="btn btn-secondary">Login to Nyxen</a>
+                        <a href="https://nyxen.smcantrellbooks.com/my-account" target="_blank" class="btn btn-secondary">Manage / My Account</a>
+                        <button class="btn btn-secondary">Logout from Nyxen</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 3: Drafting & Chapter Creation -->
+            <div class="page" id="page-drafting">
+                <div class="page-header">
+                    <h1 class="font-serif">Drafting & Chapter Creation</h1>
+                    <p>Turn your story plan into concrete chapters and scenes</p>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Drafting Mentor -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Nyxen — Drafting Mentor</h3>
+                        </div>
+                        <p style="color: var(--primary-font); margin-bottom: 16px;">I'll help you turn your story plan into concrete chapters, scenes, and summaries that stay true to your genre, audience, worldbuilding, and structure in StoryForge Studio.</p>
+                        <div class="note-box">
+                            Available on creatives.smcantrellbooks.com and nyxen.smcantrellbooks.com for the same project workspace.
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Select Project</label>
+                            <select class="form-select">
+                                <option>Starbound Heirs</option>
+                                <option>Glass Kingdoms</option>
+                                <option>Neon Fables</option>
+                                <option>Ink & Ember</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Which chapter or scene are you drafting?</label>
+                            <select class="form-select">
+                                <option>Chapter 1 - Opening</option>
+                                <option>Chapter 2 - Rising Action</option>
+                                <option>Chapter 3 - Confrontation</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Preferred Format</label>
+                            <select class="form-select">
+                                <option>Narrative prose</option>
+                                <option>Scene outline</option>
+                                <option>Dialogue-heavy</option>
+                                <option>Action sequence</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">What should we focus on?</label>
+                            <input type="text" class="form-input" placeholder="Example: opening hook, tension escalation, or character voice consistency">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Existing text (optional)</label>
+                            <textarea class="form-textarea" placeholder="Paste a draft excerpt and I'll suggest refinements and restructuring"></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <button class="btn btn-primary">Draft Guidance</button>
+                            <button class="btn btn-secondary">Suggest Next Chapter/Scene</button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div>
+                        <!-- Scene & Cover Art Generator -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Scene & Cover Art Generator</h3>
+                            </div>
+                            <p style="color: var(--primary-font); margin-bottom: 16px;">Drafting-ready visuals without outlining or prose skills.</p>
+                            <div class="form-group">
+                                <label class="form-label">Project Data Source</label>
+                                <select class="form-select">
+                                    <option>Current Project</option>
+                                    <option>Custom Input</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%;">Generate Art</button>
+                        </div>
+
+                        <!-- Chapter Progress Tracker -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Chapter Progress Tracker</h3>
+                            </div>
+                            <div class="checklist-item">
+                                <span style="flex: 1; color: var(--primary-font);">Chapter 1</span>
+                                <span style="color: var(--primary-font);">2,450 words</span>
+                                <span style="background: var(--button-bg); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Draft</span>
+                            </div>
+                            <div class="checklist-item">
+                                <span style="flex: 1; color: var(--primary-font);">Chapter 2</span>
+                                <span style="color: var(--primary-font);">1,800 words</span>
+                                <span style="background: var(--border-accent); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">In Progress</span>
+                            </div>
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Manuscript Package Settings</button>
+                        </div>
+
+                        <!-- Drafting Output -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Drafting Guidance Output</h3>
+                                <button class="btn btn-secondary">
+                                    <i class="fas fa-volume-up"></i> Read Selected
+                                </button>
+                            </div>
+                            <div style="min-height: 150px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
+                                <p style="color: var(--primary-font); opacity: 0.6;">AI guidance will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 4: Edit Mode -->
+            <div class="page" id="page-editing">
+                <div class="page-header">
+                    <h1 class="font-serif">Creative Writing Mentor — Edit Mode</h1>
+                    <p>Sharpen voice, continuity, and flow</p>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Project Context -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Project Context</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Current Project</label>
+                            <input type="text" class="form-input" value="Starbound Heirs">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Genre, Tone, or Voice</label>
+                            <input type="text" class="form-input" placeholder="e.g., Dark fantasy, sardonic humor">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Recently Edited Chapters</label>
+                            <input type="text" class="form-input" placeholder="e.g., Chapter 3, Chapter 4">
+                        </div>
+                        <button class="btn btn-primary">Update Context</button>
+                    </div>
+
+                    <!-- Editing Priorities -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Editing Priorities</h3>
+                        </div>
+                        <p style="color: var(--primary-font); margin-bottom: 16px;">Suggested next steps:</p>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="edit1">
+                            <label for="edit1" style="color: var(--primary-font);">Confirm voice consistency across recent chapters</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="edit2">
+                            <label for="edit2" style="color: var(--primary-font);">Check continuity for timeline and character arcs</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="edit3">
+                            <label for="edit3" style="color: var(--primary-font);">Tighten scene openings and endings</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="edit4">
+                            <label for="edit4" style="color: var(--primary-font);">Review formatting for dialogue and section breaks</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Readiness Check -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Readiness Check</h3>
+                    </div>
+                    <div class="grid-2">
+                        <div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="ready1">
+                                <label for="ready1" style="color: var(--primary-font);">All chapters have a complete narrative arc</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="ready2">
+                                <label for="ready2" style="color: var(--primary-font);">Continuity pass completed</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="ready3">
+                                <label for="ready3" style="color: var(--primary-font);">Line edits and style polish finished</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="ready4">
+                                <label for="ready4" style="color: var(--primary-font);">Formatting matches target standard</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note-box">
+                        Mark items as they are completed to track readiness.
+                    </div>
+                </div>
+
+                <!-- Chat with Nyxen -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Chat with Nyxen</h3>
+                    </div>
+                    <p style="color: var(--primary-font); margin-bottom: 16px;">Start the conversation when you are ready. Share the chapter or scene you're revising, and I'll help you sharpen voice, continuity, and flow with a prioritised, stepwise plan aligned to your genre and audience.</p>
+                    <div class="form-group">
+                        <textarea class="form-textarea" placeholder="Ask about style, continuity, voice, or formatting..."></textarea>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn btn-primary">Send</button>
+                        <button class="btn btn-secondary">Clear Conversation</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 5: Publishing Strategist -->
+            <div class="page" id="page-publishing">
+                <div class="page-header">
+                    <h1 class="font-serif">Story Mentor & Publishing Strategist</h1>
+                    <p>Plan your publishing journey</p>
+                </div>
+
+                <!-- Project Selector -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Focus Project</h3>
+                    </div>
+                    <select class="form-select">
+                        <option>Starbound Heirs</option>
+                        <option>Glass Kingdoms</option>
+                        <option>Neon Fables</option>
+                        <option>Ink & Ember</option>
+                    </select>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Project Snapshot -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Project Snapshot</h3>
+                        </div>
+                        <div style="color: var(--primary-font);">
+                            <p><strong>Title:</strong> Starbound Heirs</p>
+                            <p><strong>Genre:</strong> Science Fantasy</p>
+                            <p><strong>Audience:</strong> Young Adult / New Adult</p>
+                            <p><strong>Format:</strong> Ebook trilogy with audiobook editions</p>
+                        </div>
+                    </div>
+
+                    <!-- Blurb & Tagline -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Blurb & Tagline Suggestions</h3>
+                        </div>
+                        <div style="min-height: 100px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 12px;">
+                            <p style="color: var(--primary-font); opacity: 0.6;">AI-generated blurbs will appear here...</p>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="btn btn-secondary">Ebook & Audiobook</button>
+                            <button class="btn btn-secondary">Web & Visual Script</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Series Positioning -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Series Positioning & Bundles</h3>
+                        </div>
+                        <div style="min-height: 120px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
+                            <p style="color: var(--primary-font); opacity: 0.6;">AI suggestions for series positioning and bundle structure...</p>
+                        </div>
+                    </div>
+
+                    <!-- Membership Plan Ideas -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Membership Plan Ideas</h3>
+                        </div>
+                        <div style="min-height: 120px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
+                            <p style="color: var(--primary-font); opacity: 0.6;">Suggestions based on your current tier and project formats...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Author Roster -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Author Roster</h3>
+                    </div>
+                    <div class="grid-2">
+                        <div class="author-card">
+                            <div class="author-avatar"><i class="fas fa-user"></i></div>
+                            <div class="author-info">
+                                <h4>Amara Patel</h4>
+                                <p>Rising Author - Ebook first</p>
+                            </div>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-avatar"><i class="fas fa-user"></i></div>
+                            <div class="author-info">
+                                <h4>Jordan Lee</h4>
+                                <p>Narrator Partner - Audiobook only</p>
+                            </div>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-avatar"><i class="fas fa-user"></i></div>
+                            <div class="author-info">
+                                <h4>Miguel Santos</h4>
+                                <p>Creator Studio - Ebook & Visual Script</p>
+                            </div>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-avatar"><i class="fas fa-user"></i></div>
+                            <div class="author-info">
+                                <h4>Sierra Cantrell</h4>
+                                <p>Pro Author - Ebook & Audiobook</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 6: Image Studio -->
+            <div class="page" id="page-image-studio">
+                <div class="page-header">
+                    <h1 class="font-serif">Text to Image Studio</h1>
+                    <p>Generate character concepts, cover art, and scene images</p>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Create Image -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Create Image</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Select Project</label>
+                            <input type="text" class="form-input" placeholder="Search by project title...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Image Type</label>
+                            <select class="form-select">
+                                <option>Character Concept</option>
+                                <option>Cover Art</option>
+                                <option>Scene Image</option>
+                                <option>Setting/Environment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Images to Generate</label>
+                            <select class="form-select">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Detailed Prompt</label>
+                            <textarea class="form-textarea" placeholder="Describe the character, setting, mood, visual style, and key details..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-sparkles"></i> Generate Images (5 points)
+                        </button>
+                    </div>
+
+                    <!-- Filter Gallery -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Filter Gallery</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Filter by Type</label>
+                            <select class="form-select">
+                                <option>All types</option>
+                                <option>Character Concept</option>
+                                <option>Cover Art</option>
+                                <option>Scene Image</option>
+                                <option>Setting/Environment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Filter by Recency</label>
+                            <select class="form-select">
+                                <option>All time</option>
+                                <option>Today</option>
+                                <option>This week</option>
+                                <option>This month</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generated Gallery -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Generated Gallery</h3>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
+                                <i class="fas fa-image" style="font-size: 32px;"></i>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
+                                <i class="fas fa-image" style="font-size: 32px;"></i>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
+                                <i class="fas fa-image" style="font-size: 32px;"></i>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
+                                <i class="fas fa-image" style="font-size: 32px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 7: Membership -->
+            <div class="page" id="page-membership">
+                <div class="page-header">
+                    <h1 class="font-serif">Storefront & Membership</h1>
+                    <p>Choose the plan that fits your creative journey</p>
+                </div>
+
+                <!-- Membership Tiers -->
+                <div class="grid-3">
+                    <div class="membership-card">
+                        <h3 class="font-serif" style="color: var(--primary-font);">Nyxen Free</h3>
+                        <div class="membership-price">$0<span>/month</span></div>
+                        <ul class="membership-features">
+                            <li><i class="fas fa-check"></i> 100 points/month</li>
+                            <li><i class="fas fa-check"></i> Story generation</li>
+                            <li><i class="fas fa-check"></i> Image generation</li>
+                            <li><i class="fas fa-check"></i> Video generation</li>
+                            <li><i class="fas fa-times" style="opacity: 0.5;"></i> No video storage</li>
+                        </ul>
+                        <button class="btn btn-secondary" style="width: 100%;">Join Free</button>
+                    </div>
+
+                    <div class="membership-card featured">
+                        <h3 class="font-serif" style="color: var(--primary-font);">Nyxen Pro</h3>
+                        <div class="membership-price">$5<span>/month</span></div>
+                        <ul class="membership-features">
+                            <li><i class="fas fa-check"></i> 300 points/month</li>
+                            <li><i class="fas fa-check"></i> Story generation</li>
+                            <li><i class="fas fa-check"></i> <strong>Unlimited images</strong></li>
+                            <li><i class="fas fa-check"></i> Video generation</li>
+                            <li><i class="fas fa-times" style="opacity: 0.5;"></i> No video storage</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Join Pro</button>
+                    </div>
+
+                    <div class="membership-card">
+                        <h3 class="font-serif" style="color: var(--primary-font);">Nyxen Premium</h3>
+                        <div class="membership-price">$10<span>/month</span></div>
+                        <ul class="membership-features">
+                            <li><i class="fas fa-check"></i> 600 points/month</li>
+                            <li><i class="fas fa-check"></i> Story generation</li>
+                            <li><i class="fas fa-check"></i> <strong>Unlimited images</strong></li>
+                            <li><i class="fas fa-check"></i> <strong>Unlimited video</strong></li>
+                            <li><i class="fas fa-times" style="opacity: 0.5;"></i> No video storage</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Join Premium</button>
+                    </div>
+                </div>
+
+                <!-- A La Carte Points -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">A La Carte Points</h3>
+                    </div>
+                    <div class="grid-2">
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;">
+                            <div>
+                                <h4 style="color: var(--primary-font);">50 Points</h4>
+                                <p style="color: var(--primary-font); opacity: 0.7;">One-time purchase</p>
+                            </div>
+                            <button class="btn btn-primary">$2.50</button>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;">
+                            <div>
+                                <h4 style="color: var(--primary-font);">100 Points</h4>
+                                <p style="color: var(--primary-font); opacity: 0.7;">One-time purchase</p>
+                            </div>
+                            <button class="btn btn-primary">$5.00</button>
+                        </div>
+                    </div>
+                    <div class="note-box">
+                        No video storage included with point purchases.
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">Projects</h3>
+                    </div>
+                    <div class="project-card">
+                        <h4>Starbound Heirs</h4>
+                        <p>Science Fantasy — Ebook trilogy with audiobook editions and potential screenplay adaptation</p>
+                        <button class="btn btn-secondary">Set Active</button>
+                    </div>
+                    <div class="project-card">
+                        <h4>Glass Kingdoms</h4>
+                        <p>Epic Fantasy — Deluxe ebook with maps, audiobook with atmospheric sound design</p>
+                        <button class="btn btn-secondary">Set Active</button>
+                    </div>
+                    <div class="project-card">
+                        <h4>Neon Fables</h4>
+                        <p>Cyberpunk Fairy Tales — Ebook collection, episodic audiobook series, and potential visual script</p>
+                        <button class="btn btn-secondary">Set Active</button>
+                    </div>
+                    <div class="project-card">
+                        <h4>Ink & Ember</h4>
+                        <p>Dark Fantasy Mystery — Single-volume ebook, full-cast audiobook, and bonus illustrated novella</p>
+                        <button class="btn btn-secondary">Set Active</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 8: Disclosures -->
+            <div class="page" id="page-disclosures">
+                <div class="page-header">
+                    <h1 class="font-serif">Disclosures & Policies</h1>
+                    <p>Important information about using Nyxen Creative Stories</p>
+                </div>
+
+                <div class="disclosure-card">
+                    <h3><i class="fas fa-robot"></i> AI Usage Disclosure</h3>
+                    <p>Nyxen, our AI mentor, is an artificial intelligence assistant. All suggestions, creative prompts, and draft content provided by Nyxen are AI-generated. As a creator, you are solely responsible for reviewing, editing, and ensuring the legal and compliance suitability of all generated content before any use or publication.</p>
+                </div>
+
+                <div class="disclosure-card">
+                    <h3><i class="fas fa-palette"></i> Visual Creations Disclosure</h3>
+                    <p>Images and visual assets generated within Nyxen Creative Stories may also be AI-generated. These creations can sometimes inadvertently resemble existing styles or copyrighted works. It is your responsibility to review all visual assets for appropriate rights, licences, and usage permissions before public release.</p>
+                </div>
+
+                <div class="disclosure-card">
+                    <h3><i class="fas fa-book"></i> Publication Disclaimer</h3>
+                    <p>All decisions regarding the publication of your works, including but not limited to ebooks, audiobooks, print, and digital formats, are exclusively your responsibility as the creator. This includes securing all necessary rights, permissions, and ensuring full legal compliance within your specific jurisdiction.</p>
+                </div>
+
+                <div class="disclosure-card">
+                    <h3><i class="fas fa-file-contract"></i> Terms & Conditions</h3>
+                    <p>By using the Nyxen Creative Stories platform, you signify your agreement to our comprehensive terms and conditions. Please ensure you have read and understood them.</p>
+                    <button class="btn btn-secondary">View Full Terms & Conditions</button>
+                </div>
+
+                <div class="disclosure-card">
+                    <h3><i class="fas fa-shield-alt"></i> Privacy Notice</h3>
+                    <p>Your user accounts, creative projects, and uploaded content are handled with care and in accordance with our established privacy practices. We are committed to protecting your data.</p>
+                    <button class="btn btn-secondary">View Full Privacy Policy</button>
+                </div>
+
+                <div class="note-box" style="margin-top: 24px;">
+                    <strong>Backup Recommendation:</strong> We recommend downloading and backing up your creations regularly in case of technical issues or data loss.
+                </div>
+            </div>
+        </div>
+
+        <!-- Side Panel -->
+        <aside class="side-panel">
+            <div class="side-panel-header">
+                <h3 class="side-panel-title">Nyxen Panel</h3>
+                <button class="btn btn-secondary" style="padding: 6px 10px;" onclick="toggleSidePanel()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="side-panel-tabs">
+                <button class="side-tab active" onclick="switchSideTab('conversations')">Conversations</button>
+                <button class="side-tab" onclick="switchSideTab('projects')">Projects</button>
+            </div>
+            <div class="side-panel-content">
+                <!-- Conversations Tab -->
+                <div id="side-conversations">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="New conversation title...">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 16px;">
+                        <i class="fas fa-plus"></i> Create
+                    </button>
+                    <div class="conversation-item">
+                        <h4>Story structure discussion</h4>
+                        <p>Last updated: 2 hours ago</p>
+                    </div>
+                    <div class="conversation-item">
+                        <h4>Character development</h4>
+                        <p>Last updated: Yesterday</p>
+                    </div>
+                    <div class="conversation-item">
+                        <h4>World-building ideas</h4>
+                        <p>Last updated: 3 days ago</p>
+                    </div>
+                </div>
+                <!-- Projects Tab -->
+                <div id="side-projects" style="display: none;">
+                    <div class="project-card">
+                        <h4>Starbound Heirs</h4>
+                        <p>Science Fantasy • Ebook trilogy</p>
+                        <button class="btn btn-secondary" style="width: 100%;">Set Active</button>
+                    </div>
+                    <div class="project-card">
+                        <h4>Glass Kingdoms</h4>
+                        <p>Epic Fantasy • Deluxe ebook</p>
+                        <button class="btn btn-secondary" style="width: 100%;">Set Active</button>
+                    </div>
+                    <div class="project-card">
+                        <h4>Neon Fables</h4>
+                        <p>Cyberpunk • Ebook collection</p>
+                        <button class="btn btn-secondary" style="width: 100%;">Set Active</button>
+                    </div>
+                    <div class="project-card">
+                        <h4>Ink & Ember</h4>
+                        <p>Dark Fantasy Mystery</p>
+                        <button class="btn btn-secondary" style="width: 100%;">Set Active</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- JotForm Script -->
+    <script src='https://cdn.jotfor.ms/s/umd/43ddf8c9259/for-form-embed-handler.js'></script>
+    <script>
+        // Initialize JotForm
+        if (typeof window.jotformEmbedHandler === 'function') {
+            window.jotformEmbedHandler(
+                "iframe[id='JotFormIFrame-019d3d3c3a537add8379214c3060726a324e']",
+                "https://www.jotform.com"
+            );
+        }
+
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById('page-' + pageId).classList.add('active');
+            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+        }
+
+        // Mode Selector
+        function selectMode(element, mode) {
+            document.querySelectorAll('.mode-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Side Panel Tabs
+        function switchSideTab(tab) {
+            document.querySelectorAll('.side-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('side-conversations').style.display = tab === 'conversations' ? 'block' : 'none';
+            document.getElementById('side-projects').style.display = tab === 'projects' ? 'block' : 'none';
+        }
+
+        // Toggle Side Panel
+        function toggleSidePanel() {
+            const panel = document.querySelector('.side-panel');
+            panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        // Act Tabs
+        document.querySelectorAll('.act-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.act-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
