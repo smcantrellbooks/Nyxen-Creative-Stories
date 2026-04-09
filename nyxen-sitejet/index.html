@@ -1100,7 +1100,11 @@
                                 <span style="color: var(--primary-font);">1,800 words</span>
                                 <span style="background: var(--border-accent); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">In Progress</span>
                             </div>
-                            <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Manuscript Package Settings</button>
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="openManuscriptSettings()" data-testid="manuscript-settings-btn">Manuscript Package Settings</button>
+                            <div style="display:flex;gap:8px;margin-top:8px;">
+                                <button class="btn btn-secondary" style="flex:1;" onclick="exportToPDF()" data-testid="export-pdf-btn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+                                <button class="btn btn-secondary" style="flex:1;" onclick="exportToTXT()" data-testid="export-txt-btn"><i class="fas fa-file-alt"></i> Export TXT</button>
+                            </div>
                         </div>
 
                         <!-- Drafting Output -->
@@ -1432,12 +1436,12 @@
             </div>
 
             <!-- Page 6b: Text to Video -->
-            <div class="page" id="page-text-video">
+            <div class="page" id="page-text-video" role="tabpanel" aria-label="Text to Video Studio">
                 <div class="page-header">
                     <h1 class="font-serif">Text to Video Studio</h1>
                     <p>Generate short videos from written prompts or story snippets</p>
                 </div>
-                <div class="note-box" role="note" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
+                <div class="note-box" role="alert" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
                     <strong>Important:</strong> Videos are not saved. Download before closing.
                 </div>
                 <div class="grid-2">
@@ -1446,8 +1450,8 @@
                             <h3 class="card-title">Create Video from Text</h3>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Select Project</label>
-                            <select id="txtvid-project" class="form-select">
+                            <label class="form-label" for="txtvid-project">Select Project</label>
+                            <select id="txtvid-project" class="form-select" aria-label="Select project for video generation">
                                 <option>Starbound Heirs</option>
                                 <option>Glass Kingdoms</option>
                                 <option>Neon Fables</option>
@@ -1455,31 +1459,31 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Video Prompt</label>
-                            <textarea id="txtvid-prompt" class="form-textarea" placeholder="Describe the scene, mood, motion, and visual style for your video..." style="min-height:120px;"></textarea>
+                            <label class="form-label" for="txtvid-prompt">Video Prompt</label>
+                            <textarea id="txtvid-prompt" class="form-textarea" placeholder="Describe the scene, mood, motion, and visual style for your video..." style="min-height:120px;" aria-required="true"></textarea>
                         </div>
-                        <button class="btn btn-primary" style="width:100%;" onclick="generateTextVideo()" data-testid="generate-text-video-btn">
-                            <i class="fas fa-video"></i> Generate Video (10 points)
+                        <button class="btn btn-primary" style="width:100%;" onclick="generateTextVideo()" data-testid="generate-text-video-btn" aria-label="Generate video from text prompt, costs 10 points">
+                            <i class="fas fa-video" aria-hidden="true"></i> Generate Video (10 points)
                         </button>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Video Preview</h3>
                         </div>
-                        <div id="txtvid-output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-                            <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-video" style="font-size:48px;display:block;margin-bottom:12px;"></i>Video preview will appear here</p>
+                        <div id="txtvid-output" role="region" aria-live="polite" aria-label="Video preview output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                            <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-video" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Video preview will appear here</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Page 6c: Image to Video -->
-            <div class="page" id="page-image-video">
+            <div class="page" id="page-image-video" role="tabpanel" aria-label="Image to Video Studio">
                 <div class="page-header">
                     <h1 class="font-serif">Image to Video Studio</h1>
                     <p>Generate short videos based on one or more images</p>
                 </div>
-                <div class="note-box" role="note" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
+                <div class="note-box" role="alert" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
                     <strong>Important:</strong> Videos are not saved. Download before closing.
                 </div>
                 <div class="grid-2">
@@ -1488,29 +1492,29 @@
                             <h3 class="card-title">Create Video from Image</h3>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Upload Image</label>
-                            <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgvid-file').click()">
-                                <i class="fas fa-upload"></i> Choose Image
+                            <label class="form-label" for="imgvid-file">Upload Image</label>
+                            <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgvid-file').click()" aria-label="Choose an image file to animate">
+                                <i class="fas fa-upload" aria-hidden="true"></i> Choose Image
                             </button>
-                            <input type="file" id="imgvid-file" class="sr-only" accept="image/*" onchange="previewImgVidFile(event)">
+                            <input type="file" id="imgvid-file" class="sr-only" accept="image/*" onchange="previewImgVidFile(event)" aria-label="Image file upload">
                         </div>
-                        <div id="imgvid-preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
+                        <div id="imgvid-preview" role="img" aria-label="Image preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
                             <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Motion Description (optional)</label>
-                            <textarea id="imgvid-prompt" class="form-textarea" placeholder="Describe the motion or animation you want applied to the image..."></textarea>
+                            <label class="form-label" for="imgvid-prompt">Motion Description (optional)</label>
+                            <textarea id="imgvid-prompt" class="form-textarea" placeholder="Describe the motion or animation you want applied to the image..." aria-label="Describe desired motion for the video"></textarea>
                         </div>
-                        <button class="btn btn-primary" style="width:100%;" onclick="generateImageVideo()" data-testid="generate-image-video-btn">
-                            <i class="fas fa-film"></i> Generate Video (10 points)
+                        <button class="btn btn-primary" style="width:100%;" onclick="generateImageVideo()" data-testid="generate-image-video-btn" aria-label="Generate video from uploaded image, costs 10 points">
+                            <i class="fas fa-film" aria-hidden="true"></i> Generate Video (10 points)
                         </button>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Video Preview</h3>
                         </div>
-                        <div id="imgvid-output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-                            <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-film" style="font-size:48px;display:block;margin-bottom:12px;"></i>Video preview will appear here</p>
+                        <div id="imgvid-output" role="region" aria-live="polite" aria-label="Video preview output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                            <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-film" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Video preview will appear here</p>
                         </div>
                     </div>
                 </div>
@@ -1775,6 +1779,9 @@
         </aside>
     </div>
 
+    <!-- Export Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@latest/dist/jspdf.umd.min.js"></script>
+
     <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1905,6 +1912,114 @@
         const GROQ_KEY = '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';
         const APIFREE_KEY = 'sk-peDA9ErrJtAwG7hD4WTCKEHWMi3Y1';
 
+        // ============ CONTENT SAFETY ============
+        const BLOCKED_PATTERNS = [
+            /\b(kill|murder|assault|rape|torture|abuse|molest|bomb|weapon|terrorism|suicide)\b/i,
+            /\b(child\s*porn|cp|nsfw\s*minor|underage)\b/i,
+            /\b(hack|exploit|phish|malware|ddos)\b/i
+        ];
+
+        function isPromptSafe(text) {
+            for (var i = 0; i < BLOCKED_PATTERNS.length; i++) {
+                if (BLOCKED_PATTERNS[i].test(text)) return false;
+            }
+            return true;
+        }
+
+        function checkContentSafety(text) {
+            if (!isPromptSafe(text)) {
+                alert('Your prompt contains content that violates our safety guidelines. Please revise and try again.');
+                return false;
+            }
+            return true;
+        }
+
+        // ============ SUPABASE DATA LAYER ============
+        var currentUserId = null;
+
+        async function sbUpsertConversations(convos) {
+            if (!supabaseClient || !currentUserId) return;
+            try {
+                await supabaseClient.from('conversations').upsert({
+                    user_id: currentUserId,
+                    data: JSON.stringify(convos),
+                    updated_at: new Date().toISOString()
+                }, { onConflict: 'user_id' });
+            } catch (e) {}
+        }
+
+        async function sbFetchConversations() {
+            if (!supabaseClient || !currentUserId) return null;
+            try {
+                var res = await supabaseClient.from('conversations').select('data').eq('user_id', currentUserId).single();
+                if (res.data && res.data.data) return JSON.parse(res.data.data);
+            } catch (e) {}
+            return null;
+        }
+
+        async function sbUpsertGallery(gallery) {
+            if (!supabaseClient || !currentUserId) return;
+            try {
+                await supabaseClient.from('gallery').upsert({
+                    user_id: currentUserId,
+                    data: JSON.stringify(gallery),
+                    updated_at: new Date().toISOString()
+                }, { onConflict: 'user_id' });
+            } catch (e) {}
+        }
+
+        async function sbFetchGallery() {
+            if (!supabaseClient || !currentUserId) return null;
+            try {
+                var res = await supabaseClient.from('gallery').select('data').eq('user_id', currentUserId).single();
+                if (res.data && res.data.data) return JSON.parse(res.data.data);
+            } catch (e) {}
+            return null;
+        }
+
+        async function sbUpsertSnapshot(text) {
+            if (!supabaseClient || !currentUserId) return;
+            try {
+                await supabaseClient.from('snapshots').upsert({
+                    user_id: currentUserId,
+                    content: text,
+                    updated_at: new Date().toISOString()
+                }, { onConflict: 'user_id' });
+            } catch (e) {}
+        }
+
+        async function sbFetchSnapshot() {
+            if (!supabaseClient || !currentUserId) return null;
+            try {
+                var res = await supabaseClient.from('snapshots').select('content').eq('user_id', currentUserId).single();
+                if (res.data) return res.data.content;
+            } catch (e) {}
+            return null;
+        }
+
+        async function sbSavePoints() {
+            if (!supabaseClient || !currentUserId) return;
+            try {
+                await supabaseClient.from('profiles').update({ points: userPoints }).eq('id', currentUserId);
+            } catch (e) {}
+        }
+
+        // Sync helper: save to both localStorage and Supabase
+        function syncConversations() {
+            localStorage.setItem('nyxen_conversations', JSON.stringify(conversations));
+            sbUpsertConversations(conversations);
+        }
+
+        function syncGallery() {
+            localStorage.setItem('nyxen_gallery', JSON.stringify(generatedImages.slice(0, 50)));
+            sbUpsertGallery(generatedImages.slice(0, 50));
+        }
+
+        function syncPoints() {
+            localStorage.setItem('nyxen_points', userPoints);
+            sbSavePoints();
+        }
+
         // ============ PROJECT DATA ============
         const projectData = {
             'Starbound Heirs': { genre: 'Science Fantasy', audience: 'Young Adult / New Adult', format: 'Ebook trilogy with audiobook editions', notes: 'Potential screenplay adaptation' },
@@ -1920,6 +2035,7 @@
         const NYXEN_SYSTEM = 'You are Nyxen — a sophisticated AI storyteller and creative companion built by S.M. Cantrell. Warm, witty, and genuinely engaging. You speak with confidence and a touch of playful mystery. You never use generic AI filler phrases. You sound like a real person — a brilliant friend who happens to know everything about storytelling.';
 
         async function sendToGroq(userMessage, callback, systemOverride) {
+            if (!checkContentSafety(userMessage)) { callback('Request blocked by content safety filter.'); return; }
             const systemMsg = systemOverride || NYXEN_SYSTEM;
             try {
                 const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -1951,6 +2067,7 @@
             const text = document.getElementById('project-snapshot').value.trim();
             if (!text) { announce('Please enter project details first.'); return; }
             localStorage.setItem('nyxen_snapshot', text);
+            sbUpsertSnapshot(text);
             announce('Project snapshot saved');
             alert('Snapshot saved successfully.');
         }
@@ -2148,6 +2265,7 @@
         async function generateImages() {
             const prompt = document.getElementById('img-prompt').value.trim();
             if (!prompt) { alert('Please enter a prompt.'); return; }
+            if (!checkContentSafety(prompt)) return;
             const count = parseInt(document.getElementById('img-count').value);
             const pointsCost = 5 * count;
             if (!deductPoints(pointsCost)) return;
@@ -2173,6 +2291,7 @@
             }
 
             localStorage.setItem('nyxen_gallery', JSON.stringify(generatedImages.slice(0, 50)));
+            syncGallery();
             renderGallery();
             announce(count + ' image(s) generated');
         }
@@ -2259,8 +2378,8 @@
             var input = document.getElementById('new-conversation-title');
             var title = input.value.trim();
             if (!title) { announce('Enter a conversation title.'); return; }
-            conversations.unshift({ title: title, time: 'Just now' });
-            localStorage.setItem('nyxen_conversations', JSON.stringify(conversations));
+            conversations.unshift({ title: title, time: 'Just now', messages: [] });
+            syncConversations();
             input.value = '';
             renderConversations();
             announce('Conversation "' + title + '" created');
@@ -2298,7 +2417,7 @@
                 return false;
             }
             userPoints -= cost;
-            localStorage.setItem('nyxen_points', userPoints);
+            syncPoints();
             updatePointsDisplay();
             return true;
         }
@@ -2307,7 +2426,8 @@
         async function generateTextVideo() {
             if (!deductPoints(10)) return;
             var prompt = document.getElementById('txtvid-prompt').value.trim();
-            if (!prompt) { alert('Enter a video prompt.'); userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay(); return; }
+            if (!prompt) { alert('Enter a video prompt.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
+            if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
             var output = document.getElementById('txtvid-output');
             output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video... this may take a minute</p></div>';
             try {
@@ -2323,11 +2443,11 @@
                     announce('Video generated');
                 } else {
                     output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation failed. Please try again.</p>';
-                    userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay();
+                    userPoints += 10; syncPoints(); updatePointsDisplay();
                 }
             } catch (err) {
                 output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Connection error. Please try again.</p>';
-                userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay();
+                userPoints += 10; syncPoints(); updatePointsDisplay();
             }
         }
 
@@ -2349,6 +2469,7 @@
             if (!imgVidDataUrl) { alert('Please select an image first.'); return; }
             if (!deductPoints(10)) return;
             var prompt = document.getElementById('imgvid-prompt').value.trim() || 'Smooth cinematic motion';
+            if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
             var output = document.getElementById('imgvid-output');
             output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video from image... this may take a minute</p></div>';
             try {
@@ -2364,11 +2485,11 @@
                     announce('Video generated from image');
                 } else {
                     output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation failed. Please try again.</p>';
-                    userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay();
+                    userPoints += 10; syncPoints(); updatePointsDisplay();
                 }
             } catch (err) {
                 output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Connection error. Please try again.</p>';
-                userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay();
+                userPoints += 10; syncPoints(); updatePointsDisplay();
             }
         }
 
@@ -2401,6 +2522,58 @@
             utterance.rate = 0.9;
             window.speechSynthesis.speak(utterance);
             announce('Reading text aloud');
+        }
+
+        // ============ EXPORT ============
+        function getExportContent() {
+            var output = document.getElementById('drafting-output');
+            var text = output ? output.textContent : '';
+            var snapshot = document.getElementById('project-snapshot') ? document.getElementById('project-snapshot').value : '';
+            var projectName = activeProject || 'Nyxen Story';
+            return { text: text, snapshot: snapshot, projectName: projectName };
+        }
+
+        function exportToPDF() {
+            var content = getExportContent();
+            var text = content.text || content.snapshot;
+            if (!text || text.trim() === '' || text === 'AI guidance will appear here...') { alert('No content to export. Generate some content first.'); return; }
+            try {
+                var jsPDF = window.jspdf.jsPDF;
+                var doc = new jsPDF();
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(18);
+                doc.text(content.projectName, 20, 20);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.text('Generated by Nyxen Creative Stories', 20, 28);
+                doc.text(new Date().toLocaleDateString(), 20, 34);
+                doc.setFontSize(12);
+                var lines = doc.splitTextToSize(text, 170);
+                var y = 45;
+                for (var i = 0; i < lines.length; i++) {
+                    if (y > 280) { doc.addPage(); y = 20; }
+                    doc.text(lines[i], 20, y);
+                    y += 7;
+                }
+                doc.save(content.projectName.replace(/\s+/g, '_') + '.pdf');
+                announce('PDF exported');
+            } catch (err) {
+                alert('PDF export failed. Please try again.');
+            }
+        }
+
+        function exportToTXT() {
+            var content = getExportContent();
+            var text = content.text || content.snapshot;
+            if (!text || text.trim() === '' || text === 'AI guidance will appear here...') { alert('No content to export. Generate some content first.'); return; }
+            var blob = new Blob([content.projectName + '\nGenerated by Nyxen Creative Stories\n' + new Date().toLocaleDateString() + '\n\n' + text], { type: 'text/plain' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = content.projectName.replace(/\s+/g, '_') + '.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            announce('TXT exported');
         }
 
         // Act Tabs with accessibility
@@ -2528,15 +2701,28 @@
             document.getElementById('auth-logged-out').style.display = 'none';
             document.getElementById('auth-logged-in').style.display = 'block';
             document.getElementById('auth-user-email').textContent = user.email || 'User';
+            currentUserId = user.id;
             announce('Logged in as ' + (user.email || 'User'));
+            // Load Supabase data
+            loadUserData();
+        }
+
+        async function loadUserData() {
+            var sbConvos = await sbFetchConversations();
+            if (sbConvos) { conversations = sbConvos; renderConversations(); }
+            var sbGallery = await sbFetchGallery();
+            if (sbGallery) { generatedImages = sbGallery; renderGallery(); }
+            var sbSnap = await sbFetchSnapshot();
+            if (sbSnap) document.getElementById('project-snapshot').value = sbSnap;
         }
 
         function showLoggedOutState() {
             document.getElementById('auth-logged-out').style.display = 'block';
             document.getElementById('auth-logged-in').style.display = 'none';
             document.querySelector('.tier-badge').textContent = 'Free Tier';
+            currentUserId = null;
             userPoints = 100;
-            localStorage.setItem('nyxen_points', userPoints);
+            syncPoints();
             updatePointsDisplay();
         }
 
