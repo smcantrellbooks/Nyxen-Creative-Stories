@@ -1539,7 +1539,7 @@
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>Video generation</span></li>
                             <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-secondary" style="width: 100%;" aria-label="Join Nyxen Free tier">Join Free</button>
+                        <button class="btn btn-secondary" style="width: 100%;" onclick="handleCheckout('free')" aria-label="Join Nyxen Free tier" data-testid="join-free-btn">Join Free</button>
                     </article>
 
                     <article class="membership-card featured" role="listitem" aria-labelledby="pro-tier-title">
@@ -1552,7 +1552,7 @@
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>Video generation</span></li>
                             <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-primary" style="width: 100%;" aria-label="Join Nyxen Pro tier for 5 dollars per month">Join Pro</button>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="handleCheckout('pro')" aria-label="Join Nyxen Pro tier for 5 dollars per month" data-testid="join-pro-btn">Join Pro</button>
                     </article>
 
                     <article class="membership-card" role="listitem" aria-labelledby="premium-tier-title">
@@ -1565,7 +1565,7 @@
                             <li><i class="fas fa-check" aria-hidden="true"></i> <strong>Unlimited video</strong></li>
                             <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-primary" style="width: 100%;" aria-label="Join Nyxen Premium tier for 10 dollars per month">Join Premium</button>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="handleCheckout('premium')" aria-label="Join Nyxen Premium tier for 10 dollars per month" data-testid="join-premium-btn">Join Premium</button>
                     </article>
                 </div>
 
@@ -1580,14 +1580,14 @@
                                 <h3 style="color: var(--primary-font);">50 Points</h3>
                                 <p style="color: var(--primary-font); opacity: 0.7;">One-time purchase</p>
                             </div>
-                            <button class="btn btn-primary" aria-label="Purchase 50 points for 2 dollars and 50 cents">$2.50</button>
+                            <button class="btn btn-primary" onclick="handleCheckout('points_50')" aria-label="Purchase 50 points for 2 dollars and 50 cents" data-testid="buy-50-btn">$2.50</button>
                         </div>
                         <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;" role="listitem">
                             <div>
                                 <h3 style="color: var(--primary-font);">100 Points</h3>
                                 <p style="color: var(--primary-font); opacity: 0.7;">One-time purchase</p>
                             </div>
-                            <button class="btn btn-primary" aria-label="Purchase 100 points for 5 dollars">$5.00</button>
+                            <button class="btn btn-primary" onclick="handleCheckout('points_100')" aria-label="Purchase 100 points for 5 dollars" data-testid="buy-100-btn">$5.00</button>
                         </div>
                     </div>
                     <div class="note-box" role="note">
@@ -1914,6 +1914,21 @@
         // ============ API KEYS ============
         const GROQ_KEY = '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';
         const APIFREE_KEY = 'sk-peDA9ErrJtAwG7hD4WTCKEHWMi3Y1';
+
+        // ============ STRIPE CHECKOUT ============
+        const STRIPE_LINKS = {
+            free:       'https://buy.stripe.com/eVqcN48bQ1EKbx92rr2Nq0a',
+            pro:        'https://buy.stripe.com/28E14m4ZE4QW7gT8PP2Nq0b',
+            premium:    'https://buy.stripe.com/eVqfZggIm2IO1Wzea92Nq0c',
+            points_50:  'https://buy.stripe.com/9B6eVcfEigzEbx9c212Nq09',
+            points_100: 'https://buy.stripe.com/4gM6oGfEi2IOcBd5DD2Nq08'
+        };
+
+        function handleCheckout(key) {
+            var url = STRIPE_LINKS[key];
+            if (!url) { alert('Payment link not available.'); return; }
+            window.location.href = url;
+        }
 
         // ============ CONTENT SAFETY ============
         const BLOCKED_PATTERNS = [
