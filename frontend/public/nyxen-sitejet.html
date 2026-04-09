@@ -1520,7 +1520,7 @@
                             <label class="form-label" for="imgvid-source">Image Source</label>
                             <select id="imgvid-source" class="form-select" onchange="toggleImgVidSource()" aria-label="Choose image source">
                                 <option value="gallery">Select from Generated Gallery</option>
-                                <option value="url">Paste Image URL</option>
+                                <option value="upload">Upload from Device</option>
                             </select>
                         </div>
                         <div id="imgvid-gallery-picker" class="form-group">
@@ -1528,13 +1528,16 @@
                             <select id="imgvid-gallery-select" class="form-select" aria-label="Select a generated image">
                                 <option value="">-- No images yet. Generate some in Image Studio first. --</option>
                             </select>
-                            <div id="imgvid-preview" role="img" aria-label="Image preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-top:8px;display:flex;align-items:center;justify-content:center;">
-                                <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
-                            </div>
                         </div>
-                        <div id="imgvid-url-input" class="form-group" style="display:none;">
-                            <label class="form-label" for="imgvid-url">Image URL</label>
-                            <input type="url" id="imgvid-url" class="form-input" placeholder="https://example.com/image.jpg" aria-label="Paste a direct image URL">
+                        <div id="imgvid-upload-picker" class="form-group" style="display:none;">
+                            <label class="form-label">Upload Image</label>
+                            <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgvid-file').click()" aria-label="Choose an image file">
+                                <i class="fas fa-upload" aria-hidden="true"></i> Choose File
+                            </button>
+                            <input type="file" id="imgvid-file" class="sr-only" accept="image/*" onchange="handleImgVidUpload(event)">
+                        </div>
+                        <div id="imgvid-preview" role="img" aria-label="Image preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-top:8px;display:flex;align-items:center;justify-content:center;">
+                            <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="imgvid-prompt">Motion Description (optional)</label>
@@ -2566,9 +2569,37 @@
         function toggleImgVidSource() {
             var source = document.getElementById('imgvid-source').value;
             document.getElementById('imgvid-gallery-picker').style.display = source === 'gallery' ? 'block' : 'none';
-            document.getElementById('imgvid-url-input').style.display = source === 'url' ? 'block' : 'none';
+            document.getElementById('imgvid-upload-picker').style.display = source === 'upload' ? 'block' : 'none';
             imgVidSelectedUrl = null;
             document.getElementById('imgvid-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>';
+        }
+
+        function handleImgVidUpload(event) {
+            var file = event.target.files[0];
+            if (!file) return;
+            // Upload to Supabase storage to get a public URL
+            if (supabaseClient && currentUserId) {
+                var path = 'imgvid/' + currentUserId + '/' + Date.now() + '_' + file.name;
+                document.getElementById('imgvid-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.6;font-size:13px;"><i class="fas fa-spinner fa-spin"></i> Uploading...</p>';
+                supabaseClient.storage.from('uploads').upload(path, file, { upsert: true }).then(function(res) {
+                    if (res.error) {
+                        // Fallback: use object URL preview but warn about video gen
+                        var localUrl = URL.createObjectURL(file);
+                        document.getElementById('imgvid-preview').innerHTML = '<img src="' + localUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;"><p style="color:#b91c1c;font-size:11px;margin-top:4px;">Upload failed. Please use Gallery option or log in first.</p>';
+                        imgVidSelectedUrl = null;
+                        return;
+                    }
+                    var pubUrl = supabaseClient.storage.from('uploads').getPublicUrl(path);
+                    imgVidSelectedUrl = pubUrl.data.publicUrl;
+                    document.getElementById('imgvid-preview').innerHTML = '<img src="' + imgVidSelectedUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">';
+                });
+            } else {
+                // Not logged in — show preview but explain limitation
+                var localUrl = URL.createObjectURL(file);
+                document.getElementById('imgvid-preview').innerHTML = '<img src="' + localUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;"><p style="color:#b91c1c;font-size:11px;margin-top:4px;">Log in to enable uploads, or use Gallery images.</p>';
+                imgVidSelectedUrl = null;
+            }
+            event.target.value = '';
         }
 
         function populateImgVidGallery() {
@@ -2594,10 +2625,7 @@
         }
 
         function getImgVidUrl() {
-            var source = document.getElementById('imgvid-source').value;
-            if (source === 'gallery') return imgVidSelectedUrl;
-            if (source === 'url') return document.getElementById('imgvid-url').value.trim() || null;
-            return null;
+            return imgVidSelectedUrl;
         }
 
         async function generateImageVideo() {
