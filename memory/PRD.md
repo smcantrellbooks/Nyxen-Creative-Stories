@@ -1,82 +1,76 @@
-# Nyxen AI Storyteller - PRD
+# Nyxen Creative Stories - PRD
 
 ## Project Overview
-**Name**: Nyxen
+**Name**: Nyxen Creative Stories
 **Developer**: S.M. Cantrell
-**Type**: AI Storyteller & Creative Companion Platform
+**Type**: AI-powered creative writing assistant for authors and storytellers
+**Platform**: Vanilla HTML/CSS/JS monolith for Sitejet hosting
 
 ## Original Problem Statement
-Build a sophisticated AI Storyteller and Creative Companion platform with:
-- AI-powered chat and story generation (Groq API)
-- Image generation (APIFree Flux)
-- TTS voice generation (Kokoro)
-- Video generation (LTX-Video)
-- Story Bible for character/world management
-- NO MongoDB - use SQLite instead
+Build a full-stack AI creative writing app with 8 pages, JotForm chat agent, Gold/Purple dark theme, ADA compliance, Stripe pricing tiers, and Supabase for authentication and database.
+
+**CRITICAL**: Frontend MUST be vanilla HTML/CSS/JS only. No React, no Next.js. Output must be ready to upload directly to Sitejet.
 
 ## Architecture
-- **Frontend**: React + Tailwind CSS + Shadcn UI
-- **Backend**: FastAPI + SQLite
-- **AI Services**: 
-  - Groq (openai/gpt-oss-20b) for chat/stories
-  - APIFree Flux for images
-  - APIFree Kokoro for TTS
-  - APIFree LTX-Video for videos
+- **Frontend**: Single monolithic HTML file (`nyxen-full.html`) with inline CSS and JS
+- **Backend**: External Vercel deployment for Stripe webhooks/APIs
+- **Auth & DB**: Supabase (external)
+- **AI Services**: Groq, APIFree (Flux, Kokoro, LTX Video)
+- **Chat**: JotForm embedded iframe
 
-## Core Requirements (Static)
-1. ✅ Chat interface with AI storytelling
-2. ✅ Story generator with Deep/Fast modes
-3. ✅ Genre selection (Fantasy, Romance, Thriller, Sci-Fi)
-4. ✅ Story Bible (characters, world-building)
-5. ✅ Media Gallery (images, videos)
-6. ✅ Nyxen personality per specifications
-7. ✅ Anti-repetition rules in AI output
-8. ✅ Scene-specific writing styles
+## Core File
+- `/app/frontend/public/nyxen-full.html` — Single source of truth
 
-## User Personas
-1. **Writers**: Need help overcoming writer's block, developing ideas
-2. **Storytellers**: Want original stories across genres
-3. **Worldbuilders**: Track characters, settings, timelines
-4. **Visual Creators**: Generate images/videos for stories
+## 8 Pages Implemented
+1. Creatives Assistant (JotForm chat, mode selector, project snapshot)
+2. Story Generation Workspace (chapters, scenes, snippets)
+3. Drafting & Chapter Creation (mentor, art generator, progress tracker)
+4. Edit Mode (project context, editing priorities, readiness check)
+5. Publishing Strategist (blurb generator, series positioning, author roster)
+6. Image Studio (text-to-image, gallery)
+7. Membership / Storefront (3 tiers: Free $0, Pro $5, Premium $10 + A La Carte points)
+8. Disclosures & Policies (AI usage, visual creations, publication, terms, privacy)
 
-## What's Been Implemented (Jan 2026)
-- ✅ Full chat interface with Groq AI integration
-- ✅ Story generator with Deep/Fast modes
-- ✅ Genre cards with visual selection
-- ✅ Story Bible with character CRUD
-- ✅ World-building settings management
-- ✅ Media gallery with image generation
-- ✅ Video generation support
-- ✅ Elegant Jewel & Luxury dark theme
-- ✅ Playfair Display + Outfit typography
-- ✅ Glass morphism UI elements
-- ✅ SQLite database (no MongoDB)
-- ✅ All API integrations working
+## External Services
+- Supabase URL: `https://recyyhvdvuupxhbxmzal.supabase.co`
+- Vercel API: `https://smcantrellbooks-cantrell-creatives-9bpwd3k9e.vercel.app`
+- JotForm Agent: `019d3d3c3a537add8379214c3060726a324e`
+
+## DB Schema (Supabase)
+- `profiles`: `{id, tier, points}`
+
+## What's Been Implemented
+
+### Completed (Feb 2026)
+- All 8 pages with vanilla HTML/CSS/JS
+- Gold/Purple "Jewel & Luxury" dark theme (CSS variables)
+- ADA compliance (skip links, ARIA labels/roles, focus indicators, reduced motion)
+- JotForm chat agent embedded
+- Supabase Auth integration (Login/Sign Up/Logout in side panel)
+- Dynamic tier/points display from Supabase `profiles` table
+- Side panel with Conversations/Projects tabs + Auth block
+- Sticky side panel with proper flex layout
+- Fixed HTML tag nesting issues (unclosed section tags)
+
+### Bug Fixes Applied
+- Fixed page-drafting `<section>` closed with `</div>` instead of `</section>`
+- Fixed page-membership `<section>` closed with `</div>` instead of `</section>`
+- Fixed side panel flex layout (min-width:0 on main-content, flex-shrink:0 + sticky on side-panel)
 
 ## Prioritized Backlog
 
-### P0 - Critical (Done)
-- ✅ Core chat functionality
-- ✅ AI integration
-- ✅ Basic CRUD operations
-
 ### P1 - Important
-- [ ] TTS playback for story narration
-- [ ] Export stories to PDF/EPUB
-- [ ] User accounts and authentication
-- [ ] Story version history
+- [ ] Connect Stripe checkout buttons on Membership page to Vercel API endpoints
+- [ ] Wire AI generation features to Groq/APIFree APIs (story, image, video)
 
 ### P2 - Nice to Have
-- [ ] Character relationship graph
-- [ ] Timeline visualization
-- [ ] Collaborative writing
-- [ ] Custom voice selection for TTS
-- [ ] Image-to-video conversion
-- [ ] Story sharing/publishing
+- [ ] Final WAVE/axe accessibility audit for Auth block
+- [ ] Real conversation persistence via Supabase
+- [ ] Project management CRUD via Supabase
+- [ ] TTS playback for story narration
+- [ ] Export stories to PDF/EPUB
 
 ## Next Tasks
-1. Add TTS playback UI with audio controls
-2. Implement story export functionality
-3. Add user authentication if needed
-4. Build character relationship visualization
-5. Add story versioning/history
+1. Wire Stripe checkout to Vercel endpoints for membership subscriptions
+2. Implement AI generation via Groq for story/chat features
+3. Final accessibility audit

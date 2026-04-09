@@ -214,17 +214,24 @@
 
         .main-content {
             flex: 1;
+            min-width: 0;
             padding: 24px;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         /* Side Panel */
         .side-panel {
             width: 320px;
+            flex-shrink: 0;
             background: var(--card-bg);
             border-left: 2px solid var(--border-accent);
             display: flex;
             flex-direction: column;
+            position: sticky;
+            top: 130px;
+            height: calc(100vh - 130px);
+            align-self: flex-start;
         }
 
         .side-panel-header {
@@ -605,6 +612,109 @@
             margin: 12px 0;
         }
 
+        /* Auth Block in Side Panel */
+        .auth-block {
+            padding: 16px;
+            border-top: 2px solid var(--border-accent);
+            background: rgba(50, 24, 96, 0.15);
+        }
+
+        .auth-block-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            color: var(--primary-font);
+            margin-bottom: 12px;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 10px;
+        }
+
+        .auth-form .form-input {
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .auth-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .auth-actions .btn {
+            flex: 1;
+            justify-content: center;
+            font-size: 13px;
+            padding: 9px 12px;
+        }
+
+        .auth-toggle-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--border-accent);
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .auth-toggle-link:hover {
+            color: var(--button-bg);
+        }
+
+        .auth-user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--header-bg);
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .auth-user-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--icon-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--icon-color);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .auth-user-email {
+            font-size: 13px;
+            color: var(--primary-font);
+            word-break: break-all;
+            line-height: 1.3;
+        }
+
+        .auth-error {
+            font-size: 12px;
+            color: #b91c1c;
+            background: rgba(185, 28, 28, 0.1);
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        .auth-success {
+            font-size: 12px;
+            color: #15803d;
+            background: rgba(21, 128, 61, 0.1);
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .side-panel { display: none; }
@@ -962,7 +1072,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Page 4: Edit Mode -->
             <div class="page" id="page-editing">
@@ -1376,7 +1486,7 @@
                         <button class="btn btn-secondary">Set Active</button>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Page 8: Disclosures -->
             <section class="page" id="page-disclosures" role="tabpanel" aria-labelledby="tab-disclosures">
@@ -1481,8 +1591,56 @@
                     </nav>
                 </div>
             </div>
+
+            <!-- Auth Block -->
+            <div class="auth-block" id="auth-block" role="region" aria-label="Account authentication">
+                <!-- Logged Out State -->
+                <div id="auth-logged-out">
+                    <h3 class="auth-block-title" id="auth-form-title">Login</h3>
+                    <div id="auth-error" class="auth-error" role="alert"></div>
+                    <div id="auth-success" class="auth-success" role="status"></div>
+                    <form class="auth-form" id="auth-form" onsubmit="event.preventDefault(); handleAuthSubmit();" aria-labelledby="auth-form-title">
+                        <div class="form-group">
+                            <label for="auth-email" class="sr-only">Email address</label>
+                            <input type="email" id="auth-email" class="form-input" placeholder="Email address" required aria-required="true" autocomplete="email" data-testid="auth-email-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="auth-password" class="sr-only">Password</label>
+                            <input type="password" id="auth-password" class="form-input" placeholder="Password" required aria-required="true" minlength="6" autocomplete="current-password" data-testid="auth-password-input">
+                        </div>
+                        <div class="auth-actions">
+                            <button type="submit" class="btn btn-primary" id="auth-submit-btn" data-testid="auth-submit-btn">
+                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
+                            </button>
+                        </div>
+                    </form>
+                    <button class="auth-toggle-link" id="auth-toggle" onclick="toggleAuthMode()" data-testid="auth-toggle-link">
+                        Don't have an account? Sign Up
+                    </button>
+                </div>
+
+                <!-- Logged In State -->
+                <div id="auth-logged-in" style="display: none;">
+                    <h3 class="auth-block-title">My Account</h3>
+                    <div class="auth-user-info">
+                        <div class="auth-user-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
+                        <span class="auth-user-email" id="auth-user-email" data-testid="auth-user-email"></span>
+                    </div>
+                    <div class="auth-actions" style="flex-direction: column;">
+                        <a href="https://nyxen.smcantrellbooks.com/my-account" target="_blank" class="btn btn-secondary" style="justify-content: center;" aria-label="Manage your account (opens in new tab)" data-testid="auth-my-account-btn">
+                            <i class="fas fa-cog" aria-hidden="true"></i> My Account
+                        </a>
+                        <button class="btn btn-primary" onclick="handleLogout()" style="justify-content: center;" aria-label="Log out of your account" data-testid="auth-logout-btn">
+                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
         </aside>
     </div>
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- JotForm Script -->
     <script src='https://cdn.jotfor.ms/s/umd/43ddf8c9259/for-form-embed-handler.js'></script>
@@ -1662,7 +1820,171 @@
             
             // Set initial ARIA states for side panel tabs
             document.getElementById('side-projects').setAttribute('aria-hidden', 'true');
+
+            // Initialize Supabase Auth
+            initAuth();
         });
+
+        // ============ SUPABASE AUTH ============
+        const SUPABASE_URL = 'https://recyyhvdvuupxhbxmzal.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlY3l5aHZkdnV1cHhoYnhtemFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjc0MDAsImV4cCI6MjA4OTcwMzQwMH0.kO4niR2v4hgPFi2iQ8R8I1Id_COcRH_z4SsXc6W93AM';
+
+        let supabaseClient = null;
+        let authMode = 'login'; // 'login' or 'signup'
+
+        function initAuth() {
+            if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                
+                // Listen for auth state changes
+                supabaseClient.auth.onAuthStateChange(function(event, session) {
+                    if (session && session.user) {
+                        showLoggedInState(session.user);
+                        fetchProfile(session.user.id);
+                    } else {
+                        showLoggedOutState();
+                    }
+                });
+
+                // Check initial session
+                supabaseClient.auth.getSession().then(function(result) {
+                    var session = result.data.session;
+                    if (session && session.user) {
+                        showLoggedInState(session.user);
+                        fetchProfile(session.user.id);
+                    }
+                });
+            } else {
+                console.warn('Supabase SDK not loaded.');
+            }
+        }
+
+        function showLoggedInState(user) {
+            document.getElementById('auth-logged-out').style.display = 'none';
+            document.getElementById('auth-logged-in').style.display = 'block';
+            document.getElementById('auth-user-email').textContent = user.email || 'User';
+            announce('Logged in as ' + (user.email || 'User'));
+        }
+
+        function showLoggedOutState() {
+            document.getElementById('auth-logged-out').style.display = 'block';
+            document.getElementById('auth-logged-in').style.display = 'none';
+            // Reset tier/points to defaults
+            document.querySelector('.tier-badge').textContent = 'Free Tier';
+            document.querySelector('.points-display').textContent = '100 Points';
+            document.querySelector('.points-display').setAttribute('aria-label', '100 points available');
+        }
+
+        function toggleAuthMode() {
+            var title = document.getElementById('auth-form-title');
+            var submitBtn = document.getElementById('auth-submit-btn');
+            var toggleLink = document.getElementById('auth-toggle');
+            var passwordInput = document.getElementById('auth-password');
+
+            hideAuthMessages();
+
+            if (authMode === 'login') {
+                authMode = 'signup';
+                title.textContent = 'Sign Up';
+                submitBtn.innerHTML = '<i class="fas fa-user-plus" aria-hidden="true"></i> Sign Up';
+                toggleLink.textContent = 'Already have an account? Login';
+                passwordInput.setAttribute('autocomplete', 'new-password');
+            } else {
+                authMode = 'login';
+                title.textContent = 'Login';
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login';
+                toggleLink.textContent = "Don't have an account? Sign Up";
+                passwordInput.setAttribute('autocomplete', 'current-password');
+            }
+        }
+
+        function showAuthError(msg) {
+            var el = document.getElementById('auth-error');
+            el.textContent = msg;
+            el.style.display = 'block';
+            document.getElementById('auth-success').style.display = 'none';
+        }
+
+        function showAuthSuccess(msg) {
+            var el = document.getElementById('auth-success');
+            el.textContent = msg;
+            el.style.display = 'block';
+            document.getElementById('auth-error').style.display = 'none';
+        }
+
+        function hideAuthMessages() {
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+        }
+
+        async function handleAuthSubmit() {
+            if (!supabaseClient) {
+                showAuthError('Auth service not available. Please reload.');
+                return;
+            }
+
+            var email = document.getElementById('auth-email').value.trim();
+            var password = document.getElementById('auth-password').value;
+            var submitBtn = document.getElementById('auth-submit-btn');
+
+            if (!email || !password) {
+                showAuthError('Please enter email and password.');
+                return;
+            }
+
+            hideAuthMessages();
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
+
+            try {
+                if (authMode === 'login') {
+                    var result = await supabaseClient.auth.signInWithPassword({ email: email, password: password });
+                    if (result.error) {
+                        showAuthError(result.error.message);
+                    }
+                } else {
+                    var result = await supabaseClient.auth.signUp({ email: email, password: password });
+                    if (result.error) {
+                        showAuthError(result.error.message);
+                    } else if (result.data && result.data.user && !result.data.session) {
+                        showAuthSuccess('Check your email to confirm your account.');
+                    }
+                }
+            } catch (err) {
+                showAuthError('An unexpected error occurred.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+            }
+        }
+
+        async function handleLogout() {
+            if (!supabaseClient) return;
+            await supabaseClient.auth.signOut();
+            announce('Logged out successfully');
+        }
+
+        async function fetchProfile(userId) {
+            if (!supabaseClient) return;
+            try {
+                var result = await supabaseClient
+                    .from('profiles')
+                    .select('tier, points')
+                    .eq('id', userId)
+                    .single();
+
+                if (result.data) {
+                    var tier = result.data.tier || 'Free';
+                    var points = result.data.points != null ? result.data.points : 100;
+
+                    document.querySelector('.tier-badge').textContent = tier + ' Tier';
+                    document.querySelector('.points-display').textContent = points + ' Points';
+                    document.querySelector('.points-display').setAttribute('aria-label', points + ' points available');
+                }
+            } catch (err) {
+                // Profile fetch failed silently — keep defaults
+            }
+        }
     </script>
 </body>
 </html>
