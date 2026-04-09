@@ -47,6 +47,7 @@ Build a full-stack AI creative writing app with 8 pages, JotForm chat agent, Gol
 - ADA compliance (skip links, ARIA labels/roles, focus indicators, reduced motion)
 - JotForm chat agent embedded
 - Supabase Auth integration (Login/Sign Up/Logout in side panel)
+- Google OAuth social login via Supabase (`signInWithOAuth`)
 - Dynamic tier/points display from Supabase `profiles` table
 - Side panel with Conversations/Projects tabs + Auth block
 - Sticky side panel with proper flex layout
