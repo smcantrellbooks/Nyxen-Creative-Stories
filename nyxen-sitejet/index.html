@@ -1431,6 +1431,91 @@
                 </div>
             </div>
 
+            <!-- Page 6b: Text to Video -->
+            <div class="page" id="page-text-video">
+                <div class="page-header">
+                    <h1 class="font-serif">Text to Video Studio</h1>
+                    <p>Generate short videos from written prompts or story snippets</p>
+                </div>
+                <div class="note-box" role="note" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
+                    <strong>Important:</strong> Videos are not saved. Download before closing.
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Create Video from Text</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Select Project</label>
+                            <select id="txtvid-project" class="form-select">
+                                <option>Starbound Heirs</option>
+                                <option>Glass Kingdoms</option>
+                                <option>Neon Fables</option>
+                                <option>Ink & Ember</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Video Prompt</label>
+                            <textarea id="txtvid-prompt" class="form-textarea" placeholder="Describe the scene, mood, motion, and visual style for your video..." style="min-height:120px;"></textarea>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%;" onclick="generateTextVideo()" data-testid="generate-text-video-btn">
+                            <i class="fas fa-video"></i> Generate Video (10 points)
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Video Preview</h3>
+                        </div>
+                        <div id="txtvid-output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                            <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-video" style="font-size:48px;display:block;margin-bottom:12px;"></i>Video preview will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 6c: Image to Video -->
+            <div class="page" id="page-image-video">
+                <div class="page-header">
+                    <h1 class="font-serif">Image to Video Studio</h1>
+                    <p>Generate short videos based on one or more images</p>
+                </div>
+                <div class="note-box" role="note" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
+                    <strong>Important:</strong> Videos are not saved. Download before closing.
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Create Video from Image</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Upload Image</label>
+                            <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgvid-file').click()">
+                                <i class="fas fa-upload"></i> Choose Image
+                            </button>
+                            <input type="file" id="imgvid-file" class="sr-only" accept="image/*" onchange="previewImgVidFile(event)">
+                        </div>
+                        <div id="imgvid-preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
+                            <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Motion Description (optional)</label>
+                            <textarea id="imgvid-prompt" class="form-textarea" placeholder="Describe the motion or animation you want applied to the image..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%;" onclick="generateImageVideo()" data-testid="generate-image-video-btn">
+                            <i class="fas fa-film"></i> Generate Video (10 points)
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Video Preview</h3>
+                        </div>
+                        <div id="imgvid-output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                            <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-film" style="font-size:48px;display:block;margin-bottom:12px;"></i>Video preview will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Page 7: Membership -->
             <section class="page" id="page-membership" role="tabpanel" aria-labelledby="tab-membership">
                 <header class="page-header">
@@ -1725,14 +1810,17 @@
             
             // Show selected page
             const page = document.getElementById('page-' + pageId);
-            const tab = document.querySelector(`[data-page="${pageId}"]`);
+            if (!page) return;
+            const tab = document.querySelector('[data-page="' + pageId + '"]');
             
             page.classList.add('active');
             page.setAttribute('aria-hidden', 'false');
             page.removeAttribute('aria-hidden');
             
-            tab.classList.add('active');
-            tab.setAttribute('aria-selected', 'true');
+            if (tab) {
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+            }
             
             // Focus on page heading for screen readers
             const heading = page.querySelector('h1');
@@ -1741,8 +1829,7 @@
                 heading.focus();
             }
             
-            // Announce page change
-            announce('Navigated to ' + tab.textContent.trim() + ' page');
+            announce('Navigated to ' + (tab ? tab.textContent.trim() : pageId) + ' page');
         }
 
         // Mode Selector with accessibility
@@ -1756,6 +1843,12 @@
             
             const modeName = element.querySelector('span').textContent;
             announce('Selected ' + modeName + ' mode');
+
+            // Navigate to the corresponding page
+            if (mode === 'story') showPage('story-workspace');
+            else if (mode === 'image') showPage('image-studio');
+            else if (mode === 'text-video') showPage('text-video');
+            else if (mode === 'image-video') showPage('image-video');
         }
 
         // Handle keyboard for mode selection
@@ -1961,15 +2054,7 @@
         }
 
         function readSelected() {
-            const output = document.getElementById('drafting-output');
-            const selected = window.getSelection().toString();
-            const text = selected || output.textContent;
-            if (!text || text === 'AI guidance will appear here...') { announce('No text to read.'); return; }
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 0.9;
-            window.speechSynthesis.speak(utterance);
-            announce('Reading text aloud');
+            readSelectedKokoro();
         }
 
         function openManuscriptSettings() {
@@ -2064,6 +2149,8 @@
             const prompt = document.getElementById('img-prompt').value.trim();
             if (!prompt) { alert('Please enter a prompt.'); return; }
             const count = parseInt(document.getElementById('img-count').value);
+            const pointsCost = 5 * count;
+            if (!deductPoints(pointsCost)) return;
             const type = document.getElementById('img-type').value;
             const gallery = document.getElementById('image-gallery');
 
@@ -2197,6 +2284,125 @@
             return div.innerHTML;
         }
 
+        // ============ POINTS SYSTEM ============
+        let userPoints = parseInt(localStorage.getItem('nyxen_points') || '100');
+
+        function updatePointsDisplay() {
+            document.querySelector('.points-display').textContent = userPoints + ' Points';
+            document.querySelector('.points-display').setAttribute('aria-label', userPoints + ' points available');
+        }
+
+        function deductPoints(cost) {
+            if (userPoints < cost) {
+                alert('Not enough points. You need ' + cost + ' points. You have ' + userPoints + '.\nVisit Membership to buy more points.');
+                return false;
+            }
+            userPoints -= cost;
+            localStorage.setItem('nyxen_points', userPoints);
+            updatePointsDisplay();
+            return true;
+        }
+
+        // ============ TEXT-TO-VIDEO ============
+        async function generateTextVideo() {
+            if (!deductPoints(10)) return;
+            var prompt = document.getElementById('txtvid-prompt').value.trim();
+            if (!prompt) { alert('Enter a video prompt.'); userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay(); return; }
+            var output = document.getElementById('txtvid-output');
+            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video... this may take a minute</p></div>';
+            try {
+                var res = await fetch('https://api.apifree.net/v1/video/generations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
+                    body: JSON.stringify({ model: 'lightricks/ltx-video/text-to-video', prompt: prompt })
+                });
+                var data = await res.json();
+                if (data.data && data.data[0] && data.data[0].url) {
+                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + data.data[0].url + '" type="video/mp4"></video>' +
+                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + data.data[0].url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                    announce('Video generated');
+                } else {
+                    output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation failed. Please try again.</p>';
+                    userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay();
+                }
+            } catch (err) {
+                output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Connection error. Please try again.</p>';
+                userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay();
+            }
+        }
+
+        // ============ IMAGE-TO-VIDEO ============
+        var imgVidDataUrl = null;
+
+        function previewImgVidFile(event) {
+            var file = event.target.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                imgVidDataUrl = e.target.result;
+                document.getElementById('imgvid-preview').innerHTML = '<img src="' + imgVidDataUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function generateImageVideo() {
+            if (!imgVidDataUrl) { alert('Please select an image first.'); return; }
+            if (!deductPoints(10)) return;
+            var prompt = document.getElementById('imgvid-prompt').value.trim() || 'Smooth cinematic motion';
+            var output = document.getElementById('imgvid-output');
+            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video from image... this may take a minute</p></div>';
+            try {
+                var res = await fetch('https://api.apifree.net/v1/video/generations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
+                    body: JSON.stringify({ model: 'lightricks/ltx-video/image-to-video', prompt: prompt, image: imgVidDataUrl })
+                });
+                var data = await res.json();
+                if (data.data && data.data[0] && data.data[0].url) {
+                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + data.data[0].url + '" type="video/mp4"></video>' +
+                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + data.data[0].url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                    announce('Video generated from image');
+                } else {
+                    output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation failed. Please try again.</p>';
+                    userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay();
+                }
+            } catch (err) {
+                output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Connection error. Please try again.</p>';
+                userPoints += 10; localStorage.setItem('nyxen_points', userPoints); updatePointsDisplay();
+            }
+        }
+
+        // ============ KOKORO TTS ============
+        async function readSelectedKokoro() {
+            var output = document.getElementById('drafting-output');
+            var selected = window.getSelection().toString();
+            var text = selected || output.textContent;
+            if (!text || text === 'AI guidance will appear here...') { announce('No text to read.'); return; }
+
+            // Try Kokoro TTS first, fall back to browser speechSynthesis
+            try {
+                var res = await fetch('https://api.apifree.net/v1/audio/speech', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
+                    body: JSON.stringify({ model: 'hexgrad/kokoro-tts/american-english', input: text.substring(0, 2000), voice: 'af_heart' })
+                });
+                if (res.ok) {
+                    var blob = await res.blob();
+                    var url = URL.createObjectURL(blob);
+                    var audio = new Audio(url);
+                    audio.play();
+                    announce('Playing audio narration');
+                    return;
+                }
+            } catch (err) {}
+            // Fallback to browser TTS
+            window.speechSynthesis.cancel();
+            var utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+            announce('Reading text aloud');
+        }
+
         // Act Tabs with accessibility
         document.querySelectorAll('.act-tab').forEach((tab, index) => {
             tab.addEventListener('click', function() {
@@ -2274,6 +2480,9 @@
             // Restore active project
             if (activeProject) setActiveProject(activeProject);
 
+            // Init points display
+            updatePointsDisplay();
+
             // Restore snapshot
             var savedSnapshot = localStorage.getItem('nyxen_snapshot');
             if (savedSnapshot) document.getElementById('project-snapshot').value = savedSnapshot;
@@ -2326,8 +2535,9 @@
             document.getElementById('auth-logged-out').style.display = 'block';
             document.getElementById('auth-logged-in').style.display = 'none';
             document.querySelector('.tier-badge').textContent = 'Free Tier';
-            document.querySelector('.points-display').textContent = '100 Points';
-            document.querySelector('.points-display').setAttribute('aria-label', '100 points available');
+            userPoints = 100;
+            localStorage.setItem('nyxen_points', userPoints);
+            updatePointsDisplay();
         }
 
         function toggleAuthMode() {
@@ -2440,9 +2650,10 @@
                 if (result.data) {
                     var tier = result.data.tier || 'Free';
                     var points = result.data.points != null ? result.data.points : 100;
+                    userPoints = points;
+                    localStorage.setItem('nyxen_points', userPoints);
                     document.querySelector('.tier-badge').textContent = tier + ' Tier';
-                    document.querySelector('.points-display').textContent = points + ' Points';
-                    document.querySelector('.points-display').setAttribute('aria-label', points + ' points available');
+                    updatePointsDisplay();
                 }
             } catch (err) {}
         }

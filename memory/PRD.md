@@ -1,67 +1,67 @@
 # Nyxen Creative Stories - PRD
 
 ## Project Overview
-**Name**: Nyxen Creative Stories
-**Developer**: S.M. Cantrell
-**Type**: AI-powered creative writing assistant for authors and storytellers
-**Platform**: Vanilla HTML/CSS/JS monolith for Sitejet hosting
+**Name**: Nyxen Creative Stories  
+**Developer**: S.M. Cantrell  
+**Type**: AI-powered creative writing assistant  
+**Platform**: Vanilla HTML/CSS/JS monolith for Sitejet hosting  
 **Source of truth**: `/app/nyxen-sitejet/index.html`
 
 ## Architecture
-- **Frontend**: Single monolithic HTML file with inline CSS and JS
+- **Frontend**: Single monolithic HTML file with inline CSS/JS
 - **AI Chat/Story**: Groq API (`openai/gpt-oss-20b`)
-- **Image Generation**: APIFree (Flux `black-forest-labs/flux-1-schnell`)
+- **Image Gen**: APIFree Flux (`black-forest-labs/flux-1-schnell`)
+- **Text-to-Video**: APIFree LTX Video (`lightricks/ltx-video/text-to-video`)
+- **Image-to-Video**: APIFree LTX Video (`lightricks/ltx-video/image-to-video`)
+- **TTS**: APIFree Kokoro (`hexgrad/kokoro-tts/american-english`, voice: `af_heart`) + browser fallback
 - **Auth & DB**: Supabase
-- **Payments**: Stripe (checkout already wired externally)
+- **Payments**: Stripe (already wired externally)
 - **Chat Agent**: JotForm embedded iframe
 
-## What's Been Implemented (Feb 2026)
+## All Pages (10 total)
+1. Creatives Assistant (JotForm, mode selector, project snapshot)
+2. Story Workspace (AI chat, Act tabs, snippet shelf)
+3. Drafting (AI guidance, suggest next, generate art, TTS, manuscript settings)
+4. Edit Mode (context save, AI editing chat)
+5. Publishing (blurb gen, focus project, snapshot)
+6. Image Studio (APIFree Flux gen, gallery, filters, lightbox)
+6b. Text-to-Video (APIFree LTX, download warning)
+6c. Image-to-Video (APIFree LTX, image upload, download warning)
+7. Membership / Storefront (3 tiers + points, Stripe)
+8. Disclosures & Policies
 
-### UI / Layout
-- All 8 pages with Gold/Purple dark theme
-- ADA compliance (skip links, ARIA, focus indicators, reduced motion)
-- Sticky side panel with Conversations/Projects tabs + Auth block
-- Responsive breakpoints (1024px, 768px)
+## All Buttons Wired
+- **Page 1**: Save Snapshot, Choose File, Import Pasted Text, Mode Cards (navigate to pages)
+- **Page 2**: Send (Groq AI), Act I/II/III tabs, Snippet drop zone, Logout
+- **Page 3**: Draft Guidance (Groq), Suggest Next (Groq), Generate Art (nav), Read Selected (Kokoro TTS), Manuscript Settings modal
+- **Page 4**: Update Context (localStorage), Send (Groq), Clear Conversation
+- **Page 5**: Focus Project dropdown, Ebook & Audiobook blurb (Groq), Web & Visual Script blurb (Groq)
+- **Page 6**: Generate Images (APIFree, 5pts/image), Filter type/recency, Gallery lightbox + download
+- **Page 6b**: Generate Text-to-Video (APIFree LTX, 10pts), Download
+- **Page 6c**: Generate Image-to-Video (APIFree LTX, 10pts), Image upload, Download
+- **Page 7**: Set Active (all 4 projects), Stripe buttons (pre-wired)
+- **Page 8**: View Terms, View Privacy (window.open)
+- **Side Panel**: Create conversation, Load conversation, Set Active project (syncs dropdowns)
+- **Auth**: Login, Sign Up, Google OAuth, Logout, My Account
 
-### Auth
-- Supabase Auth (Login/Sign Up/Google OAuth/Logout) in Side Panel
-- Profile fetch for tier/points display in top bar
+## Points System
+- Story generation: free (Groq)
+- Image generation: 5 points per image
+- Video generation: 10 points per video
+- TTS: free
+- Points display syncs with Supabase profiles on login
 
-### All Buttons Wired (Pages 1-8 + Side Panel)
-- **Page 1 (Creatives Assistant)**: Save Snapshot, Choose File, Import Pasted Text, Ask Anything Send
-- **Page 2 (Story Workspace)**: Story Chat Send (Groq AI), Act I/II/III tabs, Snippet drop zone, Account links
-- **Page 3 (Drafting)**: Draft Guidance (Groq), Suggest Next Chapter (Groq), Generate Art (nav to Image Studio), Read Selected (speechSynthesis), Manuscript Package Settings modal
-- **Page 4 (Edit Mode)**: Update Context (localStorage), Send chat (Groq), Clear Conversation
-- **Page 5 (Publishing)**: Focus Project dropdown (updates snapshot), Ebook & Audiobook blurb (Groq), Web & Visual Script blurb (Groq)
-- **Page 6 (Image Studio)**: Generate Images (APIFree Flux), Filter by type/recency, Gallery with lightbox + download
-- **Page 7 (Membership)**: Set Active (all 4 projects), Stripe buttons (already wired)
-- **Page 8 (Disclosures)**: View Terms, View Privacy (window.open)
-- **Side Panel**: Create conversation, Load conversation, Set Active project (syncs all dropdowns)
-
-### Data Persistence
-- localStorage: active project, gallery, conversations, snapshot, edit context, manuscript settings
+## Data Persistence
+- localStorage: active project, gallery, conversations, snapshot, edit context, manuscript settings, points
 - Supabase: auth state, profile (tier/points)
 
-## API Keys in Use
-- Groq: `gsk_WJTk...` (model: `openai/gpt-oss-20b`)
-- APIFree: `sk-peDA...` (Flux image generation)
-- Supabase URL + Anon Key
-
-## Remaining / Backlog
-
-### P1
-- [ ] TTS via APIFree Kokoro (currently using browser speechSynthesis as fallback)
-- [ ] Text-to-Video via APIFree LTX Video
-- [ ] Image-to-Video via APIFree LTX Video
-- [ ] Video generation UI with "Videos are not saved" warning
-- [ ] Points deduction enforcement (currently generates freely)
+## Remaining Backlog
 
 ### P2
 - [ ] Full Supabase CRUD for projects/chapters/conversations (currently localStorage)
 - [ ] Supabase Storage for manuscripts/images
-- [ ] Chapter management CRUD (Act I/II/III content panels)
-- [ ] Final WAVE/axe accessibility audit
+- [ ] Final WAVE/axe accessibility audit for video pages
 
 ### P3
-- [ ] Content safety enforcement on Groq requests
-- [ ] Export stories to DOCX/PDF/EPUB
+- [ ] Content safety enforcement
+- [ ] Export to DOCX/PDF/EPUB
