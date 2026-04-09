@@ -1939,6 +1939,33 @@
         // ============ API KEYS ============
         const GROQ_KEY = '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';
         const APIFREE_KEY = 'sk-peDA9ErrJtAwG7hD4WTCKEHWMi3Y1';
+        const APIFREE_BASE = 'https://api.apifree.ai';
+
+        // Async submit + poll helper for APIFree
+        async function apifreeSubmitAndPoll(type, body, maxWaitMs) {
+            maxWaitMs = maxWaitMs || 120000;
+            var submitRes = await fetch(APIFREE_BASE + '/v1/' + type + '/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
+                body: JSON.stringify(body)
+            });
+            var submitData = await submitRes.json();
+            if (submitData.code !== 200 || !submitData.resp_data || !submitData.resp_data.request_id) {
+                throw new Error(submitData.error ? submitData.error.message : 'Submit failed');
+            }
+            var requestId = submitData.resp_data.request_id;
+            var start = Date.now();
+            while (Date.now() - start < maxWaitMs) {
+                await new Promise(function(r) { setTimeout(r, 3000); });
+                var pollRes = await fetch(APIFREE_BASE + '/v1/' + type + '/' + requestId + '/result', {
+                    headers: { 'Authorization': 'Bearer ' + APIFREE_KEY }
+                });
+                var pollData = await pollRes.json();
+                if (pollData.resp_data && pollData.resp_data.status === 'success') return pollData.resp_data;
+                if (pollData.resp_data && pollData.resp_data.status === 'failed') throw new Error('Generation failed');
+            }
+            throw new Error('Generation timed out');
+        }
 
         // ============ STRIPE CHECKOUT ============
         const STRIPE_LINKS = {
@@ -2340,14 +2367,15 @@
 
             for (let i = 0; i < count; i++) {
                 try {
-                    const res = await fetch('https://api.apifree.net/v1/images/generations', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
-                        body: JSON.stringify({ model: 'black-forest-labs/flux-1-schnell', prompt: prompt, n: 1, size: '1024x1024' })
-                    });
-                    const data = await res.json();
-                    if (data.data && data.data[0] && data.data[0].url) {
-                        generatedImages.unshift({ url: data.data[0].url, type: type, date: new Date().toISOString(), prompt: prompt });
+                    var result = await apifreeSubmitAndPoll('image', {
+                        model: 'black-forest-labs/flux-1-schnell',
+                        prompt: prompt,
+                        num_images: 1,
+                        width: 1024,
+                        height: 1024
+                    }, 60000);
+                    if (result.image_list && result.image_list[0]) {
+                        generatedImages.unshift({ url: result.image_list[0], type: type, date: new Date().toISOString(), prompt: prompt });
                     }
                 } catch (err) {
                     console.error('Image generation error:', err);
@@ -2497,24 +2525,26 @@
             if (!prompt) { alert('Enter a video prompt.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
             if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
             var output = document.getElementById('txtvid-output');
-            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video... this may take a minute</p></div>';
+            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video... this may take 1-2 minutes</p></div>';
             try {
-                var res = await fetch('https://api.apifree.net/v1/video/generations', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
-                    body: JSON.stringify({ model: 'lightricks/ltx-video/text-to-video', prompt: prompt })
-                });
-                var data = await res.json();
-                if (data.data && data.data[0] && data.data[0].url) {
-                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + data.data[0].url + '" type="video/mp4"></video>' +
-                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + data.data[0].url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                var result = await apifreeSubmitAndPoll('video', {
+                    model: 'lightricks/ltx-video/text-to-video',
+                    prompt: prompt
+                }, 180000);
+                if (result.video_list && result.video_list[0]) {
+                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.video_list[0] + '" type="video/mp4"></video>' +
+                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + result.video_list[0] + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                    announce('Video generated');
+                } else if (result.url) {
+                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.url + '" type="video/mp4"></video>' +
+                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + result.url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
                     announce('Video generated');
                 } else {
-                    output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation failed. Please try again.</p>';
+                    output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation completed but no video was returned. Please try again.</p>';
                     userPoints += 10; syncPoints(); updatePointsDisplay();
                 }
             } catch (err) {
-                output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Connection error. Please try again.</p>';
+                output.innerHTML = '<p style="color:#b91c1c;text-align:center;">' + escapeHtml(err.message || 'Video generation failed.') + ' Please try again.</p>';
                 userPoints += 10; syncPoints(); updatePointsDisplay();
             }
         }
@@ -2539,24 +2569,27 @@
             var prompt = document.getElementById('imgvid-prompt').value.trim() || 'Smooth cinematic motion';
             if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
             var output = document.getElementById('imgvid-output');
-            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video from image... this may take a minute</p></div>';
+            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video from image... this may take 1-2 minutes</p></div>';
             try {
-                var res = await fetch('https://api.apifree.net/v1/video/generations', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
-                    body: JSON.stringify({ model: 'lightricks/ltx-video/image-to-video', prompt: prompt, image: imgVidDataUrl })
-                });
-                var data = await res.json();
-                if (data.data && data.data[0] && data.data[0].url) {
-                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + data.data[0].url + '" type="video/mp4"></video>' +
-                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + data.data[0].url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                var result = await apifreeSubmitAndPoll('video', {
+                    model: 'lightricks/ltx-video/image-to-video',
+                    prompt: prompt,
+                    image: imgVidDataUrl
+                }, 180000);
+                if (result.video_list && result.video_list[0]) {
+                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.video_list[0] + '" type="video/mp4"></video>' +
+                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + result.video_list[0] + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                    announce('Video generated from image');
+                } else if (result.url) {
+                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.url + '" type="video/mp4"></video>' +
+                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + result.url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
                     announce('Video generated from image');
                 } else {
-                    output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation failed. Please try again.</p>';
+                    output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation completed but no video was returned. Please try again.</p>';
                     userPoints += 10; syncPoints(); updatePointsDisplay();
                 }
             } catch (err) {
-                output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Connection error. Please try again.</p>';
+                output.innerHTML = '<p style="color:#b91c1c;text-align:center;">' + escapeHtml(err.message || 'Video generation failed.') + ' Please try again.</p>';
                 userPoints += 10; syncPoints(); updatePointsDisplay();
             }
         }
@@ -2570,7 +2603,7 @@
 
             // Try Kokoro TTS first, fall back to browser speechSynthesis
             try {
-                var res = await fetch('https://api.apifree.net/v1/audio/speech', {
+                var res = await fetch(APIFREE_BASE + '/v1/audio/speech', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
                     body: JSON.stringify({ model: 'hexgrad/kokoro-tts/american-english', input: text.substring(0, 2000), voice: 'af_heart' })
