@@ -1517,14 +1517,24 @@
                             <h3 class="card-title">Create Video from Image</h3>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="imgvid-file">Upload Image</label>
-                            <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgvid-file').click()" aria-label="Choose an image file to animate">
-                                <i class="fas fa-upload" aria-hidden="true"></i> Choose Image
-                            </button>
-                            <input type="file" id="imgvid-file" class="sr-only" accept="image/*" onchange="previewImgVidFile(event)" aria-label="Image file upload">
+                            <label class="form-label" for="imgvid-source">Image Source</label>
+                            <select id="imgvid-source" class="form-select" onchange="toggleImgVidSource()" aria-label="Choose image source">
+                                <option value="gallery">Select from Generated Gallery</option>
+                                <option value="url">Paste Image URL</option>
+                            </select>
                         </div>
-                        <div id="imgvid-preview" role="img" aria-label="Image preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
-                            <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
+                        <div id="imgvid-gallery-picker" class="form-group">
+                            <label class="form-label">Select Image</label>
+                            <select id="imgvid-gallery-select" class="form-select" aria-label="Select a generated image">
+                                <option value="">-- No images yet. Generate some in Image Studio first. --</option>
+                            </select>
+                            <div id="imgvid-preview" role="img" aria-label="Image preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-top:8px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
+                            </div>
+                        </div>
+                        <div id="imgvid-url-input" class="form-group" style="display:none;">
+                            <label class="form-label" for="imgvid-url">Image URL</label>
+                            <input type="url" id="imgvid-url" class="form-input" placeholder="https://example.com/image.jpg" aria-label="Paste a direct image URL">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="imgvid-prompt">Motion Description (optional)</label>
@@ -2385,6 +2395,7 @@
             localStorage.setItem('nyxen_gallery', JSON.stringify(generatedImages.slice(0, 50)));
             syncGallery();
             renderGallery();
+            populateImgVidGallery();
             announce(count + ' image(s) generated');
         }
 
@@ -2550,21 +2561,48 @@
         }
 
         // ============ IMAGE-TO-VIDEO ============
-        var imgVidDataUrl = null;
+        var imgVidSelectedUrl = null;
 
-        function previewImgVidFile(event) {
-            var file = event.target.files[0];
-            if (!file) return;
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                imgVidDataUrl = e.target.result;
-                document.getElementById('imgvid-preview').innerHTML = '<img src="' + imgVidDataUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">';
+        function toggleImgVidSource() {
+            var source = document.getElementById('imgvid-source').value;
+            document.getElementById('imgvid-gallery-picker').style.display = source === 'gallery' ? 'block' : 'none';
+            document.getElementById('imgvid-url-input').style.display = source === 'url' ? 'block' : 'none';
+            imgVidSelectedUrl = null;
+            document.getElementById('imgvid-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>';
+        }
+
+        function populateImgVidGallery() {
+            var sel = document.getElementById('imgvid-gallery-select');
+            sel.innerHTML = '';
+            if (generatedImages.length === 0) {
+                sel.innerHTML = '<option value="">-- No images yet. Generate in Image Studio first. --</option>';
+                return;
+            }
+            sel.innerHTML = '<option value="">-- Choose an image --</option>';
+            generatedImages.forEach(function(img, i) {
+                var label = img.type + ' — ' + (img.prompt || '').substring(0, 40) + (img.prompt && img.prompt.length > 40 ? '...' : '');
+                sel.innerHTML += '<option value="' + img.url + '">' + label + '</option>';
+            });
+            sel.onchange = function() {
+                imgVidSelectedUrl = sel.value || null;
+                if (imgVidSelectedUrl) {
+                    document.getElementById('imgvid-preview').innerHTML = '<img src="' + imgVidSelectedUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">';
+                } else {
+                    document.getElementById('imgvid-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>';
+                }
             };
-            reader.readAsDataURL(file);
+        }
+
+        function getImgVidUrl() {
+            var source = document.getElementById('imgvid-source').value;
+            if (source === 'gallery') return imgVidSelectedUrl;
+            if (source === 'url') return document.getElementById('imgvid-url').value.trim() || null;
+            return null;
         }
 
         async function generateImageVideo() {
-            if (!imgVidDataUrl) { alert('Please select an image first.'); return; }
+            var imageUrl = getImgVidUrl();
+            if (!imageUrl) { alert('Please select or enter an image first.'); return; }
             if (!deductPoints(10)) return;
             var prompt = document.getElementById('imgvid-prompt').value.trim() || 'Smooth cinematic motion';
             if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
@@ -2574,7 +2612,7 @@
                 var result = await apifreeSubmitAndPoll('video', {
                     model: 'lightricks/ltx-video/image-to-video',
                     prompt: prompt,
-                    image: imgVidDataUrl
+                    image_url: imageUrl
                 }, 180000);
                 if (result.video_list && result.video_list[0]) {
                     output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.video_list[0] + '" type="video/mp4"></video>' +
@@ -2750,6 +2788,7 @@
             // Render side panel data
             renderConversations();
             renderGallery();
+            populateImgVidGallery();
 
             // Restore active project
             if (activeProject) setActiveProject(activeProject);
