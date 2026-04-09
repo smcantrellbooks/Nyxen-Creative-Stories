@@ -1782,6 +1782,9 @@
     <!-- Export Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/jspdf@latest/dist/jspdf.umd.min.js"></script>
 
+    <!-- DOCX Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+
     <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -2073,14 +2076,35 @@
         }
 
         function handleFileUpload(event) {
-            const file = event.target.files[0];
+            var file = event.target.files[0];
             if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('paste-text').value = e.target.result;
-                announce('File loaded: ' + file.name);
-            };
-            reader.readAsText(file);
+            var ext = file.name.split('.').pop().toLowerCase();
+
+            if (ext === 'docx' && typeof mammoth !== 'undefined') {
+                // Parse DOCX using mammoth.js
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    mammoth.extractRawText({ arrayBuffer: e.target.result }).then(function(result) {
+                        document.getElementById('paste-text').value = result.value;
+                        announce('DOCX file loaded: ' + file.name);
+                    }).catch(function() {
+                        alert('Could not read this DOCX file. Try saving it as .txt first.');
+                    });
+                };
+                reader.readAsArrayBuffer(file);
+            } else if (ext === 'txt' || ext === 'md' || ext === 'csv') {
+                // Plain text files
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('paste-text').value = e.target.result;
+                    announce('File loaded: ' + file.name);
+                };
+                reader.readAsText(file);
+            } else {
+                alert('Supported formats: .txt, .docx\nFor .doc or .pdf files, please copy-paste the text instead.');
+            }
+            // Reset input so the same file can be re-selected
+            event.target.value = '';
         }
 
         function importPastedText() {
@@ -2377,7 +2401,11 @@
         function createConversation() {
             var input = document.getElementById('new-conversation-title');
             var title = input.value.trim();
-            if (!title) { announce('Enter a conversation title.'); return; }
+            if (!title) {
+                title = prompt('Enter a conversation title:');
+                if (!title || !title.trim()) return;
+                title = title.trim();
+            }
             conversations.unshift({ title: title, time: 'Just now', messages: [] });
             syncConversations();
             input.value = '';
