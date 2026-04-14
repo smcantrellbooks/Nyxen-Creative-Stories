@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, BackgroundTasks
+from fastapi import FastAPI, APIRouter, HTTPException, BackgroundTasks, UploadFile, File
 from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -652,6 +652,24 @@ async def delete_story_setting(setting_id: str):
     conn.commit()
     conn.close()
     return {"success": True}
+
+# DOCX Upload
+@api_router.post("/upload")
+async def upload_docx(file: UploadFile = File(...)):
+    from docx import Document
+    import io
+    if not file.filename.endswith('.docx'):
+        raise HTTPException(status_code=400, detail="Only .docx files are supported")
+    content = await file.read()
+    if not content:
+        raise HTTPException(status_code=400, detail="File is empty")
+    try:
+        doc = Document(io.BytesIO(content))
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid or corrupted .docx file")
+    paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
+    text = "\n\n".join(paragraphs)
+    return {"filename": file.filename, "text": text, "word_count": len(text.split()), "paragraph_count": len(paragraphs)}
 
 # Media Gallery
 @api_router.get("/media")
