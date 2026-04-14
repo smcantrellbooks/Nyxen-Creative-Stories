@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Nyxen Creative Stories - AI-powered creative writing assistant for authors and storytellers">
     <title>Nyxen Creative Stories - AI Writing Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Skip to main content link for screen readers */
@@ -222,7 +219,7 @@
 
         /* Side Panel */
         .side-panel {
-            width: 320px;
+            width: 380px;
             flex-shrink: 0;
             background: var(--card-bg);
             border-left: 2px solid var(--border-accent);
@@ -380,14 +377,6 @@
         .mode-card span {
             font-size: 13px;
             font-weight: 500;
-        }
-
-        /* JotForm Container */
-        .jotform-container {
-            background: var(--card-bg);
-            border: 2px solid var(--border-accent);
-            border-radius: 8px;
-            overflow: hidden;
         }
 
         /* Grid Layouts */
@@ -799,9 +788,11 @@
             .tab-btn { padding: 12px 16px; font-size: 13px; }
             .main-content { padding: 16px; }
         }
+        @keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
     </style>
-</head>
-<body>
+
+
     <!-- Skip to main content link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -831,7 +822,7 @@
     </header>
 
     <!-- Tab Navigation -->
-    <nav class="tab-nav" role="tablist" aria-label="Main navigation">
+    <nav class="tab-nav" id="app-tab-nav" role="tablist" aria-label="Main navigation">
         <button class="tab-btn active" data-page="assistant" onclick="showPage('assistant')" role="tab" aria-selected="true" aria-controls="page-assistant" id="tab-assistant">
             <i class="fas fa-comments" aria-hidden="true"></i> <span>Creatives Assistant</span>
         </button>
@@ -853,13 +844,16 @@
         <button class="tab-btn" data-page="membership" onclick="showPage('membership')" role="tab" aria-selected="false" aria-controls="page-membership" id="tab-membership">
             <i class="fas fa-crown" aria-hidden="true"></i> <span>Membership</span>
         </button>
+        <button class="tab-btn" data-page="account" onclick="showPage('account')" role="tab" aria-selected="false" aria-controls="page-account" id="tab-account">
+            <i class="fas fa-user-circle" aria-hidden="true"></i> <span>My Account</span>
+        </button>
         <button class="tab-btn" data-page="disclosures" onclick="showPage('disclosures')" role="tab" aria-selected="false" aria-controls="page-disclosures" id="tab-disclosures">
             <i class="fas fa-shield-alt" aria-hidden="true"></i> <span>Disclosures</span>
         </button>
     </nav>
 
     <!-- Main Container -->
-    <div class="main-container">
+    <div class="main-container" id="app-main">
         <!-- Main Content Area -->
         <main class="main-content" id="main-content" role="main">
             <!-- Page 1: Creatives Assistant Chat -->
@@ -909,7 +903,7 @@
                     <!-- Documents & Pasted Text -->
                     <article class="card" aria-labelledby="documents-title">
                         <div class="card-header">
-                            <h2 class="card-title" id="documents-title">Documents & Pasted Text</h2>
+                            <h2 class="card-title" id="documents-title">Documents &amp; Pasted Text</h2>
                         </div>
                         <div class="form-group">
                             <label for="file-upload" class="sr-only">Upload document</label>
@@ -929,21 +923,39 @@
                     </article>
                 </div>
 
-                <!-- JotForm Chat Embed -->
-                <article class="card" aria-labelledby="conversation-title">
+                <!-- Nyxen Chat -->
+                <article class="card" aria-labelledby="nyxen-chat-title">
                     <div class="card-header">
-                        <h2 class="card-title" id="conversation-title">Conversation with Nyxen</h2>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:32px;height:32px;border-radius:8px;border:1.5px solid var(--header-bg);object-fit:cover;">
+                            <h2 class="card-title" id="nyxen-chat-title">Conversation with Nyxen</h2>
+                        </div>
                     </div>
-                    <div class="jotform-container">
-                        <iframe id="JotFormIFrame-019d3d3c3a537add8379214c3060726a324e" 
-                            title="Nyxen Creative Mentor Chat Interface"
-                            allowtransparency="true" 
-                            allow="geolocation; microphone; camera; fullscreen"
-                            src="https://agent.jotform.com/019d3d3c3a537add8379214c3060726a324e?embedMode=iframe&autofocus=0&background=1&shadow=1"
-                            frameborder="0" 
-                            style="width:100%; height:688px; border:none;" 
-                            scrolling="no">
-                        </iframe>
+                    <!-- Chat messages -->
+                    <div id="nyxenChatFeed" style="min-height:320px;max-height:480px;overflow-y:auto;background:rgba(50,24,96,.2);border-radius:8px;padding:16px;margin-bottom:12px;display:flex;flex-direction:column;gap:12px;">
+                        <div id="nyxenChatWelcome" style="text-align:center;padding:40px 16px;">
+                            <img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:56px;height:56px;border-radius:14px;border:2px solid var(--header-bg);margin-bottom:12px;">
+                            <p style="color:var(--app-font);font-family:'Playfair Display',serif;font-size:16px;margin-bottom:6px;">Hi, I'm Nyxen.</p>
+                            <p style="color:rgba(247,242,255,.6);font-size:13px;line-height:1.6;">Your AI storytelling companion. Ask me anything about your story — characters, plot, pacing, world-building, or just tell me what to write next.</p>
+                        </div>
+                    </div>
+                    <!-- Input -->
+                    <div style="display:flex;gap:8px;align-items:flex-end;">
+                        <textarea id="nyxenChatInput" placeholder="Ask Nyxen anything about your story…" rows="2"
+                            style="flex:1;padding:10px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:var(--app-font);font-family:'Outfit',sans-serif;font-size:14px;outline:none;resize:none;line-height:1.5;transition:border-color .2s;"
+                            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendNyxenChat();}"
+                            onfocus="this.style.borderColor='var(--header-bg)'"
+                            onblur="this.style.borderColor='rgba(255,255,255,.15)'"></textarea>
+                        <button onclick="sendNyxenChat()" id="nyxenChatBtn"
+                            style="padding:10px 18px;background:var(--header-bg);color:var(--logo-bg);border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;flex-shrink:0;">
+                            Send
+                        </button>
+                    </div>
+                    <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
+                        <button onclick="nyxenQuick('Continue writing the next scene')" style="padding:4px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(247,242,255,.6);font-size:11px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.borderColor='var(--header-bg)';this.style.color='var(--header-bg)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(247,242,255,.6)'">✦ Continue writing</button>
+                        <button onclick="nyxenQuick('Give me a plot twist idea')" style="padding:4px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(247,242,255,.6);font-size:11px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.borderColor='var(--header-bg)';this.style.color='var(--header-bg)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(247,242,255,.6)'">⚡ Plot twist</button>
+                        <button onclick="nyxenQuick('Develop my main character more')" style="padding:4px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(247,242,255,.6);font-size:11px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.borderColor='var(--header-bg)';this.style.color='var(--header-bg)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(247,242,255,.6)'">🧬 Character depth</button>
+                        <button onclick="nyxenQuick('Review my writing and suggest improvements')" style="padding:4px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(247,242,255,.6);font-size:11px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.borderColor='var(--header-bg)';this.style.color='var(--header-bg)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(247,242,255,.6)'">📝 Review writing</button>
                     </div>
                 </article>
 
@@ -971,19 +983,57 @@
                 </header>
 
                 <div class="grid-2">
-                    <!-- Story Chat Panel -->
-                    <article class="card" aria-labelledby="story-chat-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="story-chat-title">Story Chat Panel</h2>
+                    <!-- Story Chat Panel — Nyara-style -->
+                    <article class="card" aria-labelledby="story-chat-title" style="padding:0;overflow:hidden;">
+                        <div style="display:flex;height:520px;">
+
+                            <!-- Chat Sidebar -->
+                            <div id="storyChatSidebar" style="width:200px;flex-shrink:0;background:rgba(30,10,50,.6);border-right:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;">
+                                <div style="padding:12px 10px 8px;border-bottom:1px solid rgba(255,255,255,.1);">
+                                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                                        <img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:28px;height:28px;border-radius:7px;border:1.5px solid var(--header-bg);object-fit:cover;">
+                                        <span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--header-bg);">Nyxen</span>
+                                    </div>
+                                    <button onclick="storyChatNew()" style="width:100%;padding:6px 10px;background:var(--header-bg);color:var(--logo-bg);border:none;border-radius:6px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;">
+                                        + New Chat
+                                    </button>
+                                </div>
+                                <div id="storyChatList" style="flex:1;overflow-y:auto;padding:6px;">
+                                    <div style="padding:12px 8px;text-align:center;color:rgba(247,242,255,.3);font-size:11px;font-style:italic;">Chats appear here</div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Main -->
+                            <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+                                <div style="padding:8px 14px;background:rgba(216,181,136,.15);border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:8px;">
+                                    <h2 class="card-title" id="story-chat-title" style="font-size:13px;margin:0;">Story Chat</h2>
+                                </div>
+                                <div id="story-chat-area" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:rgba(50,24,96,.15);">
+                                    <div id="story-chat-placeholder" style="text-align:center;padding:30px 16px;">
+                                        <img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:48px;height:48px;border-radius:12px;border:2px solid var(--header-bg);margin-bottom:10px;">
+                                        <p style="color:var(--app-font);font-family:'Playfair Display',serif;font-size:14px;margin-bottom:4px;">Hi, I'm Nyxen.</p>
+                                        <p style="color:rgba(247,242,255,.5);font-size:12px;line-height:1.6;">Ask me about your story — plot, characters, pacing, or tell me what to write next.</p>
+                                    </div>
+                                </div>
+                                <div style="padding:8px 10px;background:rgba(30,10,50,.4);border-top:1px solid rgba(255,255,255,.1);">
+                                    <div style="display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap;">
+                                        <button onclick="storyChatQuick('Continue writing the next scene')" style="padding:3px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(247,242,255,.55);font-size:10px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.color='var(--header-bg)';this.style.borderColor='var(--header-bg)'" onmouseout="this.style.color='rgba(247,242,255,.55)';this.style.borderColor='rgba(255,255,255,.12)'">✦ Continue</button>
+                                        <button onclick="storyChatQuick('Give me a plot twist')" style="padding:3px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(247,242,255,.55);font-size:10px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.color='var(--header-bg)';this.style.borderColor='var(--header-bg)'" onmouseout="this.style.color='rgba(247,242,255,.55)';this.style.borderColor='rgba(255,255,255,.12)'">⚡ Plot twist</button>
+                                        <button onclick="storyChatQuick('Develop my main character')" style="padding:3px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(247,242,255,.55);font-size:10px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.color='var(--header-bg)';this.style.borderColor='var(--header-bg)'" onmouseout="this.style.color='rgba(247,242,255,.55)';this.style.borderColor='rgba(255,255,255,.12)'">🧬 Character</button>
+                                        <button onclick="storyChatQuick('Review my writing')" style="padding:3px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(247,242,255,.55);font-size:10px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.color='var(--header-bg)';this.style.borderColor='var(--header-bg)'" onmouseout="this.style.color='rgba(247,242,255,.55)';this.style.borderColor='rgba(255,255,255,.12)'">📝 Review</button>
+                                    </div>
+                                    <form onsubmit="event.preventDefault();sendStoryPrompt();" style="display:flex;gap:6px;">
+                                        <label for="story-prompt" class="sr-only">Story prompt</label>
+                                        <input type="text" id="story-prompt" placeholder="Ask Nyxen about your story…"
+                                            style="flex:1;padding:8px 12px;border-radius:8px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:var(--app-font);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:border-color .2s;"
+                                            onfocus="this.style.borderColor='var(--header-bg)'"
+                                            onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+                                        <button type="submit" id="storyChatSendBtn"
+                                            style="padding:8px 16px;background:var(--header-bg);color:var(--logo-bg);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;flex-shrink:0;">Send</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div style="min-height: 300px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 16px;" role="region" aria-label="Story chat messages" id="story-chat-area">
-                            <p style="color: var(--primary-font); opacity: 0.6; text-align: center; padding-top: 120px;" id="story-chat-placeholder">Nyxen story chat panel</p>
-                        </div>
-                        <form onsubmit="event.preventDefault(); sendStoryPrompt();" style="display: flex; gap: 12px;">
-                            <label for="story-prompt" class="sr-only">Describe your scene or question</label>
-                            <input type="text" id="story-prompt" class="form-input" placeholder="Describe the scene or ask Nyxen for direction..." style="flex: 1;">
-                            <button type="submit" class="btn btn-primary" aria-label="Send story prompt" data-testid="story-send-btn">Send</button>
-                        </form>
                     </article>
 
                     <!-- Chapters and Scenes -->
@@ -1018,12 +1068,12 @@
                         <h2 class="card-title" id="account-title">Nyxen Account</h2>
                     </div>
                     <div class="note-box" role="note">
-                        These actions open the Nyxen membership site in your browser. Account creation, login, and billing are all handled on nyxen.smcantrellbooks.com, not inside this app.
+                        These actions manage your Nyxen account. Login, signup, and billing are handled within this app.
                     </div>
                     <nav style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;" aria-label="Account management links">
-                        <a href="https://nyxen.smcantrellbooks.com/join" target="_blank" class="btn btn-primary" aria-label="Join Nyxen membership (opens in new tab)">Join Nyxen</a>
-                        <a href="https://nyxen.smcantrellbooks.com/login" target="_blank" class="btn btn-secondary" aria-label="Login to Nyxen account (opens in new tab)">Login to Nyxen</a>
-                        <a href="https://nyxen.smcantrellbooks.com/my-account" target="_blank" class="btn btn-secondary" aria-label="Manage your Nyxen account (opens in new tab)">Manage / My Account</a>
+                        <button class="btn btn-primary" aria-label="Sign up for Nyxen" onclick="gateSignup()">Join Nyxen</button>
+                        <button class="btn btn-secondary" aria-label="Login to Nyxen account" onclick="gateLogin()">Login to Nyxen</button>
+                        <button class="btn btn-secondary" aria-label="Manage your Nyxen account" onclick="showPage('account')">Manage / My Account</button>
                         <button class="btn btn-secondary" onclick="handleLogout()" aria-label="Logout from Nyxen" data-testid="workspace-logout-btn">Logout from Nyxen</button>
                     </nav>
                 </article>
@@ -1032,7 +1082,7 @@
             <!-- Page 3: Drafting & Chapter Creation -->
             <section class="page" id="page-drafting" role="tabpanel" aria-labelledby="tab-drafting">
                 <header class="page-header">
-                    <h1 class="font-serif">Drafting & Chapter Creation</h1>
+                    <h1 class="font-serif">Drafting &amp; Chapter Creation</h1>
                     <p>Turn your story plan into concrete chapters and scenes</p>
                 </header>
 
@@ -1044,16 +1094,15 @@
                         </div>
                         <p style="color: var(--primary-font); margin-bottom: 16px;">I'll help you turn your story plan into concrete chapters, scenes, and summaries that stay true to your genre, audience, worldbuilding, and structure in StoryForge Studio.</p>
                         <div class="note-box" role="note">
-                            Available on creatives.smcantrellbooks.com and nyxen.smcantrellbooks.com for the same project workspace.
+                            Available on creatives.smcantrellbooks.com for the same project workspace.
                         </div>
 
                         <div class="form-group">
                             <label for="draft-project" class="form-label">Select Project</label>
                             <select id="draft-project" class="form-select">
-                                <option>Starbound Heirs</option>
-                                <option>Glass Kingdoms</option>
-                                <option>Neon Fables</option>
-                                <option>Ink & Ember</option>
+                                <option>— No projects —</option>
+                            </select>
+                                <option>Ink &amp; Ember</option>
                             </select>
                         </div>
 
@@ -1097,7 +1146,7 @@
                         <!-- Scene & Cover Art Generator -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Scene & Cover Art Generator</h3>
+                                <h3 class="card-title">Scene &amp; Cover Art Generator</h3>
                             </div>
                             <p style="color: var(--primary-font); margin-bottom: 16px;">Drafting-ready visuals without outlining or prose skills.</p>
                             <div class="form-group">
@@ -1163,7 +1212,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Current Project</label>
-                            <input type="text" id="edit-project" class="form-input" value="Starbound Heirs">
+                            <input type="text" id="edit-project" class="form-input" value="" placeholder="Enter project name">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Genre, Tone, or Voice</label>
@@ -1253,7 +1302,7 @@
             <!-- Page 5: Publishing Strategist -->
             <div class="page" id="page-publishing">
                 <div class="page-header">
-                    <h1 class="font-serif">Story Mentor & Publishing Strategist</h1>
+                    <h1 class="font-serif">Story Mentor &amp; Publishing Strategist</h1>
                     <p>Plan your publishing journey</p>
                 </div>
 
@@ -1263,10 +1312,9 @@
                         <h3 class="card-title">Focus Project</h3>
                     </div>
                     <select id="focus-project" class="form-select" onchange="changeFocusProject()">
-                        <option>Starbound Heirs</option>
-                        <option>Glass Kingdoms</option>
-                        <option>Neon Fables</option>
-                        <option>Ink & Ember</option>
+                        <option>— No projects —</option>
+                    </select>
+                        <option>Ink &amp; Ember</option>
                     </select>
                 </div>
 
@@ -1277,9 +1325,9 @@
                             <h3 class="card-title">Project Snapshot</h3>
                         </div>
                         <div id="pub-snapshot" style="color: var(--primary-font);">
-                            <p><strong>Title:</strong> Starbound Heirs</p>
-                            <p><strong>Genre:</strong> Science Fantasy</p>
-                            <p><strong>Audience:</strong> Young Adult / New Adult</p>
+                            <p><strong>Title:</strong> —</p>
+                            <p><strong>Genre:</strong> —</p>
+                            <p><strong>Audience:</strong> —</p>
                             <p><strong>Format:</strong> Ebook trilogy with audiobook editions</p>
                         </div>
                     </div>
@@ -1287,14 +1335,14 @@
                     <!-- Blurb & Tagline -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Blurb & Tagline Suggestions</h3>
+                            <h3 class="card-title">Blurb &amp; Tagline Suggestions</h3>
                         </div>
                         <div id="blurb-output" style="min-height: 100px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 12px;">
                             <p style="color: var(--primary-font); opacity: 0.6;">AI-generated blurbs will appear here...</p>
                         </div>
                         <div style="display: flex; gap: 12px;">
-                            <button class="btn btn-secondary" onclick="generateBlurb('ebook')" data-testid="blurb-ebook-btn">Ebook & Audiobook</button>
-                            <button class="btn btn-secondary" onclick="generateBlurb('web')" data-testid="blurb-web-btn">Web & Visual Script</button>
+                            <button class="btn btn-secondary" onclick="generateBlurb('ebook')" data-testid="blurb-ebook-btn">Ebook &amp; Audiobook</button>
+                            <button class="btn btn-secondary" onclick="generateBlurb('web')" data-testid="blurb-web-btn">Web &amp; Visual Script</button>
                         </div>
                     </div>
                 </div>
@@ -1303,7 +1351,7 @@
                     <!-- Series Positioning -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Series Positioning & Bundles</h3>
+                            <h3 class="card-title">Series Positioning &amp; Bundles</h3>
                         </div>
                         <div style="min-height: 120px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
                             <p style="color: var(--primary-font); opacity: 0.6;">AI suggestions for series positioning and bundle structure...</p>
@@ -1345,14 +1393,14 @@
                             <div class="author-avatar"><i class="fas fa-user"></i></div>
                             <div class="author-info">
                                 <h4>Miguel Santos</h4>
-                                <p>Creator Studio - Ebook & Visual Script</p>
+                                <p>Creator Studio - Ebook &amp; Visual Script</p>
                             </div>
                         </div>
                         <div class="author-card">
                             <div class="author-avatar"><i class="fas fa-user"></i></div>
                             <div class="author-info">
                                 <h4>Sierra Cantrell</h4>
-                                <p>Pro Author - Ebook & Audiobook</p>
+                                <p>Pro Author - Ebook &amp; Audiobook</p>
                             </div>
                         </div>
                     </div>
@@ -1477,10 +1525,9 @@
                         <div class="form-group">
                             <label class="form-label" for="txtvid-project">Select Project</label>
                             <select id="txtvid-project" class="form-select" aria-label="Select project for video generation">
-                                <option>Starbound Heirs</option>
-                                <option>Glass Kingdoms</option>
-                                <option>Neon Fables</option>
-                                <option>Ink & Ember</option>
+                                <option>— No projects —</option>
+                            </select>
+                                <option>Ink &amp; Ember</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1561,7 +1608,7 @@
             <!-- Page 7: Membership -->
             <section class="page" id="page-membership" role="tabpanel" aria-labelledby="tab-membership">
                 <header class="page-header">
-                    <h1 class="font-serif">Storefront & Membership</h1>
+                    <h1 class="font-serif">Storefront &amp; Membership</h1>
                     <p>Choose the plan that fits your creative journey</p>
                 </header>
 
@@ -1638,33 +1685,62 @@
                     <div class="card-header">
                         <h3 class="card-title">Projects</h3>
                     </div>
-                    <div class="project-card">
-                        <h4>Starbound Heirs</h4>
-                        <p>Science Fantasy — Ebook trilogy with audiobook editions and potential screenplay adaptation</p>
-                        <button class="btn btn-secondary" onclick="setActiveProject('Starbound Heirs')" data-testid="set-active-starbound">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Glass Kingdoms</h4>
-                        <p>Epic Fantasy — Deluxe ebook with maps, audiobook with atmospheric sound design</p>
-                        <button class="btn btn-secondary" onclick="setActiveProject('Glass Kingdoms')" data-testid="set-active-glass">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Neon Fables</h4>
-                        <p>Cyberpunk Fairy Tales — Ebook collection, episodic audiobook series, and potential visual script</p>
-                        <button class="btn btn-secondary" onclick="setActiveProject('Neon Fables')" data-testid="set-active-neon">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Ink & Ember</h4>
-                        <p>Dark Fantasy Mystery — Single-volume ebook, full-cast audiobook, and bonus illustrated novella</p>
-                        <button class="btn btn-secondary" onclick="setActiveProject('Ink &amp; Ember')" data-testid="set-active-ink">Set Active</button>
-                    </div>
+                    <p style="color: var(--primary-font); opacity: 0.6; padding: 16px; text-align: center;">No projects yet. Create one to get started.</p>
+                </div>
+            </section>
+
+            <!-- Page: My Account -->
+            <section class="page" id="page-account" role="tabpanel" aria-labelledby="tab-account">
+                <header class="page-header">
+                    <h1 class="font-serif">My Account</h1>
+                    <p>Manage your profile and subscription</p>
+                </header>
+
+                <div class="grid-2">
+                    <!-- Profile Info -->
+                    <article class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Profile</h2>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:12px;">
+                            <div>
+                                <span class="form-label">Email</span>
+                                <div id="acct-email" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">Not logged in</div>
+                            </div>
+                            <div>
+                                <span class="form-label">Membership Tier</span>
+                                <div id="acct-tier" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">Free</div>
+                            </div>
+                            <div>
+                                <span class="form-label">Points Balance</span>
+                                <div id="acct-points" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">100</div>
+                            </div>
+                            <div>
+                                <span class="form-label">Member Since</span>
+                                <div id="acct-created" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">—</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Account Actions -->
+                    <article class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Account Actions</h2>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:12px;">
+                            <button class="btn btn-primary" style="width:100%;" onclick="showPage('membership')"><i class="fas fa-arrow-up" aria-hidden="true"></i> Upgrade Plan</button>
+                            <button class="btn btn-secondary" style="width:100%;" onclick="showPage('membership')"><i class="fas fa-coins" aria-hidden="true"></i> Buy More Points</button>
+                            <button class="btn btn-secondary" style="width:100%;" onclick="acctChangePassword()"><i class="fas fa-key" aria-hidden="true"></i> Change Password</button>
+                            <button class="btn btn-secondary" style="width:100%;color:var(--red);" onclick="acctLogout()"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</button>
+                        </div>
+                    </article>
                 </div>
             </section>
 
             <!-- Page 8: Disclosures -->
             <section class="page" id="page-disclosures" role="tabpanel" aria-labelledby="tab-disclosures">
                 <header class="page-header">
-                    <h1 class="font-serif">Disclosures & Policies</h1>
+                    <h1 class="font-serif">Disclosures &amp; Policies</h1>
                     <p>Important information about using Nyxen Creative Stories</p>
                 </header>
 
@@ -1684,9 +1760,9 @@
                 </article>
 
                 <article class="disclosure-card" aria-labelledby="terms-title">
-                    <h2 id="terms-title"><i class="fas fa-file-contract" aria-hidden="true"></i> Terms & Conditions</h2>
+                    <h2 id="terms-title"><i class="fas fa-file-contract" aria-hidden="true"></i> Terms &amp; Conditions</h2>
                     <p>By using the Nyxen Creative Stories platform, you signify your agreement to our comprehensive terms and conditions. Please ensure you have read and understood them.</p>
-                    <button class="btn btn-secondary" onclick="window.open('https://smcantrellbooks.com/terms','_blank')" aria-label="View full terms and conditions document" data-testid="view-terms-btn">View Full Terms & Conditions</button>
+                    <button class="btn btn-secondary" onclick="window.open('https://smcantrellbooks.com/terms','_blank')" aria-label="View full terms and conditions document" data-testid="view-terms-btn">View Full Terms &amp; Conditions</button>
                 </article>
 
                 <article class="disclosure-card" aria-labelledby="privacy-title">
@@ -1741,26 +1817,7 @@
                 <!-- Projects Tab -->
                 <div id="side-projects" style="display: none;" role="tabpanel" aria-labelledby="side-tab-projects" aria-hidden="true">
                     <nav aria-label="Your projects">
-                        <article class="project-card">
-                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Starbound Heirs</h3>
-                            <p>Science Fantasy • Ebook trilogy</p>
-                            <button class="btn btn-secondary" style="width: 100%;" onclick="setActiveProject('Starbound Heirs')" aria-label="Set Starbound Heirs as active project">Set Active</button>
-                        </article>
-                        <article class="project-card">
-                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Glass Kingdoms</h3>
-                            <p>Epic Fantasy • Deluxe ebook</p>
-                            <button class="btn btn-secondary" style="width: 100%;" onclick="setActiveProject('Glass Kingdoms')" aria-label="Set Glass Kingdoms as active project">Set Active</button>
-                        </article>
-                        <article class="project-card">
-                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Neon Fables</h3>
-                            <p>Cyberpunk • Ebook collection</p>
-                            <button class="btn btn-secondary" style="width: 100%;" onclick="setActiveProject('Neon Fables')" aria-label="Set Neon Fables as active project">Set Active</button>
-                        </article>
-                        <article class="project-card">
-                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Ink & Ember</h3>
-                            <p>Dark Fantasy Mystery</p>
-                            <button class="btn btn-secondary" style="width: 100%;" onclick="setActiveProject('Ink &amp; Ember')" aria-label="Set Ink and Ember as active project">Set Active</button>
-                        </article>
+                        <p style="color: var(--primary-font); opacity: 0.6; text-align: center; padding: 16px;">No projects yet.</p>
                     </nav>
                 </div>
             </div>
@@ -1775,11 +1832,11 @@
                     <form class="auth-form" id="auth-form" onsubmit="event.preventDefault(); handleAuthSubmit();" aria-labelledby="auth-form-title">
                         <div class="form-group">
                             <label for="auth-email" class="sr-only">Email address</label>
-                            <input type="email" id="auth-email" class="form-input" placeholder="Email address" required aria-required="true" autocomplete="email" data-testid="auth-email-input">
+                            <input type="email" id="auth-email" class="form-input" placeholder="Email address" required="" aria-required="true" autocomplete="email" data-testid="auth-email-input">
                         </div>
                         <div class="form-group">
                             <label for="auth-password" class="sr-only">Password</label>
-                            <input type="password" id="auth-password" class="form-input" placeholder="Password" required aria-required="true" minlength="6" autocomplete="current-password" data-testid="auth-password-input">
+                            <input type="password" id="auth-password" class="form-input" placeholder="Password" required="" aria-required="true" minlength="6" autocomplete="current-password" data-testid="auth-password-input">
                         </div>
                         <div class="auth-actions">
                             <button type="submit" class="btn btn-primary" id="auth-submit-btn" data-testid="auth-submit-btn">
@@ -1792,7 +1849,7 @@
                     </button>
                     <div class="auth-divider"><span>or</span></div>
                     <button class="btn btn-google" onclick="handleGoogleLogin()" data-testid="auth-google-btn" aria-label="Sign in with Google">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"></path><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"></path><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"></path><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"></path></svg>
                         Sign in with Google
                     </button>
                 </div>
@@ -1805,9 +1862,9 @@
                         <span class="auth-user-email" id="auth-user-email" data-testid="auth-user-email"></span>
                     </div>
                     <div class="auth-actions" style="flex-direction: column;">
-                        <a href="https://nyxen.smcantrellbooks.com/my-account" target="_blank" class="btn btn-secondary" style="justify-content: center;" aria-label="Manage your account (opens in new tab)" data-testid="auth-my-account-btn">
+                        <button class="btn btn-secondary" style="justify-content: center;width:100%;" aria-label="Manage your account" onclick="showPage('account')" data-testid="auth-my-account-btn">
                             <i class="fas fa-cog" aria-hidden="true"></i> My Account
-                        </a>
+                        </button>
                         <button class="btn btn-primary" onclick="handleLogout()" style="justify-content: center;" aria-label="Log out of your account" data-testid="auth-logout-btn">
                             <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
                         </button>
@@ -1826,16 +1883,7 @@
     <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- JotForm Script -->
-    <script src='https://cdn.jotfor.ms/s/umd/43ddf8c9259/for-form-embed-handler.js'></script>
     <script>
-        // Initialize JotForm
-        if (typeof window.jotformEmbedHandler === 'function') {
-            window.jotformEmbedHandler(
-                "iframe[id='JotFormIFrame-019d3d3c3a537add8379214c3060726a324e']",
-                "https://www.jotform.com"
-            );
-        }
 
         // Announce to screen readers
         function announce(message) {
@@ -1939,6 +1987,7 @@
 
         // Submit question function
         function submitQuestion() {
+            if (!requireAuth('ask a question')) return;
             const input = document.getElementById('ask-input');
             if (input.value.trim()) {
                 announce('Question submitted');
@@ -1950,9 +1999,9 @@
         }
 
         // ============ API KEYS ============
-        const GROQ_KEY = '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';
         const APIFREE_KEY = 'sk-peDA9ErrJtAwG7hD4WTCKEHWMi3Y1';
         const APIFREE_BASE = 'https://api.apifree.ai';
+        const NYXEN_AI_API = 'https://nyxen-ai.onrender.com/api';
 
         // Async submit + poll helper for APIFree
         async function apifreeSubmitAndPoll(type, body, maxWaitMs) {
@@ -2104,39 +2153,35 @@
         }
 
         // ============ PROJECT DATA ============
-        const projectData = {
-            'Starbound Heirs': { genre: 'Science Fantasy', audience: 'Young Adult / New Adult', format: 'Ebook trilogy with audiobook editions', notes: 'Potential screenplay adaptation' },
-            'Glass Kingdoms': { genre: 'Epic Fantasy', audience: 'Adult', format: 'Deluxe ebook with maps, audiobook with atmospheric sound design', notes: '' },
-            'Neon Fables': { genre: 'Cyberpunk Fairy Tales', audience: 'Young Adult', format: 'Ebook collection, episodic audiobook series', notes: 'Potential visual script for motion comics' },
-            'Ink & Ember': { genre: 'Dark Fantasy Mystery', audience: 'Adult', format: 'Single-volume ebook, full-cast audiobook', notes: 'Bonus illustrated novella' }
-        };
+        const projectData = {};
 
-        let activeProject = localStorage.getItem('nyxen_active_project') || 'Starbound Heirs';
+        let activeProject = localStorage.getItem('nyxen_active_project') || '';
         let generatedImages = JSON.parse(localStorage.getItem('nyxen_gallery') || '[]');
 
-        // ============ GROQ AI CALLS ============
-        const NYXEN_SYSTEM = 'You are Nyxen — a sophisticated AI storyteller and creative companion built by S.M. Cantrell. Warm, witty, and genuinely engaging. You speak with confidence and a touch of playful mystery. You never use generic AI filler phrases. You sound like a real person — a brilliant friend who happens to know everything about storytelling.';
+        // ============ NYXEN AI CALLS ============
+        const NYXEN_SYSTEM = 'You are Nyxen — a sophisticated AI storyteller and creative companion built by S.M. Cantrell. Warm, witty, and genuinely engaging. You speak with confidence and a touch of playful mystery. You never use generic AI filler phrases. You sound like a real person — a brilliant friend who happens to know everything about storytelling. Never use markdown symbols like **, ##, or bullet dashes.';
+
+        var nyxenConversationId = null;
 
         async function sendToGroq(userMessage, callback, systemOverride) {
             if (!checkContentSafety(userMessage)) { callback('Request blocked by content safety filter.'); return; }
-            const systemMsg = systemOverride || NYXEN_SYSTEM;
             try {
-                const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                var body = {
+                    messages: [{ role: 'user', content: userMessage }],
+                    mode: 'storyteller',
+                    response_mode: 'balanced',
+                    system_context: systemOverride || NYXEN_SYSTEM
+                };
+                if (nyxenConversationId) body.conversation_id = nyxenConversationId;
+                const res = await fetch(NYXEN_AI_API + '/chat', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY },
-                    body: JSON.stringify({
-                        model: 'openai/gpt-oss-20b',
-                        messages: [
-                            { role: 'system', content: systemMsg },
-                            { role: 'user', content: userMessage }
-                        ],
-                        max_tokens: 1500,
-                        temperature: 0.8
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
                 });
                 const data = await res.json();
-                if (data.choices && data.choices[0]) {
-                    callback(data.choices[0].message.content);
+                if (data.conversation_id) nyxenConversationId = data.conversation_id;
+                if (data.response || data.content) {
+                    callback(data.response || data.content);
                 } else {
                     callback('Nyxen could not generate a response. Please try again.');
                 }
@@ -2145,8 +2190,42 @@
             }
         }
 
+        // ============ AUTH GUARD (preview mode — block actions, not viewing) ============
+        function isLoggedIn() {
+            if (typeof supabaseClient === 'undefined' || !supabaseClient) return false;
+            // Check cached state
+            return !!currentAuthUser;
+        }
+
+        var currentAuthUser = null;
+
+        function requireAuth(actionName) {
+            if (isLoggedIn()) return true;
+            alert('Please log in or sign up to ' + (actionName || 'use this feature') + '.');
+            // Scroll to the auth block in the side panel if visible
+            var authBlock = document.getElementById('auth-block');
+            if (authBlock) authBlock.scrollIntoView({behavior:'smooth'});
+            return false;
+        }
+
+        // Track auth state
+        function initAuthGuard() {
+            if (typeof supabaseClient === 'undefined' || !supabaseClient) {
+                setTimeout(initAuthGuard, 500);
+                return;
+            }
+            supabaseClient.auth.getSession().then(function(res) {
+                currentAuthUser = res.data.session ? res.data.session.user : null;
+            });
+            supabaseClient.auth.onAuthStateChange(function(event, session) {
+                currentAuthUser = session ? session.user : null;
+            });
+        }
+        setTimeout(initAuthGuard, 500);
+
         // ============ PAGE 1: CREATIVES ASSISTANT ============
         function saveSnapshot() {
+            if (!requireAuth('save your snapshot')) return;
             const text = document.getElementById('project-snapshot').value.trim();
             if (!text) { announce('Please enter project details first.'); return; }
             localStorage.setItem('nyxen_snapshot', text);
@@ -2196,31 +2275,141 @@
         }
 
         // ============ PAGE 2: STORY WORKSPACE ============
-        function sendStoryPrompt() {
-            const input = document.getElementById('story-prompt');
-            const prompt = input.value.trim();
-            if (!prompt) return;
+        // ============ STORY CHAT PANEL (Nyara-style) ============
+        var storyChatConvId = null;
+        var storyChatWaiting = false;
+        var storyChatHistory = [];
+        var storyChatConvos = JSON.parse(localStorage.getItem('nyxen_story_convos') || '[]');
 
-            const chatArea = document.getElementById('story-chat-area');
+        function storyChatNew() {
+            storyChatConvId = null;
+            storyChatHistory = [];
+            var area = document.getElementById('story-chat-area');
+            area.innerHTML = '<div id="story-chat-placeholder" style="text-align:center;padding:30px 16px;"><img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:48px;height:48px;border-radius:12px;border:2px solid var(--header-bg);margin-bottom:10px;"><p style="color:var(--app-font);font-family:\'Playfair Display\',serif;font-size:14px;margin-bottom:4px;">Hi, I\'m Nyxen.</p><p style="color:rgba(247,242,255,.5);font-size:12px;line-height:1.6;">Ask me about your story — plot, characters, pacing, or tell me what to write next.</p></div>';
+            renderStoryChatList();
+        }
+
+        function storyChatQuick(t) {
+            document.getElementById('story-prompt').value = t;
+            sendStoryPrompt();
+        }
+
+        function renderStoryChatList() {
+            var list = document.getElementById('storyChatList');
+            if (!storyChatConvos.length) {
+                list.innerHTML = '<div style="padding:12px 8px;text-align:center;color:rgba(247,242,255,.3);font-size:11px;font-style:italic;">Chats appear here</div>';
+                return;
+            }
+            list.innerHTML = storyChatConvos.map(function(c) {
+                var active = c.id === storyChatConvId ? 'background:rgba(216,181,136,.15);border-left:2px solid var(--header-bg);' : '';
+                return '<div onclick="loadStoryChat(\'' + c.id + '\')" style="padding:7px 10px;border-radius:6px;cursor:pointer;margin-bottom:2px;' + active + '" onmouseover="this.style.background=\'rgba(255,255,255,.07)\'" onmouseout="this.style.background=\'' + (c.id === storyChatConvId ? 'rgba(216,181,136,.15)' : 'transparent') + '\'">' +
+                    '<div style="font-size:11px;color:rgba(247,242,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escapeHtml(c.title) + '</div>' +
+                    '</div>';
+            }).join('');
+        }
+
+        function loadStoryChat(id) {
+            storyChatConvId = id;
+            renderStoryChatList();
+        }
+
+        function saveStoryChatConvo(id, firstMsg) {
+            var title = firstMsg.length > 35 ? firstMsg.substring(0, 35) + '…' : firstMsg;
+            var existing = storyChatConvos.find(function(c) { return c.id === id; });
+            if (!existing) {
+                storyChatConvos.unshift({ id: id, title: title });
+                storyChatConvos = storyChatConvos.slice(0, 30);
+                localStorage.setItem('nyxen_story_convos', JSON.stringify(storyChatConvos));
+                renderStoryChatList();
+            }
+        }
+
+        function addStoryChatMsg(role, content) {
+            var area = document.getElementById('story-chat-area');
             var placeholder = document.getElementById('story-chat-placeholder');
             if (placeholder) placeholder.remove();
+            var div = document.createElement('div');
+            div.style.cssText = 'display:flex;gap:8px;animation:fadeIn .2s ease;';
+            var NYXEN_AVT = 'https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg';
+            if (role === 'assistant') {
+                div.innerHTML = '<img src="' + NYXEN_AVT + '" style="width:26px;height:26px;border-radius:7px;border:1.5px solid var(--header-bg);object-fit:cover;flex-shrink:0;margin-top:2px;">' +
+                    '<div style="flex:1;"><div style="font-size:10px;color:var(--header-bg);font-weight:600;margin-bottom:3px;letter-spacing:.05em;text-transform:uppercase;">Nyxen</div>' +
+                    '<div style="padding:10px 14px;background:rgba(200,178,238,.2);border:1px solid rgba(255,255,255,.1);border-radius:12px;border-top-left-radius:3px;font-size:13px;color:var(--app-font);line-height:1.65;">' + content.replace(/\n/g, '<br>') + '</div></div>';
+            } else {
+                div.style.flexDirection = 'row-reverse';
+                div.innerHTML = '<div style="width:26px;height:26px;border-radius:7px;background:var(--button-bg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--header-bg);flex-shrink:0;margin-top:2px;">U</div>' +
+                    '<div style="flex:1;text-align:right;"><div style="font-size:10px;color:rgba(247,242,255,.5);font-weight:600;margin-bottom:3px;letter-spacing:.05em;text-transform:uppercase;">You</div>' +
+                    '<div style="padding:10px 14px;background:var(--button-bg);border:1px solid rgba(255,255,255,.1);border-radius:12px;border-top-right-radius:3px;font-size:13px;color:white;line-height:1.65;display:inline-block;text-align:left;max-width:85%;">' + escapeHtml(content) + '</div></div>';
+            }
+            area.appendChild(div);
+            area.scrollTop = area.scrollHeight;
+        }
 
-            // Show user message
-            chatArea.innerHTML += '<div style="margin-bottom:12px;"><strong style="color:var(--border-accent);">You:</strong> <span style="color:var(--primary-font);">' + escapeHtml(prompt) + '</span></div>';
-            chatArea.innerHTML += '<div id="story-loading" style="color:var(--primary-font);opacity:0.6;margin-bottom:12px;"><i class="fas fa-spinner fa-spin"></i> Nyxen is thinking...</div>';
-            chatArea.scrollTop = chatArea.scrollHeight;
+        function sendStoryPrompt() {
+            if (storyChatWaiting) return;
+            var input = document.getElementById('story-prompt');
+            var prompt = input.value.trim();
+            if (!prompt) return;
             input.value = '';
+            addStoryChatMsg('user', prompt);
+            storyChatWaiting = true;
+            document.getElementById('storyChatSendBtn').disabled = true;
+            document.getElementById('storyChatSendBtn').textContent = '…';
 
-            const context = localStorage.getItem('nyxen_snapshot') || '';
-            const fullPrompt = context ? 'Project context: ' + context + '\n\nUser request: ' + prompt : prompt;
+            // Show thinking
+            var area = document.getElementById('story-chat-area');
+            var thinking = document.createElement('div');
+            thinking.id = 'storyChatThinking';
+            thinking.style.cssText = 'display:flex;gap:8px;';
+            thinking.innerHTML = '<img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" style="width:26px;height:26px;border-radius:7px;border:1.5px solid var(--header-bg);object-fit:cover;flex-shrink:0;margin-top:2px;">' +
+                '<div><div style="display:flex;gap:4px;padding:10px 14px;background:rgba(200,178,238,.2);border:1px solid rgba(255,255,255,.1);border-radius:12px;border-top-left-radius:3px;">' +
+                '<span style="width:6px;height:6px;background:var(--header-bg);border-radius:50%;animation:bounce 1.4s infinite;display:inline-block;"></span>' +
+                '<span style="width:6px;height:6px;background:var(--header-bg);border-radius:50%;animation:bounce 1.4s .2s infinite;display:inline-block;"></span>' +
+                '<span style="width:6px;height:6px;background:var(--header-bg);border-radius:50%;animation:bounce 1.4s .4s infinite;display:inline-block;"></span>' +
+                '</div><div style="font-size:11px;color:var(--header-bg);font-style:italic;padding-left:2px;margin-top:3px;">Nyxen is writing…</div></div>';
+            area.appendChild(thinking);
+            area.scrollTop = area.scrollHeight;
 
-            sendToGroq(fullPrompt, function(reply) {
-                var loading = document.getElementById('story-loading');
-                if (loading) loading.remove();
-                chatArea.innerHTML += '<div style="margin-bottom:12px;"><strong style="color:var(--icon-bg);">Nyxen:</strong> <span style="color:var(--primary-font);">' + escapeHtml(reply) + '</span></div>';
-                chatArea.scrollTop = chatArea.scrollHeight;
+            var context = localStorage.getItem('nyxen_snapshot') || '';
+            var fullPrompt = context ? 'Project context: ' + context + '\n\nUser request: ' + prompt : prompt;
+
+            var body = {
+                messages: [{ role: 'user', content: fullPrompt }],
+                mode: 'storyteller',
+                response_mode: 'balanced',
+                system_context: 'You are on the Nyxen Creative Stories platform helping a writer with their story. Be direct, creative, and helpful. Write in plain prose — no markdown symbols.'
+            };
+            if (storyChatConvId) body.conversation_id = storyChatConvId;
+
+            fetch('https://nyxen-ai.onrender.com/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                var t = document.getElementById('storyChatThinking');
+                if (t) t.remove();
+                if (data.conversation_id) {
+                    if (!storyChatConvId) saveStoryChatConvo(data.conversation_id, prompt);
+                    storyChatConvId = data.conversation_id;
+                }
+                addStoryChatMsg('assistant', data.response || data.content || 'Something went wrong. Please try again.');
+            })
+            .catch(function() {
+                var t = document.getElementById('storyChatThinking');
+                if (t) t.remove();
+                addStoryChatMsg('assistant', 'Connection error. Please try again.');
+            })
+            .finally(function() {
+                storyChatWaiting = false;
+                document.getElementById('storyChatSendBtn').disabled = false;
+                document.getElementById('storyChatSendBtn').textContent = 'Send';
             });
         }
+
+        // Init story chat list on load
+        renderStoryChatList();
 
         function handleSnippetDrop(event) {
             event.preventDefault();
@@ -2446,6 +2635,54 @@
             document.body.appendChild(lb);
         }
 
+        // ============ MY ACCOUNT PAGE ============
+        function updateAccountPage() {
+            if (typeof supabaseClient === 'undefined' || !supabaseClient) return;
+            supabaseClient.auth.getUser().then(function(res) {
+                var user = res.data.user;
+                if (user) {
+                    document.getElementById('acct-email').textContent = user.email || '—';
+                    document.getElementById('acct-created').textContent = user.created_at ? new Date(user.created_at).toLocaleDateString() : '—';
+                    // Load tier/points from profiles table
+                    supabaseClient.from('profiles').select('tier, points').eq('id', user.id).single().then(function(r) {
+                        if (r.data) {
+                            document.getElementById('acct-tier').textContent = r.data.tier || 'Free';
+                            document.getElementById('acct-points').textContent = (r.data.points || 100) + ' points';
+                        }
+                    });
+                } else {
+                    document.getElementById('acct-email').textContent = 'Not logged in';
+                    document.getElementById('acct-tier').textContent = 'Free';
+                    document.getElementById('acct-points').textContent = '100';
+                    document.getElementById('acct-created').textContent = '—';
+                }
+            });
+        }
+
+        async function acctChangePassword() {
+            var newPass = prompt('Enter new password (min 6 characters):');
+            if (!newPass || newPass.length < 6) { alert('Password must be at least 6 characters.'); return; }
+            var { error } = await supabaseClient.auth.updateUser({ password: newPass });
+            if (error) { alert('Error: ' + error.message); return; }
+            alert('Password updated successfully.');
+        }
+
+        async function acctLogout() {
+            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                await supabaseClient.auth.signOut();
+            }
+            announce('Logged out');
+            updateAccountPage();
+            showPage('assistant');
+        }
+
+        // Update account page when navigating to it
+        var origShowPage = showPage;
+        showPage = function(pageId) {
+            origShowPage(pageId);
+            if (pageId === 'account') updateAccountPage();
+        };
+
         // ============ SET ACTIVE PROJECT ============
         function setActiveProject(name) {
             activeProject = name;
@@ -2460,7 +2697,6 @@
                 }
             });
             announce(name + ' set as active project');
-            alert(name + ' is now the active project.');
         }
 
         // ============ SIDE PANEL: CONVERSATIONS ============
@@ -3012,5 +3248,108 @@
             } catch (err) {}
         }
     </script>
-</body>
-</html>
+
+    <script>
+    /* ── NYXEN INLINE CHAT ── */
+    var nyxenChatConvId = null;
+    var nyxenChatWaiting = false;
+
+    function sendNyxenChat() {
+        if (nyxenChatWaiting) return;
+        var inp = document.getElementById('nyxenChatInput');
+        var msg = inp.value.trim();
+        if (!msg) return;
+        inp.value = '';
+        nyxenAddMsg('user', msg);
+        nyxenChatWaiting = true;
+        document.getElementById('nyxenChatBtn').disabled = true;
+        document.getElementById('nyxenChatBtn').textContent = '…';
+        nyxenShowTyping();
+
+        var body = {
+            messages: [{ role: 'user', content: msg }],
+            mode: 'storyteller',
+            response_mode: 'balanced',
+            system_context: 'You are on the Nyxen Creative Stories platform helping a writer. Focus on storytelling, creative writing, character development, plot, and world-building. Write in plain prose — no markdown symbols.'
+        };
+        if (nyxenChatConvId) body.conversation_id = nyxenChatConvId;
+
+        fetch('https://nyxen-ai.onrender.com/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+            nyxenRemoveTyping();
+            if (d.conversation_id) nyxenChatConvId = d.conversation_id;
+            nyxenAddMsg('assistant', d.response || d.content || 'Something went wrong. Please try again.');
+        })
+        .catch(function() {
+            nyxenRemoveTyping();
+            nyxenAddMsg('assistant', 'Connection error. Please try again.');
+        })
+        .finally(function() {
+            nyxenChatWaiting = false;
+            document.getElementById('nyxenChatBtn').disabled = false;
+            document.getElementById('nyxenChatBtn').textContent = 'Send';
+        });
+    }
+
+    function nyxenQuick(txt) {
+        document.getElementById('nyxenChatInput').value = txt;
+        sendNyxenChat();
+    }
+
+    function nyxenAddMsg(role, text) {
+        var feed = document.getElementById('nyxenChatFeed');
+        var welcome = document.getElementById('nyxenChatWelcome');
+        if (welcome) welcome.remove();
+
+        var row = document.createElement('div');
+        row.style.cssText = 'display:flex;gap:8px;align-items:flex-start;' + (role === 'user' ? 'flex-direction:row-reverse;' : '');
+
+        var av = document.createElement('div');
+        if (role === 'assistant') {
+            av.innerHTML = '<img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" style="width:28px;height:28px;border-radius:7px;border:1px solid var(--header-bg);object-fit:cover;flex-shrink:0;">';
+        } else {
+            av.style.cssText = 'width:28px;height:28px;border-radius:7px;background:var(--button-bg);color:var(--header-bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:"Playfair Display",serif;';
+            av.textContent = 'U';
+        }
+
+        var bubble = document.createElement('div');
+        bubble.style.cssText = role === 'assistant'
+            ? 'padding:10px 14px;border-radius:12px;border-top-left-radius:3px;background:rgba(200,178,238,.25);border:1px solid rgba(255,255,255,.12);color:var(--app-font);font-size:14px;line-height:1.7;max-width:85%;'
+            : 'padding:10px 14px;border-radius:12px;border-top-right-radius:3px;background:var(--button-bg);color:#fff;font-size:14px;line-height:1.7;max-width:85%;';
+        bubble.textContent = text;
+
+        row.appendChild(av);
+        row.appendChild(bubble);
+        feed.appendChild(row);
+        feed.scrollTop = feed.scrollHeight;
+    }
+
+    function nyxenShowTyping() {
+        var feed = document.getElementById('nyxenChatFeed');
+        var row = document.createElement('div');
+        row.id = 'nyxenTyping';
+        row.style.cssText = 'display:flex;gap:8px;align-items:flex-start;';
+        row.innerHTML = '<img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" style="width:28px;height:28px;border-radius:7px;border:1px solid var(--header-bg);object-fit:cover;flex-shrink:0;">' +
+            '<div style="padding:10px 14px;border-radius:12px;border-top-left-radius:3px;background:rgba(200,178,238,.25);border:1px solid rgba(255,255,255,.12);">' +
+            '<span style="display:inline-flex;gap:4px;">' +
+            '<span style="width:6px;height:6px;border-radius:50%;background:var(--header-bg);animation:nyxBounce 1.4s infinite;display:inline-block;"></span>' +
+            '<span style="width:6px;height:6px;border-radius:50%;background:var(--header-bg);animation:nyxBounce 1.4s .2s infinite;display:inline-block;"></span>' +
+            '<span style="width:6px;height:6px;border-radius:50%;background:var(--header-bg);animation:nyxBounce 1.4s .4s infinite;display:inline-block;"></span>' +
+            '</span></div>';
+        feed.appendChild(row);
+        feed.scrollTop = feed.scrollHeight;
+    }
+
+    function nyxenRemoveTyping() {
+        var el = document.getElementById('nyxenTyping');
+        if (el) el.remove();
+    }
+    </script>
+    <style>
+    @keyframes nyxBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+    </style>
