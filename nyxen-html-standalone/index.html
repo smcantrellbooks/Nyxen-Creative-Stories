@@ -65,10 +65,10 @@
             border: 0;
         }
 
-        /* Ensure sufficient color contrast for text */
         .high-contrast-text {
             color: #1a1a1a;
         }
+
         :root {
             --gradient-start: #b8966a;
             --gradient-end: #662a69;
@@ -215,61 +215,6 @@
             padding: 24px;
             overflow-y: auto;
             overflow-x: hidden;
-        }
-
-        /* Side Panel */
-        .side-panel {
-            width: 320px;
-            flex-shrink: 0;
-            background: var(--card-bg);
-            border-left: 2px solid var(--border-accent);
-            display: flex;
-            flex-direction: column;
-            position: sticky;
-            top: 130px;
-            height: calc(100vh - 130px);
-            align-self: flex-start;
-        }
-
-        .side-panel-header {
-            padding: 16px;
-            border-bottom: 2px solid var(--border-accent);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .side-panel-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            color: var(--primary-font);
-        }
-
-        .side-panel-tabs {
-            display: flex;
-            border-bottom: 2px solid var(--border-accent);
-        }
-
-        .side-tab {
-            flex: 1;
-            padding: 12px;
-            background: transparent;
-            border: none;
-            color: var(--primary-font);
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .side-tab.active {
-            background: var(--header-bg);
-            font-weight: 600;
-        }
-
-        .side-panel-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
         }
 
         /* Pages */
@@ -431,126 +376,6 @@
             color: var(--border-accent);
         }
 
-        /* Chapter Tabs */
-        .act-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .act-tab {
-            padding: 8px 16px;
-            background: var(--header-bg);
-            border: 2px solid var(--border-accent);
-            border-radius: 6px;
-            color: var(--primary-font);
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .act-tab.active {
-            background: var(--button-bg);
-            color: var(--button-text);
-        }
-
-        /* Checklist */
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: var(--header-bg);
-            border-radius: 6px;
-            margin-bottom: 8px;
-            color: var(--primary-font);
-        }
-
-        .checklist-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--border-accent);
-        }
-
-        /* Author Card */
-        .author-card {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: var(--header-bg);
-            border-radius: 6px;
-            margin-bottom: 8px;
-        }
-
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--icon-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--icon-color);
-        }
-
-        .author-info h4 {
-            color: var(--primary-font);
-            font-size: 14px;
-        }
-
-        .author-info p {
-            color: var(--primary-font);
-            opacity: 0.7;
-            font-size: 12px;
-        }
-
-        /* Project Card */
-        .project-card {
-            background: var(--header-bg);
-            border: 2px solid var(--border-accent);
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .project-card h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary-font);
-            margin-bottom: 8px;
-        }
-
-        .project-card p {
-            font-size: 13px;
-            color: var(--primary-font);
-            opacity: 0.8;
-            margin-bottom: 12px;
-        }
-
-        /* Conversation Item */
-        .conversation-item {
-            padding: 12px;
-            background: var(--header-bg);
-            border-radius: 6px;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-
-        .conversation-item:hover {
-            background: rgba(216, 181, 136, 0.8);
-        }
-
-        .conversation-item h4 {
-            color: var(--primary-font);
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .conversation-item p {
-            color: var(--primary-font);
-            opacity: 0.7;
-            font-size: 12px;
-        }
-
         /* Gallery Grid */
         .gallery-grid {
             display: grid;
@@ -630,64 +455,32 @@
             margin: 12px 0;
         }
 
-        /* Auth Block in Side Panel */
-        .auth-block {
-            padding: 16px;
-            border-top: 2px solid var(--border-accent);
-            background: rgba(50, 24, 96, 0.15);
-        }
-
-        .auth-block-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 15px;
-            color: var(--primary-font);
-            margin-bottom: 12px;
-        }
-
-        .auth-form .form-group {
-            margin-bottom: 10px;
-        }
-
-        .auth-form .form-input {
-            padding: 10px;
-            font-size: 13px;
-        }
-
-        .auth-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .auth-actions .btn {
-            flex: 1;
-            justify-content: center;
-            font-size: 13px;
-            padding: 9px 12px;
-        }
-
-        .auth-toggle-link {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
+        /* Auth styles */
+        .auth-error {
             font-size: 12px;
-            color: var(--border-accent);
-            cursor: pointer;
-            text-decoration: underline;
-            background: none;
-            border: none;
-            font-family: 'Outfit', sans-serif;
+            color: #b91c1c;
+            background: rgba(185, 28, 28, 0.1);
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: none;
         }
 
-        .auth-toggle-link:hover {
-            color: var(--button-bg);
+        .auth-success {
+            font-size: 12px;
+            color: #15803d;
+            background: rgba(21, 128, 61, 0.1);
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: none;
         }
 
         .auth-divider {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin: 12px 0;
+            margin: 16px 0;
         }
 
         .auth-divider::before,
@@ -728,59 +521,69 @@
             flex-shrink: 0;
         }
 
-        .auth-user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: var(--header-bg);
-            border-radius: 6px;
+        /* Publishing pathway */
+        .publish-pathway {
+            background: rgba(50, 24, 96, 0.12);
+            border: 1.5px solid rgba(50, 24, 96, 0.25);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 16px;
+        }
+
+        .publish-pathway h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-font);
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .publish-pathway p {
+            font-size: 13px;
+            color: var(--primary-font);
+            opacity: 0.8;
+            line-height: 1.6;
             margin-bottom: 10px;
         }
 
-        .auth-user-avatar {
-            width: 36px;
-            height: 36px;
-            background: var(--icon-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--icon-color);
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .auth-user-email {
+        .publish-pathway ol {
             font-size: 13px;
             color: var(--primary-font);
-            word-break: break-all;
-            line-height: 1.3;
+            opacity: 0.8;
+            line-height: 1.8;
+            padding-left: 20px;
+            margin-bottom: 12px;
         }
 
-        .auth-error {
-            font-size: 12px;
-            color: #b91c1c;
-            background: rgba(185, 28, 28, 0.1);
-            padding: 8px 10px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            display: none;
+        /* Story setup panel */
+        .story-setup {
+            background: var(--header-bg);
+            border: 2px solid var(--border-accent);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 16px;
         }
 
-        .auth-success {
-            font-size: 12px;
-            color: #15803d;
-            background: rgba(21, 128, 61, 0.1);
-            padding: 8px 10px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            display: none;
+        .story-setup h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-font);
+            font-size: 16px;
+            margin-bottom: 12px;
         }
+
+        .story-setup .form-group {
+            margin-bottom: 12px;
+        }
+
+        .story-setup .form-label {
+            font-size: 13px;
+        }
+
+        /* Visual Studio mode panels */
+        .vs-panel { display: none; }
+        .vs-panel.active { display: block; }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .side-panel { display: none; }
             .mode-selector { grid-template-columns: repeat(2, 1fr); }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
@@ -825,29 +628,17 @@
 
     <!-- Tab Navigation -->
     <nav class="tab-nav" id="app-tab-nav" role="tablist" aria-label="Main navigation">
-        <button class="tab-btn active" data-page="assistant" onclick="showPage('assistant')" role="tab" aria-selected="true" aria-controls="page-assistant" id="tab-assistant">
-            <i class="fas fa-comments" aria-hidden="true"></i> <span>Creatives Assistant</span>
+        <button class="tab-btn active" data-page="nyxen" onclick="showPage('nyxen')" role="tab" aria-selected="true" aria-controls="page-nyxen" id="tab-nyxen">
+            <i class="fas fa-feather-alt" aria-hidden="true"></i> <span>Nyxen</span>
         </button>
-        <button class="tab-btn" data-page="story-workspace" onclick="showPage('story-workspace')" role="tab" aria-selected="false" aria-controls="page-story-workspace" id="tab-story-workspace">
-            <i class="fas fa-pen-fancy" aria-hidden="true"></i> <span>Story Workspace</span>
-        </button>
-        <button class="tab-btn" data-page="drafting" onclick="showPage('drafting')" role="tab" aria-selected="false" aria-controls="page-drafting" id="tab-drafting">
-            <i class="fas fa-file-alt" aria-hidden="true"></i> <span>Drafting</span>
-        </button>
-        <button class="tab-btn" data-page="editing" onclick="showPage('editing')" role="tab" aria-selected="false" aria-controls="page-editing" id="tab-editing">
-            <i class="fas fa-edit" aria-hidden="true"></i> <span>Edit Mode</span>
-        </button>
-        <button class="tab-btn" data-page="publishing" onclick="showPage('publishing')" role="tab" aria-selected="false" aria-controls="page-publishing" id="tab-publishing">
-            <i class="fas fa-book-open" aria-hidden="true"></i> <span>Publishing</span>
-        </button>
-        <button class="tab-btn" data-page="image-studio" onclick="showPage('image-studio')" role="tab" aria-selected="false" aria-controls="page-image-studio" id="tab-image-studio">
-            <i class="fas fa-image" aria-hidden="true"></i> <span>Image Studio</span>
+        <button class="tab-btn" data-page="visual-studio" onclick="showPage('visual-studio')" role="tab" aria-selected="false" aria-controls="page-visual-studio" id="tab-visual-studio">
+            <i class="fas fa-palette" aria-hidden="true"></i> <span>Visual Studio</span>
         </button>
         <button class="tab-btn" data-page="membership" onclick="showPage('membership')" role="tab" aria-selected="false" aria-controls="page-membership" id="tab-membership">
             <i class="fas fa-crown" aria-hidden="true"></i> <span>Membership</span>
         </button>
         <button class="tab-btn" data-page="account" onclick="showPage('account')" role="tab" aria-selected="false" aria-controls="page-account" id="tab-account">
-            <i class="fas fa-user-circle" aria-hidden="true"></i> <span>My Account</span>
+            <i class="fas fa-user-circle" aria-hidden="true"></i> <span>Account</span>
         </button>
         <button class="tab-btn" data-page="disclosures" onclick="showPage('disclosures')" role="tab" aria-selected="false" aria-controls="page-disclosures" id="tab-disclosures">
             <i class="fas fa-shield-alt" aria-hidden="true"></i> <span>Disclosures</span>
@@ -856,81 +647,19 @@
 
     <!-- Main Container -->
     <div class="main-container" id="app-main">
-        <!-- Main Content Area -->
         <main class="main-content" id="main-content" role="main">
-            <!-- Page 1: Creatives Assistant Chat -->
-            <section class="page active" id="page-assistant" role="tabpanel" aria-labelledby="tab-assistant">
-                <header class="page-header">
-                    <h1 class="font-serif">Creatives Assistant</h1>
-                    <p>Your AI-powered creative companion for storytelling</p>
-                </header>
 
-                <!-- Generation Mode Selector -->
-                <fieldset class="mode-selector" role="radiogroup" aria-label="Select generation mode">
-                    <legend class="sr-only">Generation Mode</legend>
-                    <div class="mode-card active" onclick="selectMode(this, 'story')" role="radio" aria-checked="true" tabindex="0" onkeypress="handleModeKeypress(event, this, 'story')">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                        <span>Story Generation</span>
-                    </div>
-                    <div class="mode-card" onclick="selectMode(this, 'image')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'image')">
-                        <i class="fas fa-image" aria-hidden="true"></i>
-                        <span>Image Generation</span>
-                    </div>
-                    <div class="mode-card" onclick="selectMode(this, 'text-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'text-video')">
-                        <i class="fas fa-video" aria-hidden="true"></i>
-                        <span>Text to Video</span>
-                    </div>
-                    <div class="mode-card" onclick="selectMode(this, 'image-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'image-video')">
-                        <i class="fas fa-film" aria-hidden="true"></i>
-                        <span>Image to Video</span>
-                    </div>
-                </fieldset>
+            <!-- ============================================================ -->
+            <!-- PAGE: NYXEN (Writing Assistant) -->
+            <!-- ============================================================ -->
+            <section class="page active" id="page-nyxen" role="tabpanel" aria-labelledby="tab-nyxen">
 
-                <div class="grid-2">
-                    <!-- Project Snapshot -->
-                    <article class="card" aria-labelledby="snapshot-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="snapshot-title">Project Snapshot</h2>
-                            <button class="btn btn-secondary" onclick="saveSnapshot()" aria-label="Save project snapshot" data-testid="save-snapshot-btn">Save Snapshot</button>
-                        </div>
-                        <div class="form-group">
-                            <label for="project-snapshot" class="sr-only">Project details</label>
-                            <textarea id="project-snapshot" class="form-textarea" placeholder="Genre, audience, premise, protagonist, worldbuilding, structure, current chapter draft status..." aria-describedby="snapshot-note"></textarea>
-                        </div>
-                        <div class="note-box" id="snapshot-note" role="note">
-                            Keep brief notes about your project so Nyxen stays consistent across the conversation.
-                        </div>
-                    </article>
-
-                    <!-- Documents & Pasted Text -->
-                    <article class="card" aria-labelledby="documents-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="documents-title">Documents &amp; Pasted Text</h2>
-                        </div>
-                        <div class="form-group">
-                            <label for="file-upload" class="sr-only">Upload document</label>
-                            <button class="btn btn-secondary" style="width: 100%;" onclick="document.getElementById('file-upload').click()" aria-label="Choose file to upload" data-testid="choose-file-btn">
-                                <i class="fas fa-upload" aria-hidden="true"></i> Choose File
-                            </button>
-                            <input type="file" id="file-upload" class="sr-only" accept=".txt,.doc,.docx,.pdf" onchange="handleFileUpload(event)" aria-describedby="upload-note">
-                        </div>
-                        <div class="form-group">
-                            <label for="paste-text" class="sr-only">Paste text</label>
-                            <textarea id="paste-text" class="form-textarea" placeholder="Paste text here..."></textarea>
-                        </div>
-                        <button class="btn btn-primary" onclick="importPastedText()" aria-label="Import pasted text into session" data-testid="import-paste-btn">Import Pasted Text</button>
-                        <div class="note-box" id="upload-note" role="note">
-                            I can summarise and reference them during the session, but I do not store files after the session ends.
-                        </div>
-                    </article>
-                </div>
-
-                <!-- Nyxen Chat -->
+                <!-- Nyxen Chat (full width, primary experience) -->
                 <article class="card" aria-labelledby="conversation-title" style="padding:0;overflow:hidden;border-radius:12px;">
-                  <div style="display:flex;height:560px;">
+                  <div style="display:flex;height:620px;">
 
-                    <!-- Sidebar -->
-                    <div style="width:220px;flex-shrink:0;background:#2D1249;display:flex;flex-direction:column;">
+                    <!-- Sidebar: conversations + story setup -->
+                    <div style="width:260px;flex-shrink:0;background:#2D1249;display:flex;flex-direction:column;">
                       <div style="padding:16px 14px 12px;border-bottom:1px solid rgba(255,255,255,.1);">
                         <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
                           <img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:36px;height:36px;border-radius:9px;border:2px solid #d8b588;object-fit:cover;">
@@ -941,47 +670,99 @@
                         </div>
                         <button onclick="nyxenNewChat()" style="width:100%;padding:8px;background:#d8b588;color:#2D1249;border:none;border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">+ New Chat</button>
                       </div>
+
+                      <!-- Story Setup (collapsible) -->
+                      <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.1);">
+                        <button onclick="toggleStorySetup()" id="storySetupToggle" style="width:100%;padding:7px 10px;background:rgba(216,181,136,.15);color:#d8b588;border:1px solid rgba(216,181,136,.3);border-radius:6px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+                          <span><i class="fas fa-book-open" style="margin-right:6px;"></i> Story Setup</span>
+                          <i class="fas fa-chevron-down" id="storySetupArrow" style="font-size:10px;transition:transform .2s;"></i>
+                        </button>
+                        <div id="storySetupPanel" style="display:none;margin-top:10px;">
+                          <div style="margin-bottom:8px;">
+                            <label style="font-size:11px;color:rgba(255,255,255,.5);display:block;margin-bottom:3px;">Genre *</label>
+                            <select id="setup-genre" style="width:100%;padding:6px 8px;background:#412A69;border:1px solid rgba(216,181,136,.3);border-radius:5px;color:#d8b588;font-family:'Outfit',sans-serif;font-size:12px;">
+                              <option value="">Select genre...</option>
+                              <option value="Romance">Romance</option>
+                              <option value="Fantasy">Fantasy</option>
+                              <option value="Thriller">Thriller</option>
+                              <option value="Mystery">Mystery</option>
+                              <option value="Sci-Fi">Sci-Fi</option>
+                              <option value="Drama">Drama</option>
+                              <option value="Horror">Horror</option>
+                              <option value="Literary Fiction">Literary Fiction</option>
+                              <option value="Young Adult">Young Adult</option>
+                              <option value="Poetry">Poetry</option>
+                            </select>
+                          </div>
+                          <div style="margin-bottom:8px;">
+                            <label style="font-size:11px;color:rgba(255,255,255,.5);display:block;margin-bottom:3px;">Tone (optional)</label>
+                            <input id="setup-tone" type="text" placeholder="e.g. Dark, Lighthearted, Witty" style="width:100%;padding:6px 8px;background:#412A69;border:1px solid rgba(216,181,136,.3);border-radius:5px;color:#d8b588;font-family:'Outfit',sans-serif;font-size:12px;">
+                          </div>
+                          <div style="margin-bottom:8px;">
+                            <label style="font-size:11px;color:rgba(255,255,255,.5);display:block;margin-bottom:3px;">Audience (optional)</label>
+                            <input id="setup-audience" type="text" placeholder="e.g. Young Adult, Adult" style="width:100%;padding:6px 8px;background:#412A69;border:1px solid rgba(216,181,136,.3);border-radius:5px;color:#d8b588;font-family:'Outfit',sans-serif;font-size:12px;">
+                          </div>
+                          <div style="margin-bottom:8px;">
+                            <label style="font-size:11px;color:rgba(255,255,255,.5);display:block;margin-bottom:3px;">Writing Style (optional)</label>
+                            <input id="setup-style" type="text" placeholder="e.g. Descriptive, Minimalist" style="width:100%;padding:6px 8px;background:#412A69;border:1px solid rgba(216,181,136,.3);border-radius:5px;color:#d8b588;font-family:'Outfit',sans-serif;font-size:12px;">
+                          </div>
+                          <button onclick="applyStorySetup()" style="width:100%;padding:6px;background:#d8b588;color:#2D1249;border:none;border-radius:5px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;margin-top:2px;">Apply to Chat</button>
+                          <div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;text-align:center;">Soft limit: 60,000 words per project</div>
+                        </div>
+                      </div>
+
+                      <!-- Conversation list -->
                       <div id="nyxenConvoList" style="flex:1;overflow-y:auto;padding:8px;">
                         <div style="padding:16px 8px;text-align:center;color:rgba(255,255,255,.3);font-size:12px;font-style:italic;">Your chats appear here</div>
                       </div>
+
+                      <!-- Publishing Pathway (soft prompt at bottom of sidebar) -->
+                      <div style="padding:12px 14px;border-top:1px solid rgba(255,255,255,.1);background:rgba(216,181,136,.08);">
+                        <div style="font-family:'Playfair Display',serif;font-size:12px;color:#d8b588;margin-bottom:6px;">Ready to publish?</div>
+                        <p style="font-size:11px;color:rgba(255,255,255,.45);line-height:1.5;margin-bottom:8px;">Turn your story into a published book through S.M. Cantrell Books when you are ready.</p>
+                        <a href="https://smcantrellbooks.com/join" target="_blank" style="display:block;padding:6px;background:rgba(216,181,136,.15);border:1px solid rgba(216,181,136,.3);border-radius:5px;text-align:center;color:#d8b588;font-size:11px;font-weight:600;text-decoration:none;font-family:'Outfit',sans-serif;">Continue to Publishing</a>
+                      </div>
                     </div>
 
-                    <!-- Main chat -->
+                    <!-- Main chat area -->
                     <div style="flex:1;display:flex;flex-direction:column;min-width:0;background:#fff;">
                       <!-- Header -->
                       <div style="padding:12px 18px;background:#f5f0fb;border-bottom:1px solid #e0d8ed;display:flex;align-items:center;gap:10px;">
                         <h2 class="card-title" id="conversation-title" style="font-size:16px;color:#2D1249;margin:0;">Conversation with Nyxen</h2>
                       </div>
+
                       <!-- Messages -->
                       <div id="nyxenChatFeed" style="flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;background:#fafafa;">
                         <div id="nyxenChatWelcome" style="text-align:center;padding:40px 20px;">
                           <img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:64px;height:64px;border-radius:16px;border:3px solid #d8b588;margin-bottom:14px;">
                           <p style="color:#1a1a1a;font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin-bottom:8px;">Hi, I'm Nyxen.</p>
-                          <p style="color:#555;font-size:16px;line-height:1.7;max-width:380px;margin:0 auto;">Your AI storytelling companion. Ask me anything about your story — characters, plot, pacing, or just tell me what to write next.</p>
+                          <p style="color:#555;font-size:16px;line-height:1.7;max-width:420px;margin:0 auto;">Your AI storytelling companion. I can help you write stories, chapters, scenes, dialogue, poetry, and more. Pick a quick action below or just tell me what you want to create.</p>
                         </div>
                       </div>
-                      <!-- Quick buttons -->
+
+                      <!-- Quick action buttons -->
                       <div style="padding:10px 18px 0;background:#fff;border-top:1px solid #eee;display:flex;gap:8px;flex-wrap:wrap;">
-                        <button onclick="nyxenQuick('Continue writing the next scene')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">✦ Continue writing</button>
-                        <button onclick="nyxenQuick('Give me a plot twist idea')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">⚡ Plot twist</button>
-                        <button onclick="nyxenQuick('Develop my main character')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">🧬 Character</button>
-                        <button onclick="nyxenQuick('Review my writing and suggest improvements')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">📝 Review</button>
+                        <button onclick="nyxenQuick('Write a poem about a theme I describe')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">&#x270D; Write Poem</button>
+                        <button onclick="nyxenQuick('Help me start a new story. Ask me about the genre, characters, and setting.')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">&#x2728; Start Story</button>
+                        <button onclick="nyxenQuick('Help me develop and write a scene. Ask me what the scene should contain.')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">&#x1F3AC; Develop Scene</button>
+                        <button onclick="nyxenQuick('Help me create a character. Ask me questions to develop them.')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">&#x1F9EC; Create Character</button>
                       </div>
-                      <!-- Input -->
+
+                      <!-- Input area -->
                       <div style="padding:12px 18px 16px;background:#fff;border-top:1px solid #eee;">
                         <!-- File preview -->
-                        <div id="nyxenFilePreview" style="display:none;padding:8px 12px;background:#f0e6f5;border-radius:8px;margin-bottom:8px;display:none;align-items:center;gap:8px;font-size:13px;color:#5C2D6E;border:1px solid #d0b8e8;">
-                          <span style="font-size:16px;">📄</span>
+                        <div id="nyxenFilePreview" style="display:none;padding:8px 12px;background:#f0e6f5;border-radius:8px;margin-bottom:8px;align-items:center;gap:8px;font-size:13px;color:#5C2D6E;border:1px solid #d0b8e8;">
+                          <span style="font-size:16px;">&#x1F4C4;</span>
                           <span id="nyxenFileName" style="flex:1;font-weight:500;"></span>
-                          <button onclick="nyxenClearFile()" style="background:none;border:none;color:#8B5CA8;cursor:pointer;font-size:18px;padding:0;line-height:1;">✕</button>
+                          <button onclick="nyxenClearFile()" style="background:none;border:none;color:#8B5CA8;cursor:pointer;font-size:18px;padding:0;line-height:1;">&#x2715;</button>
                         </div>
                         <div style="display:flex;gap:8px;align-items:flex-end;">
-                          <!-- + Upload button -->
+                          <!-- Upload button -->
                           <button onclick="document.getElementById('nyxenFileInput').click()" title="Upload .docx for review"
                             style="width:42px;height:42px;flex-shrink:0;background:#f5f0fb;border:2px solid #d0c4e0;border-radius:10px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;color:#5C2D6E;"
                             onmouseover="this.style.borderColor='#8B5CA8';this.style.background='#f0e6f5'" onmouseout="this.style.borderColor='#d0c4e0';this.style.background='#f5f0fb'">+</button>
                           <input type="file" id="nyxenFileInput" accept=".docx" style="display:none;" onchange="nyxenHandleFile(event)">
-                          <textarea id="nyxenChatInput" placeholder="Ask Nyxen anything about your story…" rows="2"
+                          <textarea id="nyxenChatInput" placeholder="Ask Nyxen anything about your story..." rows="2"
                             style="flex:1;padding:12px 16px;border-radius:10px;border:2px solid #d0c4e0;background:#fff;color:#1a1a1a;font-family:'Outfit',sans-serif;font-size:15px;outline:none;resize:none;line-height:1.5;transition:border-color .2s;"
                             onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendNyxenChat();}"
                             onfocus="this.style.borderColor='#8B5CA8'"
@@ -990,601 +771,310 @@
                             style="padding:12px 22px;background:#2D1249;color:#d8b588;border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .2s;"
                             onmouseover="this.style.background='#412A69'" onmouseout="this.style.background='#2D1249'">Send</button>
                         </div>
-                        <div style="font-size:12px;color:#999;margin-top:6px;padding-left:2px;">Enter to send · Shift+Enter for new line · <span style="color:#8B5CA8;">+ to upload .docx for review</span></div>
+                        <div style="font-size:12px;color:#999;margin-top:6px;padding-left:2px;">Enter to send &middot; Shift+Enter for new line &middot; <span style="color:#8B5CA8;">+ to upload .docx for review</span></div>
                       </div>
                     </div>
 
                   </div>
                 </article>
 
-            </section>
-
-            <!-- Page 2: Story Generation Workspace -->
-            <section class="page" id="page-story-workspace" role="tabpanel" aria-labelledby="tab-story-workspace">
-                <header class="page-header">
-                    <h1 class="font-serif">Story Generation Workspace</h1>
-                    <p>Craft your narrative with AI assistance</p>
-                </header>
-
-                <div class="grid-2">
-
-                    <!-- Chapters and Scenes -->
-                    <article class="card" aria-labelledby="chapters-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="chapters-title">Chapters and Scenes</h2>
-                        </div>
-                        <div class="act-tabs" role="tablist" aria-label="Story acts">
-                            <button class="act-tab active" role="tab" aria-selected="true" aria-controls="act1-content" id="act1-tab">Act I</button>
-                            <button class="act-tab" role="tab" aria-selected="false" aria-controls="act2-content" id="act2-tab">Act II</button>
-                            <button class="act-tab" role="tab" aria-selected="false" aria-controls="act3-content" id="act3-tab">Act III</button>
-                        </div>
-                        <div id="act1-content" role="tabpanel" aria-labelledby="act1-tab" style="min-height: 200px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
-                            <p style="color: var(--primary-font); opacity: 0.6;">Manage structure, outlines, and scene notes here.</p>
-                        </div>
-                    </article>
+                <!-- Publishing Pathway (below chat, soft and optional) -->
+                <div class="publish-pathway">
+                    <h4><i class="fas fa-book-open" aria-hidden="true" style="margin-right:6px;"></i> Publish Your Story</h4>
+                    <p>You can turn your story into a published book through S.M. Cantrell Books. When you are ready, you can move your work from this creative space into the full publishing platform.</p>
+                    <ol>
+                        <li>Finish your draft inside Nyxen</li>
+                        <li>Review and refine your content</li>
+                        <li>Export or prepare your manuscript</li>
+                        <li>Join the main platform (S.M. Cantrell Books)</li>
+                        <li>Upload and publish your work</li>
+                    </ol>
+                    <a href="https://smcantrellbooks.com/join" target="_blank" class="btn btn-secondary" style="font-size:13px;padding:8px 16px;">
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> Join to Publish
+                    </a>
                 </div>
 
-                <!-- Collected Snippets -->
-                <article class="card" aria-labelledby="snippets-title">
-                    <div class="card-header">
-                        <h2 class="card-title" id="snippets-title">Collected Snippets</h2>
-                    </div>
-                    <div style="min-height: 150px; background: var(--header-bg); border-radius: 6px; padding: 16px; border: 2px dashed var(--border-accent);" role="region" aria-label="Snippet drop zone" tabindex="0" id="snippet-zone" ondragover="event.preventDefault(); this.style.borderColor='var(--button-bg)';" ondragleave="this.style.borderColor='var(--border-accent)';" ondrop="handleSnippetDrop(event)">
-                        <p style="color: var(--primary-font); opacity: 0.6; text-align: center;" id="snippet-placeholder">Drop generated text snippets here</p>
-                    </div>
-                </article>
-
-                <!-- Nyxen Account Links -->
-                <article class="card" aria-labelledby="account-title">
-                    <div class="card-header">
-                        <h2 class="card-title" id="account-title">Nyxen Account</h2>
-                    </div>
-                    <div class="note-box" role="note">
-                        These actions manage your Nyxen account. Login, signup, and billing are handled within this app.
-                    </div>
-                    <nav style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;" aria-label="Account management links">
-                        <button class="btn btn-primary" aria-label="Sign up for Nyxen" onclick="gateSignup()">Join Nyxen</button>
-                        <button class="btn btn-secondary" aria-label="Login to Nyxen account" onclick="gateLogin()">Login to Nyxen</button>
-                        <button class="btn btn-secondary" aria-label="Manage your Nyxen account" onclick="showPage('account')">Manage / My Account</button>
-                        <button class="btn btn-secondary" onclick="handleLogout()" aria-label="Logout from Nyxen" data-testid="workspace-logout-btn">Logout from Nyxen</button>
-                    </nav>
-                </article>
             </section>
 
-            <!-- Page 3: Drafting & Chapter Creation -->
-            <section class="page" id="page-drafting" role="tabpanel" aria-labelledby="tab-drafting">
+            <!-- ============================================================ -->
+            <!-- PAGE: VISUAL STUDIO (Images + Video combined) -->
+            <!-- ============================================================ -->
+            <section class="page" id="page-visual-studio" role="tabpanel" aria-labelledby="tab-visual-studio">
                 <header class="page-header">
-                    <h1 class="font-serif">Drafting &amp; Chapter Creation</h1>
-                    <p>Turn your story plan into concrete chapters and scenes</p>
+                    <h1 class="font-serif">Visual Studio</h1>
+                    <p>Create images and videos for your stories</p>
                 </header>
 
-                <div class="grid-2">
-                    <!-- Drafting Mentor -->
-                    <article class="card" aria-labelledby="drafting-mentor-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="drafting-mentor-title">Nyxen — Drafting Mentor</h2>
-                        </div>
-                        <p style="color: var(--primary-font); margin-bottom: 16px;">I'll help you turn your story plan into concrete chapters, scenes, and summaries that stay true to your genre, audience, worldbuilding, and structure in StoryForge Studio.</p>
-                        <div class="note-box" role="note">
-                            Available on creatives.smcantrellbooks.com for the same project workspace.
-                        </div>
+                <!-- Visual mode selector -->
+                <fieldset class="mode-selector" role="radiogroup" aria-label="Select visual creation mode">
+                    <legend class="sr-only">Visual Creation Mode</legend>
+                    <div class="mode-card active" onclick="selectVisualMode(this, 'image-gen')" role="radio" aria-checked="true" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectVisualMode(this,'image-gen');}">
+                        <i class="fas fa-image" aria-hidden="true"></i>
+                        <span>Image Generation</span>
+                    </div>
+                    <div class="mode-card" onclick="selectVisualMode(this, 'image-edit')" role="radio" aria-checked="false" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectVisualMode(this,'image-edit');}">
+                        <i class="fas fa-magic" aria-hidden="true"></i>
+                        <span>Image Editing</span>
+                    </div>
+                    <div class="mode-card" onclick="selectVisualMode(this, 'text-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectVisualMode(this,'text-video');}">
+                        <i class="fas fa-video" aria-hidden="true"></i>
+                        <span>Text to Video</span>
+                    </div>
+                    <div class="mode-card" onclick="selectVisualMode(this, 'image-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectVisualMode(this,'image-video');}">
+                        <i class="fas fa-film" aria-hidden="true"></i>
+                        <span>Image to Video</span>
+                    </div>
+                </fieldset>
 
-                        <div class="form-group">
-                            <label for="draft-project" class="form-label">Select Project</label>
-                            <select id="draft-project" class="form-select">
-                                <option>— No projects —</option>
-                            </select>
-                                <option>Ink &amp; Ember</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-chapter" class="form-label">Which chapter or scene are you drafting?</label>
-                            <select id="draft-chapter" class="form-select">
-                                <option>Chapter 1 - Opening</option>
-                                <option>Chapter 2 - Rising Action</option>
-                                <option>Chapter 3 - Confrontation</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-format" class="form-label">Preferred Format</label>
-                            <select id="draft-format" class="form-select">
-                                <option>Narrative prose</option>
-                                <option>Scene outline</option>
-                                <option>Dialogue-heavy</option>
-                                <option>Action sequence</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-focus" class="form-label">What should we focus on?</label>
-                            <input type="text" id="draft-focus" class="form-input" placeholder="Example: opening hook, tension escalation, or character voice consistency">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-existing" class="form-label">Existing text (optional)</label>
-                            <textarea id="draft-existing" class="form-textarea" placeholder="Paste a draft excerpt and I'll suggest refinements and restructuring"></textarea>
-                        </div>
-
-                        <div style="display: flex; gap: 12px;" role="group" aria-label="Drafting actions">
-                            <button class="btn btn-primary" onclick="draftGuidance()" aria-label="Get draft guidance from Nyxen" data-testid="draft-guidance-btn">Draft Guidance</button>
-                            <button class="btn btn-secondary" onclick="suggestNextChapter()" aria-label="Get suggestion for next chapter or scene" data-testid="suggest-next-btn">Suggest Next Chapter/Scene</button>
-                        </div>
-                    </article>
-
-                    <!-- Right Column -->
-                    <div>
-                        <!-- Scene & Cover Art Generator -->
+                <!-- ===== Image Generation Panel ===== -->
+                <div class="vs-panel active" id="vs-image-gen">
+                    <div class="grid-2">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Scene &amp; Cover Art Generator</h3>
+                                <h3 class="card-title">Generate Image</h3>
                             </div>
-                            <p style="color: var(--primary-font); margin-bottom: 16px;">Drafting-ready visuals without outlining or prose skills.</p>
                             <div class="form-group">
-                                <label class="form-label">Project Data Source</label>
-                                <select class="form-select">
-                                    <option>Current Project</option>
-                                    <option>Custom Input</option>
+                                <label class="form-label" for="img-model">Model</label>
+                                <select id="img-model" class="form-select">
+                                    <option value="black-forest-labs/flux-1-schnell">Flux Schnell (Fast)</option>
+                                    <option value="google/imagen-4">Imagen 4</option>
+                                    <option value="bytedance/seedream-4.5">Seedream 4.5</option>
+                                    <option value="wan-ai/wan2.6-image">Wan 2.6 Image</option>
+                                    <option value="ideogram-ai/ideogram-v2a-turbo">Ideogram v2a (Text)</option>
+                                    <option value="ideogram-ai/ideogram-character">Ideogram Character</option>
+                                    <option value="xai/grok-imagine-image/edit">Grok Imagine</option>
+                                    <option value="hidream-ai/hidream-e1-1">HiDream E1</option>
                                 </select>
                             </div>
-                            <button class="btn btn-primary" style="width: 100%;" onclick="generateArt()" data-testid="generate-art-btn">Generate Art</button>
+                            <div class="form-group">
+                                <label class="form-label" for="img-type">Image Type</label>
+                                <select id="img-type" class="form-select">
+                                    <option>Character Concept</option>
+                                    <option>Cover Art</option>
+                                    <option>Scene Image</option>
+                                    <option>Setting/Environment</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="img-count">Images to Generate</label>
+                                <select id="img-count" class="form-select">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="img-prompt">Detailed Prompt</label>
+                                <textarea id="img-prompt" class="form-textarea" placeholder="Describe the character, setting, mood, visual style, and key details..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%;" onclick="generateImages()" data-testid="generate-images-btn">
+                                <i class="fas fa-sparkles" aria-hidden="true"></i> Generate Images (5 points)
+                            </button>
                         </div>
-
-                        <!-- Chapter Progress Tracker -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Chapter Progress Tracker</h3>
+                                <h3 class="card-title">Filter Gallery</h3>
                             </div>
-                            <div class="checklist-item">
-                                <span style="flex: 1; color: var(--primary-font);">Chapter 1</span>
-                                <span style="color: var(--primary-font);">2,450 words</span>
-                                <span style="background: var(--button-bg); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Draft</span>
+                            <div class="form-group">
+                                <label class="form-label" for="filter-type">Filter by Type</label>
+                                <select id="filter-type" class="form-select" onchange="filterGallery()">
+                                    <option>All types</option>
+                                    <option>Character Concept</option>
+                                    <option>Cover Art</option>
+                                    <option>Scene Image</option>
+                                    <option>Setting/Environment</option>
+                                </select>
                             </div>
-                            <div class="checklist-item">
-                                <span style="flex: 1; color: var(--primary-font);">Chapter 2</span>
-                                <span style="color: var(--primary-font);">1,800 words</span>
-                                <span style="background: var(--border-accent); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">In Progress</span>
-                            </div>
-                            <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="openManuscriptSettings()" data-testid="manuscript-settings-btn">Manuscript Package Settings</button>
-                            <div style="display:flex;gap:8px;margin-top:8px;">
-                                <button class="btn btn-secondary" style="flex:1;" onclick="exportToPDF()" data-testid="export-pdf-btn"><i class="fas fa-file-pdf"></i> Export PDF</button>
-                                <button class="btn btn-secondary" style="flex:1;" onclick="exportToTXT()" data-testid="export-txt-btn"><i class="fas fa-file-alt"></i> Export TXT</button>
+                            <div class="form-group">
+                                <label class="form-label" for="filter-recency">Filter by Recency</label>
+                                <select id="filter-recency" class="form-select" onchange="filterGallery()">
+                                    <option>All time</option>
+                                    <option>Today</option>
+                                    <option>This week</option>
+                                    <option>This month</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Generated Gallery</h3>
+                        </div>
+                        <div id="image-gallery" class="gallery-grid">
+                            <div class="gallery-item"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i></div></div>
+                            <div class="gallery-item"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i></div></div>
+                            <div class="gallery-item"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i></div></div>
+                            <div class="gallery-item"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i></div></div>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Drafting Output -->
+                <!-- ===== Image Editing Panel ===== -->
+                <div class="vs-panel" id="vs-image-edit">
+                    <div class="grid-2">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Drafting Guidance Output</h3>
-                                <button class="btn btn-secondary" onclick="readSelected()" data-testid="read-selected-btn">
-                                    <i class="fas fa-volume-up"></i> Read Selected
+                                <h3 class="card-title">Edit Image</h3>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgedit-model">Model</label>
+                                <select id="imgedit-model" class="form-select">
+                                    <option value="bytedance/seedream-4.5/edit">Seedream 4.5 Edit</option>
+                                    <option value="ideogram-ai/ideogram-v2-turbo/edit">Ideogram v2 Edit</option>
+                                    <option value="wan-ai/wan2.6-image-edit">Wan 2.6 Edit</option>
+                                    <option value="black-forest-labs/flux-2-flash/edit">Flux 2 Flash Edit</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgedit-source">Source Image</label>
+                                <select id="imgedit-source" class="form-select" onchange="toggleImgEditSource()">
+                                    <option value="gallery">Select from Gallery</option>
+                                    <option value="upload">Upload from Device</option>
+                                </select>
+                            </div>
+                            <div id="imgedit-gallery-picker" class="form-group">
+                                <label class="form-label">Select Image</label>
+                                <select id="imgedit-gallery-select" class="form-select">
+                                    <option value="">-- No images yet. Generate some first. --</option>
+                                </select>
+                            </div>
+                            <div id="imgedit-upload-picker" class="form-group" style="display:none;">
+                                <label class="form-label">Upload Image</label>
+                                <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgedit-file').click()">
+                                    <i class="fas fa-upload" aria-hidden="true"></i> Choose File
                                 </button>
+                                <input type="file" id="imgedit-file" class="sr-only" accept="image/*" onchange="handleImgEditUpload(event)">
                             </div>
-                            <div id="drafting-output" style="min-height: 150px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
-                                <p style="color: var(--primary-font); opacity: 0.6;">AI guidance will appear here...</p>
+                            <div id="imgedit-preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgedit-prompt">Edit Instructions</label>
+                                <textarea id="imgedit-prompt" class="form-textarea" placeholder="Describe what changes to make to the image..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="width:100%;" onclick="editImage()" data-testid="edit-image-btn">
+                                <i class="fas fa-magic" aria-hidden="true"></i> Edit Image (5 points)
+                            </button>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Edit Result</h3>
+                            </div>
+                            <div id="imgedit-output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-magic" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Edited image will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Text to Video Panel ===== -->
+                <div class="vs-panel" id="vs-text-video">
+                    <div class="note-box" role="alert" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
+                        <strong>Important:</strong> Videos are not saved. Download before closing.
+                    </div>
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Create Video from Text</h3>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="txtvid-model">Model</label>
+                                <select id="txtvid-model" class="form-select">
+                                    <option value="wan-ai/wan2.2-t2v-a14b/turbo">Wan 2.2 Turbo</option>
+                                    <option value="klingai/kling-v2.6/pro/text-to-video">Kling v2.6 Pro</option>
+                                    <option value="lightricks/ltx-2-19b/text-to-video">LTX 2 19B</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="txtvid-prompt">Video Prompt</label>
+                                <textarea id="txtvid-prompt" class="form-textarea" placeholder="Describe the scene, mood, motion, and visual style for your video..." style="min-height:120px;" aria-required="true"></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="width:100%;" onclick="generateTextVideo()" data-testid="generate-text-video-btn">
+                                <i class="fas fa-video" aria-hidden="true"></i> Generate Video (10 points)
+                            </button>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Video Preview</h3>
+                            </div>
+                            <div id="txtvid-output" role="region" aria-live="polite" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-video" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Video preview will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Image to Video Panel ===== -->
+                <div class="vs-panel" id="vs-image-video">
+                    <div class="note-box" role="alert" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
+                        <strong>Important:</strong> Videos are not saved. Download before closing.
+                    </div>
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Create Video from Image</h3>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgvid-model">Model</label>
+                                <select id="imgvid-model" class="form-select">
+                                    <option value="wan-ai/wan2.6-i2v-flash">Wan 2.6 i2v Flash</option>
+                                    <option value="klingai/kling-v2.6/pro/image-to-video">Kling v2.6 Pro i2v</option>
+                                    <option value="lightricks/ltx-2-19b-distilled/image-to-video">LTX 2 19B i2v</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgvid-source">Image Source</label>
+                                <select id="imgvid-source" class="form-select" onchange="toggleImgVidSource()">
+                                    <option value="gallery">Select from Generated Gallery</option>
+                                    <option value="upload">Upload from Device</option>
+                                </select>
+                            </div>
+                            <div id="imgvid-gallery-picker" class="form-group">
+                                <label class="form-label">Select Image</label>
+                                <select id="imgvid-gallery-select" class="form-select">
+                                    <option value="">-- No images yet. Generate some first. --</option>
+                                </select>
+                            </div>
+                            <div id="imgvid-upload-picker" class="form-group" style="display:none;">
+                                <label class="form-label">Upload Image</label>
+                                <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgvid-file').click()">
+                                    <i class="fas fa-upload" aria-hidden="true"></i> Choose File
+                                </button>
+                                <input type="file" id="imgvid-file" class="sr-only" accept="image/*" onchange="handleImgVidUpload(event)">
+                            </div>
+                            <div id="imgvid-preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgvid-prompt">Motion Description (optional)</label>
+                                <textarea id="imgvid-prompt" class="form-textarea" placeholder="Describe the motion or animation you want applied to the image..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="width:100%;" onclick="generateImageVideo()" data-testid="generate-image-video-btn">
+                                <i class="fas fa-film" aria-hidden="true"></i> Generate Video (10 points)
+                            </button>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Video Preview</h3>
+                            </div>
+                            <div id="imgvid-output" role="region" aria-live="polite" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-film" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Video preview will appear here</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Page 4: Edit Mode -->
-            <div class="page" id="page-editing">
-                <div class="page-header">
-                    <h1 class="font-serif">Creative Writing Mentor — Edit Mode</h1>
-                    <p>Sharpen voice, continuity, and flow</p>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Project Context -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Project Context</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Current Project</label>
-                            <input type="text" id="edit-project" class="form-input" value="" placeholder="Enter project name">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Genre, Tone, or Voice</label>
-                            <input type="text" id="edit-genre" class="form-input" placeholder="e.g., Dark fantasy, sardonic humor">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Recently Edited Chapters</label>
-                            <input type="text" id="edit-chapters" class="form-input" placeholder="e.g., Chapter 3, Chapter 4">
-                        </div>
-                        <button class="btn btn-primary" onclick="updateEditContext()" data-testid="update-context-btn">Update Context</button>
-                    </div>
-
-                    <!-- Editing Priorities -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Editing Priorities</h3>
-                        </div>
-                        <p style="color: var(--primary-font); margin-bottom: 16px;">Suggested next steps:</p>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="edit1">
-                            <label for="edit1" style="color: var(--primary-font);">Confirm voice consistency across recent chapters</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="edit2">
-                            <label for="edit2" style="color: var(--primary-font);">Check continuity for timeline and character arcs</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="edit3">
-                            <label for="edit3" style="color: var(--primary-font);">Tighten scene openings and endings</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="edit4">
-                            <label for="edit4" style="color: var(--primary-font);">Review formatting for dialogue and section breaks</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Readiness Check -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Readiness Check</h3>
-                    </div>
-                    <div class="grid-2">
-                        <div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="ready1">
-                                <label for="ready1" style="color: var(--primary-font);">All chapters have a complete narrative arc</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="ready2">
-                                <label for="ready2" style="color: var(--primary-font);">Continuity pass completed</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="ready3">
-                                <label for="ready3" style="color: var(--primary-font);">Line edits and style polish finished</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="ready4">
-                                <label for="ready4" style="color: var(--primary-font);">Formatting matches target standard</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="note-box">
-                        Mark items as they are completed to track readiness.
-                    </div>
-                </div>
-
-                <!-- Chat with Nyxen -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Chat with Nyxen</h3>
-                    </div>
-                    <p style="color: var(--primary-font); margin-bottom: 16px;">Start the conversation when you are ready. Share the chapter or scene you're revising, and I'll help you sharpen voice, continuity, and flow with a prioritised, stepwise plan aligned to your genre and audience.</p>
-                    <div class="form-group">
-                        <textarea id="edit-chat-input" class="form-textarea" placeholder="Ask about style, continuity, voice, or formatting..."></textarea>
-                    </div>
-                    <div style="display: flex; gap: 12px;">
-                        <button class="btn btn-primary" onclick="sendEditChat()" data-testid="edit-send-btn">Send</button>
-                        <button class="btn btn-secondary" onclick="clearEditChat()" data-testid="edit-clear-btn">Clear Conversation</button>
-                    </div>
-                    <div id="edit-chat-output" style="min-height: 100px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-top: 16px; display: none;"></div>
-                </div>
-            </div>
-
-            <!-- Page 5: Publishing Strategist -->
-            <div class="page" id="page-publishing">
-                <div class="page-header">
-                    <h1 class="font-serif">Story Mentor &amp; Publishing Strategist</h1>
-                    <p>Plan your publishing journey</p>
-                </div>
-
-                <!-- Project Selector -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Focus Project</h3>
-                    </div>
-                    <select id="focus-project" class="form-select" onchange="changeFocusProject()">
-                        <option>— No projects —</option>
-                    </select>
-                        <option>Ink &amp; Ember</option>
-                    </select>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Project Snapshot -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Project Snapshot</h3>
-                        </div>
-                        <div id="pub-snapshot" style="color: var(--primary-font);">
-                            <p><strong>Title:</strong> —</p>
-                            <p><strong>Genre:</strong> —</p>
-                            <p><strong>Audience:</strong> —</p>
-                            <p><strong>Format:</strong> Ebook trilogy with audiobook editions</p>
-                        </div>
-                    </div>
-
-                    <!-- Blurb & Tagline -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Blurb &amp; Tagline Suggestions</h3>
-                        </div>
-                        <div id="blurb-output" style="min-height: 100px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 12px;">
-                            <p style="color: var(--primary-font); opacity: 0.6;">AI-generated blurbs will appear here...</p>
-                        </div>
-                        <div style="display: flex; gap: 12px;">
-                            <button class="btn btn-secondary" onclick="generateBlurb('ebook')" data-testid="blurb-ebook-btn">Ebook &amp; Audiobook</button>
-                            <button class="btn btn-secondary" onclick="generateBlurb('web')" data-testid="blurb-web-btn">Web &amp; Visual Script</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Series Positioning -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Series Positioning &amp; Bundles</h3>
-                        </div>
-                        <div style="min-height: 120px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
-                            <p style="color: var(--primary-font); opacity: 0.6;">AI suggestions for series positioning and bundle structure...</p>
-                        </div>
-                    </div>
-
-                    <!-- Membership Plan Ideas -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Membership Plan Ideas</h3>
-                        </div>
-                        <div style="min-height: 120px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
-                            <p style="color: var(--primary-font); opacity: 0.6;">Suggestions based on your current tier and project formats...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Author Roster -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Author Roster</h3>
-                    </div>
-                    <div class="grid-2">
-                        <div class="author-card">
-                            <div class="author-avatar"><i class="fas fa-user"></i></div>
-                            <div class="author-info">
-                                <h4>Amara Patel</h4>
-                                <p>Rising Author - Ebook first</p>
-                            </div>
-                        </div>
-                        <div class="author-card">
-                            <div class="author-avatar"><i class="fas fa-user"></i></div>
-                            <div class="author-info">
-                                <h4>Jordan Lee</h4>
-                                <p>Narrator Partner - Audiobook only</p>
-                            </div>
-                        </div>
-                        <div class="author-card">
-                            <div class="author-avatar"><i class="fas fa-user"></i></div>
-                            <div class="author-info">
-                                <h4>Miguel Santos</h4>
-                                <p>Creator Studio - Ebook &amp; Visual Script</p>
-                            </div>
-                        </div>
-                        <div class="author-card">
-                            <div class="author-avatar"><i class="fas fa-user"></i></div>
-                            <div class="author-info">
-                                <h4>Sierra Cantrell</h4>
-                                <p>Pro Author - Ebook &amp; Audiobook</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 6: Image Studio -->
-            <div class="page" id="page-image-studio">
-                <div class="page-header">
-                    <h1 class="font-serif">Text to Image Studio</h1>
-                    <p>Generate character concepts, cover art, and scene images</p>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Create Image -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Create Image</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Select Project</label>
-                            <input type="text" id="img-project" class="form-input" placeholder="Search by project title...">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Image Type</label>
-                            <select id="img-type" class="form-select">
-                                <option>Character Concept</option>
-                                <option>Cover Art</option>
-                                <option>Scene Image</option>
-                                <option>Setting/Environment</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Images to Generate</label>
-                            <select id="img-count" class="form-select">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Detailed Prompt</label>
-                            <textarea id="img-prompt" class="form-textarea" placeholder="Describe the character, setting, mood, visual style, and key details..."></textarea>
-                        </div>
-                        <button class="btn btn-primary" style="width: 100%;" onclick="generateImages()" data-testid="generate-images-btn">
-                            <i class="fas fa-sparkles"></i> Generate Images (5 points)
-                        </button>
-                    </div>
-
-                    <!-- Filter Gallery -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Filter Gallery</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Filter by Type</label>
-                            <select id="filter-type" class="form-select" onchange="filterGallery()">
-                                <option>All types</option>
-                                <option>Character Concept</option>
-                                <option>Cover Art</option>
-                                <option>Scene Image</option>
-                                <option>Setting/Environment</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Filter by Recency</label>
-                            <select id="filter-recency" class="form-select" onchange="filterGallery()">
-                                <option>All time</option>
-                                <option>Today</option>
-                                <option>This week</option>
-                                <option>This month</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Generated Gallery -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Generated Gallery</h3>
-                    </div>
-                    <div id="image-gallery" class="gallery-grid">
-                        <div class="gallery-item">
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
-                                <i class="fas fa-image" style="font-size: 32px;"></i>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
-                                <i class="fas fa-image" style="font-size: 32px;"></i>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
-                                <i class="fas fa-image" style="font-size: 32px;"></i>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
-                                <i class="fas fa-image" style="font-size: 32px;"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 6b: Text to Video -->
-            <div class="page" id="page-text-video" role="tabpanel" aria-label="Text to Video Studio">
-                <div class="page-header">
-                    <h1 class="font-serif">Text to Video Studio</h1>
-                    <p>Generate short videos from written prompts or story snippets</p>
-                </div>
-                <div class="note-box" role="alert" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
-                    <strong>Important:</strong> Videos are not saved. Download before closing.
-                </div>
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Create Video from Text</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="txtvid-project">Select Project</label>
-                            <select id="txtvid-project" class="form-select" aria-label="Select project for video generation">
-                                <option>— No projects —</option>
-                            </select>
-                                <option>Ink &amp; Ember</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="txtvid-prompt">Video Prompt</label>
-                            <textarea id="txtvid-prompt" class="form-textarea" placeholder="Describe the scene, mood, motion, and visual style for your video..." style="min-height:120px;" aria-required="true"></textarea>
-                        </div>
-                        <button class="btn btn-primary" style="width:100%;" onclick="generateTextVideo()" data-testid="generate-text-video-btn" aria-label="Generate video from text prompt, costs 10 points">
-                            <i class="fas fa-video" aria-hidden="true"></i> Generate Video (10 points)
-                        </button>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Video Preview</h3>
-                        </div>
-                        <div id="txtvid-output" role="region" aria-live="polite" aria-label="Video preview output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-                            <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-video" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Video preview will appear here</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 6c: Image to Video -->
-            <div class="page" id="page-image-video" role="tabpanel" aria-label="Image to Video Studio">
-                <div class="page-header">
-                    <h1 class="font-serif">Image to Video Studio</h1>
-                    <p>Generate short videos based on one or more images</p>
-                </div>
-                <div class="note-box" role="alert" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;">
-                    <strong>Important:</strong> Videos are not saved. Download before closing.
-                </div>
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Create Video from Image</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="imgvid-source">Image Source</label>
-                            <select id="imgvid-source" class="form-select" onchange="toggleImgVidSource()" aria-label="Choose image source">
-                                <option value="gallery">Select from Generated Gallery</option>
-                                <option value="upload">Upload from Device</option>
-                            </select>
-                        </div>
-                        <div id="imgvid-gallery-picker" class="form-group">
-                            <label class="form-label">Select Image</label>
-                            <select id="imgvid-gallery-select" class="form-select" aria-label="Select a generated image">
-                                <option value="">-- No images yet. Generate some in Image Studio first. --</option>
-                            </select>
-                        </div>
-                        <div id="imgvid-upload-picker" class="form-group" style="display:none;">
-                            <label class="form-label">Upload Image</label>
-                            <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgvid-file').click()" aria-label="Choose an image file">
-                                <i class="fas fa-upload" aria-hidden="true"></i> Choose File
-                            </button>
-                            <input type="file" id="imgvid-file" class="sr-only" accept="image/*" onchange="handleImgVidUpload(event)">
-                        </div>
-                        <div id="imgvid-preview" role="img" aria-label="Image preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-top:8px;display:flex;align-items:center;justify-content:center;">
-                            <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="imgvid-prompt">Motion Description (optional)</label>
-                            <textarea id="imgvid-prompt" class="form-textarea" placeholder="Describe the motion or animation you want applied to the image..." aria-label="Describe desired motion for the video"></textarea>
-                        </div>
-                        <button class="btn btn-primary" style="width:100%;" onclick="generateImageVideo()" data-testid="generate-image-video-btn" aria-label="Generate video from uploaded image, costs 10 points">
-                            <i class="fas fa-film" aria-hidden="true"></i> Generate Video (10 points)
-                        </button>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Video Preview</h3>
-                        </div>
-                        <div id="imgvid-output" role="region" aria-live="polite" aria-label="Video preview output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-                            <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-film" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Video preview will appear here</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 7: Membership -->
+            <!-- ============================================================ -->
+            <!-- PAGE: MEMBERSHIP -->
+            <!-- ============================================================ -->
             <section class="page" id="page-membership" role="tabpanel" aria-labelledby="tab-membership">
                 <header class="page-header">
                     <h1 class="font-serif">Storefront &amp; Membership</h1>
                     <p>Choose the plan that fits your creative journey</p>
                 </header>
 
-                <!-- Membership Tiers -->
                 <div class="grid-3" role="list" aria-label="Membership tier options">
                     <article class="membership-card" role="listitem" aria-labelledby="free-tier-title">
                         <h2 class="font-serif" id="free-tier-title" style="color: var(--primary-font);">Nyxen Free</h2>
@@ -1626,7 +1116,6 @@
                     </article>
                 </div>
 
-                <!-- A La Carte Points -->
                 <article class="card" style="margin-top: 24px;" aria-labelledby="alacarte-title">
                     <div class="card-header">
                         <h2 class="card-title" id="alacarte-title">A La Carte Points</h2>
@@ -1647,69 +1136,103 @@
                             <button class="btn btn-primary" onclick="handleCheckout('points_100')" aria-label="Purchase 100 points for 5 dollars" data-testid="buy-100-btn">$5.00</button>
                         </div>
                     </div>
-                    <div class="note-box" role="note">
-                        No video storage included with point purchases.
-                    </div>
+                    <div class="note-box" role="note">No video storage included with point purchases.</div>
                 </article>
-
-                <!-- Projects -->
-                <div class="card" style="margin-top: 24px;">
-                    <div class="card-header">
-                        <h3 class="card-title">Projects</h3>
-                    </div>
-                    <p style="color: var(--primary-font); opacity: 0.6; padding: 16px; text-align: center;">No projects yet. Create one to get started.</p>
-                </div>
             </section>
 
-            <!-- Page: My Account -->
+            <!-- ============================================================ -->
+            <!-- PAGE: ACCOUNT (Login/Signup + Profile) -->
+            <!-- ============================================================ -->
             <section class="page" id="page-account" role="tabpanel" aria-labelledby="tab-account">
                 <header class="page-header">
-                    <h1 class="font-serif">My Account</h1>
-                    <p>Manage your profile and subscription</p>
+                    <h1 class="font-serif">Account</h1>
+                    <p>Sign in or manage your profile</p>
                 </header>
 
                 <div class="grid-2">
-                    <!-- Profile Info -->
-                    <article class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Profile</h2>
+                    <!-- Auth Form -->
+                    <article class="card" id="auth-card-form">
+                        <div id="auth-logged-out">
+                            <div class="card-header">
+                                <h2 class="card-title" id="auth-form-title">Login</h2>
+                            </div>
+                            <div id="auth-error" class="auth-error" role="alert"></div>
+                            <div id="auth-success" class="auth-success" role="status"></div>
+                            <form class="auth-form" id="auth-form" onsubmit="event.preventDefault(); handleAuthSubmit();" aria-labelledby="auth-form-title">
+                                <div class="form-group">
+                                    <label for="auth-email" class="form-label">Email address</label>
+                                    <input type="email" id="auth-email" class="form-input" placeholder="you@example.com" required aria-required="true" autocomplete="email" data-testid="auth-email-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="auth-password" class="form-label">Password</label>
+                                    <input type="password" id="auth-password" class="form-input" placeholder="Password" required aria-required="true" minlength="6" autocomplete="current-password" data-testid="auth-password-input">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="auth-submit-btn" data-testid="auth-submit-btn">
+                                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
+                                </button>
+                            </form>
+                            <button style="display:block;text-align:center;margin-top:12px;font-size:13px;color:var(--border-accent);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'Outfit',sans-serif;width:100%;" id="auth-toggle" onclick="toggleAuthMode()" data-testid="auth-toggle-link">
+                                Don't have an account? Sign Up
+                            </button>
+                            <div class="auth-divider"><span>or</span></div>
+                            <button class="btn btn-google" onclick="handleGoogleLogin()" data-testid="auth-google-btn" aria-label="Sign in with Google">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                                Sign in with Google
+                            </button>
                         </div>
-                        <div style="display:flex;flex-direction:column;gap:12px;">
-                            <div>
-                                <span class="form-label">Email</span>
-                                <div id="acct-email" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">Not logged in</div>
+
+                        <div id="auth-logged-in" style="display: none;">
+                            <div class="card-header">
+                                <h2 class="card-title">My Account</h2>
                             </div>
-                            <div>
-                                <span class="form-label">Membership Tier</span>
-                                <div id="acct-tier" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">Free</div>
+                            <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--header-bg);border-radius:6px;margin-bottom:16px;">
+                                <div style="width:40px;height:40px;background:var(--icon-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--icon-color);"><i class="fas fa-user" aria-hidden="true"></i></div>
+                                <span id="auth-user-email" data-testid="auth-user-email" style="color:var(--primary-font);font-size:14px;word-break:break-all;"></span>
                             </div>
-                            <div>
-                                <span class="form-label">Points Balance</span>
-                                <div id="acct-points" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">100</div>
+                            <div style="display:flex;flex-direction:column;gap:10px;">
+                                <div>
+                                    <span class="form-label">Membership Tier</span>
+                                    <div id="acct-tier" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">Free</div>
+                                </div>
+                                <div>
+                                    <span class="form-label">Points Balance</span>
+                                    <div id="acct-points" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">100</div>
+                                </div>
+                                <div>
+                                    <span class="form-label">Member Since</span>
+                                    <div id="acct-created" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">&mdash;</div>
+                                </div>
                             </div>
-                            <div>
-                                <span class="form-label">Member Since</span>
-                                <div id="acct-created" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">—</div>
+                            <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+                                <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="showPage('membership')"><i class="fas fa-arrow-up" aria-hidden="true"></i> Upgrade Plan</button>
+                                <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="acctChangePassword()"><i class="fas fa-key" aria-hidden="true"></i> Change Password</button>
+                                <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="handleLogout()"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</button>
                             </div>
                         </div>
                     </article>
 
-                    <!-- Account Actions -->
+                    <!-- Account Info / Getting Started -->
                     <article class="card">
                         <div class="card-header">
-                            <h2 class="card-title">Account Actions</h2>
+                            <h2 class="card-title">Getting Started</h2>
                         </div>
-                        <div style="display:flex;flex-direction:column;gap:12px;">
-                            <button class="btn btn-primary" style="width:100%;" onclick="showPage('membership')"><i class="fas fa-arrow-up" aria-hidden="true"></i> Upgrade Plan</button>
-                            <button class="btn btn-secondary" style="width:100%;" onclick="showPage('membership')"><i class="fas fa-coins" aria-hidden="true"></i> Buy More Points</button>
-                            <button class="btn btn-secondary" style="width:100%;" onclick="acctChangePassword()"><i class="fas fa-key" aria-hidden="true"></i> Change Password</button>
-                            <button class="btn btn-secondary" style="width:100%;color:var(--red);" onclick="acctLogout()"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</button>
+                        <p style="color:var(--primary-font);line-height:1.7;margin-bottom:16px;">Welcome to Nyxen Creative Stories! Here is how to get the most out of the platform:</p>
+                        <div style="color:var(--primary-font);line-height:1.8;">
+                            <p style="margin-bottom:8px;"><strong>1. Set up your story</strong> &mdash; Use the Story Setup panel in Nyxen to choose your genre, tone, and audience.</p>
+                            <p style="margin-bottom:8px;"><strong>2. Chat with Nyxen</strong> &mdash; Ask Nyxen to help you write stories, chapters, scenes, dialogue, or poetry.</p>
+                            <p style="margin-bottom:8px;"><strong>3. Create visuals</strong> &mdash; Use Visual Studio to generate images and videos for your stories.</p>
+                            <p style="margin-bottom:8px;"><strong>4. Publish when ready</strong> &mdash; Move your finished work to S.M. Cantrell Books for publishing.</p>
+                        </div>
+                        <div class="note-box" role="note" style="margin-top:16px;">
+                            Your chat history is saved per session. Log in to keep your conversations across visits.
                         </div>
                     </article>
                 </div>
             </section>
 
-            <!-- Page 8: Disclosures -->
+            <!-- ============================================================ -->
+            <!-- PAGE: DISCLOSURES -->
+            <!-- ============================================================ -->
             <section class="page" id="page-disclosures" role="tabpanel" aria-labelledby="tab-disclosures">
                 <header class="page-header">
                     <h1 class="font-serif">Disclosures &amp; Policies</h1>
@@ -1747,103 +1270,8 @@
                     <strong>Backup Recommendation:</strong> We recommend downloading and backing up your creations regularly in case of technical issues or data loss.
                 </aside>
             </section>
+
         </main>
-
-        <!-- Side Panel -->
-        <aside class="side-panel" role="complementary" aria-label="Nyxen side panel">
-            <div class="side-panel-header">
-                <h2 class="side-panel-title">Nyxen Panel</h2>
-                <button class="btn btn-secondary" style="padding: 6px 10px;" onclick="toggleSidePanel()" aria-label="Collapse side panel" aria-expanded="true">
-                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="side-panel-tabs" role="tablist" aria-label="Side panel navigation">
-                <button class="side-tab active" onclick="switchSideTab('conversations')" role="tab" aria-selected="true" aria-controls="side-conversations" id="side-tab-conversations">Conversations</button>
-                <button class="side-tab" onclick="switchSideTab('projects')" role="tab" aria-selected="false" aria-controls="side-projects" id="side-tab-projects">Projects</button>
-            </div>
-            <div class="side-panel-content">
-                <!-- Conversations Tab -->
-                <div id="side-conversations" role="tabpanel" aria-labelledby="side-tab-conversations">
-                    <div class="form-group">
-                        <label for="new-conversation-title" class="sr-only">New conversation title</label>
-                        <input type="text" id="new-conversation-title" class="form-input" placeholder="New conversation title...">
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 16px;" onclick="createConversation()" aria-label="Create new conversation" data-testid="create-conversation-btn">
-                        <i class="fas fa-plus" aria-hidden="true"></i> Create
-                    </button>
-                    <nav aria-label="Recent conversations" id="conversation-list">
-                        <div class="conversation-item" role="button" tabindex="0" aria-label="Story structure discussion, last updated 2 hours ago">
-                            <h3 style="font-size: 14px; color: var(--primary-font);">Story structure discussion</h3>
-                            <p>Last updated: 2 hours ago</p>
-                        </div>
-                        <div class="conversation-item" role="button" tabindex="0" aria-label="Character development, last updated yesterday">
-                            <h3 style="font-size: 14px; color: var(--primary-font);">Character development</h3>
-                            <p>Last updated: Yesterday</p>
-                        </div>
-                        <div class="conversation-item" role="button" tabindex="0" aria-label="World-building ideas, last updated 3 days ago">
-                            <h3 style="font-size: 14px; color: var(--primary-font);">World-building ideas</h3>
-                            <p>Last updated: 3 days ago</p>
-                        </div>
-                    </nav>
-                </div>
-                <!-- Projects Tab -->
-                <div id="side-projects" style="display: none;" role="tabpanel" aria-labelledby="side-tab-projects" aria-hidden="true">
-                    <nav aria-label="Your projects">
-                        <p style="color: var(--primary-font); opacity: 0.6; text-align: center; padding: 16px;">No projects yet.</p>
-                    </nav>
-                </div>
-            </div>
-
-            <!-- Auth Block -->
-            <div class="auth-block" id="auth-block" role="region" aria-label="Account authentication">
-                <!-- Logged Out State -->
-                <div id="auth-logged-out">
-                    <h3 class="auth-block-title" id="auth-form-title">Login</h3>
-                    <div id="auth-error" class="auth-error" role="alert"></div>
-                    <div id="auth-success" class="auth-success" role="status"></div>
-                    <form class="auth-form" id="auth-form" onsubmit="event.preventDefault(); handleAuthSubmit();" aria-labelledby="auth-form-title">
-                        <div class="form-group">
-                            <label for="auth-email" class="sr-only">Email address</label>
-                            <input type="email" id="auth-email" class="form-input" placeholder="Email address" required="" aria-required="true" autocomplete="email" data-testid="auth-email-input">
-                        </div>
-                        <div class="form-group">
-                            <label for="auth-password" class="sr-only">Password</label>
-                            <input type="password" id="auth-password" class="form-input" placeholder="Password" required="" aria-required="true" minlength="6" autocomplete="current-password" data-testid="auth-password-input">
-                        </div>
-                        <div class="auth-actions">
-                            <button type="submit" class="btn btn-primary" id="auth-submit-btn" data-testid="auth-submit-btn">
-                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
-                            </button>
-                        </div>
-                    </form>
-                    <button class="auth-toggle-link" id="auth-toggle" onclick="toggleAuthMode()" data-testid="auth-toggle-link">
-                        Don't have an account? Sign Up
-                    </button>
-                    <div class="auth-divider"><span>or</span></div>
-                    <button class="btn btn-google" onclick="handleGoogleLogin()" data-testid="auth-google-btn" aria-label="Sign in with Google">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"></path><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"></path><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"></path><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"></path></svg>
-                        Sign in with Google
-                    </button>
-                </div>
-
-                <!-- Logged In State -->
-                <div id="auth-logged-in" style="display: none;">
-                    <h3 class="auth-block-title">My Account</h3>
-                    <div class="auth-user-info">
-                        <div class="auth-user-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
-                        <span class="auth-user-email" id="auth-user-email" data-testid="auth-user-email"></span>
-                    </div>
-                    <div class="auth-actions" style="flex-direction: column;">
-                        <button class="btn btn-secondary" style="justify-content: center;width:100%;" aria-label="Manage your account" onclick="showPage('account')" data-testid="auth-my-account-btn">
-                            <i class="fas fa-cog" aria-hidden="true"></i> My Account
-                        </button>
-                        <button class="btn btn-primary" onclick="handleLogout()" style="justify-content: center;" aria-label="Log out of your account" data-testid="auth-logout-btn">
-                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </aside>
     </div>
 
     <!-- Export Libraries -->
@@ -1871,7 +1299,7 @@
             formData.append('file', file);
             var preview = document.getElementById('nyxenFilePreview');
             var fileName = document.getElementById('nyxenFileName');
-            fileName.textContent = file.name + ' — uploading…';
+            fileName.textContent = file.name + ' — uploading...';
             preview.style.display = 'flex';
 
             fetch('https://nyxen-creative-stories.onrender.com/api/upload', {
@@ -1884,7 +1312,7 @@
                 nyxenPendingFile = file.name;
                 nyxenPendingText = data.text;
                 fileName.textContent = file.name + ' (' + (data.word_count || '?') + ' words) — ready';
-                document.getElementById('nyxenChatInput').placeholder = 'Ask Nyxen to review, edit, or give feedback on your document…';
+                document.getElementById('nyxenChatInput').placeholder = 'Ask Nyxen to review, edit, or give feedback on your document...';
                 document.getElementById('nyxenChatInput').focus();
             })
             .catch(function(err) {
@@ -1899,7 +1327,7 @@
             nyxenPendingText = null;
             var preview = document.getElementById('nyxenFilePreview');
             preview.style.display = 'none';
-            document.getElementById('nyxenChatInput').placeholder = 'Ask Nyxen anything about your story…';
+            document.getElementById('nyxenChatInput').placeholder = 'Ask Nyxen anything about your story...';
         }
 
         // ============ NYXEN CHAT ============
@@ -1908,11 +1336,50 @@
         var nyxenConvId = null;
         var nyxenWaiting = false;
         var nyxenConvos = JSON.parse(localStorage.getItem('nyxen_convos') || '[]');
+        var nyxenStoryContext = JSON.parse(localStorage.getItem('nyxen_story_setup') || '{}');
+
+        function toggleStorySetup() {
+            var panel = document.getElementById('storySetupPanel');
+            var arrow = document.getElementById('storySetupArrow');
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                panel.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function applyStorySetup() {
+            var genre = document.getElementById('setup-genre').value;
+            if (!genre) { alert('Please select a genre before applying.'); return; }
+            nyxenStoryContext = {
+                genre: genre,
+                tone: document.getElementById('setup-tone').value.trim(),
+                audience: document.getElementById('setup-audience').value.trim(),
+                style: document.getElementById('setup-style').value.trim()
+            };
+            localStorage.setItem('nyxen_story_setup', JSON.stringify(nyxenStoryContext));
+            announce('Story setup applied: ' + genre);
+            // Auto-close the panel
+            document.getElementById('storySetupPanel').style.display = 'none';
+            document.getElementById('storySetupArrow').style.transform = 'rotate(0deg)';
+        }
+
+        function getStoryContextString() {
+            if (!nyxenStoryContext.genre) return '';
+            var parts = ['Genre: ' + nyxenStoryContext.genre];
+            if (nyxenStoryContext.tone) parts.push('Tone: ' + nyxenStoryContext.tone);
+            if (nyxenStoryContext.audience) parts.push('Audience: ' + nyxenStoryContext.audience);
+            if (nyxenStoryContext.style) parts.push('Writing Style: ' + nyxenStoryContext.style);
+            parts.push('Soft word limit: 60,000 words per project.');
+            return parts.join('. ');
+        }
 
         function nyxenNewChat() {
             nyxenConvId = null;
             var feed = document.getElementById('nyxenChatFeed');
-            feed.innerHTML = '<div id="nyxenChatWelcome" style="text-align:center;padding:40px 20px;"><img src="' + NYXEN_AVT + '" alt="Nyxen" style="width:64px;height:64px;border-radius:16px;border:3px solid #d8b588;margin-bottom:14px;"><p style="color:#1a1a1a;font-family:\'Playfair Display\',serif;font-size:20px;font-weight:600;margin-bottom:8px;">Hi, I\'m Nyxen.</p><p style="color:#555;font-size:16px;line-height:1.7;max-width:380px;margin:0 auto;">Your AI storytelling companion. Ask me anything about your story.</p></div>';
+            feed.innerHTML = '<div id="nyxenChatWelcome" style="text-align:center;padding:40px 20px;"><img src="' + NYXEN_AVT + '" alt="Nyxen" style="width:64px;height:64px;border-radius:16px;border:3px solid #d8b588;margin-bottom:14px;"><p style="color:#1a1a1a;font-family:\'Playfair Display\',serif;font-size:20px;font-weight:600;margin-bottom:8px;">Hi, I\'m Nyxen.</p><p style="color:#555;font-size:16px;line-height:1.7;max-width:420px;margin:0 auto;">Your AI storytelling companion. I can help you write stories, chapters, scenes, dialogue, poetry, and more. Pick a quick action below or just tell me what you want to create.</p></div>';
             renderNyxenConvos();
         }
 
@@ -1929,7 +1396,7 @@
             }
             list.innerHTML = nyxenConvos.map(function(c) {
                 var isActive = c.id === nyxenConvId;
-                return '<div style="padding:9px 12px;border-radius:8px;cursor:pointer;margin-bottom:3px;background:' + (isActive ? 'rgba(216,181,136,.2)' : 'transparent') + ';border-left:' + (isActive ? '3px solid #d8b588' : '3px solid transparent') + ';" onclick="nyxenLoadConvo(\'' + c.id + '\')" onmouseover="if(this.style.borderLeft!==\'3px solid #d8b588\')this.style.background=\'rgba(255,255,255,.07)\'" onmouseout="if(this.style.borderLeft!==\'3px solid #d8b588\')this.style.background=\'transparent\'">' +
+                return '<div style="padding:9px 12px;border-radius:8px;cursor:pointer;margin-bottom:3px;background:' + (isActive ? 'rgba(216,181,136,.2)' : 'transparent') + ';border-left:' + (isActive ? '3px solid #d8b588' : '3px solid transparent') + ';" onclick="nyxenLoadConvo(\'' + c.id + '\')" onmouseover="if(this.style.borderLeftColor!==\'rgb(216, 181, 136)\')this.style.background=\'rgba(255,255,255,.07)\'" onmouseout="if(this.style.borderLeftColor!==\'rgb(216, 181, 136)\')this.style.background=\'transparent\'">' +
                     '<div style="font-size:13px;color:' + (isActive ? '#d8b588' : 'rgba(255,255,255,.75)') + ';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + c.title + '</div>' +
                     '</div>';
             }).join('');
@@ -1941,7 +1408,7 @@
         }
 
         function nyxenSaveConvo(id, firstMsg) {
-            var title = firstMsg.length > 38 ? firstMsg.substring(0, 38) + '…' : firstMsg;
+            var title = firstMsg.length > 38 ? firstMsg.substring(0, 38) + '...' : firstMsg;
             if (!nyxenConvos.find(function(c) { return c.id === id; })) {
                 nyxenConvos.unshift({ id: id, title: title });
                 nyxenConvos = nyxenConvos.slice(0, 40);
@@ -1984,7 +1451,7 @@
             nyxenWaiting = true;
             var btn = document.getElementById('nyxenChatBtn');
             btn.disabled = true;
-            btn.textContent = '…';
+            btn.textContent = '...';
 
             // Thinking indicator
             var feed = document.getElementById('nyxenChatFeed');
@@ -1996,23 +1463,24 @@
                 '<span style="width:8px;height:8px;background:#8B5CA8;border-radius:50%;display:inline-block;animation:nyxBounce 1.4s infinite;"></span>' +
                 '<span style="width:8px;height:8px;background:#8B5CA8;border-radius:50%;display:inline-block;animation:nyxBounce 1.4s .2s infinite;"></span>' +
                 '<span style="width:8px;height:8px;background:#8B5CA8;border-radius:50%;display:inline-block;animation:nyxBounce 1.4s .4s infinite;"></span>' +
-                '</div><div style="font-size:12px;color:#8B5CA8;font-style:italic;margin-top:4px;padding-left:2px;">Nyxen is writing…</div></div>';
+                '</div><div style="font-size:12px;color:#8B5CA8;font-style:italic;margin-top:4px;padding-left:2px;">Nyxen is writing...</div></div>';
             feed.appendChild(thinking);
             feed.scrollTop = feed.scrollHeight;
 
-            var context = localStorage.getItem('nyxen_snapshot') || '';
+            var storyCtx = getStoryContextString();
             var fullMsg = msg;
             if (nyxenPendingText) {
                 fullMsg = 'The user has uploaded a document titled "' + nyxenPendingFile + '" for review.\n\nDocument content:\n' + nyxenPendingText.substring(0, 8000) + (nyxenPendingText.length > 8000 ? '\n\n[Document truncated for length]' : '') + '\n\nUser request: ' + msg;
                 nyxenClearFile();
-            } else if (context) {
-                fullMsg = 'Project context: ' + context + '\n\nUser: ' + msg;
+            } else if (storyCtx) {
+                fullMsg = 'Story context: ' + storyCtx + '\n\nUser: ' + msg;
             }
+
             var body = {
                 messages: [{ role: 'user', content: fullMsg }],
                 mode: 'storyteller',
                 response_mode: 'balanced',
-                system_context: 'You are on the Nyxen Creative Stories platform. Help the writer with their story. Write in plain prose — no markdown symbols like **, ##, or bullet dashes.'
+                system_context: 'You are Nyxen, the AI storytelling companion on the Nyxen Creative Stories platform. You help writers create stories, chapters, scenes, dialogue, poetry, and more. Write in plain prose. No markdown symbols like **, ##, or bullet dashes. Be warm, creative, and helpful. Guide beginners through the writing process step by step.'
             };
             if (nyxenConvId) body.conversation_id = nyxenConvId;
 
@@ -2042,126 +1510,73 @@
             });
         }
 
-        // Init convo list
         renderNyxenConvos();
 
-        // Announce to screen readers
+        // ============ ANNOUNCEMENTS ============
         function announce(message) {
-            const announcer = document.getElementById('announcements');
+            var announcer = document.getElementById('announcements');
             announcer.textContent = message;
-            setTimeout(() => { announcer.textContent = ''; }, 1000);
+            setTimeout(function() { announcer.textContent = ''; }, 1000);
         }
 
-        // Page Navigation with accessibility
+        // ============ PAGE NAVIGATION ============
         function showPage(pageId) {
-            // Hide all pages and update ARIA
-            document.querySelectorAll('.page').forEach(page => {
+            document.querySelectorAll('.page').forEach(function(page) {
                 page.classList.remove('active');
                 page.setAttribute('aria-hidden', 'true');
             });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
+            document.querySelectorAll('.tab-btn').forEach(function(btn) {
                 btn.classList.remove('active');
                 btn.setAttribute('aria-selected', 'false');
             });
-            
-            // Show selected page
-            const page = document.getElementById('page-' + pageId);
+
+            var page = document.getElementById('page-' + pageId);
             if (!page) return;
-            const tab = document.querySelector('[data-page="' + pageId + '"]');
-            
+            var tab = document.querySelector('[data-page="' + pageId + '"]');
+
             page.classList.add('active');
-            page.setAttribute('aria-hidden', 'false');
             page.removeAttribute('aria-hidden');
-            
+
             if (tab) {
                 tab.classList.add('active');
                 tab.setAttribute('aria-selected', 'true');
             }
-            
-            // Focus on page heading for screen readers
-            const heading = page.querySelector('h1');
+
+            var heading = page.querySelector('h1');
             if (heading) {
                 heading.setAttribute('tabindex', '-1');
                 heading.focus();
             }
-            
+
             announce('Navigated to ' + (tab ? tab.textContent.trim() : pageId) + ' page');
+
+            if (pageId === 'account') updateAccountPage();
         }
 
-        // Mode Selector with accessibility
-        function selectMode(element, mode) {
-            document.querySelectorAll('.mode-card').forEach(card => {
+        // ============ VISUAL STUDIO MODE SELECTOR ============
+        var currentVisualMode = 'image-gen';
+
+        function selectVisualMode(element, mode) {
+            document.querySelectorAll('#page-visual-studio .mode-card').forEach(function(card) {
                 card.classList.remove('active');
                 card.setAttribute('aria-checked', 'false');
             });
             element.classList.add('active');
             element.setAttribute('aria-checked', 'true');
-            
-            const modeName = element.querySelector('span').textContent;
+
+            document.querySelectorAll('.vs-panel').forEach(function(p) { p.classList.remove('active'); });
+            var panel = document.getElementById('vs-' + mode);
+            if (panel) panel.classList.add('active');
+
+            currentVisualMode = mode;
+            var modeName = element.querySelector('span').textContent;
             announce('Selected ' + modeName + ' mode');
-
-            // Navigate to the corresponding page
-            if (mode === 'story') showPage('story-workspace');
-            else if (mode === 'image') showPage('image-studio');
-            else if (mode === 'text-video') showPage('text-video');
-            else if (mode === 'image-video') showPage('image-video');
-        }
-
-        // Handle keyboard for mode selection
-        function handleModeKeypress(event, element, mode) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                selectMode(element, mode);
-            }
-        }
-
-        // Side Panel Tabs with accessibility
-        function switchSideTab(tab) {
-            document.querySelectorAll('.side-tab').forEach(t => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-            });
-            event.target.classList.add('active');
-            event.target.setAttribute('aria-selected', 'true');
-            
-            const conversationsTab = document.getElementById('side-conversations');
-            const projectsTab = document.getElementById('side-projects');
-            
-            conversationsTab.style.display = tab === 'conversations' ? 'block' : 'none';
-            conversationsTab.setAttribute('aria-hidden', tab === 'conversations' ? 'false' : 'true');
-            
-            projectsTab.style.display = tab === 'projects' ? 'block' : 'none';
-            projectsTab.setAttribute('aria-hidden', tab === 'projects' ? 'false' : 'true');
-            
-            announce('Switched to ' + tab + ' panel');
-        }
-
-        // Toggle Side Panel
-        function toggleSidePanel() {
-            const panel = document.querySelector('.side-panel');
-            const isVisible = panel.style.display !== 'none';
-            panel.style.display = isVisible ? 'none' : 'flex';
-            panel.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
-            announce(isVisible ? 'Side panel hidden' : 'Side panel shown');
-        }
-
-        // Submit question function
-        function submitQuestion() {
-            if (!requireAuth('ask a question')) return;
-            const input = document.getElementById('ask-input');
-            if (input.value.trim()) {
-                announce('Question submitted');
-                sendToGroq(input.value.trim(), function(reply) {
-                    alert('Nyxen says:\n\n' + reply);
-                });
-                input.value = '';
-            }
         }
 
         // ============ API KEYS ============
-        const GROQ_KEY = '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';
-        const APIFREE_KEY = 'sk-peDA9ErrJtAwG7hD4WTCKEHWMi3Y1';
-        const APIFREE_BASE = 'https://api.apifree.ai';
+        var GROQ_KEY = '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';
+        var APIFREE_KEY = 'sk-peDA9ErrJtAwG7hD4WTCKEHWMi3Y1';
+        var APIFREE_BASE = 'https://api.apifree.ai';
 
         // Async submit + poll helper for APIFree
         async function apifreeSubmitAndPoll(type, body, maxWaitMs) {
@@ -2190,7 +1605,7 @@
         }
 
         // ============ STRIPE CHECKOUT ============
-        const STRIPE_LINKS = {
+        var STRIPE_LINKS = {
             free:       'https://buy.stripe.com/eVqcN48bQ1EKbx92rr2Nq0a',
             pro:        'https://buy.stripe.com/28E14m4ZE4QW7gT8PP2Nq0b',
             premium:    'https://buy.stripe.com/eVqfZggIm2IO1Wzea92Nq0c',
@@ -2205,7 +1620,7 @@
         }
 
         // ============ CONTENT SAFETY ============
-        const BLOCKED_PATTERNS = [
+        var BLOCKED_PATTERNS = [
             /\b(kill|murder|assault|rape|torture|abuse|molest|bomb|weapon|terrorism|suicide)\b/i,
             /\b(child\s*porn|cp|nsfw\s*minor|underage)\b/i,
             /\b(hack|exploit|phish|malware|ddos)\b/i
@@ -2226,27 +1641,38 @@
             return true;
         }
 
+        // ============ POINTS SYSTEM ============
+        var userPoints = parseInt(localStorage.getItem('nyxen_points') || '100');
+
+        function updatePointsDisplay() {
+            document.querySelector('.points-display').textContent = userPoints + ' Points';
+            document.querySelector('.points-display').setAttribute('aria-label', userPoints + ' points available');
+        }
+
+        function deductPoints(cost) {
+            if (userPoints < cost) {
+                alert('Not enough points. You need ' + cost + ' points. You have ' + userPoints + '.\nVisit Membership to buy more points.');
+                return false;
+            }
+            userPoints -= cost;
+            syncPoints();
+            updatePointsDisplay();
+            return true;
+        }
+
+        function syncPoints() {
+            localStorage.setItem('nyxen_points', userPoints);
+            sbSavePoints();
+        }
+
         // ============ SUPABASE DATA LAYER ============
         var currentUserId = null;
 
-        async function sbUpsertConversations(convos) {
+        async function sbSavePoints() {
             if (!supabaseClient || !currentUserId) return;
             try {
-                await supabaseClient.from('conversations').upsert({
-                    user_id: currentUserId,
-                    data: JSON.stringify(convos),
-                    updated_at: new Date().toISOString()
-                }, { onConflict: 'user_id' });
+                await supabaseClient.from('profiles').update({ points: userPoints }).eq('id', currentUserId);
             } catch (e) {}
-        }
-
-        async function sbFetchConversations() {
-            if (!supabaseClient || !currentUserId) return null;
-            try {
-                var res = await supabaseClient.from('conversations').select('data').eq('user_id', currentUserId).single();
-                if (res.data && res.data.data) return JSON.parse(res.data.data);
-            } catch (e) {}
-            return null;
         }
 
         async function sbUpsertGallery(gallery) {
@@ -2269,357 +1695,31 @@
             return null;
         }
 
-        async function sbUpsertSnapshot(text) {
-            if (!supabaseClient || !currentUserId) return;
-            try {
-                await supabaseClient.from('snapshots').upsert({
-                    user_id: currentUserId,
-                    content: text,
-                    updated_at: new Date().toISOString()
-                }, { onConflict: 'user_id' });
-            } catch (e) {}
-        }
-
-        async function sbFetchSnapshot() {
-            if (!supabaseClient || !currentUserId) return null;
-            try {
-                var res = await supabaseClient.from('snapshots').select('content').eq('user_id', currentUserId).single();
-                if (res.data) return res.data.content;
-            } catch (e) {}
-            return null;
-        }
-
-        async function sbSavePoints() {
-            if (!supabaseClient || !currentUserId) return;
-            try {
-                await supabaseClient.from('profiles').update({ points: userPoints }).eq('id', currentUserId);
-            } catch (e) {}
-        }
-
-        // Sync helper: save to both localStorage and Supabase
-        function syncConversations() {
-            localStorage.setItem('nyxen_conversations', JSON.stringify(conversations));
-            sbUpsertConversations(conversations);
-        }
-
         function syncGallery() {
             localStorage.setItem('nyxen_gallery', JSON.stringify(generatedImages.slice(0, 50)));
             sbUpsertGallery(generatedImages.slice(0, 50));
         }
 
-        function syncPoints() {
-            localStorage.setItem('nyxen_points', userPoints);
-            sbSavePoints();
-        }
+        // ============ IMAGE GENERATION ============
+        var generatedImages = JSON.parse(localStorage.getItem('nyxen_gallery') || '[]');
 
-        // ============ PROJECT DATA ============
-        const projectData = {};
-
-        let activeProject = localStorage.getItem('nyxen_active_project') || '';
-        let generatedImages = JSON.parse(localStorage.getItem('nyxen_gallery') || '[]');
-
-        // ============ GROQ AI CALLS ============
-        const NYXEN_SYSTEM = 'You are Nyxen — a sophisticated AI storyteller and creative companion built by S.M. Cantrell. Warm, witty, and genuinely engaging. You speak with confidence and a touch of playful mystery. You never use generic AI filler phrases. You sound like a real person — a brilliant friend who happens to know everything about storytelling.';
-
-        async function sendToGroq(userMessage, callback, systemOverride) {
-            if (!checkContentSafety(userMessage)) { callback('Request blocked by content safety filter.'); return; }
-            const systemMsg = systemOverride || NYXEN_SYSTEM;
-            try {
-                const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY },
-                    body: JSON.stringify({
-                        model: 'openai/gpt-oss-20b',
-                        messages: [
-                            { role: 'system', content: systemMsg },
-                            { role: 'user', content: userMessage }
-                        ],
-                        max_tokens: 1500,
-                        temperature: 0.8
-                    })
-                });
-                const data = await res.json();
-                if (data.choices && data.choices[0]) {
-                    callback(data.choices[0].message.content);
-                } else {
-                    callback('Nyxen could not generate a response. Please try again.');
-                }
-            } catch (err) {
-                callback('Connection error. Please check your internet and try again.');
-            }
-        }
-
-        // ============ AUTH GUARD (preview mode — block actions, not viewing) ============
-        function isLoggedIn() {
-            if (typeof supabaseClient === 'undefined' || !supabaseClient) return false;
-            // Check cached state
-            return !!currentAuthUser;
-        }
-
-        var currentAuthUser = null;
-
-        function requireAuth(actionName) {
-            if (isLoggedIn()) return true;
-            alert('Please log in or sign up to ' + (actionName || 'use this feature') + '.');
-            // Scroll to the auth block in the side panel if visible
-            var authBlock = document.getElementById('auth-block');
-            if (authBlock) authBlock.scrollIntoView({behavior:'smooth'});
-            return false;
-        }
-
-        // Track auth state
-        function initAuthGuard() {
-            if (typeof supabaseClient === 'undefined' || !supabaseClient) {
-                setTimeout(initAuthGuard, 500);
-                return;
-            }
-            supabaseClient.auth.getSession().then(function(res) {
-                currentAuthUser = res.data.session ? res.data.session.user : null;
-            });
-            supabaseClient.auth.onAuthStateChange(function(event, session) {
-                currentAuthUser = session ? session.user : null;
-            });
-        }
-        setTimeout(initAuthGuard, 500);
-
-        // ============ PAGE 1: CREATIVES ASSISTANT ============
-        function saveSnapshot() {
-            if (!requireAuth('save your snapshot')) return;
-            const text = document.getElementById('project-snapshot').value.trim();
-            if (!text) { announce('Please enter project details first.'); return; }
-            localStorage.setItem('nyxen_snapshot', text);
-            sbUpsertSnapshot(text);
-            announce('Project snapshot saved');
-            alert('Snapshot saved successfully.');
-        }
-
-        function handleFileUpload(event) {
-            var file = event.target.files[0];
-            if (!file) return;
-            var ext = file.name.split('.').pop().toLowerCase();
-
-            if (ext === 'docx' && typeof mammoth !== 'undefined') {
-                // Parse DOCX using mammoth.js
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    mammoth.extractRawText({ arrayBuffer: e.target.result }).then(function(result) {
-                        document.getElementById('paste-text').value = result.value;
-                        announce('DOCX file loaded: ' + file.name);
-                    }).catch(function() {
-                        alert('Could not read this DOCX file. Try saving it as .txt first.');
-                    });
-                };
-                reader.readAsArrayBuffer(file);
-            } else if (ext === 'txt' || ext === 'md' || ext === 'csv') {
-                // Plain text files
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('paste-text').value = e.target.result;
-                    announce('File loaded: ' + file.name);
-                };
-                reader.readAsText(file);
-            } else {
-                alert('Supported formats: .txt, .docx\nFor .doc or .pdf files, please copy-paste the text instead.');
-            }
-            // Reset input so the same file can be re-selected
-            event.target.value = '';
-        }
-
-        function importPastedText() {
-            const text = document.getElementById('paste-text').value.trim();
-            if (!text) { announce('No text to import.'); return; }
-            localStorage.setItem('nyxen_pasted_context', text);
-            announce('Text imported into session context');
-            alert('Text imported. Nyxen can now reference this content during the session.');
-        }
-
-        // ============ PAGE 2: STORY WORKSPACE ============
-        function sendStoryPrompt() {
-            const input = document.getElementById('story-prompt');
-            const prompt = input.value.trim();
-            if (!prompt) return;
-
-            const chatArea = document.getElementById('story-chat-area');
-            var placeholder = document.getElementById('story-chat-placeholder');
-            if (placeholder) placeholder.remove();
-
-            // Show user message
-            chatArea.innerHTML += '<div style="margin-bottom:12px;"><strong style="color:var(--border-accent);">You:</strong> <span style="color:var(--primary-font);">' + escapeHtml(prompt) + '</span></div>';
-            chatArea.innerHTML += '<div id="story-loading" style="color:var(--primary-font);opacity:0.6;margin-bottom:12px;"><i class="fas fa-spinner fa-spin"></i> Nyxen is thinking...</div>';
-            chatArea.scrollTop = chatArea.scrollHeight;
-            input.value = '';
-
-            const context = localStorage.getItem('nyxen_snapshot') || '';
-            const fullPrompt = context ? 'Project context: ' + context + '\n\nUser request: ' + prompt : prompt;
-
-            sendToGroq(fullPrompt, function(reply) {
-                var loading = document.getElementById('story-loading');
-                if (loading) loading.remove();
-                chatArea.innerHTML += '<div style="margin-bottom:12px;"><strong style="color:var(--icon-bg);">Nyxen:</strong> <span style="color:var(--primary-font);">' + escapeHtml(reply) + '</span></div>';
-                chatArea.scrollTop = chatArea.scrollHeight;
-            });
-        }
-
-        function handleSnippetDrop(event) {
-            event.preventDefault();
-            event.target.style.borderColor = 'var(--border-accent)';
-            const text = event.dataTransfer.getData('text/plain');
-            if (!text) return;
-            var placeholder = document.getElementById('snippet-placeholder');
-            if (placeholder) placeholder.remove();
-            const zone = document.getElementById('snippet-zone');
-            const card = document.createElement('div');
-            card.style.cssText = 'background:var(--card-bg);padding:10px;border-radius:6px;margin-bottom:8px;color:var(--primary-font);position:relative;';
-            card.innerHTML = escapeHtml(text.substring(0, 200)) + (text.length > 200 ? '...' : '') + '<button onclick="this.parentElement.remove()" style="position:absolute;top:4px;right:4px;background:none;border:none;color:var(--border-accent);cursor:pointer;font-size:16px;">&times;</button>';
-            zone.appendChild(card);
-            announce('Snippet added');
-        }
-
-        // ============ PAGE 3: DRAFTING ============
-        function draftGuidance() {
-            const project = document.getElementById('draft-project').value;
-            const chapter = document.getElementById('draft-chapter').value;
-            const format = document.getElementById('draft-format').value;
-            const focus = document.getElementById('draft-focus').value;
-            const existing = document.getElementById('draft-existing').value;
-            const output = document.getElementById('drafting-output');
-
-            output.innerHTML = '<p style="color:var(--primary-font);"><i class="fas fa-spinner fa-spin"></i> Generating guidance...</p>';
-
-            const prompt = 'Project: ' + project + '\nChapter: ' + chapter + '\nFormat: ' + format + '\nFocus: ' + (focus || 'general guidance') + (existing ? '\nExisting text:\n' + existing : '') + '\n\nProvide detailed drafting guidance for this chapter. Include structure suggestions, pacing notes, and specific craft advice.';
-
-            sendToGroq(prompt, function(reply) {
-                output.innerHTML = '<div style="color:var(--primary-font);line-height:1.7;white-space:pre-wrap;">' + escapeHtml(reply) + '</div>';
-            }, NYXEN_SYSTEM + ' You are in Drafting Mentor mode. Help turn story plans into concrete chapters.');
-        }
-
-        function suggestNextChapter() {
-            const project = document.getElementById('draft-project').value;
-            const chapter = document.getElementById('draft-chapter').value;
-            const output = document.getElementById('drafting-output');
-
-            output.innerHTML = '<p style="color:var(--primary-font);"><i class="fas fa-spinner fa-spin"></i> Thinking about what comes next...</p>';
-
-            sendToGroq('Project: ' + project + '\nCurrent chapter: ' + chapter + '\n\nSuggest what the next chapter or scene should be. Include a brief outline, key beats, and narrative purpose.', function(reply) {
-                output.innerHTML = '<div style="color:var(--primary-font);line-height:1.7;white-space:pre-wrap;">' + escapeHtml(reply) + '</div>';
-            });
-        }
-
-        function generateArt() {
-            showPage('image-studio');
-            const project = document.getElementById('draft-project').value;
-            document.getElementById('img-project').value = project;
-            announce('Switched to Image Studio with project: ' + project);
-        }
-
-        function readSelected() {
-            readSelectedKokoro();
-        }
-
-        function openManuscriptSettings() {
-            const modal = document.createElement('div');
-            modal.id = 'manuscript-modal';
-            modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;';
-            modal.innerHTML = '<div style="background:var(--card-bg);border:2px solid var(--border-accent);border-radius:8px;padding:24px;max-width:450px;width:90%;">' +
-                '<h3 style="font-family:Playfair Display,serif;color:var(--primary-font);margin-bottom:16px;">Manuscript Package Settings</h3>' +
-                '<div style="margin-bottom:12px;"><label style="color:var(--primary-font);display:block;margin-bottom:4px;font-size:14px;">Word Count Goal</label><input type="number" class="form-input" value="80000" id="ms-wordcount"></div>' +
-                '<div style="margin-bottom:12px;"><label style="color:var(--primary-font);display:block;margin-bottom:4px;font-size:14px;">Format</label><select class="form-select" id="ms-format"><option>EPUB</option><option>PDF</option><option>DOCX</option></select></div>' +
-                '<div style="margin-bottom:16px;"><label style="color:var(--primary-font);display:block;margin-bottom:4px;font-size:14px;">Chapter Structure</label><select class="form-select" id="ms-structure"><option>Standard (10-15 chapters)</option><option>Short (5-8 chapters)</option><option>Long (20+ chapters)</option></select></div>' +
-                '<div style="display:flex;gap:12px;"><button class="btn btn-primary" onclick="saveManuscriptSettings()">Save</button><button class="btn btn-secondary" onclick="document.getElementById(\'manuscript-modal\').remove()">Cancel</button></div></div>';
-            document.body.appendChild(modal);
-            modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
-        }
-
-        function saveManuscriptSettings() {
-            localStorage.setItem('nyxen_ms_settings', JSON.stringify({
-                wordcount: document.getElementById('ms-wordcount').value,
-                format: document.getElementById('ms-format').value,
-                structure: document.getElementById('ms-structure').value
-            }));
-            document.getElementById('manuscript-modal').remove();
-            announce('Manuscript settings saved');
-        }
-
-        // ============ PAGE 4: EDIT MODE ============
-        function updateEditContext() {
-            localStorage.setItem('nyxen_edit_context', JSON.stringify({
-                project: document.getElementById('edit-project').value,
-                genre: document.getElementById('edit-genre').value,
-                chapters: document.getElementById('edit-chapters').value
-            }));
-            announce('Edit context updated');
-            alert('Context saved.');
-        }
-
-        function sendEditChat() {
-            const input = document.getElementById('edit-chat-input');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const output = document.getElementById('edit-chat-output');
-            output.style.display = 'block';
-            output.innerHTML = '<p style="color:var(--primary-font);"><i class="fas fa-spinner fa-spin"></i> Nyxen is reviewing...</p>';
-
-            const ctx = JSON.parse(localStorage.getItem('nyxen_edit_context') || '{}');
-            const prompt = 'Project: ' + (ctx.project || 'Unknown') + '\nGenre/Tone: ' + (ctx.genre || '') + '\nRecent chapters: ' + (ctx.chapters || '') + '\n\nWriter asks: ' + text;
-
-            sendToGroq(prompt, function(reply) {
-                output.innerHTML = '<div style="color:var(--primary-font);line-height:1.7;white-space:pre-wrap;">' + escapeHtml(reply) + '</div>';
-            }, NYXEN_SYSTEM + ' You are in Edit Mode. Help sharpen voice, continuity, and flow. Provide a prioritised, stepwise plan.');
-            input.value = '';
-        }
-
-        function clearEditChat() {
-            document.getElementById('edit-chat-input').value = '';
-            var output = document.getElementById('edit-chat-output');
-            output.innerHTML = '';
-            output.style.display = 'none';
-            announce('Conversation cleared');
-        }
-
-        // ============ PAGE 5: PUBLISHING ============
-        function changeFocusProject() {
-            const sel = document.getElementById('focus-project');
-            const project = sel.value;
-            const data = projectData[project];
-            const snap = document.getElementById('pub-snapshot');
-            if (data) {
-                snap.innerHTML = '<p><strong>Title:</strong> ' + project + '</p><p><strong>Genre:</strong> ' + data.genre + '</p><p><strong>Audience:</strong> ' + data.audience + '</p><p><strong>Format:</strong> ' + data.format + '</p>';
-            }
-            announce('Focus project changed to ' + project);
-        }
-
-        function generateBlurb(type) {
-            const project = document.getElementById('focus-project').value;
-            const data = projectData[project] || {};
-            const output = document.getElementById('blurb-output');
-            output.innerHTML = '<p style="color:var(--primary-font);"><i class="fas fa-spinner fa-spin"></i> Generating blurb...</p>';
-
-            const promptType = type === 'ebook' ? 'an ebook and audiobook' : 'a web serial and visual script';
-            const prompt = 'Project: ' + project + '\nGenre: ' + (data.genre || '') + '\nAudience: ' + (data.audience || '') + '\nFormat: ' + (data.format || '') + '\n\nGenerate a compelling back-cover blurb and 3 tagline options for ' + promptType + ' version. Make it vivid and genre-appropriate.';
-
-            sendToGroq(prompt, function(reply) {
-                output.innerHTML = '<div style="color:var(--primary-font);line-height:1.7;white-space:pre-wrap;">' + escapeHtml(reply) + '</div>';
-            }, NYXEN_SYSTEM + ' You are in Publishing Strategist mode. Generate marketing copy.');
-        }
-
-        // ============ PAGE 6: IMAGE STUDIO ============
         async function generateImages() {
-            const prompt = document.getElementById('img-prompt').value.trim();
+            var prompt = document.getElementById('img-prompt').value.trim();
             if (!prompt) { alert('Please enter a prompt.'); return; }
             if (!checkContentSafety(prompt)) return;
-            const count = parseInt(document.getElementById('img-count').value);
-            const pointsCost = 5 * count;
+            var count = parseInt(document.getElementById('img-count').value);
+            var pointsCost = 5 * count;
             if (!deductPoints(pointsCost)) return;
-            const type = document.getElementById('img-type').value;
-            const gallery = document.getElementById('image-gallery');
+            var type = document.getElementById('img-type').value;
+            var model = document.getElementById('img-model').value;
+            var gallery = document.getElementById('image-gallery');
 
             gallery.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:24px;"></i><p style="margin-top:12px;">Generating ' + count + ' image(s)...</p><p style="font-size:12px;opacity:0.6;">This may take a moment</p></div>';
 
-            for (let i = 0; i < count; i++) {
+            for (var i = 0; i < count; i++) {
                 try {
                     var result = await apifreeSubmitAndPoll('image', {
-                        model: 'black-forest-labs/flux-1-schnell',
+                        model: model,
                         prompt: prompt,
                         num_images: 1,
                         width: 1024,
@@ -2633,18 +1733,18 @@
                 }
             }
 
-            localStorage.setItem('nyxen_gallery', JSON.stringify(generatedImages.slice(0, 50)));
             syncGallery();
             renderGallery();
             populateImgVidGallery();
+            populateImgEditGallery();
             announce(count + ' image(s) generated');
         }
 
         function renderGallery() {
-            const gallery = document.getElementById('image-gallery');
-            const typeFilter = document.getElementById('filter-type').value;
-            const recencyFilter = document.getElementById('filter-recency').value;
-            let items = generatedImages;
+            var gallery = document.getElementById('image-gallery');
+            var typeFilter = document.getElementById('filter-type').value;
+            var recencyFilter = document.getElementById('filter-recency').value;
+            var items = generatedImages;
 
             if (typeFilter !== 'All types') items = items.filter(function(img) { return img.type === typeFilter; });
             if (recencyFilter === 'Today') {
@@ -2664,7 +1764,7 @@
             }
 
             gallery.innerHTML = '';
-            items.forEach(function(img, idx) {
+            items.forEach(function(img) {
                 var item = document.createElement('div');
                 item.className = 'gallery-item';
                 item.onclick = function() { openLightbox(img.url); };
@@ -2684,159 +1784,118 @@
             document.body.appendChild(lb);
         }
 
-        // ============ MY ACCOUNT PAGE ============
-        function updateAccountPage() {
-            if (typeof supabaseClient === 'undefined' || !supabaseClient) return;
-            supabaseClient.auth.getUser().then(function(res) {
-                var user = res.data.user;
-                if (user) {
-                    document.getElementById('acct-email').textContent = user.email || '—';
-                    document.getElementById('acct-created').textContent = user.created_at ? new Date(user.created_at).toLocaleDateString() : '—';
-                    // Load tier/points from profiles table
-                    supabaseClient.from('profiles').select('tier, points').eq('id', user.id).single().then(function(r) {
-                        if (r.data) {
-                            document.getElementById('acct-tier').textContent = r.data.tier || 'Free';
-                            document.getElementById('acct-points').textContent = (r.data.points || 100) + ' points';
-                        }
-                    });
+        // ============ IMAGE EDITING ============
+        var imgEditSelectedUrl = null;
+
+        function toggleImgEditSource() {
+            var source = document.getElementById('imgedit-source').value;
+            document.getElementById('imgedit-gallery-picker').style.display = source === 'gallery' ? 'block' : 'none';
+            document.getElementById('imgedit-upload-picker').style.display = source === 'upload' ? 'block' : 'none';
+            imgEditSelectedUrl = null;
+            document.getElementById('imgedit-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>';
+        }
+
+        function populateImgEditGallery() {
+            var sel = document.getElementById('imgedit-gallery-select');
+            sel.innerHTML = '';
+            if (generatedImages.length === 0) {
+                sel.innerHTML = '<option value="">-- No images yet. Generate some first. --</option>';
+                return;
+            }
+            sel.innerHTML = '<option value="">-- Choose an image --</option>';
+            generatedImages.forEach(function(img) {
+                var label = img.type + ' — ' + (img.prompt || '').substring(0, 40) + (img.prompt && img.prompt.length > 40 ? '...' : '');
+                sel.innerHTML += '<option value="' + img.url + '">' + label + '</option>';
+            });
+            sel.onchange = function() {
+                imgEditSelectedUrl = sel.value || null;
+                if (imgEditSelectedUrl) {
+                    document.getElementById('imgedit-preview').innerHTML = '<img src="' + imgEditSelectedUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">';
                 } else {
-                    document.getElementById('acct-email').textContent = 'Not logged in';
-                    document.getElementById('acct-tier').textContent = 'Free';
-                    document.getElementById('acct-points').textContent = '100';
-                    document.getElementById('acct-created').textContent = '—';
+                    document.getElementById('imgedit-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>';
                 }
-            });
+            };
         }
 
-        async function acctChangePassword() {
-            var newPass = prompt('Enter new password (min 6 characters):');
-            if (!newPass || newPass.length < 6) { alert('Password must be at least 6 characters.'); return; }
-            var { error } = await supabaseClient.auth.updateUser({ password: newPass });
-            if (error) { alert('Error: ' + error.message); return; }
-            alert('Password updated successfully.');
-        }
-
-        async function acctLogout() {
-            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
-                await supabaseClient.auth.signOut();
-            }
-            announce('Logged out');
-            updateAccountPage();
-            showPage('assistant');
-        }
-
-        // Update account page when navigating to it
-        var origShowPage = showPage;
-        showPage = function(pageId) {
-            origShowPage(pageId);
-            if (pageId === 'account') updateAccountPage();
-        };
-
-        // ============ SET ACTIVE PROJECT ============
-        function setActiveProject(name) {
-            activeProject = name;
-            localStorage.setItem('nyxen_active_project', name);
-            // Sync all dropdowns
-            document.querySelectorAll('#draft-project, #focus-project').forEach(function(sel) {
-                for (var i = 0; i < sel.options.length; i++) {
-                    if (sel.options[i].value === name || sel.options[i].text === name) {
-                        sel.selectedIndex = i;
-                        break;
+        function handleImgEditUpload(event) {
+            var file = event.target.files[0];
+            if (!file) return;
+            if (supabaseClient && currentUserId) {
+                var path = 'imgedit/' + currentUserId + '/' + Date.now() + '_' + file.name;
+                document.getElementById('imgedit-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.6;font-size:13px;"><i class="fas fa-spinner fa-spin"></i> Uploading...</p>';
+                supabaseClient.storage.from('uploads').upload(path, file, { upsert: true }).then(function(res) {
+                    if (res.error) {
+                        document.getElementById('imgedit-preview').innerHTML = '<p style="color:#b91c1c;font-size:12px;">Upload failed. Please log in first.</p>';
+                        imgEditSelectedUrl = null;
+                        return;
                     }
+                    var pubUrl = supabaseClient.storage.from('uploads').getPublicUrl(path);
+                    imgEditSelectedUrl = pubUrl.data.publicUrl;
+                    document.getElementById('imgedit-preview').innerHTML = '<img src="' + imgEditSelectedUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">';
+                });
+            } else {
+                var localUrl = URL.createObjectURL(file);
+                document.getElementById('imgedit-preview').innerHTML = '<img src="' + localUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;"><p style="color:#b91c1c;font-size:11px;margin-top:4px;">Log in to enable uploads, or use Gallery images.</p>';
+                imgEditSelectedUrl = null;
+            }
+            event.target.value = '';
+        }
+
+        async function editImage() {
+            if (!imgEditSelectedUrl) { alert('Please select a source image first.'); return; }
+            var prompt = document.getElementById('imgedit-prompt').value.trim();
+            if (!prompt) { alert('Please describe the edits you want.'); return; }
+            if (!checkContentSafety(prompt)) return;
+            if (!deductPoints(5)) return;
+
+            var model = document.getElementById('imgedit-model').value;
+            var output = document.getElementById('imgedit-output');
+            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Editing image...</p></div>';
+
+            try {
+                var result = await apifreeSubmitAndPoll('image', {
+                    model: model,
+                    prompt: prompt,
+                    image_url: imgEditSelectedUrl,
+                    num_images: 1,
+                    width: 1024,
+                    height: 1024
+                }, 60000);
+                if (result.image_list && result.image_list[0]) {
+                    var editedUrl = result.image_list[0];
+                    generatedImages.unshift({ url: editedUrl, type: 'Edited', date: new Date().toISOString(), prompt: 'Edit: ' + prompt });
+                    syncGallery();
+                    renderGallery();
+                    output.innerHTML = '<img src="' + editedUrl + '" style="width:100%;border-radius:6px;"><div style="margin-top:12px;display:flex;gap:12px;"><a href="' + editedUrl + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                    announce('Image edited successfully');
+                } else {
+                    output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Edit completed but no image returned. Try again.</p>';
+                    userPoints += 5; syncPoints(); updatePointsDisplay();
                 }
-            });
-            announce(name + ' set as active project');
-        }
-
-        // ============ SIDE PANEL: CONVERSATIONS ============
-        var conversations = JSON.parse(localStorage.getItem('nyxen_conversations') || '[{"title":"Story structure discussion","time":"2 hours ago"},{"title":"Character development","time":"Yesterday"},{"title":"World-building ideas","time":"3 days ago"}]');
-
-        function renderConversations() {
-            var list = document.getElementById('conversation-list');
-            list.innerHTML = '';
-            conversations.forEach(function(c, i) {
-                var div = document.createElement('div');
-                div.className = 'conversation-item';
-                div.setAttribute('role', 'button');
-                div.setAttribute('tabindex', '0');
-                div.onclick = function() { loadConversation(i); };
-                div.innerHTML = '<h3 style="font-size:14px;color:var(--primary-font);">' + escapeHtml(c.title) + '</h3><p>Last updated: ' + c.time + '</p>';
-                list.appendChild(div);
-            });
-        }
-
-        function createConversation() {
-            var input = document.getElementById('new-conversation-title');
-            var title = input.value.trim();
-            if (!title) {
-                title = prompt('Enter a conversation title:');
-                if (!title || !title.trim()) return;
-                title = title.trim();
+            } catch (err) {
+                output.innerHTML = '<p style="color:#b91c1c;text-align:center;">' + escapeHtml(err.message || 'Image editing failed.') + '</p>';
+                userPoints += 5; syncPoints(); updatePointsDisplay();
             }
-            conversations.unshift({ title: title, time: 'Just now', messages: [] });
-            syncConversations();
-            input.value = '';
-            renderConversations();
-            announce('Conversation "' + title + '" created');
-        }
-
-        function loadConversation(index) {
-            var c = conversations[index];
-            if (!c) return;
-            showPage('story-workspace');
-            var chatArea = document.getElementById('story-chat-area');
-            var placeholder = document.getElementById('story-chat-placeholder');
-            if (placeholder) placeholder.remove();
-            chatArea.innerHTML = '<p style="color:var(--primary-font);opacity:0.7;text-align:center;">Loaded conversation: <strong>' + escapeHtml(c.title) + '</strong></p>';
-            announce('Loaded conversation: ' + c.title);
-        }
-
-        // ============ UTILITY ============
-        function escapeHtml(str) {
-            var div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        // ============ POINTS SYSTEM ============
-        let userPoints = parseInt(localStorage.getItem('nyxen_points') || '100');
-
-        function updatePointsDisplay() {
-            document.querySelector('.points-display').textContent = userPoints + ' Points';
-            document.querySelector('.points-display').setAttribute('aria-label', userPoints + ' points available');
-        }
-
-        function deductPoints(cost) {
-            if (userPoints < cost) {
-                alert('Not enough points. You need ' + cost + ' points. You have ' + userPoints + '.\nVisit Membership to buy more points.');
-                return false;
-            }
-            userPoints -= cost;
-            syncPoints();
-            updatePointsDisplay();
-            return true;
         }
 
         // ============ TEXT-TO-VIDEO ============
         async function generateTextVideo() {
-            if (!deductPoints(10)) return;
             var prompt = document.getElementById('txtvid-prompt').value.trim();
-            if (!prompt) { alert('Enter a video prompt.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
-            if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
+            if (!prompt) { alert('Enter a video prompt.'); return; }
+            if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); return; }
+            if (!deductPoints(10)) return;
+            var model = document.getElementById('txtvid-model').value;
             var output = document.getElementById('txtvid-output');
             output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video... this may take 1-2 minutes</p></div>';
             try {
                 var result = await apifreeSubmitAndPoll('video', {
-                    model: 'lightricks/ltx-video/text-to-video',
+                    model: model,
                     prompt: prompt
                 }, 180000);
-                if (result.video_list && result.video_list[0]) {
-                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.video_list[0] + '" type="video/mp4"></video>' +
-                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + result.video_list[0] + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
-                    announce('Video generated');
-                } else if (result.url) {
-                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.url + '" type="video/mp4"></video>' +
-                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + result.url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                var videoUrl = (result.video_list && result.video_list[0]) || result.url;
+                if (videoUrl) {
+                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + videoUrl + '" type="video/mp4"></video>' +
+                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + videoUrl + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
                     announce('Video generated');
                 } else {
                     output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation completed but no video was returned. Please try again.</p>';
@@ -2862,13 +1921,11 @@
         function handleImgVidUpload(event) {
             var file = event.target.files[0];
             if (!file) return;
-            // Upload to Supabase storage to get a public URL
             if (supabaseClient && currentUserId) {
                 var path = 'imgvid/' + currentUserId + '/' + Date.now() + '_' + file.name;
                 document.getElementById('imgvid-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.6;font-size:13px;"><i class="fas fa-spinner fa-spin"></i> Uploading...</p>';
                 supabaseClient.storage.from('uploads').upload(path, file, { upsert: true }).then(function(res) {
                     if (res.error) {
-                        // Fallback: use object URL preview but warn about video gen
                         var localUrl = URL.createObjectURL(file);
                         document.getElementById('imgvid-preview').innerHTML = '<img src="' + localUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;"><p style="color:#b91c1c;font-size:11px;margin-top:4px;">Upload failed. Please use Gallery option or log in first.</p>';
                         imgVidSelectedUrl = null;
@@ -2879,7 +1936,6 @@
                     document.getElementById('imgvid-preview').innerHTML = '<img src="' + imgVidSelectedUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">';
                 });
             } else {
-                // Not logged in — show preview but explain limitation
                 var localUrl = URL.createObjectURL(file);
                 document.getElementById('imgvid-preview').innerHTML = '<img src="' + localUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;"><p style="color:#b91c1c;font-size:11px;margin-top:4px;">Log in to enable uploads, or use Gallery images.</p>';
                 imgVidSelectedUrl = null;
@@ -2891,11 +1947,11 @@
             var sel = document.getElementById('imgvid-gallery-select');
             sel.innerHTML = '';
             if (generatedImages.length === 0) {
-                sel.innerHTML = '<option value="">-- No images yet. Generate in Image Studio first. --</option>';
+                sel.innerHTML = '<option value="">-- No images yet. Generate some first. --</option>';
                 return;
             }
             sel.innerHTML = '<option value="">-- Choose an image --</option>';
-            generatedImages.forEach(function(img, i) {
+            generatedImages.forEach(function(img) {
                 var label = img.type + ' — ' + (img.prompt || '').substring(0, 40) + (img.prompt && img.prompt.length > 40 ? '...' : '');
                 sel.innerHTML += '<option value="' + img.url + '">' + label + '</option>';
             });
@@ -2909,31 +1965,24 @@
             };
         }
 
-        function getImgVidUrl() {
-            return imgVidSelectedUrl;
-        }
-
         async function generateImageVideo() {
-            var imageUrl = getImgVidUrl();
-            if (!imageUrl) { alert('Please select or enter an image first.'); return; }
-            if (!deductPoints(10)) return;
+            if (!imgVidSelectedUrl) { alert('Please select or upload an image first.'); return; }
             var prompt = document.getElementById('imgvid-prompt').value.trim() || 'Smooth cinematic motion';
-            if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); userPoints += 10; syncPoints(); updatePointsDisplay(); return; }
+            if (!isPromptSafe(prompt)) { alert('Prompt blocked by content safety.'); return; }
+            if (!deductPoints(10)) return;
+            var model = document.getElementById('imgvid-model').value;
             var output = document.getElementById('imgvid-output');
             output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video from image... this may take 1-2 minutes</p></div>';
             try {
                 var result = await apifreeSubmitAndPoll('video', {
-                    model: 'lightricks/ltx-video/image-to-video',
+                    model: model,
                     prompt: prompt,
-                    image_url: imageUrl
+                    image_url: imgVidSelectedUrl
                 }, 180000);
-                if (result.video_list && result.video_list[0]) {
-                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.video_list[0] + '" type="video/mp4"></video>' +
-                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + result.video_list[0] + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
-                    announce('Video generated from image');
-                } else if (result.url) {
-                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + result.url + '" type="video/mp4"></video>' +
-                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + result.url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
+                var videoUrl = (result.video_list && result.video_list[0]) || result.url;
+                if (videoUrl) {
+                    output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + videoUrl + '" type="video/mp4"></video>' +
+                        '<div style="margin-top:12px;display:flex;gap:12px;"><a href="' + videoUrl + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>';
                     announce('Video generated from image');
                 } else {
                     output.innerHTML = '<p style="color:#b91c1c;text-align:center;">Video generation completed but no video was returned. Please try again.</p>';
@@ -2945,134 +1994,49 @@
             }
         }
 
-        // ============ KOKORO TTS ============
-        async function readSelectedKokoro() {
-            var output = document.getElementById('drafting-output');
-            var selected = window.getSelection().toString();
-            var text = selected || output.textContent;
-            if (!text || text === 'AI guidance will appear here...') { announce('No text to read.'); return; }
-
-            // Try Kokoro TTS first, fall back to browser speechSynthesis
-            try {
-                var res = await fetch(APIFREE_BASE + '/v1/audio/speech', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY },
-                    body: JSON.stringify({ model: 'hexgrad/kokoro-tts/american-english', input: text.substring(0, 2000), voice: 'af_heart' })
-                });
-                if (res.ok) {
-                    var blob = await res.blob();
-                    var url = URL.createObjectURL(blob);
-                    var audio = new Audio(url);
-                    audio.play();
-                    announce('Playing audio narration');
-                    return;
-                }
-            } catch (err) {}
-            // Fallback to browser TTS
-            window.speechSynthesis.cancel();
-            var utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 0.9;
-            window.speechSynthesis.speak(utterance);
-            announce('Reading text aloud');
+        // ============ UTILITY ============
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
         }
 
-        // ============ EXPORT ============
-        function getExportContent() {
-            var output = document.getElementById('drafting-output');
-            var text = output ? output.textContent : '';
-            var snapshot = document.getElementById('project-snapshot') ? document.getElementById('project-snapshot').value : '';
-            var projectName = activeProject || 'Nyxen Story';
-            return { text: text, snapshot: snapshot, projectName: projectName };
-        }
-
-        function exportToPDF() {
-            var content = getExportContent();
-            var text = content.text || content.snapshot;
-            if (!text || text.trim() === '' || text === 'AI guidance will appear here...') { alert('No content to export. Generate some content first.'); return; }
-            try {
-                var jsPDF = window.jspdf.jsPDF;
-                var doc = new jsPDF();
-                doc.setFont('helvetica', 'bold');
-                doc.setFontSize(18);
-                doc.text(content.projectName, 20, 20);
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(10);
-                doc.text('Generated by Nyxen Creative Stories', 20, 28);
-                doc.text(new Date().toLocaleDateString(), 20, 34);
-                doc.setFontSize(12);
-                var lines = doc.splitTextToSize(text, 170);
-                var y = 45;
-                for (var i = 0; i < lines.length; i++) {
-                    if (y > 280) { doc.addPage(); y = 20; }
-                    doc.text(lines[i], 20, y);
-                    y += 7;
-                }
-                doc.save(content.projectName.replace(/\s+/g, '_') + '.pdf');
-                announce('PDF exported');
-            } catch (err) {
-                alert('PDF export failed. Please try again.');
-            }
-        }
-
-        function exportToTXT() {
-            var content = getExportContent();
-            var text = content.text || content.snapshot;
-            if (!text || text.trim() === '' || text === 'AI guidance will appear here...') { alert('No content to export. Generate some content first.'); return; }
-            var blob = new Blob([content.projectName + '\nGenerated by Nyxen Creative Stories\n' + new Date().toLocaleDateString() + '\n\n' + text], { type: 'text/plain' });
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = content.projectName.replace(/\s+/g, '_') + '.txt';
-            a.click();
-            URL.revokeObjectURL(url);
-            announce('TXT exported');
-        }
-
-        // Act Tabs with accessibility
-        document.querySelectorAll('.act-tab').forEach((tab, index) => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.act-tab').forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
-                this.classList.add('active');
-                this.setAttribute('aria-selected', 'true');
-                announce('Switched to ' + this.textContent);
-            });
-            
-            // Keyboard navigation for act tabs
-            tab.addEventListener('keydown', function(e) {
-                const tabs = Array.from(document.querySelectorAll('.act-tab'));
-                const currentIndex = tabs.indexOf(this);
-                
-                if (e.key === 'ArrowRight') {
-                    e.preventDefault();
-                    const nextTab = tabs[(currentIndex + 1) % tabs.length];
-                    nextTab.focus();
-                    nextTab.click();
-                } else if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    const prevTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
-                    prevTab.focus();
-                    prevTab.click();
+        // ============ ACCOUNT PAGE ============
+        function updateAccountPage() {
+            if (typeof supabaseClient === 'undefined' || !supabaseClient) return;
+            supabaseClient.auth.getUser().then(function(res) {
+                var user = res.data.user;
+                if (user) {
+                    document.getElementById('acct-created').textContent = user.created_at ? new Date(user.created_at).toLocaleDateString() : '—';
+                    supabaseClient.from('profiles').select('tier, points').eq('id', user.id).single().then(function(r) {
+                        if (r.data) {
+                            document.getElementById('acct-tier').textContent = r.data.tier || 'Free';
+                            document.getElementById('acct-points').textContent = (r.data.points || 100) + ' points';
+                        }
+                    });
                 }
             });
-        });
+        }
 
-        // Main tab keyboard navigation
-        document.querySelectorAll('.tab-btn').forEach((tab, index) => {
+        async function acctChangePassword() {
+            var newPass = prompt('Enter new password (min 6 characters):');
+            if (!newPass || newPass.length < 6) { alert('Password must be at least 6 characters.'); return; }
+            var res = await supabaseClient.auth.updateUser({ password: newPass });
+            if (res.error) { alert('Error: ' + res.error.message); return; }
+            alert('Password updated successfully.');
+        }
+
+        // ============ KEYBOARD NAVIGATION ============
+        document.querySelectorAll('.tab-btn').forEach(function(tab) {
             tab.addEventListener('keydown', function(e) {
-                const tabs = Array.from(document.querySelectorAll('.tab-btn'));
-                const currentIndex = tabs.indexOf(this);
-                
+                var tabs = Array.from(document.querySelectorAll('.tab-btn'));
+                var currentIndex = tabs.indexOf(this);
                 if (e.key === 'ArrowRight') {
                     e.preventDefault();
-                    const nextTab = tabs[(currentIndex + 1) % tabs.length];
-                    nextTab.focus();
+                    tabs[(currentIndex + 1) % tabs.length].focus();
                 } else if (e.key === 'ArrowLeft') {
                     e.preventDefault();
-                    const prevTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
-                    prevTab.focus();
+                    tabs[(currentIndex - 1 + tabs.length) % tabs.length].focus();
                 } else if (e.key === 'Home') {
                     e.preventDefault();
                     tabs[0].focus();
@@ -3083,54 +2047,18 @@
             });
         });
 
-        // Initialize ARIA states on load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set initial ARIA states for pages
-            document.querySelectorAll('.page').forEach(page => {
-                if (!page.classList.contains('active')) {
-                    page.setAttribute('aria-hidden', 'true');
-                }
-            });
-            
-            // Set initial ARIA states for side panel tabs
-            document.getElementById('side-projects').setAttribute('aria-hidden', 'true');
-
-            // Initialize Supabase Auth
-            initAuth();
-
-            // Render side panel data
-            renderConversations();
-            renderGallery();
-            populateImgVidGallery();
-
-            // Restore active project
-            if (activeProject) setActiveProject(activeProject);
-
-            // Init points display
-            updatePointsDisplay();
-
-            // Restore snapshot
-            var savedSnapshot = localStorage.getItem('nyxen_snapshot');
-            if (savedSnapshot) document.getElementById('project-snapshot').value = savedSnapshot;
-
-            // Restore edit context
-            var editCtx = JSON.parse(localStorage.getItem('nyxen_edit_context') || '{}');
-            if (editCtx.project) document.getElementById('edit-project').value = editCtx.project;
-            if (editCtx.genre) document.getElementById('edit-genre').value = editCtx.genre;
-            if (editCtx.chapters) document.getElementById('edit-chapters').value = editCtx.chapters;
-        });
-
         // ============ SUPABASE AUTH ============
-        const SUPABASE_URL = 'https://dxtjkdhhcbbbvfqpevyj.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dGprZGhoY2JiYnZmcXBldnlqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1OTY4MDksImV4cCI6MjA5MTE3MjgwOX0.Df-nRTY2QRDRwaarUrJASZNNzc6-glqz-fdYI2Ls9b8';
+        var SUPABASE_URL = 'https://dxtjkdhhcbbbvfqpevyj.supabase.co';
+        var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dGprZGhoY2JiYnZmcXBldnlqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1OTY4MDksImV4cCI6MjA5MTE3MjgwOX0.Df-nRTY2QRDRwaarUrJASZNNzc6-glqz-fdYI2Ls9b8';
 
-        let supabaseClient = null;
-        let authMode = 'login';
+        var supabaseClient = null;
+        var authMode = 'login';
+        var currentAuthUser = null;
 
         function initAuth() {
             if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
                 supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                
+
                 supabaseClient.auth.onAuthStateChange(function(event, session) {
                     if (session && session.user) {
                         showLoggedInState(session.user);
@@ -3155,18 +2083,14 @@
             document.getElementById('auth-logged-in').style.display = 'block';
             document.getElementById('auth-user-email').textContent = user.email || 'User';
             currentUserId = user.id;
+            currentAuthUser = user;
             announce('Logged in as ' + (user.email || 'User'));
-            // Load Supabase data
             loadUserData();
         }
 
         async function loadUserData() {
-            var sbConvos = await sbFetchConversations();
-            if (sbConvos) { conversations = sbConvos; renderConversations(); }
             var sbGallery = await sbFetchGallery();
-            if (sbGallery) { generatedImages = sbGallery; renderGallery(); }
-            var sbSnap = await sbFetchSnapshot();
-            if (sbSnap) document.getElementById('project-snapshot').value = sbSnap;
+            if (sbGallery) { generatedImages = sbGallery; renderGallery(); populateImgVidGallery(); populateImgEditGallery(); }
         }
 
         function showLoggedOutState() {
@@ -3174,6 +2098,7 @@
             document.getElementById('auth-logged-in').style.display = 'none';
             document.querySelector('.tier-badge').textContent = 'Free Tier';
             currentUserId = null;
+            currentAuthUser = null;
             userPoints = 100;
             syncPoints();
             updatePointsDisplay();
@@ -3296,4 +2221,27 @@
                 }
             } catch (err) {}
         }
+
+        // ============ INIT ============
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.page').forEach(function(page) {
+                if (!page.classList.contains('active')) {
+                    page.setAttribute('aria-hidden', 'true');
+                }
+            });
+
+            initAuth();
+            renderGallery();
+            populateImgVidGallery();
+            populateImgEditGallery();
+            updatePointsDisplay();
+
+            // Restore story setup
+            if (nyxenStoryContext.genre) {
+                document.getElementById('setup-genre').value = nyxenStoryContext.genre;
+                if (nyxenStoryContext.tone) document.getElementById('setup-tone').value = nyxenStoryContext.tone;
+                if (nyxenStoryContext.audience) document.getElementById('setup-audience').value = nyxenStoryContext.audience;
+                if (nyxenStoryContext.style) document.getElementById('setup-style').value = nyxenStoryContext.style;
+            }
+        });
     </script>
