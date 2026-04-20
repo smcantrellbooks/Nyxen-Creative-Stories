@@ -68,10 +68,10 @@
             border: 0;
         }
 
-        /* Ensure sufficient color contrast for text */
         .high-contrast-text {
             color: #1a1a1a;
         }
+
         :root {
             --gradient-start: #b8966a;
             --gradient-end: #662a69;
@@ -220,61 +220,6 @@
             overflow-x: hidden;
         }
 
-        /* Side Panel */
-        .side-panel {
-            width: 320px;
-            flex-shrink: 0;
-            background: var(--card-bg);
-            border-left: 2px solid var(--border-accent);
-            display: flex;
-            flex-direction: column;
-            position: sticky;
-            top: 130px;
-            height: calc(100vh - 130px);
-            align-self: flex-start;
-        }
-
-        .side-panel-header {
-            padding: 16px;
-            border-bottom: 2px solid var(--border-accent);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .side-panel-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            color: var(--primary-font);
-        }
-
-        .side-panel-tabs {
-            display: flex;
-            border-bottom: 2px solid var(--border-accent);
-        }
-
-        .side-tab {
-            flex: 1;
-            padding: 12px;
-            background: transparent;
-            border: none;
-            color: var(--primary-font);
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .side-tab.active {
-            background: var(--header-bg);
-            font-weight: 600;
-        }
-
-        .side-panel-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-        }
-
         /* Pages */
         .page { display: none; }
         .page.active { display: block; }
@@ -382,13 +327,9 @@
             font-weight: 500;
         }
 
-        /* JotForm Container */
-        .jotform-container {
-            background: var(--card-bg);
-            border: 2px solid var(--border-accent);
-            border-radius: 8px;
-            overflow: hidden;
-        }
+        /* Nyxen Chat Animations */
+        @keyframes nyxFadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes nyxBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
 
         /* Grid Layouts */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -438,126 +379,6 @@
             color: var(--border-accent);
         }
 
-        /* Chapter Tabs */
-        .act-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .act-tab {
-            padding: 8px 16px;
-            background: var(--header-bg);
-            border: 2px solid var(--border-accent);
-            border-radius: 6px;
-            color: var(--primary-font);
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .act-tab.active {
-            background: var(--button-bg);
-            color: var(--button-text);
-        }
-
-        /* Checklist */
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: var(--header-bg);
-            border-radius: 6px;
-            margin-bottom: 8px;
-            color: var(--primary-font);
-        }
-
-        .checklist-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--border-accent);
-        }
-
-        /* Author Card */
-        .author-card {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: var(--header-bg);
-            border-radius: 6px;
-            margin-bottom: 8px;
-        }
-
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--icon-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--icon-color);
-        }
-
-        .author-info h4 {
-            color: var(--primary-font);
-            font-size: 14px;
-        }
-
-        .author-info p {
-            color: var(--primary-font);
-            opacity: 0.7;
-            font-size: 12px;
-        }
-
-        /* Project Card */
-        .project-card {
-            background: var(--header-bg);
-            border: 2px solid var(--border-accent);
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .project-card h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary-font);
-            margin-bottom: 8px;
-        }
-
-        .project-card p {
-            font-size: 13px;
-            color: var(--primary-font);
-            opacity: 0.8;
-            margin-bottom: 12px;
-        }
-
-        /* Conversation Item */
-        .conversation-item {
-            padding: 12px;
-            background: var(--header-bg);
-            border-radius: 6px;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-
-        .conversation-item:hover {
-            background: rgba(216, 181, 136, 0.8);
-        }
-
-        .conversation-item h4 {
-            color: var(--primary-font);
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .conversation-item p {
-            color: var(--primary-font);
-            opacity: 0.7;
-            font-size: 12px;
-        }
-
         /* Gallery Grid */
         .gallery-grid {
             display: grid;
@@ -572,12 +393,37 @@
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
+            position: relative;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .gallery-item .dl-btn {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: var(--button-bg);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 2;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .gallery-item:hover .dl-btn {
+            opacity: 1;
         }
 
         /* Disclosure Card */
@@ -612,64 +458,32 @@
             margin: 12px 0;
         }
 
-        /* Auth Block in Side Panel */
-        .auth-block {
-            padding: 16px;
-            border-top: 2px solid var(--border-accent);
-            background: rgba(50, 24, 96, 0.15);
-        }
-
-        .auth-block-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 15px;
-            color: var(--primary-font);
-            margin-bottom: 12px;
-        }
-
-        .auth-form .form-group {
-            margin-bottom: 10px;
-        }
-
-        .auth-form .form-input {
-            padding: 10px;
-            font-size: 13px;
-        }
-
-        .auth-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .auth-actions .btn {
-            flex: 1;
-            justify-content: center;
-            font-size: 13px;
-            padding: 9px 12px;
-        }
-
-        .auth-toggle-link {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
+        /* Auth styles */
+        .auth-error {
             font-size: 12px;
-            color: var(--border-accent);
-            cursor: pointer;
-            text-decoration: underline;
-            background: none;
-            border: none;
-            font-family: 'Outfit', sans-serif;
+            color: #b91c1c;
+            background: rgba(185, 28, 28, 0.1);
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: none;
         }
 
-        .auth-toggle-link:hover {
-            color: var(--button-bg);
+        .auth-success {
+            font-size: 12px;
+            color: #15803d;
+            background: rgba(21, 128, 61, 0.1);
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: none;
         }
 
         .auth-divider {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin: 12px 0;
+            margin: 16px 0;
         }
 
         .auth-divider::before,
@@ -710,59 +524,45 @@
             flex-shrink: 0;
         }
 
-        .auth-user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: var(--header-bg);
-            border-radius: 6px;
+        /* Publishing pathway */
+        .publish-pathway {
+            background: rgba(50, 24, 96, 0.12);
+            border: 1.5px solid rgba(50, 24, 96, 0.25);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 16px;
+        }
+
+        .publish-pathway h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-font);
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .publish-pathway p {
+            font-size: 13px;
+            color: var(--primary-font);
+            opacity: 0.8;
+            line-height: 1.6;
             margin-bottom: 10px;
         }
 
-        .auth-user-avatar {
-            width: 36px;
-            height: 36px;
-            background: var(--icon-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--icon-color);
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .auth-user-email {
+        .publish-pathway ol {
             font-size: 13px;
             color: var(--primary-font);
-            word-break: break-all;
-            line-height: 1.3;
+            opacity: 0.8;
+            line-height: 1.8;
+            padding-left: 20px;
+            margin-bottom: 12px;
         }
 
-        .auth-error {
-            font-size: 12px;
-            color: #b91c1c;
-            background: rgba(185, 28, 28, 0.1);
-            padding: 8px 10px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            display: none;
-        }
-
-        .auth-success {
-            font-size: 12px;
-            color: #15803d;
-            background: rgba(21, 128, 61, 0.1);
-            padding: 8px 10px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            display: none;
-        }
+        /* Visual Studio mode panels */
+        .vs-panel { display: none; }
+        .vs-panel.active { display: block; }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .side-panel { display: none; }
             .mode-selector { grid-template-columns: repeat(2, 1fr); }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
@@ -806,27 +606,18 @@
     </header>
 
     <!-- Tab Navigation -->
-    <nav class="tab-nav" role="tablist" aria-label="Main navigation">
-        <button class="tab-btn active" data-page="assistant" onclick="showPage('assistant')" role="tab" aria-selected="true" aria-controls="page-assistant" id="tab-assistant">
-            <i class="fas fa-comments" aria-hidden="true"></i> <span>Creatives Assistant</span>
+    <nav class="tab-nav" id="app-tab-nav" role="tablist" aria-label="Main navigation">
+        <button class="tab-btn active" data-page="nyxen" onclick="showPage('nyxen')" role="tab" aria-selected="true" aria-controls="page-nyxen" id="tab-nyxen">
+            <i class="fas fa-feather-alt" aria-hidden="true"></i> <span>Nyxen</span>
         </button>
-        <button class="tab-btn" data-page="story-workspace" onclick="showPage('story-workspace')" role="tab" aria-selected="false" aria-controls="page-story-workspace" id="tab-story-workspace">
-            <i class="fas fa-pen-fancy" aria-hidden="true"></i> <span>Story Workspace</span>
-        </button>
-        <button class="tab-btn" data-page="drafting" onclick="showPage('drafting')" role="tab" aria-selected="false" aria-controls="page-drafting" id="tab-drafting">
-            <i class="fas fa-file-alt" aria-hidden="true"></i> <span>Drafting</span>
-        </button>
-        <button class="tab-btn" data-page="editing" onclick="showPage('editing')" role="tab" aria-selected="false" aria-controls="page-editing" id="tab-editing">
-            <i class="fas fa-edit" aria-hidden="true"></i> <span>Edit Mode</span>
-        </button>
-        <button class="tab-btn" data-page="publishing" onclick="showPage('publishing')" role="tab" aria-selected="false" aria-controls="page-publishing" id="tab-publishing">
-            <i class="fas fa-book-open" aria-hidden="true"></i> <span>Publishing</span>
-        </button>
-        <button class="tab-btn" data-page="image-studio" onclick="showPage('image-studio')" role="tab" aria-selected="false" aria-controls="page-image-studio" id="tab-image-studio">
-            <i class="fas fa-image" aria-hidden="true"></i> <span>Image Studio</span>
+        <button class="tab-btn" data-page="visual-studio" onclick="showPage('visual-studio')" role="tab" aria-selected="false" aria-controls="page-visual-studio" id="tab-visual-studio">
+            <i class="fas fa-palette" aria-hidden="true"></i> <span>Visual Studio</span>
         </button>
         <button class="tab-btn" data-page="membership" onclick="showPage('membership')" role="tab" aria-selected="false" aria-controls="page-membership" id="tab-membership">
             <i class="fas fa-crown" aria-hidden="true"></i> <span>Membership</span>
+        </button>
+        <button class="tab-btn" data-page="account" onclick="showPage('account')" role="tab" aria-selected="false" aria-controls="page-account" id="tab-account">
+            <i class="fas fa-user-circle" aria-hidden="true"></i> <span>Account</span>
         </button>
         <button class="tab-btn" data-page="disclosures" onclick="showPage('disclosures')" role="tab" aria-selected="false" aria-controls="page-disclosures" id="tab-disclosures">
             <i class="fas fa-shield-alt" aria-hidden="true"></i> <span>Disclosures</span>
@@ -834,1078 +625,834 @@
     </nav>
 
     <!-- Main Container -->
-    <div class="main-container">
-        <!-- Main Content Area -->
+    <div class="main-container" id="app-main">
         <main class="main-content" id="main-content" role="main">
-            <!-- Page 1: Creatives Assistant Chat -->
-            <section class="page active" id="page-assistant" role="tabpanel" aria-labelledby="tab-assistant">
+
+            <!-- PAGE: NYXEN (Writing Assistant) -->
+            <section class="page active" id="page-nyxen" role="tabpanel" aria-labelledby="tab-nyxen">
+
+                <article class="card" aria-labelledby="conversation-title" style="padding:0;overflow:hidden;border-radius:12px;">
+                  <div style="display:flex;height:620px;">
+
+                    <!-- Sidebar: conversations + story setup -->
+                    <div style="width:260px;flex-shrink:0;background:#2D1249;display:flex;flex-direction:column;">
+                      <div style="padding:16px 14px 12px;border-bottom:1px solid rgba(255,255,255,.1);">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                          <img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:36px;height:36px;border-radius:9px;border:2px solid #d8b588;object-fit:cover;">
+                          <div>
+                            <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#d8b588;">Nyxen</div>
+                            <div style="font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.05em;">AI Storyteller</div>
+                          </div>
+                        </div>
+                        <button onclick="nyxenNewChat()" style="width:100%;padding:8px;background:#d8b588;color:#2D1249;border:none;border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">+ New Chat</button>
+                      </div>
+
+                      <!-- Story Setup -->
+                      <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.1);">
+                        <button onclick="toggleStorySetup()" id="storySetupToggle" style="width:100%;padding:7px 10px;background:rgba(216,181,136,.15);color:#d8b588;border:1px solid rgba(216,181,136,.3);border-radius:6px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+                          <span><i class="fas fa-book-open" style="margin-right:6px;"></i> Story Setup</span>
+                          <i class="fas fa-chevron-down" id="storySetupArrow" style="font-size:10px;transition:transform .2s;"></i>
+                        </button>
+                        <div id="storySetupPanel" style="display:none;margin-top:10px;">
+                          <div style="margin-bottom:8px;">
+                            <label style="font-size:11px;color:rgba(255,255,255,.5);display:block;margin-bottom:3px;">Genre *</label>
+                            <select id="setup-genre" style="width:100%;padding:6px 8px;background:#412A69;border:1px solid rgba(216,181,136,.3);border-radius:5px;color:#d8b588;font-family:'Outfit',sans-serif;font-size:12px;">
+                              <option value="">Select genre...</option>
+                              <option value="Romance">Romance</option>
+                              <option value="Fantasy">Fantasy</option>
+                              <option value="Thriller">Thriller</option>
+                              <option value="Mystery">Mystery</option>
+                              <option value="Sci-Fi">Sci-Fi</option>
+                              <option value="Drama">Drama</option>
+                              <option value="Horror">Horror</option>
+                              <option value="Literary Fiction">Literary Fiction</option>
+                              <option value="Young Adult">Young Adult</option>
+                              <option value="Poetry">Poetry</option>
+                            </select>
+                          </div>
+                          <div style="margin-bottom:8px;">
+                            <label style="font-size:11px;color:rgba(255,255,255,.5);display:block;margin-bottom:3px;">Tone (optional)</label>
+                            <input id="setup-tone" type="text" placeholder="e.g. Dark, Lighthearted, Witty" style="width:100%;padding:6px 8px;background:#412A69;border:1px solid rgba(216,181,136,.3);border-radius:5px;color:#d8b588;font-family:'Outfit',sans-serif;font-size:12px;">
+                          </div>
+                          <div style="margin-bottom:8px;">
+                            <label style="font-size:11px;color:rgba(255,255,255,.5);display:block;margin-bottom:3px;">Audience (optional)</label>
+                            <input id="setup-audience" type="text" placeholder="e.g. Young Adult, Adult" style="width:100%;padding:6px 8px;background:#412A69;border:1px solid rgba(216,181,136,.3);border-radius:5px;color:#d8b588;font-family:'Outfit',sans-serif;font-size:12px;">
+                          </div>
+                          <div style="margin-bottom:8px;">
+                            <label style="font-size:11px;color:rgba(255,255,255,.5);display:block;margin-bottom:3px;">Writing Style (optional)</label>
+                            <input id="setup-style" type="text" placeholder="e.g. Descriptive, Minimalist" style="width:100%;padding:6px 8px;background:#412A69;border:1px solid rgba(216,181,136,.3);border-radius:5px;color:#d8b588;font-family:'Outfit',sans-serif;font-size:12px;">
+                          </div>
+                          <button onclick="applyStorySetup()" style="width:100%;padding:6px;background:#d8b588;color:#2D1249;border:none;border-radius:5px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;margin-top:2px;">Apply to Chat</button>
+                          <div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;text-align:center;">Soft limit: 60,000 words per project</div>
+                        </div>
+                      </div>
+
+                      <!-- Conversation list -->
+                      <div id="nyxenConvoList" style="flex:1;overflow-y:auto;padding:8px;">
+                        <div style="padding:16px 8px;text-align:center;color:rgba(255,255,255,.3);font-size:12px;font-style:italic;">Your chats appear here</div>
+                      </div>
+
+                      <!-- Publishing Pathway -->
+                      <div style="padding:12px 14px;border-top:1px solid rgba(255,255,255,.1);background:rgba(216,181,136,.08);">
+                        <div style="font-family:'Playfair Display',serif;font-size:12px;color:#d8b588;margin-bottom:6px;">Ready to publish?</div>
+                        <p style="font-size:11px;color:rgba(255,255,255,.45);line-height:1.5;margin-bottom:8px;">Turn your story into a published book through S.M. Cantrell Books when you are ready.</p>
+                        <a href="https://smcantrellbooks.com/join" target="_blank" style="display:block;padding:6px;background:rgba(216,181,136,.15);border:1px solid rgba(216,181,136,.3);border-radius:5px;text-align:center;color:#d8b588;font-size:11px;font-weight:600;text-decoration:none;font-family:'Outfit',sans-serif;">Continue to Publishing</a>
+                      </div>
+                    </div>
+
+                    <!-- Main chat area -->
+                    <div style="flex:1;display:flex;flex-direction:column;min-width:0;background:#fff;">
+                      <div style="padding:12px 18px;background:#f5f0fb;border-bottom:1px solid #e0d8ed;display:flex;align-items:center;gap:10px;">
+                        <h2 class="card-title" id="conversation-title" style="font-size:16px;color:#2D1249;margin:0;">Conversation with Nyxen</h2>
+                      </div>
+
+                      <div id="nyxenChatFeed" style="flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;background:#fafafa;">
+                        <div id="nyxenChatWelcome" style="text-align:center;padding:40px 20px;">
+                          <img src="https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg" alt="Nyxen" style="width:64px;height:64px;border-radius:16px;border:3px solid #d8b588;margin-bottom:14px;">
+                          <p style="color:#1a1a1a;font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin-bottom:8px;">Hi, I'm Nyxen.</p>
+                          <p style="color:#555;font-size:16px;line-height:1.7;max-width:420px;margin:0 auto;">Your AI storytelling companion. I can help you write stories, chapters, scenes, dialogue, poetry, and more. Pick a quick action below or just tell me what you want to create.</p>
+                        </div>
+                      </div>
+
+                      <!-- Quick action buttons -->
+                      <div style="padding:10px 18px 0;background:#fff;border-top:1px solid #eee;display:flex;gap:8px;flex-wrap:wrap;">
+                        <button onclick="nyxenQuick('Write a poem about a theme I describe')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">&#x270D; Write Poem</button>
+                        <button onclick="nyxenQuick('Help me start a new story. Ask me about the genre, characters, and setting.')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">&#x2728; Start Story</button>
+                        <button onclick="nyxenQuick('Help me develop and write a scene. Ask me what the scene should contain.')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">&#x1F3AC; Develop Scene</button>
+                        <button onclick="nyxenQuick('Help me create a character. Ask me questions to develop them.')" style="padding:6px 14px;border-radius:20px;border:1.5px solid #8B5CA8;background:#fff;color:#5C2D6E;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;" onmouseover="this.style.background='#f0e6f5'" onmouseout="this.style.background='#fff'">&#x1F9EC; Create Character</button>
+                      </div>
+
+                      <!-- Input area -->
+                      <div style="padding:12px 18px 16px;background:#fff;border-top:1px solid #eee;">
+                        <div id="nyxenFilePreview" style="display:none;padding:8px 12px;background:#f0e6f5;border-radius:8px;margin-bottom:8px;align-items:center;gap:8px;font-size:13px;color:#5C2D6E;border:1px solid #d0b8e8;">
+                          <span style="font-size:16px;">&#x1F4C4;</span>
+                          <span id="nyxenFileName" style="flex:1;font-weight:500;"></span>
+                          <button onclick="nyxenClearFile()" style="background:none;border:none;color:#8B5CA8;cursor:pointer;font-size:18px;padding:0;line-height:1;">&#x2715;</button>
+                        </div>
+                        <div style="display:flex;gap:8px;align-items:flex-end;">
+                          <button onclick="document.getElementById('nyxenFileInput').click()" title="Upload .docx for review"
+                            style="width:42px;height:42px;flex-shrink:0;background:#f5f0fb;border:2px solid #d0c4e0;border-radius:10px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;color:#5C2D6E;"
+                            onmouseover="this.style.borderColor='#8B5CA8';this.style.background='#f0e6f5'" onmouseout="this.style.borderColor='#d0c4e0';this.style.background='#f5f0fb'">+</button>
+                          <input type="file" id="nyxenFileInput" accept=".docx" style="display:none;" onchange="nyxenHandleFile(event)">
+                          <textarea id="nyxenChatInput" placeholder="Ask Nyxen anything about your story..." rows="2"
+                            style="flex:1;padding:12px 16px;border-radius:10px;border:2px solid #d0c4e0;background:#fff;color:#1a1a1a;font-family:'Outfit',sans-serif;font-size:15px;outline:none;resize:none;line-height:1.5;transition:border-color .2s;"
+                            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendNyxenChat();}"
+                            onfocus="this.style.borderColor='#8B5CA8'"
+                            onblur="this.style.borderColor='#d0c4e0'"></textarea>
+                          <button onclick="sendNyxenChat()" id="nyxenChatBtn"
+                            style="padding:12px 22px;background:#2D1249;color:#d8b588;border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .2s;"
+                            onmouseover="this.style.background='#412A69'" onmouseout="this.style.background='#2D1249'">Send</button>
+                        </div>
+                        <div style="font-size:12px;color:#999;margin-top:6px;padding-left:2px;">Enter to send &middot; Shift+Enter for new line &middot; <span style="color:#8B5CA8;">+ to upload .docx for review</span></div>
+                      </div>
+                    </div>
+
+                  </div>
+                </article>
+
+                <!-- Publishing Pathway -->
+                <div class="publish-pathway">
+                    <h4><i class="fas fa-book-open" aria-hidden="true" style="margin-right:6px;"></i> Publish Your Story</h4>
+                    <p>You can turn your story into a published book through S.M. Cantrell Books. When you are ready, you can move your work from this creative space into the full publishing platform.</p>
+                    <ol>
+                        <li>Finish your draft inside Nyxen</li>
+                        <li>Review and refine your content</li>
+                        <li>Export or prepare your manuscript</li>
+                        <li>Join the main platform (S.M. Cantrell Books)</li>
+                        <li>Upload and publish your work</li>
+                    </ol>
+                    <a href="https://smcantrellbooks.com/join" target="_blank" class="btn btn-secondary" style="font-size:13px;padding:8px 16px;">
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> Join to Publish
+                    </a>
+                </div>
+
+            </section>
+
+            <!-- PAGE: VISUAL STUDIO -->
+            <section class="page" id="page-visual-studio" role="tabpanel" aria-labelledby="tab-visual-studio">
                 <header class="page-header">
-                    <h1 class="font-serif">Creatives Assistant</h1>
-                    <p>Your AI-powered creative companion for storytelling</p>
+                    <h1 class="font-serif">Visual Studio</h1>
+                    <p>Create images and videos for your stories</p>
                 </header>
 
-                <!-- Generation Mode Selector -->
-                <fieldset class="mode-selector" role="radiogroup" aria-label="Select generation mode">
-                    <legend class="sr-only">Generation Mode</legend>
-                    <div class="mode-card active" onclick="selectMode(this, 'story')" role="radio" aria-checked="true" tabindex="0" onkeypress="handleModeKeypress(event, this, 'story')">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                        <span>Story Generation</span>
-                    </div>
-                    <div class="mode-card" onclick="selectMode(this, 'image')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'image')">
+                <fieldset class="mode-selector" role="radiogroup" aria-label="Select visual creation mode">
+                    <legend class="sr-only">Visual Creation Mode</legend>
+                    <div class="mode-card active" onclick="selectVisualMode(this, 'image-gen')" role="radio" aria-checked="true" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectVisualMode(this,'image-gen');}">
                         <i class="fas fa-image" aria-hidden="true"></i>
                         <span>Image Generation</span>
                     </div>
-                    <div class="mode-card" onclick="selectMode(this, 'text-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'text-video')">
+                    <div class="mode-card" onclick="selectVisualMode(this, 'image-edit')" role="radio" aria-checked="false" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectVisualMode(this,'image-edit');}">
+                        <i class="fas fa-magic" aria-hidden="true"></i>
+                        <span>Image Editing</span>
+                    </div>
+                    <div class="mode-card" onclick="selectVisualMode(this, 'text-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectVisualMode(this,'text-video');}">
                         <i class="fas fa-video" aria-hidden="true"></i>
                         <span>Text to Video</span>
                     </div>
-                    <div class="mode-card" onclick="selectMode(this, 'image-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="handleModeKeypress(event, this, 'image-video')">
+                    <div class="mode-card" onclick="selectVisualMode(this, 'image-video')" role="radio" aria-checked="false" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectVisualMode(this,'image-video');}">
                         <i class="fas fa-film" aria-hidden="true"></i>
                         <span>Image to Video</span>
                     </div>
                 </fieldset>
 
-                <div class="grid-2">
-                    <!-- Project Snapshot -->
-                    <article class="card" aria-labelledby="snapshot-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="snapshot-title">Project Snapshot</h2>
-                            <button class="btn btn-secondary" aria-label="Save project snapshot">Save Snapshot</button>
-                        </div>
-                        <div class="form-group">
-                            <label for="project-snapshot" class="sr-only">Project details</label>
-                            <textarea id="project-snapshot" class="form-textarea" placeholder="Genre, audience, premise, protagonist, worldbuilding, structure, current chapter draft status..." aria-describedby="snapshot-note"></textarea>
-                        </div>
-                        <div class="note-box" id="snapshot-note" role="note">
-                            Keep brief notes about your project so Nyxen stays consistent across the conversation.
-                        </div>
-                    </article>
-
-                    <!-- Documents & Pasted Text -->
-                    <article class="card" aria-labelledby="documents-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="documents-title">Documents & Pasted Text</h2>
-                        </div>
-                        <div class="form-group">
-                            <label for="file-upload" class="sr-only">Upload document</label>
-                            <button class="btn btn-secondary" style="width: 100%;" onclick="document.getElementById('file-upload').click()" aria-label="Choose file to upload">
-                                <i class="fas fa-upload" aria-hidden="true"></i> Choose File
-                            </button>
-                            <input type="file" id="file-upload" class="sr-only" accept=".txt,.doc,.docx,.pdf" aria-describedby="upload-note">
-                        </div>
-                        <div class="form-group">
-                            <label for="paste-text" class="sr-only">Paste text</label>
-                            <textarea id="paste-text" class="form-textarea" placeholder="Paste text here..."></textarea>
-                        </div>
-                        <button class="btn btn-primary" aria-label="Import pasted text into session">Import Pasted Text</button>
-                        <div class="note-box" id="upload-note" role="note">
-                            I can summarise and reference them during the session, but I do not store files after the session ends.
-                        </div>
-                    </article>
-                </div>
-
-                <!-- JotForm Chat Embed -->
-                <article class="card" aria-labelledby="conversation-title">
-                    <div class="card-header">
-                        <h2 class="card-title" id="conversation-title">Conversation with Nyxen</h2>
-                    </div>
-                    <div class="jotform-container">
-                        <iframe id="JotFormIFrame-019d3d3c3a537add8379214c3060726a324e" 
-                            title="Nyxen Creative Mentor Chat Interface"
-                            allowtransparency="true" 
-                            allow="geolocation; microphone; camera; fullscreen"
-                            src="https://agent.jotform.com/019d3d3c3a537add8379214c3060726a324e?embedMode=iframe&autofocus=0&background=1&shadow=1"
-                            frameborder="0" 
-                            style="width:100%; height:688px; border:none;" 
-                            scrolling="no">
-                        </iframe>
-                    </div>
-                </article>
-
-                <!-- Ask Anything -->
-                <article class="card" aria-labelledby="ask-title">
-                    <div class="card-header">
-                        <h2 class="card-title" id="ask-title">Ask Anything</h2>
-                    </div>
-                    <form onsubmit="event.preventDefault(); submitQuestion();" style="display: flex; gap: 12px;">
-                        <label for="ask-input" class="sr-only">Your question about writing</label>
-                        <input type="text" id="ask-input" class="form-input" placeholder="Ask about structure, pacing, formats, or next steps..." style="flex: 1;" aria-describedby="ask-help">
-                        <button type="submit" class="btn btn-primary" aria-label="Send your question">
-                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Send
-                        </button>
-                    </form>
-                    <span id="ask-help" class="sr-only">Type your question and press Enter or click Send</span>
-                </article>
-            </section>
-
-            <!-- Page 2: Story Generation Workspace -->
-            <section class="page" id="page-story-workspace" role="tabpanel" aria-labelledby="tab-story-workspace">
-                <header class="page-header">
-                    <h1 class="font-serif">Story Generation Workspace</h1>
-                    <p>Craft your narrative with AI assistance</p>
-                </header>
-
-                <div class="grid-2">
-                    <!-- Story Chat Panel -->
-                    <article class="card" aria-labelledby="story-chat-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="story-chat-title">Story Chat Panel</h2>
-                        </div>
-                        <div style="min-height: 300px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 16px;" role="region" aria-label="Story chat messages">
-                            <p style="color: var(--primary-font); opacity: 0.6; text-align: center; padding-top: 120px;">Nyxen story chat panel</p>
-                        </div>
-                        <form onsubmit="event.preventDefault();" style="display: flex; gap: 12px;">
-                            <label for="story-prompt" class="sr-only">Describe your scene or question</label>
-                            <input type="text" id="story-prompt" class="form-input" placeholder="Describe the scene or ask Nyxen for direction..." style="flex: 1;">
-                            <button type="submit" class="btn btn-primary" aria-label="Send story prompt">Send</button>
-                        </form>
-                    </article>
-
-                    <!-- Chapters and Scenes -->
-                    <article class="card" aria-labelledby="chapters-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="chapters-title">Chapters and Scenes</h2>
-                        </div>
-                        <div class="act-tabs" role="tablist" aria-label="Story acts">
-                            <button class="act-tab active" role="tab" aria-selected="true" aria-controls="act1-content" id="act1-tab">Act I</button>
-                            <button class="act-tab" role="tab" aria-selected="false" aria-controls="act2-content" id="act2-tab">Act II</button>
-                            <button class="act-tab" role="tab" aria-selected="false" aria-controls="act3-content" id="act3-tab">Act III</button>
-                        </div>
-                        <div id="act1-content" role="tabpanel" aria-labelledby="act1-tab" style="min-height: 200px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
-                            <p style="color: var(--primary-font); opacity: 0.6;">Manage structure, outlines, and scene notes here.</p>
-                        </div>
-                    </article>
-                </div>
-
-                <!-- Collected Snippets -->
-                <article class="card" aria-labelledby="snippets-title">
-                    <div class="card-header">
-                        <h2 class="card-title" id="snippets-title">Collected Snippets</h2>
-                    </div>
-                    <div style="min-height: 150px; background: var(--header-bg); border-radius: 6px; padding: 16px; border: 2px dashed var(--border-accent);" role="region" aria-label="Snippet drop zone" tabindex="0">
-                        <p style="color: var(--primary-font); opacity: 0.6; text-align: center;">Drop generated text snippets here</p>
-                    </div>
-                </article>
-
-                <!-- Nyxen Account Links -->
-                <article class="card" aria-labelledby="account-title">
-                    <div class="card-header">
-                        <h2 class="card-title" id="account-title">Nyxen Account</h2>
-                    </div>
-                    <div class="note-box" role="note">
-                        These actions open the Nyxen membership site in your browser. Account creation, login, and billing are all handled on nyxen.smcantrellbooks.com, not inside this app.
-                    </div>
-                    <nav style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;" aria-label="Account management links">
-                        <a href="https://nyxen.smcantrellbooks.com/join" target="_blank" class="btn btn-primary" aria-label="Join Nyxen membership (opens in new tab)">Join Nyxen</a>
-                        <a href="https://nyxen.smcantrellbooks.com/login" target="_blank" class="btn btn-secondary" aria-label="Login to Nyxen account (opens in new tab)">Login to Nyxen</a>
-                        <a href="https://nyxen.smcantrellbooks.com/my-account" target="_blank" class="btn btn-secondary" aria-label="Manage your Nyxen account (opens in new tab)">Manage / My Account</a>
-                        <button class="btn btn-secondary" aria-label="Logout from Nyxen">Logout from Nyxen</button>
-                    </nav>
-                </article>
-            </section>
-
-            <!-- Page 3: Drafting & Chapter Creation -->
-            <section class="page" id="page-drafting" role="tabpanel" aria-labelledby="tab-drafting">
-                <header class="page-header">
-                    <h1 class="font-serif">Drafting & Chapter Creation</h1>
-                    <p>Turn your story plan into concrete chapters and scenes</p>
-                </header>
-
-                <div class="grid-2">
-                    <!-- Drafting Mentor -->
-                    <article class="card" aria-labelledby="drafting-mentor-title">
-                        <div class="card-header">
-                            <h2 class="card-title" id="drafting-mentor-title">Nyxen — Drafting Mentor</h2>
-                        </div>
-                        <p style="color: var(--primary-font); margin-bottom: 16px;">I'll help you turn your story plan into concrete chapters, scenes, and summaries that stay true to your genre, audience, worldbuilding, and structure in StoryForge Studio.</p>
-                        <div class="note-box" role="note">
-                            Available on creatives.smcantrellbooks.com and nyxen.smcantrellbooks.com for the same project workspace.
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-project" class="form-label">Select Project</label>
-                            <select id="draft-project" class="form-select">
-                                <option>Starbound Heirs</option>
-                                <option>Glass Kingdoms</option>
-                                <option>Neon Fables</option>
-                                <option>Ink & Ember</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-chapter" class="form-label">Which chapter or scene are you drafting?</label>
-                            <select id="draft-chapter" class="form-select">
-                                <option>Chapter 1 - Opening</option>
-                                <option>Chapter 2 - Rising Action</option>
-                                <option>Chapter 3 - Confrontation</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-format" class="form-label">Preferred Format</label>
-                            <select id="draft-format" class="form-select">
-                                <option>Narrative prose</option>
-                                <option>Scene outline</option>
-                                <option>Dialogue-heavy</option>
-                                <option>Action sequence</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-focus" class="form-label">What should we focus on?</label>
-                            <input type="text" id="draft-focus" class="form-input" placeholder="Example: opening hook, tension escalation, or character voice consistency">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="draft-existing" class="form-label">Existing text (optional)</label>
-                            <textarea id="draft-existing" class="form-textarea" placeholder="Paste a draft excerpt and I'll suggest refinements and restructuring"></textarea>
-                        </div>
-
-                        <div style="display: flex; gap: 12px;" role="group" aria-label="Drafting actions">
-                            <button class="btn btn-primary" aria-label="Get draft guidance from Nyxen">Draft Guidance</button>
-                            <button class="btn btn-secondary" aria-label="Get suggestion for next chapter or scene">Suggest Next Chapter/Scene</button>
-                        </div>
-                    </article>
-
-                    <!-- Right Column -->
-                    <div>
-                        <!-- Scene & Cover Art Generator -->
+                <!-- Image Generation -->
+                <div class="vs-panel active" id="vs-image-gen">
+                    <div class="grid-2">
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Scene & Cover Art Generator</h3>
-                            </div>
-                            <p style="color: var(--primary-font); margin-bottom: 16px;">Drafting-ready visuals without outlining or prose skills.</p>
+                            <div class="card-header"><h3 class="card-title">Generate Image</h3></div>
                             <div class="form-group">
-                                <label class="form-label">Project Data Source</label>
-                                <select class="form-select">
-                                    <option>Current Project</option>
-                                    <option>Custom Input</option>
+                                <label class="form-label" for="img-model">Model</label>
+                                <select id="img-model" class="form-select">
+                                    <option value="black-forest-labs/flux-1-schnell">Flux Schnell (Fast)</option>
+                                    <option value="google/imagen-4">Imagen 4</option>
+                                    <option value="bytedance/seedream-4.5">Seedream 4.5</option>
+                                    <option value="wan-ai/wan2.6-image">Wan 2.6 Image</option>
+                                    <option value="ideogram-ai/ideogram-v2a-turbo">Ideogram v2a (Text)</option>
+                                    <option value="ideogram-ai/ideogram-character">Ideogram Character</option>
+                                    <option value="xai/grok-imagine-image/edit">Grok Imagine</option>
+                                    <option value="hidream-ai/hidream-e1-1">HiDream E1</option>
                                 </select>
                             </div>
-                            <button class="btn btn-primary" style="width: 100%;">Generate Art</button>
+                            <div class="form-group">
+                                <label class="form-label" for="img-type">Image Type</label>
+                                <select id="img-type" class="form-select">
+                                    <option>Character Concept</option><option>Cover Art</option><option>Scene Image</option><option>Setting/Environment</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="img-count">Images to Generate</label>
+                                <select id="img-count" class="form-select"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="img-prompt">Detailed Prompt</label>
+                                <textarea id="img-prompt" class="form-textarea" placeholder="Describe the character, setting, mood, visual style, and key details..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="width:100%;" onclick="generateImages()" data-testid="generate-images-btn">
+                                <i class="fas fa-sparkles" aria-hidden="true"></i> Generate Images (5 points)
+                            </button>
                         </div>
-
-                        <!-- Chapter Progress Tracker -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chapter Progress Tracker</h3>
+                            <div class="card-header"><h3 class="card-title">Filter Gallery</h3></div>
+                            <div class="form-group">
+                                <label class="form-label" for="filter-type">Filter by Type</label>
+                                <select id="filter-type" class="form-select" onchange="filterGallery()"><option>All types</option><option>Character Concept</option><option>Cover Art</option><option>Scene Image</option><option>Setting/Environment</option></select>
                             </div>
-                            <div class="checklist-item">
-                                <span style="flex: 1; color: var(--primary-font);">Chapter 1</span>
-                                <span style="color: var(--primary-font);">2,450 words</span>
-                                <span style="background: var(--button-bg); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Draft</span>
+                            <div class="form-group">
+                                <label class="form-label" for="filter-recency">Filter by Recency</label>
+                                <select id="filter-recency" class="form-select" onchange="filterGallery()"><option>All time</option><option>Today</option><option>This week</option><option>This month</option></select>
                             </div>
-                            <div class="checklist-item">
-                                <span style="flex: 1; color: var(--primary-font);">Chapter 2</span>
-                                <span style="color: var(--primary-font);">1,800 words</span>
-                                <span style="background: var(--border-accent); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">In Progress</span>
-                            </div>
-                            <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Manuscript Package Settings</button>
                         </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3 class="card-title">Generated Gallery</h3></div>
+                        <div id="image-gallery" class="gallery-grid">
+                            <div class="gallery-item"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i></div></div>
+                            <div class="gallery-item"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i></div></div>
+                            <div class="gallery-item"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i></div></div>
+                            <div class="gallery-item"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i></div></div>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Drafting Output -->
+                <!-- Image Editing -->
+                <div class="vs-panel" id="vs-image-edit">
+                    <div class="grid-2">
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Drafting Guidance Output</h3>
-                                <button class="btn btn-secondary">
-                                    <i class="fas fa-volume-up"></i> Read Selected
-                                </button>
+                            <div class="card-header"><h3 class="card-title">Edit Image</h3></div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgedit-model">Model</label>
+                                <select id="imgedit-model" class="form-select">
+                                    <option value="bytedance/seedream-4.5/edit">Seedream 4.5 Edit</option>
+                                    <option value="ideogram-ai/ideogram-v2-turbo/edit">Ideogram v2 Edit</option>
+                                    <option value="wan-ai/wan2.6-image-edit">Wan 2.6 Edit</option>
+                                    <option value="black-forest-labs/flux-2-flash/edit">Flux 2 Flash Edit</option>
+                                </select>
                             </div>
-                            <div style="min-height: 150px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
-                                <p style="color: var(--primary-font); opacity: 0.6;">AI guidance will appear here...</p>
+                            <div class="form-group">
+                                <label class="form-label" for="imgedit-source">Source Image</label>
+                                <select id="imgedit-source" class="form-select" onchange="toggleImgEditSource()"><option value="gallery">Select from Gallery</option><option value="upload">Upload from Device</option></select>
+                            </div>
+                            <div id="imgedit-gallery-picker" class="form-group">
+                                <label class="form-label">Select Image</label>
+                                <select id="imgedit-gallery-select" class="form-select"><option value="">-- No images yet. Generate some first. --</option></select>
+                            </div>
+                            <div id="imgedit-upload-picker" class="form-group" style="display:none;">
+                                <label class="form-label">Upload Image</label>
+                                <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgedit-file').click()"><i class="fas fa-upload" aria-hidden="true"></i> Choose File</button>
+                                <input type="file" id="imgedit-file" class="sr-only" accept="image/*" onchange="handleImgEditUpload(event)">
+                            </div>
+                            <div id="imgedit-preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgedit-prompt">Edit Instructions</label>
+                                <textarea id="imgedit-prompt" class="form-textarea" placeholder="Describe what changes to make to the image..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="width:100%;" onclick="editImage()" data-testid="edit-image-btn"><i class="fas fa-magic" aria-hidden="true"></i> Edit Image (5 points)</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Edit Result</h3></div>
+                            <div id="imgedit-output" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-magic" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Edited image will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text to Video -->
+                <div class="vs-panel" id="vs-text-video">
+                    <div class="note-box" role="alert" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;"><strong>Important:</strong> Videos are not saved. Download before closing.</div>
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Create Video from Text</h3></div>
+                            <div class="form-group">
+                                <label class="form-label" for="txtvid-model">Model</label>
+                                <select id="txtvid-model" class="form-select">
+                                    <option value="wan-ai/wan2.2-t2v-a14b/turbo">Wan 2.2 Turbo</option>
+                                    <option value="klingai/kling-v2.6/pro/text-to-video">Kling v2.6 Pro</option>
+                                    <option value="lightricks/ltx-2-19b/text-to-video">LTX 2 19B</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="txtvid-prompt">Video Prompt</label>
+                                <textarea id="txtvid-prompt" class="form-textarea" placeholder="Describe the scene, mood, motion, and visual style..." style="min-height:120px;"></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="width:100%;" onclick="generateTextVideo()" data-testid="generate-text-video-btn"><i class="fas fa-video" aria-hidden="true"></i> Generate Video (10 points)</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Video Preview</h3></div>
+                            <div id="txtvid-output" role="region" aria-live="polite" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-video" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Video preview will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image to Video -->
+                <div class="vs-panel" id="vs-image-video">
+                    <div class="note-box" role="alert" style="margin-bottom:16px;background:rgba(185,28,28,0.15);border-left-color:#b91c1c;"><strong>Important:</strong> Videos are not saved. Download before closing.</div>
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Create Video from Image</h3></div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgvid-model">Model</label>
+                                <select id="imgvid-model" class="form-select">
+                                    <option value="wan-ai/wan2.6-i2v-flash">Wan 2.6 i2v Flash</option>
+                                    <option value="klingai/kling-v2.6/pro/image-to-video">Kling v2.6 Pro i2v</option>
+                                    <option value="lightricks/ltx-2-19b-distilled/image-to-video">LTX 2 19B i2v</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgvid-source">Image Source</label>
+                                <select id="imgvid-source" class="form-select" onchange="toggleImgVidSource()"><option value="gallery">Select from Generated Gallery</option><option value="upload">Upload from Device</option></select>
+                            </div>
+                            <div id="imgvid-gallery-picker" class="form-group">
+                                <label class="form-label">Select Image</label>
+                                <select id="imgvid-gallery-select" class="form-select"><option value="">-- No images yet. Generate some first. --</option></select>
+                            </div>
+                            <div id="imgvid-upload-picker" class="form-group" style="display:none;">
+                                <label class="form-label">Upload Image</label>
+                                <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('imgvid-file').click()"><i class="fas fa-upload" aria-hidden="true"></i> Choose File</button>
+                                <input type="file" id="imgvid-file" class="sr-only" accept="image/*" onchange="handleImgVidUpload(event)">
+                            </div>
+                            <div id="imgvid-preview" style="min-height:80px;background:var(--header-bg);border-radius:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="imgvid-prompt">Motion Description (optional)</label>
+                                <textarea id="imgvid-prompt" class="form-textarea" placeholder="Describe the motion or animation you want..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" style="width:100%;" onclick="generateImageVideo()" data-testid="generate-image-video-btn"><i class="fas fa-film" aria-hidden="true"></i> Generate Video (10 points)</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><h3 class="card-title">Video Preview</h3></div>
+                            <div id="imgvid-output" role="region" aria-live="polite" style="min-height:300px;background:var(--header-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                                <p style="color:var(--primary-font);opacity:0.5;text-align:center;"><i class="fas fa-film" style="font-size:48px;display:block;margin-bottom:12px;" aria-hidden="true"></i>Video preview will appear here</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Page 4: Edit Mode -->
-            <div class="page" id="page-editing">
-                <div class="page-header">
-                    <h1 class="font-serif">Creative Writing Mentor — Edit Mode</h1>
-                    <p>Sharpen voice, continuity, and flow</p>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Project Context -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Project Context</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Current Project</label>
-                            <input type="text" class="form-input" value="Starbound Heirs">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Genre, Tone, or Voice</label>
-                            <input type="text" class="form-input" placeholder="e.g., Dark fantasy, sardonic humor">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Recently Edited Chapters</label>
-                            <input type="text" class="form-input" placeholder="e.g., Chapter 3, Chapter 4">
-                        </div>
-                        <button class="btn btn-primary">Update Context</button>
-                    </div>
-
-                    <!-- Editing Priorities -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Editing Priorities</h3>
-                        </div>
-                        <p style="color: var(--primary-font); margin-bottom: 16px;">Suggested next steps:</p>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="edit1">
-                            <label for="edit1" style="color: var(--primary-font);">Confirm voice consistency across recent chapters</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="edit2">
-                            <label for="edit2" style="color: var(--primary-font);">Check continuity for timeline and character arcs</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="edit3">
-                            <label for="edit3" style="color: var(--primary-font);">Tighten scene openings and endings</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="edit4">
-                            <label for="edit4" style="color: var(--primary-font);">Review formatting for dialogue and section breaks</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Readiness Check -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Readiness Check</h3>
-                    </div>
-                    <div class="grid-2">
-                        <div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="ready1">
-                                <label for="ready1" style="color: var(--primary-font);">All chapters have a complete narrative arc</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="ready2">
-                                <label for="ready2" style="color: var(--primary-font);">Continuity pass completed</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="ready3">
-                                <label for="ready3" style="color: var(--primary-font);">Line edits and style polish finished</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="ready4">
-                                <label for="ready4" style="color: var(--primary-font);">Formatting matches target standard</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="note-box">
-                        Mark items as they are completed to track readiness.
-                    </div>
-                </div>
-
-                <!-- Chat with Nyxen -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Chat with Nyxen</h3>
-                    </div>
-                    <p style="color: var(--primary-font); margin-bottom: 16px;">Start the conversation when you are ready. Share the chapter or scene you're revising, and I'll help you sharpen voice, continuity, and flow with a prioritised, stepwise plan aligned to your genre and audience.</p>
-                    <div class="form-group">
-                        <textarea class="form-textarea" placeholder="Ask about style, continuity, voice, or formatting..."></textarea>
-                    </div>
-                    <div style="display: flex; gap: 12px;">
-                        <button class="btn btn-primary">Send</button>
-                        <button class="btn btn-secondary">Clear Conversation</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 5: Publishing Strategist -->
-            <div class="page" id="page-publishing">
-                <div class="page-header">
-                    <h1 class="font-serif">Story Mentor & Publishing Strategist</h1>
-                    <p>Plan your publishing journey</p>
-                </div>
-
-                <!-- Project Selector -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Focus Project</h3>
-                    </div>
-                    <select class="form-select">
-                        <option>Starbound Heirs</option>
-                        <option>Glass Kingdoms</option>
-                        <option>Neon Fables</option>
-                        <option>Ink & Ember</option>
-                    </select>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Project Snapshot -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Project Snapshot</h3>
-                        </div>
-                        <div style="color: var(--primary-font);">
-                            <p><strong>Title:</strong> Starbound Heirs</p>
-                            <p><strong>Genre:</strong> Science Fantasy</p>
-                            <p><strong>Audience:</strong> Young Adult / New Adult</p>
-                            <p><strong>Format:</strong> Ebook trilogy with audiobook editions</p>
-                        </div>
-                    </div>
-
-                    <!-- Blurb & Tagline -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Blurb & Tagline Suggestions</h3>
-                        </div>
-                        <div style="min-height: 100px; background: var(--header-bg); border-radius: 6px; padding: 16px; margin-bottom: 12px;">
-                            <p style="color: var(--primary-font); opacity: 0.6;">AI-generated blurbs will appear here...</p>
-                        </div>
-                        <div style="display: flex; gap: 12px;">
-                            <button class="btn btn-secondary">Ebook & Audiobook</button>
-                            <button class="btn btn-secondary">Web & Visual Script</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Series Positioning -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Series Positioning & Bundles</h3>
-                        </div>
-                        <div style="min-height: 120px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
-                            <p style="color: var(--primary-font); opacity: 0.6;">AI suggestions for series positioning and bundle structure...</p>
-                        </div>
-                    </div>
-
-                    <!-- Membership Plan Ideas -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Membership Plan Ideas</h3>
-                        </div>
-                        <div style="min-height: 120px; background: var(--header-bg); border-radius: 6px; padding: 16px;">
-                            <p style="color: var(--primary-font); opacity: 0.6;">Suggestions based on your current tier and project formats...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Author Roster -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Author Roster</h3>
-                    </div>
-                    <div class="grid-2">
-                        <div class="author-card">
-                            <div class="author-avatar"><i class="fas fa-user"></i></div>
-                            <div class="author-info">
-                                <h4>Amara Patel</h4>
-                                <p>Rising Author - Ebook first</p>
-                            </div>
-                        </div>
-                        <div class="author-card">
-                            <div class="author-avatar"><i class="fas fa-user"></i></div>
-                            <div class="author-info">
-                                <h4>Jordan Lee</h4>
-                                <p>Narrator Partner - Audiobook only</p>
-                            </div>
-                        </div>
-                        <div class="author-card">
-                            <div class="author-avatar"><i class="fas fa-user"></i></div>
-                            <div class="author-info">
-                                <h4>Miguel Santos</h4>
-                                <p>Creator Studio - Ebook & Visual Script</p>
-                            </div>
-                        </div>
-                        <div class="author-card">
-                            <div class="author-avatar"><i class="fas fa-user"></i></div>
-                            <div class="author-info">
-                                <h4>Sierra Cantrell</h4>
-                                <p>Pro Author - Ebook & Audiobook</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 6: Image Studio -->
-            <div class="page" id="page-image-studio">
-                <div class="page-header">
-                    <h1 class="font-serif">Text to Image Studio</h1>
-                    <p>Generate character concepts, cover art, and scene images</p>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Create Image -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Create Image</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Select Project</label>
-                            <input type="text" class="form-input" placeholder="Search by project title...">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Image Type</label>
-                            <select class="form-select">
-                                <option>Character Concept</option>
-                                <option>Cover Art</option>
-                                <option>Scene Image</option>
-                                <option>Setting/Environment</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Images to Generate</label>
-                            <select class="form-select">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Detailed Prompt</label>
-                            <textarea class="form-textarea" placeholder="Describe the character, setting, mood, visual style, and key details..."></textarea>
-                        </div>
-                        <button class="btn btn-primary" style="width: 100%;">
-                            <i class="fas fa-sparkles"></i> Generate Images (5 points)
-                        </button>
-                    </div>
-
-                    <!-- Filter Gallery -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Filter Gallery</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Filter by Type</label>
-                            <select class="form-select">
-                                <option>All types</option>
-                                <option>Character Concept</option>
-                                <option>Cover Art</option>
-                                <option>Scene Image</option>
-                                <option>Setting/Environment</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Filter by Recency</label>
-                            <select class="form-select">
-                                <option>All time</option>
-                                <option>Today</option>
-                                <option>This week</option>
-                                <option>This month</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Generated Gallery -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Generated Gallery</h3>
-                    </div>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
-                                <i class="fas fa-image" style="font-size: 32px;"></i>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
-                                <i class="fas fa-image" style="font-size: 32px;"></i>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
-                                <i class="fas fa-image" style="font-size: 32px;"></i>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--primary-font); opacity: 0.5;">
-                                <i class="fas fa-image" style="font-size: 32px;"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 7: Membership -->
+            <!-- PAGE: MEMBERSHIP -->
             <section class="page" id="page-membership" role="tabpanel" aria-labelledby="tab-membership">
                 <header class="page-header">
                     <h1 class="font-serif">Storefront & Membership</h1>
                     <p>Choose the plan that fits your creative journey</p>
                 </header>
-
-                <!-- Membership Tiers -->
                 <div class="grid-3" role="list" aria-label="Membership tier options">
-                    <article class="membership-card" role="listitem" aria-labelledby="free-tier-title">
-                        <h2 class="font-serif" id="free-tier-title" style="color: var(--primary-font);">Nyxen Free</h2>
-                        <div class="membership-price" aria-label="Free, zero dollars per month">$0<span>/month</span></div>
-                        <ul class="membership-features" aria-label="Free tier features">
+                    <article class="membership-card" role="listitem">
+                        <h2 class="font-serif" style="color:var(--primary-font);">Nyxen Free</h2>
+                        <div class="membership-price">$0<span>/month</span></div>
+                        <ul class="membership-features">
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>100 points/month</span></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>Story generation</span></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>Image generation</span></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>Video generation</span></li>
-                            <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
+                            <li><i class="fas fa-times" aria-hidden="true" style="opacity:0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-secondary" style="width: 100%;" aria-label="Join Nyxen Free tier">Join Free</button>
+                        <button class="btn btn-secondary" style="width:100%;" onclick="handleCheckout('free')">Join Free</button>
                     </article>
-
-                    <article class="membership-card featured" role="listitem" aria-labelledby="pro-tier-title">
-                        <h2 class="font-serif" id="pro-tier-title" style="color: var(--primary-font);">Nyxen Pro</h2>
-                        <div class="membership-price" aria-label="Five dollars per month">$5<span>/month</span></div>
-                        <ul class="membership-features" aria-label="Pro tier features">
+                    <article class="membership-card featured" role="listitem">
+                        <h2 class="font-serif" style="color:var(--primary-font);">Nyxen Pro</h2>
+                        <div class="membership-price">$5<span>/month</span></div>
+                        <ul class="membership-features">
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>300 points/month</span></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>Story generation</span></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <strong>Unlimited images</strong></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>Video generation</span></li>
-                            <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
+                            <li><i class="fas fa-times" aria-hidden="true" style="opacity:0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-primary" style="width: 100%;" aria-label="Join Nyxen Pro tier for 5 dollars per month">Join Pro</button>
+                        <button class="btn btn-primary" style="width:100%;" onclick="handleCheckout('pro')">Join Pro</button>
                     </article>
-
-                    <article class="membership-card" role="listitem" aria-labelledby="premium-tier-title">
-                        <h2 class="font-serif" id="premium-tier-title" style="color: var(--primary-font);">Nyxen Premium</h2>
-                        <div class="membership-price" aria-label="Ten dollars per month">$10<span>/month</span></div>
-                        <ul class="membership-features" aria-label="Premium tier features">
+                    <article class="membership-card" role="listitem">
+                        <h2 class="font-serif" style="color:var(--primary-font);">Nyxen Premium</h2>
+                        <div class="membership-price">$10<span>/month</span></div>
+                        <ul class="membership-features">
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>600 points/month</span></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <span>Story generation</span></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <strong>Unlimited images</strong></li>
                             <li><i class="fas fa-check" aria-hidden="true"></i> <strong>Unlimited video</strong></li>
-                            <li><i class="fas fa-times" aria-hidden="true" style="opacity: 0.5;"></i> <span>No video storage</span></li>
+                            <li><i class="fas fa-times" aria-hidden="true" style="opacity:0.5;"></i> <span>No video storage</span></li>
                         </ul>
-                        <button class="btn btn-primary" style="width: 100%;" aria-label="Join Nyxen Premium tier for 10 dollars per month">Join Premium</button>
+                        <button class="btn btn-primary" style="width:100%;" onclick="handleCheckout('premium')">Join Premium</button>
                     </article>
                 </div>
-
-                <!-- A La Carte Points -->
-                <article class="card" style="margin-top: 24px;" aria-labelledby="alacarte-title">
-                    <div class="card-header">
-                        <h2 class="card-title" id="alacarte-title">A La Carte Points</h2>
-                    </div>
-                    <div class="grid-2" role="list" aria-label="Point purchase options">
-                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;" role="listitem">
-                            <div>
-                                <h3 style="color: var(--primary-font);">50 Points</h3>
-                                <p style="color: var(--primary-font); opacity: 0.7;">One-time purchase</p>
-                            </div>
-                            <button class="btn btn-primary" aria-label="Purchase 50 points for 2 dollars and 50 cents">$2.50</button>
+                <article class="card" style="margin-top:24px;">
+                    <div class="card-header"><h2 class="card-title">A La Carte Points</h2></div>
+                    <div class="grid-2" role="list">
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--header-bg);border-radius:6px;" role="listitem">
+                            <div><h3 style="color:var(--primary-font);">50 Points</h3><p style="color:var(--primary-font);opacity:0.7;">One-time purchase</p></div>
+                            <button class="btn btn-primary" onclick="handleCheckout('points_50')">$2.50</button>
                         </div>
-                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--header-bg); border-radius: 6px;" role="listitem">
-                            <div>
-                                <h3 style="color: var(--primary-font);">100 Points</h3>
-                                <p style="color: var(--primary-font); opacity: 0.7;">One-time purchase</p>
-                            </div>
-                            <button class="btn btn-primary" aria-label="Purchase 100 points for 5 dollars">$5.00</button>
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--header-bg);border-radius:6px;" role="listitem">
+                            <div><h3 style="color:var(--primary-font);">100 Points</h3><p style="color:var(--primary-font);opacity:0.7;">One-time purchase</p></div>
+                            <button class="btn btn-primary" onclick="handleCheckout('points_100')">$5.00</button>
                         </div>
                     </div>
-                    <div class="note-box" role="note">
-                        No video storage included with point purchases.
-                    </div>
+                    <div class="note-box" role="note">No video storage included with point purchases.</div>
                 </article>
+            </section>
 
-                <!-- Projects -->
-                <div class="card" style="margin-top: 24px;">
-                    <div class="card-header">
-                        <h3 class="card-title">Projects</h3>
-                    </div>
-                    <div class="project-card">
-                        <h4>Starbound Heirs</h4>
-                        <p>Science Fantasy — Ebook trilogy with audiobook editions and potential screenplay adaptation</p>
-                        <button class="btn btn-secondary">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Glass Kingdoms</h4>
-                        <p>Epic Fantasy — Deluxe ebook with maps, audiobook with atmospheric sound design</p>
-                        <button class="btn btn-secondary">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Neon Fables</h4>
-                        <p>Cyberpunk Fairy Tales — Ebook collection, episodic audiobook series, and potential visual script</p>
-                        <button class="btn btn-secondary">Set Active</button>
-                    </div>
-                    <div class="project-card">
-                        <h4>Ink & Ember</h4>
-                        <p>Dark Fantasy Mystery — Single-volume ebook, full-cast audiobook, and bonus illustrated novella</p>
-                        <button class="btn btn-secondary">Set Active</button>
-                    </div>
+            <!-- PAGE: ACCOUNT -->
+            <section class="page" id="page-account" role="tabpanel" aria-labelledby="tab-account">
+                <header class="page-header">
+                    <h1 class="font-serif">Account</h1>
+                    <p>Sign in or manage your profile</p>
+                </header>
+                <div class="grid-2">
+                    <article class="card" id="auth-card-form">
+                        <div id="auth-logged-out">
+                            <div class="card-header"><h2 class="card-title" id="auth-form-title">Login</h2></div>
+                            <div id="auth-error" class="auth-error" role="alert"></div>
+                            <div id="auth-success" class="auth-success" role="status"></div>
+                            <form class="auth-form" id="auth-form" onsubmit="event.preventDefault(); handleAuthSubmit();">
+                                <div class="form-group">
+                                    <label for="auth-email" class="form-label">Email address</label>
+                                    <input type="email" id="auth-email" class="form-input" placeholder="you@example.com" required autocomplete="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="auth-password" class="form-label">Password</label>
+                                    <input type="password" id="auth-password" class="form-input" placeholder="Password" required minlength="6" autocomplete="current-password">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="auth-submit-btn">
+                                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
+                                </button>
+                            </form>
+                            <button style="display:block;text-align:center;margin-top:12px;font-size:13px;color:var(--border-accent);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'Outfit',sans-serif;width:100%;" id="auth-toggle" onclick="toggleAuthMode()">
+                                Don't have an account? Sign Up
+                            </button>
+                            <div class="auth-divider"><span>or</span></div>
+                            <button class="btn btn-google" onclick="handleGoogleLogin()" aria-label="Sign in with Google">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                                Sign in with Google
+                            </button>
+                        </div>
+                        <div id="auth-logged-in" style="display:none;">
+                            <div class="card-header"><h2 class="card-title">My Account</h2></div>
+                            <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--header-bg);border-radius:6px;margin-bottom:16px;">
+                                <div style="width:40px;height:40px;background:var(--icon-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--icon-color);"><i class="fas fa-user" aria-hidden="true"></i></div>
+                                <span id="auth-user-email" style="color:var(--primary-font);font-size:14px;word-break:break-all;"></span>
+                            </div>
+                            <div style="display:flex;flex-direction:column;gap:10px;">
+                                <div><span class="form-label">Membership Tier</span><div id="acct-tier" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">Free</div></div>
+                                <div><span class="form-label">Points Balance</span><div id="acct-points" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">100</div></div>
+                                <div><span class="form-label">Member Since</span><div id="acct-created" style="padding:10px 12px;background:var(--header-bg);border-radius:6px;color:var(--primary-font);font-size:14px;">&mdash;</div></div>
+                            </div>
+                            <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+                                <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="showPage('membership')"><i class="fas fa-arrow-up" aria-hidden="true"></i> Upgrade Plan</button>
+                                <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="acctChangePassword()"><i class="fas fa-key" aria-hidden="true"></i> Change Password</button>
+                                <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="handleLogout()"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-header"><h2 class="card-title">Getting Started</h2></div>
+                        <p style="color:var(--primary-font);line-height:1.7;margin-bottom:16px;">Welcome to Nyxen Creative Stories! Here is how to get the most out of the platform:</p>
+                        <div style="color:var(--primary-font);line-height:1.8;">
+                            <p style="margin-bottom:8px;"><strong>1. Set up your story</strong> &mdash; Use the Story Setup panel in Nyxen to choose your genre, tone, and audience.</p>
+                            <p style="margin-bottom:8px;"><strong>2. Chat with Nyxen</strong> &mdash; Ask Nyxen to help you write stories, chapters, scenes, dialogue, or poetry.</p>
+                            <p style="margin-bottom:8px;"><strong>3. Create visuals</strong> &mdash; Use Visual Studio to generate images and videos for your stories.</p>
+                            <p style="margin-bottom:8px;"><strong>4. Publish when ready</strong> &mdash; Move your finished work to S.M. Cantrell Books for publishing.</p>
+                        </div>
+                        <div class="note-box" role="note" style="margin-top:16px;">Your chat history is saved per session. Log in to keep your conversations across visits.</div>
+                    </article>
                 </div>
             </section>
 
-            <!-- Page 8: Disclosures -->
+            <!-- PAGE: DISCLOSURES -->
             <section class="page" id="page-disclosures" role="tabpanel" aria-labelledby="tab-disclosures">
                 <header class="page-header">
                     <h1 class="font-serif">Disclosures & Policies</h1>
                     <p>Important information about using Nyxen Creative Stories</p>
                 </header>
-
-                <article class="disclosure-card" aria-labelledby="ai-disclosure-title">
-                    <h2 id="ai-disclosure-title"><i class="fas fa-robot" aria-hidden="true"></i> AI Usage Disclosure</h2>
-                    <p>Nyxen, our AI mentor, is an artificial intelligence assistant. All suggestions, creative prompts, and draft content provided by Nyxen are AI-generated. As a creator, you are solely responsible for reviewing, editing, and ensuring the legal and compliance suitability of all generated content before any use or publication.</p>
-                </article>
-
-                <article class="disclosure-card" aria-labelledby="visual-disclosure-title">
-                    <h2 id="visual-disclosure-title"><i class="fas fa-palette" aria-hidden="true"></i> Visual Creations Disclosure</h2>
-                    <p>Images and visual assets generated within Nyxen Creative Stories may also be AI-generated. These creations can sometimes inadvertently resemble existing styles or copyrighted works. It is your responsibility to review all visual assets for appropriate rights, licences, and usage permissions before public release.</p>
-                </article>
-
-                <article class="disclosure-card" aria-labelledby="publication-disclaimer-title">
-                    <h2 id="publication-disclaimer-title"><i class="fas fa-book" aria-hidden="true"></i> Publication Disclaimer</h2>
-                    <p>All decisions regarding the publication of your works, including but not limited to ebooks, audiobooks, print, and digital formats, are exclusively your responsibility as the creator. This includes securing all necessary rights, permissions, and ensuring full legal compliance within your specific jurisdiction.</p>
-                </article>
-
-                <article class="disclosure-card" aria-labelledby="terms-title">
-                    <h2 id="terms-title"><i class="fas fa-file-contract" aria-hidden="true"></i> Terms & Conditions</h2>
-                    <p>By using the Nyxen Creative Stories platform, you signify your agreement to our comprehensive terms and conditions. Please ensure you have read and understood them.</p>
-                    <button class="btn btn-secondary" aria-label="View full terms and conditions document">View Full Terms & Conditions</button>
-                </article>
-
-                <article class="disclosure-card" aria-labelledby="privacy-title">
-                    <h2 id="privacy-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> Privacy Notice</h2>
-                    <p>Your user accounts, creative projects, and uploaded content are handled with care and in accordance with our established privacy practices. We are committed to protecting your data.</p>
-                    <button class="btn btn-secondary" aria-label="View full privacy policy document">View Full Privacy Policy</button>
-                </article>
-
-                <aside class="note-box" style="margin-top: 24px;" role="note" aria-label="Backup recommendation">
-                    <strong>Backup Recommendation:</strong> We recommend downloading and backing up your creations regularly in case of technical issues or data loss.
-                </aside>
+                <article class="disclosure-card"><h2><i class="fas fa-robot" aria-hidden="true"></i> AI Usage Disclosure</h2><p>Nyxen, our AI mentor, is an artificial intelligence assistant. All suggestions, creative prompts, and draft content provided by Nyxen are AI-generated. As a creator, you are solely responsible for reviewing, editing, and ensuring the legal and compliance suitability of all generated content before any use or publication.</p></article>
+                <article class="disclosure-card"><h2><i class="fas fa-palette" aria-hidden="true"></i> Visual Creations Disclosure</h2><p>Images and visual assets generated within Nyxen Creative Stories may also be AI-generated. These creations can sometimes inadvertently resemble existing styles or copyrighted works. It is your responsibility to review all visual assets for appropriate rights, licences, and usage permissions before public release.</p></article>
+                <article class="disclosure-card"><h2><i class="fas fa-book" aria-hidden="true"></i> Publication Disclaimer</h2><p>All decisions regarding the publication of your works, including but not limited to ebooks, audiobooks, print, and digital formats, are exclusively your responsibility as the creator. This includes securing all necessary rights, permissions, and ensuring full legal compliance within your specific jurisdiction.</p></article>
+                <article class="disclosure-card"><h2><i class="fas fa-file-contract" aria-hidden="true"></i> Terms & Conditions</h2><p>By using the Nyxen Creative Stories platform, you signify your agreement to our comprehensive terms and conditions.</p><button class="btn btn-secondary" onclick="window.open('https://smcantrellbooks.com/terms','_blank')">View Full Terms & Conditions</button></article>
+                <article class="disclosure-card"><h2><i class="fas fa-shield-alt" aria-hidden="true"></i> Privacy Notice</h2><p>Your user accounts, creative projects, and uploaded content are handled with care and in accordance with our established privacy practices.</p><button class="btn btn-secondary" onclick="window.open('https://smcantrellbooks.com/privacy','_blank')">View Full Privacy Policy</button></article>
+                <aside class="note-box" style="margin-top:24px;" role="note"><strong>Backup Recommendation:</strong> We recommend downloading and backing up your creations regularly in case of technical issues or data loss.</aside>
             </section>
+
         </main>
-
-        <!-- Side Panel -->
-        <aside class="side-panel" role="complementary" aria-label="Nyxen side panel">
-            <div class="side-panel-header">
-                <h2 class="side-panel-title">Nyxen Panel</h2>
-                <button class="btn btn-secondary" style="padding: 6px 10px;" onclick="toggleSidePanel()" aria-label="Collapse side panel" aria-expanded="true">
-                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="side-panel-tabs" role="tablist" aria-label="Side panel navigation">
-                <button class="side-tab active" onclick="switchSideTab('conversations')" role="tab" aria-selected="true" aria-controls="side-conversations" id="side-tab-conversations">Conversations</button>
-                <button class="side-tab" onclick="switchSideTab('projects')" role="tab" aria-selected="false" aria-controls="side-projects" id="side-tab-projects">Projects</button>
-            </div>
-            <div class="side-panel-content">
-                <!-- Conversations Tab -->
-                <div id="side-conversations" role="tabpanel" aria-labelledby="side-tab-conversations">
-                    <div class="form-group">
-                        <label for="new-conversation-title" class="sr-only">New conversation title</label>
-                        <input type="text" id="new-conversation-title" class="form-input" placeholder="New conversation title...">
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 16px;" aria-label="Create new conversation">
-                        <i class="fas fa-plus" aria-hidden="true"></i> Create
-                    </button>
-                    <nav aria-label="Recent conversations">
-                        <div class="conversation-item" role="button" tabindex="0" aria-label="Story structure discussion, last updated 2 hours ago">
-                            <h3 style="font-size: 14px; color: var(--primary-font);">Story structure discussion</h3>
-                            <p>Last updated: 2 hours ago</p>
-                        </div>
-                        <div class="conversation-item" role="button" tabindex="0" aria-label="Character development, last updated yesterday">
-                            <h3 style="font-size: 14px; color: var(--primary-font);">Character development</h3>
-                            <p>Last updated: Yesterday</p>
-                        </div>
-                        <div class="conversation-item" role="button" tabindex="0" aria-label="World-building ideas, last updated 3 days ago">
-                            <h3 style="font-size: 14px; color: var(--primary-font);">World-building ideas</h3>
-                            <p>Last updated: 3 days ago</p>
-                        </div>
-                    </nav>
-                </div>
-                <!-- Projects Tab -->
-                <div id="side-projects" style="display: none;" role="tabpanel" aria-labelledby="side-tab-projects" aria-hidden="true">
-                    <nav aria-label="Your projects">
-                        <article class="project-card">
-                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Starbound Heirs</h3>
-                            <p>Science Fantasy • Ebook trilogy</p>
-                            <button class="btn btn-secondary" style="width: 100%;" aria-label="Set Starbound Heirs as active project">Set Active</button>
-                        </article>
-                        <article class="project-card">
-                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Glass Kingdoms</h3>
-                            <p>Epic Fantasy • Deluxe ebook</p>
-                            <button class="btn btn-secondary" style="width: 100%;" aria-label="Set Glass Kingdoms as active project">Set Active</button>
-                        </article>
-                        <article class="project-card">
-                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Neon Fables</h3>
-                            <p>Cyberpunk • Ebook collection</p>
-                            <button class="btn btn-secondary" style="width: 100%;" aria-label="Set Neon Fables as active project">Set Active</button>
-                        </article>
-                        <article class="project-card">
-                            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-font);">Ink & Ember</h3>
-                            <p>Dark Fantasy Mystery</p>
-                            <button class="btn btn-secondary" style="width: 100%;" aria-label="Set Ink and Ember as active project">Set Active</button>
-                        </article>
-                    </nav>
-                </div>
-            </div>
-
-            <!-- Auth Block -->
-            <div class="auth-block" id="auth-block" role="region" aria-label="Account authentication">
-                <!-- Logged Out State -->
-                <div id="auth-logged-out">
-                    <h3 class="auth-block-title" id="auth-form-title">Login</h3>
-                    <div id="auth-error" class="auth-error" role="alert"></div>
-                    <div id="auth-success" class="auth-success" role="status"></div>
-                    <form class="auth-form" id="auth-form" onsubmit="event.preventDefault(); handleAuthSubmit();" aria-labelledby="auth-form-title">
-                        <div class="form-group">
-                            <label for="auth-email" class="sr-only">Email address</label>
-                            <input type="email" id="auth-email" class="form-input" placeholder="Email address" required aria-required="true" autocomplete="email" data-testid="auth-email-input">
-                        </div>
-                        <div class="form-group">
-                            <label for="auth-password" class="sr-only">Password</label>
-                            <input type="password" id="auth-password" class="form-input" placeholder="Password" required aria-required="true" minlength="6" autocomplete="current-password" data-testid="auth-password-input">
-                        </div>
-                        <div class="auth-actions">
-                            <button type="submit" class="btn btn-primary" id="auth-submit-btn" data-testid="auth-submit-btn">
-                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
-                            </button>
-                        </div>
-                    </form>
-                    <button class="auth-toggle-link" id="auth-toggle" onclick="toggleAuthMode()" data-testid="auth-toggle-link">
-                        Don't have an account? Sign Up
-                    </button>
-                    <div class="auth-divider"><span>or</span></div>
-                    <button class="btn btn-google" onclick="handleGoogleLogin()" data-testid="auth-google-btn" aria-label="Sign in with Google">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-                        Sign in with Google
-                    </button>
-                </div>
-
-                <!-- Logged In State -->
-                <div id="auth-logged-in" style="display: none;">
-                    <h3 class="auth-block-title">My Account</h3>
-                    <div class="auth-user-info">
-                        <div class="auth-user-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
-                        <span class="auth-user-email" id="auth-user-email" data-testid="auth-user-email"></span>
-                    </div>
-                    <div class="auth-actions" style="flex-direction: column;">
-                        <a href="https://nyxen.smcantrellbooks.com/my-account" target="_blank" class="btn btn-secondary" style="justify-content: center;" aria-label="Manage your account (opens in new tab)" data-testid="auth-my-account-btn">
-                            <i class="fas fa-cog" aria-hidden="true"></i> My Account
-                        </a>
-                        <button class="btn btn-primary" onclick="handleLogout()" style="justify-content: center;" aria-label="Log out of your account" data-testid="auth-logout-btn">
-                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </aside>
     </div>
 
-    <!-- Supabase JS SDK -->
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- JotForm Script -->
-    <script src='https://cdn.jotfor.ms/s/umd/43ddf8c9259/for-form-embed-handler.js'></script>
     <script>
-        // Initialize JotForm
-        if (typeof window.jotformEmbedHandler === 'function') {
-            window.jotformEmbedHandler(
-                "iframe[id='JotFormIFrame-019d3d3c3a537add8379214c3060726a324e']",
-                "https://www.jotform.com"
-            );
+        // ============ NYXEN FILE UPLOAD ============
+        var nyxenPendingFile = null;
+        var nyxenPendingText = null;
+
+        function nyxenHandleFile(event) {
+            var file = event.target.files[0];
+            if (!file) return;
+            if (!file.name.endsWith('.docx')) { alert('Only .docx files are supported.'); return; }
+            var formData = new FormData();
+            formData.append('file', file);
+            var preview = document.getElementById('nyxenFilePreview');
+            var fileName = document.getElementById('nyxenFileName');
+            fileName.textContent = file.name + ' — uploading...';
+            preview.style.display = 'flex';
+            fetch('https://nyxen-creative-stories.onrender.com/api/upload', { method: 'POST', body: formData })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (!data.text) throw new Error('Upload failed');
+                nyxenPendingFile = file.name;
+                nyxenPendingText = data.text;
+                fileName.textContent = file.name + ' (' + (data.word_count || '?') + ' words) — ready';
+                document.getElementById('nyxenChatInput').placeholder = 'Ask Nyxen to review, edit, or give feedback on your document...';
+                document.getElementById('nyxenChatInput').focus();
+            })
+            .catch(function(err) {
+                fileName.textContent = 'Upload failed — ' + err.message;
+                setTimeout(function() { nyxenClearFile(); }, 3000);
+            });
+            event.target.value = '';
         }
 
-        // Announce to screen readers
-        function announce(message) {
-            const announcer = document.getElementById('announcements');
-            announcer.textContent = message;
-            setTimeout(() => { announcer.textContent = ''; }, 1000);
+        function nyxenClearFile() {
+            nyxenPendingFile = null; nyxenPendingText = null;
+            document.getElementById('nyxenFilePreview').style.display = 'none';
+            document.getElementById('nyxenChatInput').placeholder = 'Ask Nyxen anything about your story...';
         }
 
-        // Page Navigation with accessibility
+        // ============ NYXEN CHAT ============
+        var NYXEN_API = 'https://nyxen-ai.onrender.com/api';
+        var NYXEN_AVT = 'https://cdn1.site-media.eu/images/0/24185616/nyxen-hucYBsyp6NvKtsJFls-OUg.jpg';
+        var nyxenConvId = null, nyxenWaiting = false;
+        var nyxenConvos = JSON.parse(localStorage.getItem('nyxen_convos') || '[]');
+        var nyxenStoryContext = JSON.parse(localStorage.getItem('nyxen_story_setup') || '{}');
+
+        function toggleStorySetup() {
+            var panel = document.getElementById('storySetupPanel');
+            var arrow = document.getElementById('storySetupArrow');
+            if (panel.style.display === 'none') { panel.style.display = 'block'; arrow.style.transform = 'rotate(180deg)'; }
+            else { panel.style.display = 'none'; arrow.style.transform = 'rotate(0deg)'; }
+        }
+
+        function applyStorySetup() {
+            var genre = document.getElementById('setup-genre').value;
+            if (!genre) { alert('Please select a genre before applying.'); return; }
+            nyxenStoryContext = { genre: genre, tone: document.getElementById('setup-tone').value.trim(), audience: document.getElementById('setup-audience').value.trim(), style: document.getElementById('setup-style').value.trim() };
+            localStorage.setItem('nyxen_story_setup', JSON.stringify(nyxenStoryContext));
+            announce('Story setup applied: ' + genre);
+            document.getElementById('storySetupPanel').style.display = 'none';
+            document.getElementById('storySetupArrow').style.transform = 'rotate(0deg)';
+        }
+
+        function getStoryContextString() {
+            if (!nyxenStoryContext.genre) return '';
+            var parts = ['Genre: ' + nyxenStoryContext.genre];
+            if (nyxenStoryContext.tone) parts.push('Tone: ' + nyxenStoryContext.tone);
+            if (nyxenStoryContext.audience) parts.push('Audience: ' + nyxenStoryContext.audience);
+            if (nyxenStoryContext.style) parts.push('Writing Style: ' + nyxenStoryContext.style);
+            parts.push('Soft word limit: 60,000 words per project.');
+            return parts.join('. ');
+        }
+
+        function nyxenNewChat() {
+            nyxenConvId = null;
+            document.getElementById('nyxenChatFeed').innerHTML = '<div id="nyxenChatWelcome" style="text-align:center;padding:40px 20px;"><img src="' + NYXEN_AVT + '" alt="Nyxen" style="width:64px;height:64px;border-radius:16px;border:3px solid #d8b588;margin-bottom:14px;"><p style="color:#1a1a1a;font-family:\'Playfair Display\',serif;font-size:20px;font-weight:600;margin-bottom:8px;">Hi, I\'m Nyxen.</p><p style="color:#555;font-size:16px;line-height:1.7;max-width:420px;margin:0 auto;">Your AI storytelling companion. I can help you write stories, chapters, scenes, dialogue, poetry, and more.</p></div>';
+            renderNyxenConvos();
+        }
+
+        function nyxenQuick(t) { document.getElementById('nyxenChatInput').value = t; sendNyxenChat(); }
+
+        function renderNyxenConvos() {
+            var list = document.getElementById('nyxenConvoList');
+            if (!nyxenConvos.length) { list.innerHTML = '<div style="padding:16px 8px;text-align:center;color:rgba(255,255,255,.3);font-size:12px;font-style:italic;">Your chats appear here</div>'; return; }
+            list.innerHTML = nyxenConvos.map(function(c) {
+                var isActive = c.id === nyxenConvId;
+                return '<div style="padding:9px 12px;border-radius:8px;cursor:pointer;margin-bottom:3px;background:' + (isActive ? 'rgba(216,181,136,.2)' : 'transparent') + ';border-left:' + (isActive ? '3px solid #d8b588' : '3px solid transparent') + ';" onclick="nyxenLoadConvo(\'' + c.id + '\')">' +
+                    '<div style="font-size:13px;color:' + (isActive ? '#d8b588' : 'rgba(255,255,255,.75)') + ';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + c.title + '</div></div>';
+            }).join('');
+        }
+
+        function nyxenLoadConvo(id) { nyxenConvId = id; renderNyxenConvos(); }
+
+        function nyxenSaveConvo(id, firstMsg) {
+            var title = firstMsg.length > 38 ? firstMsg.substring(0, 38) + '...' : firstMsg;
+            if (!nyxenConvos.find(function(c) { return c.id === id; })) {
+                nyxenConvos.unshift({ id: id, title: title });
+                nyxenConvos = nyxenConvos.slice(0, 40);
+                localStorage.setItem('nyxen_convos', JSON.stringify(nyxenConvos));
+                renderNyxenConvos();
+            }
+        }
+
+        function nyxenAddMsg(role, content) {
+            var feed = document.getElementById('nyxenChatFeed');
+            var welcome = document.getElementById('nyxenChatWelcome'); if (welcome) welcome.remove();
+            var div = document.createElement('div');
+            div.style.cssText = 'display:flex;gap:12px;animation:nyxFadeIn .2s ease;' + (role === 'user' ? 'flex-direction:row-reverse;' : '');
+            if (role === 'assistant') {
+                div.innerHTML = '<img src="' + NYXEN_AVT + '" style="width:32px;height:32px;border-radius:9px;border:2px solid #d8b588;object-fit:cover;flex-shrink:0;margin-top:2px;"><div style="flex:1;max-width:82%;"><div style="font-size:12px;color:#8B5CA8;font-weight:600;margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase;">Nyxen</div><div style="padding:13px 17px;background:#fff;border:1.5px solid #e0d8ed;border-radius:14px;border-top-left-radius:3px;font-size:16px;color:#1a1a1a;line-height:1.75;">' + content.replace(/\n/g, '<br>') + '</div></div>';
+            } else {
+                div.innerHTML = '<div style="width:32px;height:32px;border-radius:9px;background:#2D1249;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#d8b588;flex-shrink:0;margin-top:2px;">U</div><div style="flex:1;max-width:82%;text-align:right;"><div style="font-size:12px;color:#999;font-weight:600;margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase;">You</div><div style="padding:13px 17px;background:#2D1249;border-radius:14px;border-top-right-radius:3px;font-size:16px;color:#fff;line-height:1.75;display:inline-block;text-align:left;">' + content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>') + '</div></div>';
+            }
+            feed.appendChild(div); feed.scrollTop = feed.scrollHeight;
+        }
+
+        function sendNyxenChat() {
+            if (nyxenWaiting) return;
+            var inp = document.getElementById('nyxenChatInput'), msg = inp.value.trim();
+            if (!msg) return;
+            inp.value = ''; nyxenAddMsg('user', msg); nyxenWaiting = true;
+            var btn = document.getElementById('nyxenChatBtn'); btn.disabled = true; btn.textContent = '...';
+            var feed = document.getElementById('nyxenChatFeed');
+            var thinking = document.createElement('div'); thinking.id = 'nyxenThinking'; thinking.style.cssText = 'display:flex;gap:12px;';
+            thinking.innerHTML = '<img src="' + NYXEN_AVT + '" style="width:32px;height:32px;border-radius:9px;border:2px solid #d8b588;object-fit:cover;flex-shrink:0;margin-top:2px;"><div><div style="display:flex;gap:5px;padding:13px 17px;background:#fff;border:1.5px solid #e0d8ed;border-radius:14px;border-top-left-radius:3px;"><span style="width:8px;height:8px;background:#8B5CA8;border-radius:50%;display:inline-block;animation:nyxBounce 1.4s infinite;"></span><span style="width:8px;height:8px;background:#8B5CA8;border-radius:50%;display:inline-block;animation:nyxBounce 1.4s .2s infinite;"></span><span style="width:8px;height:8px;background:#8B5CA8;border-radius:50%;display:inline-block;animation:nyxBounce 1.4s .4s infinite;"></span></div><div style="font-size:12px;color:#8B5CA8;font-style:italic;margin-top:4px;padding-left:2px;">Nyxen is writing...</div></div>';
+            feed.appendChild(thinking); feed.scrollTop = feed.scrollHeight;
+
+            var storyCtx = getStoryContextString(), fullMsg = msg;
+            if (nyxenPendingText) {
+                fullMsg = 'The user has uploaded a document titled "' + nyxenPendingFile + '" for review.\n\nDocument content:\n' + nyxenPendingText.substring(0, 8000) + (nyxenPendingText.length > 8000 ? '\n\n[Document truncated]' : '') + '\n\nUser request: ' + msg;
+                nyxenClearFile();
+            } else if (storyCtx) { fullMsg = 'Story context: ' + storyCtx + '\n\nUser: ' + msg; }
+
+            var body = { messages: [{ role: 'user', content: fullMsg }], mode: 'storyteller', response_mode: 'balanced', system_context: 'You are Nyxen, the AI storytelling companion on the Nyxen Creative Stories platform. You help writers create stories, chapters, scenes, dialogue, poetry, and more. Write in plain prose. No markdown symbols like **, ##, or bullet dashes. Be warm, creative, and helpful. Guide beginners through the writing process step by step.' };
+            if (nyxenConvId) body.conversation_id = nyxenConvId;
+
+            fetch(NYXEN_API + '/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                var t = document.getElementById('nyxenThinking'); if (t) t.remove();
+                if (data.conversation_id) { if (!nyxenConvId) nyxenSaveConvo(data.conversation_id, msg); nyxenConvId = data.conversation_id; }
+                nyxenAddMsg('assistant', data.response || data.content || 'Something went wrong. Please try again.');
+            })
+            .catch(function() { var t = document.getElementById('nyxenThinking'); if (t) t.remove(); nyxenAddMsg('assistant', 'Connection error. Please try again.'); })
+            .finally(function() { nyxenWaiting = false; btn.disabled = false; btn.textContent = 'Send'; document.getElementById('nyxenChatInput').focus(); });
+        }
+
+        renderNyxenConvos();
+
+        // ============ CORE FUNCTIONS ============
+        function announce(message) { var a = document.getElementById('announcements'); a.textContent = message; setTimeout(function() { a.textContent = ''; }, 1000); }
+        function escapeHtml(str) { var d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+
         function showPage(pageId) {
-            // Hide all pages and update ARIA
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-                page.setAttribute('aria-hidden', 'true');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-                btn.setAttribute('aria-selected', 'false');
-            });
-            
-            // Show selected page
-            const page = document.getElementById('page-' + pageId);
-            const tab = document.querySelector(`[data-page="${pageId}"]`);
-            
-            page.classList.add('active');
-            page.setAttribute('aria-hidden', 'false');
-            page.removeAttribute('aria-hidden');
-            
-            tab.classList.add('active');
-            tab.setAttribute('aria-selected', 'true');
-            
-            // Focus on page heading for screen readers
-            const heading = page.querySelector('h1');
-            if (heading) {
-                heading.setAttribute('tabindex', '-1');
-                heading.focus();
+            document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
+            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+            var page = document.getElementById('page-' + pageId); if (!page) return;
+            var tab = document.querySelector('[data-page="' + pageId + '"]');
+            page.classList.add('active'); page.removeAttribute('aria-hidden');
+            if (tab) { tab.classList.add('active'); tab.setAttribute('aria-selected','true'); }
+            var h = page.querySelector('h1'); if (h) { h.setAttribute('tabindex','-1'); h.focus(); }
+            announce('Navigated to ' + (tab ? tab.textContent.trim() : pageId) + ' page');
+            if (pageId === 'account') updateAccountPage();
+        }
+
+        var currentVisualMode = 'image-gen';
+        function selectVisualMode(element, mode) {
+            document.querySelectorAll('#page-visual-studio .mode-card').forEach(function(c) { c.classList.remove('active'); c.setAttribute('aria-checked','false'); });
+            element.classList.add('active'); element.setAttribute('aria-checked','true');
+            document.querySelectorAll('.vs-panel').forEach(function(p) { p.classList.remove('active'); });
+            var panel = document.getElementById('vs-' + mode); if (panel) panel.classList.add('active');
+            currentVisualMode = mode;
+            announce('Selected ' + element.querySelector('span').textContent + ' mode');
+        }
+
+        // ============ API KEYS ============
+        var GROQ_KEY = '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';
+        var APIFREE_KEY = 'sk-peDA9ErrJtAwG7hD4WTCKEHWMi3Y1';
+        var APIFREE_BASE = 'https://api.apifree.ai';
+
+        async function apifreeSubmitAndPoll(type, body, maxWaitMs) {
+            maxWaitMs = maxWaitMs || 120000;
+            var submitRes = await fetch(APIFREE_BASE + '/v1/' + type + '/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + APIFREE_KEY }, body: JSON.stringify(body) });
+            var submitData = await submitRes.json();
+            if (submitData.code !== 200 || !submitData.resp_data || !submitData.resp_data.request_id) throw new Error(submitData.error ? submitData.error.message : 'Submit failed');
+            var requestId = submitData.resp_data.request_id, start = Date.now();
+            while (Date.now() - start < maxWaitMs) {
+                await new Promise(function(r) { setTimeout(r, 3000); });
+                var pollRes = await fetch(APIFREE_BASE + '/v1/' + type + '/' + requestId + '/result', { headers: { 'Authorization': 'Bearer ' + APIFREE_KEY } });
+                var pollData = await pollRes.json();
+                if (pollData.resp_data && pollData.resp_data.status === 'success') return pollData.resp_data;
+                if (pollData.resp_data && pollData.resp_data.status === 'failed') throw new Error('Generation failed');
             }
-            
-            // Announce page change
-            announce('Navigated to ' + tab.textContent.trim() + ' page');
+            throw new Error('Generation timed out');
         }
 
-        // Mode Selector with accessibility
-        function selectMode(element, mode) {
-            document.querySelectorAll('.mode-card').forEach(card => {
-                card.classList.remove('active');
-                card.setAttribute('aria-checked', 'false');
-            });
-            element.classList.add('active');
-            element.setAttribute('aria-checked', 'true');
-            
-            const modeName = element.querySelector('span').textContent;
-            announce('Selected ' + modeName + ' mode');
+        // ============ STRIPE ============
+        var STRIPE_LINKS = { free: 'https://buy.stripe.com/eVqcN48bQ1EKbx92rr2Nq0a', pro: 'https://buy.stripe.com/28E14m4ZE4QW7gT8PP2Nq0b', premium: 'https://buy.stripe.com/eVqfZggIm2IO1Wzea92Nq0c', points_50: 'https://buy.stripe.com/9B6eVcfEigzEbx9c212Nq09', points_100: 'https://buy.stripe.com/4gM6oGfEi2IOcBd5DD2Nq08' };
+        function handleCheckout(key) { var url = STRIPE_LINKS[key]; if (!url) { alert('Payment link not available.'); return; } window.location.href = url; }
+
+        // ============ SAFETY ============
+        var BLOCKED_PATTERNS = [/\b(kill|murder|assault|rape|torture|abuse|molest|bomb|weapon|terrorism|suicide)\b/i, /\b(child\s*porn|cp|nsfw\s*minor|underage)\b/i, /\b(hack|exploit|phish|malware|ddos)\b/i];
+        function isPromptSafe(text) { for (var i = 0; i < BLOCKED_PATTERNS.length; i++) { if (BLOCKED_PATTERNS[i].test(text)) return false; } return true; }
+        function checkContentSafety(text) { if (!isPromptSafe(text)) { alert('Your prompt contains content that violates our safety guidelines.'); return false; } return true; }
+
+        // ============ POINTS ============
+        var userPoints = parseInt(localStorage.getItem('nyxen_points') || '100');
+        function updatePointsDisplay() { document.querySelector('.points-display').textContent = userPoints + ' Points'; }
+        function deductPoints(cost) { if (userPoints < cost) { alert('Not enough points. You need ' + cost + '. You have ' + userPoints + '.'); return false; } userPoints -= cost; syncPoints(); updatePointsDisplay(); return true; }
+        function syncPoints() { localStorage.setItem('nyxen_points', userPoints); sbSavePoints(); }
+
+        // ============ SUPABASE DATA ============
+        var currentUserId = null;
+        async function sbSavePoints() { if (!supabaseClient || !currentUserId) return; try { await supabaseClient.from('profiles').update({ points: userPoints }).eq('id', currentUserId); } catch(e) {} }
+        async function sbUpsertGallery(g) { if (!supabaseClient || !currentUserId) return; try { await supabaseClient.from('gallery').upsert({ user_id: currentUserId, data: JSON.stringify(g), updated_at: new Date().toISOString() }, { onConflict: 'user_id' }); } catch(e) {} }
+        async function sbFetchGallery() { if (!supabaseClient || !currentUserId) return null; try { var r = await supabaseClient.from('gallery').select('data').eq('user_id', currentUserId).single(); if (r.data && r.data.data) return JSON.parse(r.data.data); } catch(e) {} return null; }
+        function syncGallery() { localStorage.setItem('nyxen_gallery', JSON.stringify(generatedImages.slice(0, 50))); sbUpsertGallery(generatedImages.slice(0, 50)); }
+
+        // ============ IMAGE GEN ============
+        var generatedImages = JSON.parse(localStorage.getItem('nyxen_gallery') || '[]');
+
+        async function generateImages() {
+            var prompt = document.getElementById('img-prompt').value.trim();
+            if (!prompt) { alert('Please enter a prompt.'); return; }
+            if (!checkContentSafety(prompt)) return;
+            var count = parseInt(document.getElementById('img-count').value), pointsCost = 5 * count;
+            if (!deductPoints(pointsCost)) return;
+            var type = document.getElementById('img-type').value, model = document.getElementById('img-model').value;
+            var gallery = document.getElementById('image-gallery');
+            gallery.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:24px;"></i><p style="margin-top:12px;">Generating...</p></div>';
+            for (var i = 0; i < count; i++) { try { var result = await apifreeSubmitAndPoll('image', { model: model, prompt: prompt, num_images: 1, width: 1024, height: 1024 }, 60000); if (result.image_list && result.image_list[0]) generatedImages.unshift({ url: result.image_list[0], type: type, date: new Date().toISOString(), prompt: prompt }); } catch(err) { console.error(err); } }
+            syncGallery(); renderGallery(); populateImgVidGallery(); populateImgEditGallery(); announce(count + ' image(s) generated');
         }
 
-        // Handle keyboard for mode selection
-        function handleModeKeypress(event, element, mode) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                selectMode(element, mode);
-            }
+        function renderGallery() {
+            var gallery = document.getElementById('image-gallery'), items = generatedImages;
+            var tf = document.getElementById('filter-type').value, rf = document.getElementById('filter-recency').value;
+            if (tf !== 'All types') items = items.filter(function(i) { return i.type === tf; });
+            if (rf === 'Today') { var d = new Date().toDateString(); items = items.filter(function(i) { return new Date(i.date).toDateString() === d; }); }
+            else if (rf === 'This week') { var w = Date.now() - 7*86400000; items = items.filter(function(i) { return new Date(i.date).getTime() > w; }); }
+            else if (rf === 'This month') { var m = Date.now() - 30*86400000; items = items.filter(function(i) { return new Date(i.date).getTime() > m; }); }
+            if (!items.length) { gallery.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--primary-font);opacity:0.5;"><i class="fas fa-image" style="font-size:32px;"></i><p>No images yet</p></div>'; return; }
+            gallery.innerHTML = '';
+            items.forEach(function(img) { var item = document.createElement('div'); item.className = 'gallery-item'; item.onclick = function() { openLightbox(img.url); }; item.innerHTML = '<img src="' + img.url + '" alt="Generated ' + img.type + '" loading="lazy"><a href="' + img.url + '" download class="dl-btn" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>'; gallery.appendChild(item); });
+        }
+        function filterGallery() { renderGallery(); }
+        function openLightbox(url) {
+            var lb = document.createElement('div'); lb.id = 'lightbox'; lb.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;';
+            lb.innerHTML = '<img src="' + url + '" style="max-width:90%;max-height:80%;border-radius:8px;"><div style="margin-top:16px;display:flex;gap:12px;"><a href="' + url + '" download class="btn btn-primary" onclick="event.stopPropagation()"><i class="fas fa-download"></i> Download</a><button class="btn btn-secondary" onclick="event.stopPropagation();document.getElementById(\'lightbox\').remove()">Close</button></div>';
+            lb.addEventListener('click', function(e) { if (e.target === lb) lb.remove(); }); document.body.appendChild(lb);
         }
 
-        // Side Panel Tabs with accessibility
-        function switchSideTab(tab) {
-            document.querySelectorAll('.side-tab').forEach(t => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-            });
-            event.target.classList.add('active');
-            event.target.setAttribute('aria-selected', 'true');
-            
-            const conversationsTab = document.getElementById('side-conversations');
-            const projectsTab = document.getElementById('side-projects');
-            
-            conversationsTab.style.display = tab === 'conversations' ? 'block' : 'none';
-            conversationsTab.setAttribute('aria-hidden', tab === 'conversations' ? 'false' : 'true');
-            
-            projectsTab.style.display = tab === 'projects' ? 'block' : 'none';
-            projectsTab.setAttribute('aria-hidden', tab === 'projects' ? 'false' : 'true');
-            
-            announce('Switched to ' + tab + ' panel');
+        // ============ IMAGE EDIT ============
+        var imgEditSelectedUrl = null;
+        function toggleImgEditSource() { var s = document.getElementById('imgedit-source').value; document.getElementById('imgedit-gallery-picker').style.display = s === 'gallery' ? 'block' : 'none'; document.getElementById('imgedit-upload-picker').style.display = s === 'upload' ? 'block' : 'none'; imgEditSelectedUrl = null; document.getElementById('imgedit-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>'; }
+        function populateImgEditGallery() {
+            var sel = document.getElementById('imgedit-gallery-select'); sel.innerHTML = '';
+            if (!generatedImages.length) { sel.innerHTML = '<option value="">-- No images yet --</option>'; return; }
+            sel.innerHTML = '<option value="">-- Choose an image --</option>';
+            generatedImages.forEach(function(img) { sel.innerHTML += '<option value="' + img.url + '">' + img.type + ' — ' + (img.prompt||'').substring(0,40) + '</option>'; });
+            sel.onchange = function() { imgEditSelectedUrl = sel.value || null; document.getElementById('imgedit-preview').innerHTML = imgEditSelectedUrl ? '<img src="' + imgEditSelectedUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">' : '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>'; };
+        }
+        function handleImgEditUpload(event) { var file = event.target.files[0]; if (!file) return; var localUrl = URL.createObjectURL(file); document.getElementById('imgedit-preview').innerHTML = '<img src="' + localUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">'; imgEditSelectedUrl = null; event.target.value = ''; }
+        async function editImage() {
+            if (!imgEditSelectedUrl) { alert('Please select a source image.'); return; }
+            var prompt = document.getElementById('imgedit-prompt').value.trim();
+            if (!prompt) { alert('Please describe the edits.'); return; }
+            if (!checkContentSafety(prompt) || !deductPoints(5)) return;
+            var model = document.getElementById('imgedit-model').value, output = document.getElementById('imgedit-output');
+            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Editing...</p></div>';
+            try { var result = await apifreeSubmitAndPoll('image', { model: model, prompt: prompt, image_url: imgEditSelectedUrl, num_images: 1, width: 1024, height: 1024 }, 60000);
+                if (result.image_list && result.image_list[0]) { var u = result.image_list[0]; generatedImages.unshift({ url: u, type: 'Edited', date: new Date().toISOString(), prompt: 'Edit: ' + prompt }); syncGallery(); renderGallery(); output.innerHTML = '<img src="' + u + '" style="width:100%;border-radius:6px;"><div style="margin-top:12px;"><a href="' + u + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>'; }
+                else { output.innerHTML = '<p style="color:#b91c1c;text-align:center;">No image returned.</p>'; userPoints += 5; syncPoints(); updatePointsDisplay(); }
+            } catch(err) { output.innerHTML = '<p style="color:#b91c1c;text-align:center;">' + escapeHtml(err.message) + '</p>'; userPoints += 5; syncPoints(); updatePointsDisplay(); }
         }
 
-        // Toggle Side Panel
-        function toggleSidePanel() {
-            const panel = document.querySelector('.side-panel');
-            const isVisible = panel.style.display !== 'none';
-            panel.style.display = isVisible ? 'none' : 'flex';
-            panel.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
-            announce(isVisible ? 'Side panel hidden' : 'Side panel shown');
+        // ============ TEXT-TO-VIDEO ============
+        async function generateTextVideo() {
+            var prompt = document.getElementById('txtvid-prompt').value.trim();
+            if (!prompt) { alert('Enter a video prompt.'); return; }
+            if (!isPromptSafe(prompt)) { alert('Prompt blocked.'); return; }
+            if (!deductPoints(10)) return;
+            var model = document.getElementById('txtvid-model').value, output = document.getElementById('txtvid-output');
+            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video... 1-2 minutes</p></div>';
+            try { var result = await apifreeSubmitAndPoll('video', { model: model, prompt: prompt }, 180000); var url = (result.video_list && result.video_list[0]) || result.url;
+                if (url) { output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + url + '" type="video/mp4"></video><div style="margin-top:12px;"><a href="' + url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>'; }
+                else { output.innerHTML = '<p style="color:#b91c1c;text-align:center;">No video returned.</p>'; userPoints += 10; syncPoints(); updatePointsDisplay(); }
+            } catch(err) { output.innerHTML = '<p style="color:#b91c1c;text-align:center;">' + escapeHtml(err.message) + '</p>'; userPoints += 10; syncPoints(); updatePointsDisplay(); }
         }
 
-        // Submit question function
-        function submitQuestion() {
-            const input = document.getElementById('ask-input');
-            if (input.value.trim()) {
-                announce('Question submitted');
-                // Add submission logic here
-            }
+        // ============ IMAGE-TO-VIDEO ============
+        var imgVidSelectedUrl = null;
+        function toggleImgVidSource() { var s = document.getElementById('imgvid-source').value; document.getElementById('imgvid-gallery-picker').style.display = s === 'gallery' ? 'block' : 'none'; document.getElementById('imgvid-upload-picker').style.display = s === 'upload' ? 'block' : 'none'; imgVidSelectedUrl = null; document.getElementById('imgvid-preview').innerHTML = '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>'; }
+        function handleImgVidUpload(event) { var file = event.target.files[0]; if (!file) return; var localUrl = URL.createObjectURL(file); document.getElementById('imgvid-preview').innerHTML = '<img src="' + localUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">'; imgVidSelectedUrl = null; event.target.value = ''; }
+        function populateImgVidGallery() {
+            var sel = document.getElementById('imgvid-gallery-select'); sel.innerHTML = '';
+            if (!generatedImages.length) { sel.innerHTML = '<option value="">-- No images yet --</option>'; return; }
+            sel.innerHTML = '<option value="">-- Choose an image --</option>';
+            generatedImages.forEach(function(img) { sel.innerHTML += '<option value="' + img.url + '">' + img.type + ' — ' + (img.prompt||'').substring(0,40) + '</option>'; });
+            sel.onchange = function() { imgVidSelectedUrl = sel.value || null; document.getElementById('imgvid-preview').innerHTML = imgVidSelectedUrl ? '<img src="' + imgVidSelectedUrl + '" style="max-width:100%;max-height:200px;border-radius:6px;">' : '<p style="color:var(--primary-font);opacity:0.5;font-size:13px;">No image selected</p>'; };
+        }
+        async function generateImageVideo() {
+            if (!imgVidSelectedUrl) { alert('Please select an image.'); return; }
+            var prompt = document.getElementById('imgvid-prompt').value.trim() || 'Smooth cinematic motion';
+            if (!isPromptSafe(prompt)) { alert('Prompt blocked.'); return; }
+            if (!deductPoints(10)) return;
+            var model = document.getElementById('imgvid-model').value, output = document.getElementById('imgvid-output');
+            output.innerHTML = '<div style="text-align:center;color:var(--primary-font);"><i class="fas fa-spinner fa-spin" style="font-size:32px;"></i><p style="margin-top:12px;">Generating video... 1-2 minutes</p></div>';
+            try { var result = await apifreeSubmitAndPoll('video', { model: model, prompt: prompt, image_url: imgVidSelectedUrl }, 180000); var url = (result.video_list && result.video_list[0]) || result.url;
+                if (url) { output.innerHTML = '<video controls autoplay style="width:100%;border-radius:6px;"><source src="' + url + '" type="video/mp4"></video><div style="margin-top:12px;"><a href="' + url + '" download class="btn btn-primary"><i class="fas fa-download"></i> Download</a></div>'; }
+                else { output.innerHTML = '<p style="color:#b91c1c;text-align:center;">No video returned.</p>'; userPoints += 10; syncPoints(); updatePointsDisplay(); }
+            } catch(err) { output.innerHTML = '<p style="color:#b91c1c;text-align:center;">' + escapeHtml(err.message) + '</p>'; userPoints += 10; syncPoints(); updatePointsDisplay(); }
         }
 
-        // Act Tabs with accessibility
-        document.querySelectorAll('.act-tab').forEach((tab, index) => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.act-tab').forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
-                this.classList.add('active');
-                this.setAttribute('aria-selected', 'true');
-                announce('Switched to ' + this.textContent);
-            });
-            
-            // Keyboard navigation for act tabs
-            tab.addEventListener('keydown', function(e) {
-                const tabs = Array.from(document.querySelectorAll('.act-tab'));
-                const currentIndex = tabs.indexOf(this);
-                
-                if (e.key === 'ArrowRight') {
-                    e.preventDefault();
-                    const nextTab = tabs[(currentIndex + 1) % tabs.length];
-                    nextTab.focus();
-                    nextTab.click();
-                } else if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    const prevTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
-                    prevTab.focus();
-                    prevTab.click();
-                }
-            });
-        });
-
-        // Main tab keyboard navigation
-        document.querySelectorAll('.tab-btn').forEach((tab, index) => {
-            tab.addEventListener('keydown', function(e) {
-                const tabs = Array.from(document.querySelectorAll('.tab-btn'));
-                const currentIndex = tabs.indexOf(this);
-                
-                if (e.key === 'ArrowRight') {
-                    e.preventDefault();
-                    const nextTab = tabs[(currentIndex + 1) % tabs.length];
-                    nextTab.focus();
-                } else if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    const prevTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
-                    prevTab.focus();
-                } else if (e.key === 'Home') {
-                    e.preventDefault();
-                    tabs[0].focus();
-                } else if (e.key === 'End') {
-                    e.preventDefault();
-                    tabs[tabs.length - 1].focus();
-                }
-            });
-        });
-
-        // Initialize ARIA states on load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set initial ARIA states for pages
-            document.querySelectorAll('.page').forEach(page => {
-                if (!page.classList.contains('active')) {
-                    page.setAttribute('aria-hidden', 'true');
-                }
-            });
-            
-            // Set initial ARIA states for side panel tabs
-            document.getElementById('side-projects').setAttribute('aria-hidden', 'true');
-
-            // Initialize Supabase Auth
-            initAuth();
-        });
+        // ============ ACCOUNT ============
+        function updateAccountPage() {
+            if (!supabaseClient) return;
+            supabaseClient.auth.getUser().then(function(res) { var user = res.data.user; if (user) { document.getElementById('acct-created').textContent = user.created_at ? new Date(user.created_at).toLocaleDateString() : '—';
+                supabaseClient.from('profiles').select('tier, points').eq('id', user.id).single().then(function(r) { if (r.data) { document.getElementById('acct-tier').textContent = r.data.tier || 'Free'; document.getElementById('acct-points').textContent = (r.data.points || 100) + ' points'; } }); } });
+        }
+        async function acctChangePassword() { var p = prompt('Enter new password (min 6 characters):'); if (!p || p.length < 6) { alert('Min 6 characters.'); return; } var r = await supabaseClient.auth.updateUser({ password: p }); if (r.error) alert('Error: ' + r.error.message); else alert('Password updated.'); }
 
         // ============ SUPABASE AUTH ============
-        const SUPABASE_URL = 'https://recyyhvdvuupxhbxmzal.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlY3l5aHZkdnV1cHhoYnhtemFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjc0MDAsImV4cCI6MjA4OTcwMzQwMH0.kO4niR2v4hgPFi2iQ8R8I1Id_COcRH_z4SsXc6W93AM';
-
-        let supabaseClient = null;
-        let authMode = 'login'; // 'login' or 'signup'
+        var SUPABASE_URL = 'https://dxtjkdhhcbbbvfqpevyj.supabase.co';
+        var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dGprZGhoY2JiYnZmcXBldnlqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1OTY4MDksImV4cCI6MjA5MTE3MjgwOX0.Df-nRTY2QRDRwaarUrJASZNNzc6-glqz-fdYI2Ls9b8';
+        var supabaseClient = null, authMode = 'login', currentAuthUser = null;
 
         function initAuth() {
             if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
                 supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                
-                // Listen for auth state changes
-                supabaseClient.auth.onAuthStateChange(function(event, session) {
-                    if (session && session.user) {
-                        showLoggedInState(session.user);
-                        fetchProfile(session.user.id);
-                    } else {
-                        showLoggedOutState();
-                    }
-                });
-
-                // Check initial session
-                supabaseClient.auth.getSession().then(function(result) {
-                    var session = result.data.session;
-                    if (session && session.user) {
-                        showLoggedInState(session.user);
-                        fetchProfile(session.user.id);
-                    }
-                });
-            } else {
-                console.warn('Supabase SDK not loaded.');
+                supabaseClient.auth.onAuthStateChange(function(event, session) { if (session && session.user) { showLoggedInState(session.user); fetchProfile(session.user.id); } else showLoggedOutState(); });
+                supabaseClient.auth.getSession().then(function(r) { var s = r.data.session; if (s && s.user) { showLoggedInState(s.user); fetchProfile(s.user.id); } });
             }
         }
 
@@ -1913,149 +1460,82 @@
             document.getElementById('auth-logged-out').style.display = 'none';
             document.getElementById('auth-logged-in').style.display = 'block';
             document.getElementById('auth-user-email').textContent = user.email || 'User';
+            currentUserId = user.id; currentAuthUser = user;
             announce('Logged in as ' + (user.email || 'User'));
+            loadUserData();
+        }
+
+        async function loadUserData() {
+            var g = await sbFetchGallery(); if (g) { generatedImages = g; renderGallery(); populateImgVidGallery(); populateImgEditGallery(); }
         }
 
         function showLoggedOutState() {
             document.getElementById('auth-logged-out').style.display = 'block';
             document.getElementById('auth-logged-in').style.display = 'none';
-            // Reset tier/points to defaults
             document.querySelector('.tier-badge').textContent = 'Free Tier';
-            document.querySelector('.points-display').textContent = '100 Points';
-            document.querySelector('.points-display').setAttribute('aria-label', '100 points available');
+            currentUserId = null; currentAuthUser = null; userPoints = 100; syncPoints(); updatePointsDisplay();
         }
 
         function toggleAuthMode() {
-            var title = document.getElementById('auth-form-title');
-            var submitBtn = document.getElementById('auth-submit-btn');
-            var toggleLink = document.getElementById('auth-toggle');
-            var passwordInput = document.getElementById('auth-password');
-
+            var title = document.getElementById('auth-form-title'), btn = document.getElementById('auth-submit-btn'), link = document.getElementById('auth-toggle'), pw = document.getElementById('auth-password');
             hideAuthMessages();
-
-            if (authMode === 'login') {
-                authMode = 'signup';
-                title.textContent = 'Sign Up';
-                submitBtn.innerHTML = '<i class="fas fa-user-plus" aria-hidden="true"></i> Sign Up';
-                toggleLink.textContent = 'Already have an account? Login';
-                passwordInput.setAttribute('autocomplete', 'new-password');
-            } else {
-                authMode = 'login';
-                title.textContent = 'Login';
-                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login';
-                toggleLink.textContent = "Don't have an account? Sign Up";
-                passwordInput.setAttribute('autocomplete', 'current-password');
-            }
+            if (authMode === 'login') { authMode = 'signup'; title.textContent = 'Sign Up'; btn.innerHTML = '<i class="fas fa-user-plus" aria-hidden="true"></i> Sign Up'; link.textContent = 'Already have an account? Login'; pw.setAttribute('autocomplete','new-password'); }
+            else { authMode = 'login'; title.textContent = 'Login'; btn.innerHTML = '<i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login'; link.textContent = "Don't have an account? Sign Up"; pw.setAttribute('autocomplete','current-password'); }
         }
 
-        function showAuthError(msg) {
-            var el = document.getElementById('auth-error');
-            el.textContent = msg;
-            el.style.display = 'block';
-            document.getElementById('auth-success').style.display = 'none';
-        }
-
-        function showAuthSuccess(msg) {
-            var el = document.getElementById('auth-success');
-            el.textContent = msg;
-            el.style.display = 'block';
-            document.getElementById('auth-error').style.display = 'none';
-        }
-
-        function hideAuthMessages() {
-            document.getElementById('auth-error').style.display = 'none';
-            document.getElementById('auth-success').style.display = 'none';
-        }
+        function showAuthError(msg) { var el = document.getElementById('auth-error'); el.textContent = msg; el.style.display = 'block'; document.getElementById('auth-success').style.display = 'none'; }
+        function showAuthSuccess(msg) { var el = document.getElementById('auth-success'); el.textContent = msg; el.style.display = 'block'; document.getElementById('auth-error').style.display = 'none'; }
+        function hideAuthMessages() { document.getElementById('auth-error').style.display = 'none'; document.getElementById('auth-success').style.display = 'none'; }
 
         async function handleAuthSubmit() {
-            if (!supabaseClient) {
-                showAuthError('Auth service not available. Please reload.');
-                return;
-            }
-
-            var email = document.getElementById('auth-email').value.trim();
-            var password = document.getElementById('auth-password').value;
-            var submitBtn = document.getElementById('auth-submit-btn');
-
-            if (!email || !password) {
-                showAuthError('Please enter email and password.');
-                return;
-            }
-
-            hideAuthMessages();
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.6';
-
-            try {
-                if (authMode === 'login') {
-                    var result = await supabaseClient.auth.signInWithPassword({ email: email, password: password });
-                    if (result.error) {
-                        showAuthError(result.error.message);
-                    }
-                } else {
-                    var result = await supabaseClient.auth.signUp({ email: email, password: password });
-                    if (result.error) {
-                        showAuthError(result.error.message);
-                    } else if (result.data && result.data.user && !result.data.session) {
-                        showAuthSuccess('Check your email to confirm your account.');
-                    }
-                }
-            } catch (err) {
-                showAuthError('An unexpected error occurred.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-            }
+            if (!supabaseClient) { showAuthError('Auth not available. Reload.'); return; }
+            var email = document.getElementById('auth-email').value.trim(), password = document.getElementById('auth-password').value, btn = document.getElementById('auth-submit-btn');
+            if (!email || !password) { showAuthError('Enter email and password.'); return; }
+            hideAuthMessages(); btn.disabled = true; btn.style.opacity = '0.6';
+            try { if (authMode === 'login') { var r = await supabaseClient.auth.signInWithPassword({ email: email, password: password }); if (r.error) showAuthError(r.error.message); }
+                else { var r = await supabaseClient.auth.signUp({ email: email, password: password }); if (r.error) showAuthError(r.error.message); else if (r.data && r.data.user && !r.data.session) showAuthSuccess('Check your email to confirm your account.'); }
+            } catch(err) { showAuthError('An error occurred.'); }
+            finally { btn.disabled = false; btn.style.opacity = '1'; }
         }
 
-        async function handleLogout() {
-            if (!supabaseClient) return;
-            await supabaseClient.auth.signOut();
-            announce('Logged out successfully');
-        }
+        async function handleLogout() { if (!supabaseClient) return; await supabaseClient.auth.signOut(); announce('Logged out'); }
 
         async function handleGoogleLogin() {
-            if (!supabaseClient) {
-                showAuthError('Auth service not available. Please reload.');
-                return;
-            }
+            if (!supabaseClient) { showAuthError('Auth not available.'); return; }
             hideAuthMessages();
-            try {
-                var result = await supabaseClient.auth.signInWithOAuth({
-                    provider: 'google',
-                    options: {
-                        redirectTo: window.location.href
-                    }
-                });
-                if (result.error) {
-                    showAuthError(result.error.message);
-                }
-            } catch (err) {
-                showAuthError('Google sign-in failed. Please try again.');
-            }
+            try { var r = await supabaseClient.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.href } }); if (r.error) showAuthError(r.error.message); }
+            catch(err) { showAuthError('Google sign-in failed.'); }
         }
 
         async function fetchProfile(userId) {
             if (!supabaseClient) return;
-            try {
-                var result = await supabaseClient
-                    .from('profiles')
-                    .select('tier, points')
-                    .eq('id', userId)
-                    .single();
-
-                if (result.data) {
-                    var tier = result.data.tier || 'Free';
-                    var points = result.data.points != null ? result.data.points : 100;
-
-                    document.querySelector('.tier-badge').textContent = tier + ' Tier';
-                    document.querySelector('.points-display').textContent = points + ' Points';
-                    document.querySelector('.points-display').setAttribute('aria-label', points + ' points available');
-                }
-            } catch (err) {
-                // Profile fetch failed silently — keep defaults
-            }
+            try { var r = await supabaseClient.from('profiles').select('tier, points').eq('id', userId).single();
+                if (r.data) { var tier = r.data.tier || 'Free', pts = r.data.points != null ? r.data.points : 100; userPoints = pts; localStorage.setItem('nyxen_points', userPoints); document.querySelector('.tier-badge').textContent = tier + ' Tier'; updatePointsDisplay(); }
+            } catch(err) {}
         }
+
+        // ============ INIT ============
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.page').forEach(function(p) { if (!p.classList.contains('active')) p.setAttribute('aria-hidden','true'); });
+            initAuth(); renderGallery(); populateImgVidGallery(); populateImgEditGallery(); updatePointsDisplay();
+            if (nyxenStoryContext.genre) {
+                document.getElementById('setup-genre').value = nyxenStoryContext.genre;
+                if (nyxenStoryContext.tone) document.getElementById('setup-tone').value = nyxenStoryContext.tone;
+                if (nyxenStoryContext.audience) document.getElementById('setup-audience').value = nyxenStoryContext.audience;
+                if (nyxenStoryContext.style) document.getElementById('setup-style').value = nyxenStoryContext.style;
+            }
+        });
+
+        // Keyboard navigation for tabs
+        document.querySelectorAll('.tab-btn').forEach(function(tab) {
+            tab.addEventListener('keydown', function(e) {
+                var tabs = Array.from(document.querySelectorAll('.tab-btn')), idx = tabs.indexOf(this);
+                if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(idx+1)%tabs.length].focus(); }
+                else if (e.key === 'ArrowLeft') { e.preventDefault(); tabs[(idx-1+tabs.length)%tabs.length].focus(); }
+                else if (e.key === 'Home') { e.preventDefault(); tabs[0].focus(); }
+                else if (e.key === 'End') { e.preventDefault(); tabs[tabs.length-1].focus(); }
+            });
+        });
     </script>
 </body>
 </html>
